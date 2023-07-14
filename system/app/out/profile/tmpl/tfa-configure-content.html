@@ -1,0 +1,35 @@
+<div class="internal popupTFAConfigure">
+
+    <div class="popupTFAConfigureHeader">
+        <h2 class="tfa_header">{{'profile_tfa_configure_popup_header'|gL:'Конфигурировать двухфакторную аутентификацию'}}</h2>
+        <hr>
+    </div>
+
+    <div class="info-block">
+        <h4>
+            {{'profile_tfa_configure_lead'|gL:'Сосканируйте QR-код телефоном, используя приложение Google Authenticator.'}}
+        </h4>
+    </div>
+
+    <div class="info-block d-flex">
+        <div class="qrContainer">
+            <img src="{{$item.qr}}" />
+        </div>
+        <div class="codeContainer">
+            <p>
+                {{'profile_tfa_configure_code_label'|gL:'Если вы не можете сосканировать QR-код телефоном, введите код вручную.'}} <a class="codeShowLink" href="">{{'profile_tfa_show_code'|gL:'Показать код'}}</a>
+            </p>
+            <p class="codeHidden">
+                <span class="code">{{$item.secret}}</span>
+            </p>
+        </div>
+    </div>
+    <hr>
+    <div class="btn_cont">
+        <a class="btn btnw w3 back-btn">{{'profile_back'|gL:'Отменить'}}</a>
+        <a href="" class="btng w1 continue-btn">{{"profile_continue"|gL:"Continue"}}</a>
+    </div>
+
+    <div class="hiddens"></div>
+
+</div>

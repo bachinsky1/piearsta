@@ -1,0 +1,46 @@
+.signup_block.personas {
+	.col2_y{
+		.cont{border:1px solid #cbd5da;padding:20px 25px;._bgc(#ffffff);color:#636c70;margin-bottom:20px;._clear;min-height: 500px;}
+		.btn_cont.person{._left;
+			.text{._left;padding: 12px 0px 13px 0;._text(16px,18px);color: #404446;._ovh;white-space:nowrap;text-overflow:ellipsis;width:260px;}
+			.gender_icon{._left;margin-right:5px;margin-left:10px;color: #bbc6cc;font-size: 20px;margin-top:10px;}
+			&:nth-child(2n){._left;}
+			&:hover{
+				.text{color:#009fe5;}
+				._cur;
+			}
+		}
+		.btn_cont{width:49%;._inb;._left;margin-top: 10px;
+			.btnw{color: #404446;._all;height:42px;._text();padding: 0;._blo;
+				a{._blo;
+					.add_icon{._inb;margin-left:10px;color:#80ca00;font-size:18px;}
+					.text{._inb;padding: 12px 0px 13px 0;._text(16px,18px);}
+				}
+			}
+			&:nth-child(2n){._left;margin-left: 12px;}
+		}
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	.signup_block.personas {
+		.col2_y{
+			.btn_cont{
+				&.person{.text{width:80%;}}
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.signup_block.personas {
+		.col2_y{
+			.cont{min-height: auto;}
+			.field{width:100%;}
+			.btn_cont{width:100%;
+				&.person{.text{width:80%;}}
+				&:nth-child(2n){._left;margin-left: 0px;}
+			}
+		}
+	}
+}

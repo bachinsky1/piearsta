@@ -1,0 +1,15 @@
+<div id="content">
+    {{if $clinics_list}}
+	{{$TEMPLATE_CLINICS_MODULE_FILTERS}}
+
+	<div class="clinic_list" id="clinic_list">
+	    {{$TEMPLATE_CLINICS_MODULE}}
+    {{else}}
+	<div class="wrap">
+	    <div class="clinic_open">
+		{{$TEMPLATE_CLINICS_MODULE}}
+	    </div>
+	
+    {{/if}}
+    </div>
+</div>

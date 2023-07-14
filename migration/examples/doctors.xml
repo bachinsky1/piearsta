@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctors>
+	<doctor>
+		<piearstaId>{YOUR_SYSTEM_ID}</piearstaId>
+		<name>{NAME}</name>
+		<surname>{SURNAME}</surname>
+		<phone>{PHONE}</phone>
+		<email>{EMAIL}</email>
+		<photo>{FULL_PATH_TO_PHOTO}</photo>
+		<about>{ABOUT}</about>
+		<created>{CREATED}</created>
+		<updated>{UPDATED}</updated>
+		<enabled>{ENABLED_STATUS(true,false)}</enabled>
+		<deleted>{DELETE_STATUS(true,false)}</deleted>
+		<clinics>
+			<clinic>{YOUR_SYSTEM_CLINIC_ID}</clinic>
+			<clinic>{YOUR_SYSTEM_CLINIC_ID}</clinic>
+		</clinics>
+		<services>
+			<service>{YOUR_SYSTEM_SERVICE_ID}</service>
+			<service>{YOUR_SYSTEM_SERVICE_ID}</service>
+		</services>
+		<specialities>
+			<speciality>{YOUR_SYSTEM_SPECIALITY_ID}</speciality>
+			<speciality>{YOUR_SYSTEM_SPECIALITY_ID}</speciality>
+		</specialities>
+	</doctor>
+</doctors>

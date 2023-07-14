@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{$AD_CMS_LANGUAGE}}" lang="{{$AD_CMS_LANGUAGE}}">
+<head>
+	<title>{{'title'|gLA:'Beattum CMS 2.5.5':'':true}}</title>
+	<meta name="title" content="{{'title'|gLA:'Beattum CMS 2.5.5':'':true}}" />
+	<meta name="description" content="{{'description'|gLA:'Beattum CMS - Content managment system':'':true}}" />
+	<meta name="keywords" content="{{'keywords'|gLA:'Beattum CMS':'':true}}" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<meta content="www.Beattum.lv" name="author" />
+	<meta name="robots" content="noindex, nofollow" />
+	<link type="image/ico" href="{{$AD_CMS_IMAGE_FOLDER}}favicon.ico" rel="shortcut icon"/>
+	<link rel="stylesheet" type="text/css" href="{{$AD_CMS_CSS_FOLDER}}main.css" media="screen, projection" />   
+    <!--[if lte IE 7]>
+        <link rel="stylesheet" type="text/css" href="{{$AD_CMS_CSS_FOLDER}}ie.css"/>
+    <![endif]-->
+    <!--[if IE 6]>
+        <link rel="stylesheet" type="text/css" href="{{$AD_CMS_CSS_FOLDER}}ie6.css"/>
+    <![endif]-->
+	<script type="text/javascript" src="{{$AD_CMS_JS_FOLDER}}jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#username").focus();
+		});
+
+		function changeLanguage() {
+			$("#action").val("language");
+			$("#form").submit();
+		}
+	</script>
+</head>
+<body>
+	<div id="wrapper" class="main">		
+		
+		<form id="form" action="{{$url}}" method="post">
+			{{if $denied}}
+			<p id="error">{{'access_denied'|gLA:'Access denied':'':true}}</p>
+			{{/if}}
+			<fieldset>
+			<input type="hidden" name="action" value="login" id="action" />		
+				<dl>
+					<dt><label for="username">{{'username'|gLA:'Username':'':true}}:</label></dt>
+					<dd><input id="username" name="username" value="" /></dd>
+					<dt><label for="password">{{'password'|gLA:'Password':'':true}}:</label></dt>
+					<dd><input id="password" type="password" name="password" value="" /></dd>
+					<dt><label for="language">{{'lang'|gLA:'Language':'':true}}:</label></dt>
+					<dd>
+						<select id="language" name="language" onchange="changeLanguage()">
+							{{$language_menu}}
+						</select>
+					</dd>
+					<dd><input type="submit" value="{{'login'|gLA:'Login':'':true}}" id="button" /></dd>
+				</dl>
+			</fieldset>
+		</form>
+	</div>		
+</body>
+</html>

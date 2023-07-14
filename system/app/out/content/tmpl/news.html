@@ -1,0 +1,77 @@
+{{if ($menu.RIGHT[$TOP_ACTIVE]|@count > 0) || ($BANNERS.side_banner)}}
+{{assign var="hasRightCol" value='1'}}
+{{/if}}
+
+<div id="content">
+	<div class="twocols_z{{if !$hasRightCol}} fullWidth{{/if}}"><div class="wrapd">
+
+		{{if $hasRightCol}}
+		<div class="col2_z">
+			<div class="sp50-0-0"></div>
+			
+			{{if $menu.RIGHT[$TOP_ACTIVE]|@count > 0}}
+			<nav class="sidemenu">
+				<div class="trigger">
+					<div class="wrap">
+						<i class="fa fa-bars"></i>
+						{{$web.pagePath}}
+					</div>
+				</div>
+				<ul class="menu"> 
+				{{section name=item loop=$menu.RIGHT[$TOP_ACTIVE]}}
+					{{assign var="RIGHT_ID" value=$menu.RIGHT[$TOP_ACTIVE][item].id}}
+					<li class="item {{if $menu.RIGHT[$TOP_ACTIVE][item].active}} active{{/if}}">
+						{{if $menu.RIGHT[$TOP_ACTIVE][item].active}}
+						<div><div class="wrapt wrapm">{{$menu.RIGHT[$TOP_ACTIVE][item].title}}</div></div>
+							{{if $menu.RIGHT_SUB[$RIGHT_ID]|@count > 0}}
+							<ul class="submenu">
+							{{section name=item2 loop=$menu.RIGHT_SUB[$RIGHT_ID]}}
+								{{if $menu.RIGHT_SUB[$RIGHT_ID][item2].active}}
+								<li class="subitem active"><div>{{$menu.RIGHT_SUB[$RIGHT_ID][item2].title}}</div></li>
+								{{else}}
+								<li class="subitem"><a href="{{$menu.RIGHT_SUB[$RIGHT_ID][item2].url}}" title="{{$menu.RIGHT_SUB[$RIGHT_ID][item2].title}}">{{$menu.RIGHT_SUB[$RIGHT_ID][item2].title}}</a></li>
+								{{/if}}
+							{{/section}}
+							</ul>
+							{{/if}}	
+						{{else}}
+						<a href="{{$menu.RIGHT[$TOP_ACTIVE][item].url}}" title="{{$menu.RIGHT[$TOP_ACTIVE][item].title}}">
+							<div class="wrapt wrapm">{{$menu.RIGHT[$TOP_ACTIVE][item].title}}</div>
+						</a>
+						{{/if}}
+					</li>	 
+				{{/section}}
+			  	</ul>
+			</nav>
+			{{/if}}
+			{{if $BANNERS.side_banner}}
+				{{if $BANNERS.side_banner.url}}
+				<a href="{{$BANNERS.side_banner.url}}" target="{{$BANNERS.side_banner.target}}" class="side_banner ver1"><img alt="{{$BANNERS.side_banner.alt}}" src="{{$BANNERS.side_banner.image}}"></a>
+				{{else}}
+				<img class="side_banner ver1" alt="{{$BANNERS.side_banner.alt}}" src="{{$BANNERS.side_banner.image}}">
+				{{/if}}
+			{{/if}}	
+			
+		</div>
+		{{/if}}
+		
+		{{if !$opendoc && !$web.html}}
+		<div class="single_header"><div class="wrap">
+			<h1>{{$web.title}}</h1>
+		</div></div>
+		{{/if}}
+	
+		
+		{{if $web.html}}
+		<div class="col1_z wrapt wrapm">
+			<div class="sp44-35-35"></div>
+			<h1>{{$web.title|clear}}</h1>
+			<div class="opendoc">
+				{{$web.html}}
+			</div>
+		</div>	
+		{{else}}
+		{{$TEMPLATE_NEWS_MODULE}}
+		{{/if}}
+	</div></div>
+</div>

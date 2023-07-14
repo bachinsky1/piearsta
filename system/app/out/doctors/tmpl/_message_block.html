@@ -1,0 +1,32 @@
+{{if $sheduleData.nearest}}
+    {{if $sheduleData.nearest.status == 'empty'}}
+        <div class="message_cont"><div class="message">
+            <div>{{'doctors_list_empty_calendar'|gL:'У врача не указан рабочий график'}}</div>
+        </div></div>
+    {{elseif $sheduleData.nearest.status == 'busy'}}
+        <div class="message_cont"><div class="message">
+            <div>{{'doctors_list_busy_calendar'|gL:'На данный момент всё время записи занято'}}</div>
+        </div></div>
+    {{elseif $sheduleData.nearest.status == 'later'}}
+        <div class="message_cont"><div class="message">
+            <div>{{'doctor_calendar_until'|gL:'Līdz'}} <a class="link filterReservationCalendar" data-action="search" data-date="{{$sheduleData.nearest.date}}">{{$sheduleData.nearest.displayDate}}</a> {{'doctor_calendar_no_free_slots'|gL:'brīvu pieraksta laiku nav'}}</div>
+        </div></div>
+    {{elseif $sheduleData.nearest.paid || $sheduleData.nearest.state}}
+        <div class="message_cont"><div class="message">
+            <div>{{'doctor_calendar_nearest_free_time'|gL:'Tuvākais pieraksta laiks'}}:</div>
+            <div class="message_cont_links">
+                {{if $sheduleData.nearest.state}}
+                <div class="link state">{{'profile_reservation_payment_type_country'|gL:'Valsts'}}: <a class="filterReservationCalendar" href="#" data-action="" data-date="{{$sheduleData.nearest.state.date}}">{{$sheduleData.nearest.state.displayDate}}</a></div>
+                {{/if}}
+                {{if $sheduleData.nearest.paid}}
+                <div class="link paid">{{'profile_reservation_payment_type_pay'|gL:'Maksas'}}: <a class="filterReservationCalendar" href="#" data-action="" data-date="{{$sheduleData.nearest.paid.date}}">{{$sheduleData.nearest.paid.displayDate}}</a></div>
+                {{/if}}
+            </div>
+        </div></div>
+    {{else}}
+    {{/if}}
+{{else}}
+    <div class="message_cont"><div class="message">
+        <div>{{'doctors_list_empty_calendar'|gL:'У врача не указан рабочий график'}}</div>
+    </div></div>
+{{/if}}

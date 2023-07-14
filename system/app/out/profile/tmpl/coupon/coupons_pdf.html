@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="{{$web.lang}}">
+	<head>
+		<meta charset="utf-8">
+		<meta id="Viewport" name="viewport" content="width=device-width">
+		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+		<title>Piearsta.lv</title>
+		<link rel="stylesheet" href="http://{{$smarty.server.HTTP_HOST}}{{$AD_CSS_FOLDER}}font-awesome.min.css">
+		<link rel="stylesheet" href="http://{{$smarty.server.HTTP_HOST}}{{$AD_CSS_FOLDER}}pdfcss_coupons.css">
+	</head>
+	<body class="margins">
+		<div id="page" class="w1080">
+			<div class="min1571">
+				<img class="logo"alt="" src="http://{{$smarty.server.HTTP_HOST}}{{$AD_IMAGE_FOLDER}}pdf_logo.png">
+				<div class="info_coupon f2424">
+					<div>{{'pdf_coupon_code'|gL:'Kods:'}} {{$coupon.code}}</div>
+					<div>{{'pdf_coupon_created'|gL:'Izveidots:'}} {{$coupon.pcreated|date_format:"%d.%m.%Y."}}</div>
+					<div>{{'pdf_coupon_date_to'|gL:'Deriguma termiņš:'}} {{$coupon.date_to|date_format:"%d.%m.%Y."}}</div>
+				</div>
+				<div class="w950 left">
+					<h1>{{$coupon.title|clear}}</h1>
+					<div class="table sp56">
+						<div class="item sp56 left">
+							<div class="f24">{{'pdf_coupon_discount_price'|gL:'Akcijas cena:'}}</div>
+							<div class="f36">€{{$coupon.discount_price}}</div>
+						</div>
+						<div class="item sp56 left">
+							<div class="f24">{{'pdf_coupon_price'|gL:'Parasta cena:'}}</div>
+							<div class="f36">€{{$coupon.price}}</div>
+						</div>
+						<div class="item sp56 left">
+							<div class="f24">{{'pdf_coupon_discount'|gL:'Atlaide:'}}</div>
+							<div class="f36">{{$coupon.discount}}%</div>
+						</div>
+					</div>
+					{{if $coupon.text_image}}
+					<img src="http://{{$smarty.server.HTTP_HOST}}{{$AD_UPLOAD_FOLDER}}coupons/big/{{$coupon.text_image}}" alt="{{$coupon.title|clear}}" />
+					{{/if}}
+				</div>
+				<div class="barcode" style="margin-left:10px;">
+					<img alt="" src="http://{{$smarty.server.HTTP_HOST}}/tools/barcodegen/html/image.php?filetype=PNG&amp;dpi=72&amp;scale=2&amp;rotation=270&amp;font_family=Arial.ttf&amp;font_size=24&amp;text={{$coupon.code}}&amp;thickness=40&amp;checksum=0&amp;code=BCGcode39">
+				</div>
+				<div class="sp27 clear"></div>
+				<div class="f2430 fblack3">
+					<p>{{$coupon.lead}}</p>
+	    			{{$coupon.text}}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

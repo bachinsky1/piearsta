@@ -1,0 +1,127 @@
+{{foreach from=$userData.consultations item=item name=pr}}
+
+{{assign var=monthName value=$item.start|date_format:"%B"}}
+{{assign var=monthKey value='month_'|cat:$monthName}}
+
+{{if $item.start && $item.start != '9999-12-31 23:59:59'}}
+{{assign var=anyTime value=false}}
+{{else}}
+{{assign var=anyTime value=true}}
+{{/if}}
+
+{{if $item.status == 0}}
+{{assign var=status_color value="yellow"}}
+{{assign var=status_class value="status_wait"}}
+{{elseif $item.status == 1}}
+{{assign var=status_color value="red"}}
+{{assign var=status_class value="status_canceled"}}
+{{elseif $item.status == 2}}
+{{assign var=status_color value="green"}}
+{{assign var=status_class value="status_active"}}
+{{elseif $item.status == 3}}
+{{assign var=status_color value=""}}
+{{assign var=status_class value="status_canceled"}}
+{{elseif $item.status == 4}}
+{{assign var=status_color value=""}}
+{{assign var=status_class value=""}}
+{{/if}}
+
+<div id="r_{{$item.id}}" data-resid="{{$item.id}}" class="openRes table_line{{if $item.status == 4}} grayed{{/if}}{{if $item.service_type == '1'}} consultation{{/if}}{{if $anyTime && $status_class}} status_wait{{else}} {{$status_class}}{{/if}}">
+    <table class="table1 table_consultations">
+        <tbody>
+        <tr>
+            <td class="res_time">
+                {{if !$anyTime}}
+                <div class="time">{{$item.start|date_format:"%H:%M"}}</div>
+                <div>
+                    {{$item.start|date_format:"%d"}}. {{$monthKey|gL:"month"}}, {{$item.start|date_format:"%Y"}}
+                </div>
+                {{else}}
+                <div class="no_time">-</div>
+                {{/if}}
+            </td>
+            {{if $item.name or $item.surname}}
+            <td><div>{{$item.name}} {{$item.surname}}</div></td>
+            {{else}}
+            <td data-hastip="{{'profile_reservation_other_doctor_tooltip'|gL:'Pieraksts ir nodots citam speciālistam.'}}"><div>{{'profile_reservation_other_doctor'|gL:'Pie citu spciālistu'}}</div></td>
+            {{/if}}
+            <td>
+                <div>
+                    {{$item.title}}
+                </div>
+            </td>
+            <td>
+                {{if $item.status == 0}}
+                <div class="status">{{'profile_reservation_status_0'|gL:'Gaida apstiprinājumu'}}</div>
+                {{elseif $item.status == 1}}
+                <div class="status">{{'profile_reservation_status_1'|gL:'Noraidīts'}}</div>
+                {{elseif $item.status == 2}}
+                <div class="status">{{'profile_reservation_status_2'|gL:'Aktīvs'}}</div>
+                {{elseif $item.status == 3}}
+                <div class="status">{{'profile_reservation_status_3'|gL:'Atcelts'}}</div>
+                {{elseif $item.status == 4}}
+                <div class="status">{{'profile_reservation_status_4'|gL:'Arhīvā'}}</div>
+                {{/if}}
+            </td>
+            <td>
+                <div class="cons_action">
+                    <a class="darbibas{{if !$item.consultation_vroom}} disabled{{/if}}"
+                       data-id="{{$item.id}}"
+                       data-action="vroom">
+                        {{'profile_enter_vroom'|gL:'Pāriet uz e-kabinetu'}}
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="header2 {{$status_color}}">
+        {{if $item.status == 0}}
+        {{'profile_reservation_status_0'|gL:'Gaida apstiprinājumu'}}
+        {{elseif $item.status == 1}}
+        {{'profile_reservation_status_1'|gL:'Noraidīts'}}
+        {{elseif $item.status == 2}}
+        {{'profile_reservation_status_2'|gL:'Aktīvs'}}
+        {{elseif $item.status == 3}}
+        {{'profile_reservation_status_3'|gL:'Atcelts'}}
+        {{elseif $item.status == 4}}
+        {{'profile_reservation_status_4'|gL:'Arhīvā'}}
+        {{/if}}
+    </div>
+    <div class="info2">
+        <div class="time2">
+
+
+            {{if !$anyTime}}
+            {{$item.start|date_format:"%d. %B"}} {{$item.start|date_format:"%H:%M"}}
+            {{else}}
+            <div class="no_time">-</div>
+            {{/if}}
+
+        </div>
+        <div class="line">
+            <div class="col1">{{'profile_reservation_doctor'|gL:'Ārsts'}}:</div>
+            <div class="col2">{{$item.name}} {{$item.surname}}</div>
+        </div>
+        <div class="line">
+            <div class="col1">{{'profile_reservation_clinic'|gL:'Iestade'}}:</div>
+            <div class="col2">{{$item.clinic_name}}</div>
+        </div>
+        <div class="line">
+            <div class="col1">{{'profile_reservation_service'|gL:'Pakalpojums'}}</div>
+            <div class="col2">{{$item.title}}</div>
+        </div>
+
+        <div class="line">
+            <div class="cons_action">
+                <a class="darbibas{{if !$item.consultation_vroom}} disabled{{/if}}"
+                   data-id="{{$item.id}}"
+                   data-action="vroom">
+                    {{'profile_enter_vroom'|gL:'Pāriet uz e-kabinetu'}}
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{{/foreach}}

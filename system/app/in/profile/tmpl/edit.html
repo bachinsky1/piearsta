@@ -1,0 +1,76 @@
+<div class="content">
+    <form id="edit_form">
+        <input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+
+		<div id="profileTabs">
+			<ul>
+					
+				<li>
+					<a rel="general_data_form" href="#general_data_form"  >
+						{{'general'|gLA:'Main info'}}
+					</a>
+				</li>
+				<li>
+					<a rel="messages_form" href="#messages_form"  >
+						{{'messages_customer'|gLA:'Messages'}}
+					</a>
+				</li>
+				<li>
+					<a rel="persons_form" href="#persons_form"  >
+						{{'persons'|gLA:'Persons'}}
+					</a>
+				</li>
+					
+			</ul>
+
+			{{include file="general_profile_form.html"}}
+			<div id="message_block">
+			{{include file="messages_form.html"}}
+			</div>
+
+			{{include file="persons_form.html"}}
+
+		</div>
+
+
+		<table class="bttns-table">
+	        <tr>
+	            <td>
+	            	{{if $edit.id}}
+	                <div class="btn orange"><a href="javascript:;" onclick="checkFields('apply');"><span>{{'apply'|gLA:'Apply'}}</span></a></div>
+	                {{/if}}
+	                <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save'|gLA:'Save'}}</span></a></div>
+	                <div class="btn cancel"><a href="javascript:;" onclick="window.location.href = moduleTable.getRequestUrl();"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+	            </td>
+	        </tr>
+	    </table>
+		
+    </form>
+</div>
+<script type="text/javascript">
+    
+    moduleTable.mainUrl		= '{{$MAIN_URL}}';
+    moduleTable.moduleName	= '{{$MODULE_NAME}}';
+    
+    $(document).ready(function() {
+
+    	$('ul.lang-tabs a').click(function() {
+			var curChildIndex = $(this).parent().prevAll().length + 1;
+			$(this).parent().parent().children('.active').removeClass('active');
+			$(this).parent().addClass('active');
+			$(this).parent().parent().next('.areaBlock').children('.open').fadeOut('fast',function() {
+				$(this).removeClass('open');
+				$(this).parent().children('div:nth-child('+curChildIndex+')').fadeIn('normal',function() {
+					$(this).addClass('open');
+				});
+			});
+			return false;
+		});
+
+    	$('#profileTabs').tabs();	   
+    	
+    });
+    
+    
+
+</script>

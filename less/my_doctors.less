@@ -1,0 +1,227 @@
+.signup_block.my_doctors {
+  > .wrap {
+    padding-bottom: 100px;
+  }
+
+  .col2_y {
+    .cont {
+      border: 1px solid #cbd5da;
+      padding: 10px 25px 20px;
+      ._bgc(#ffffff);
+      color: #636c70;
+      margin-bottom: 20px;
+      ._clear;
+    }
+
+    .list {
+      border-bottom: 1px solid #cbd5da;
+    }
+
+    .item {
+      padding-bottom: 20px;
+      ._clear;
+
+      .image {
+        ._left;
+        width: 100px;
+        padding-top: 20px;
+
+        img {
+          ._blo;
+          ._rel;
+          z-index: 2;
+        }
+      }
+
+      .text {
+        margin-left: 120px;
+        padding-top: 14px;
+        margin-right: 40px;
+
+        .top {
+          .fav_cont {
+            ._right;
+            ._rel;
+            right: -40px;
+
+            .btng {
+              ._wh(35px, 35px);
+              ._m0p0;
+              margin-top: 5px;
+
+              .fa {
+                ._text(22px, 35px);
+              }
+
+              .fa-star-o {
+                ._blo;
+              }
+            }
+
+            &.faved {
+              .btng {
+                top: 0;
+
+                .fa-star {
+                  ._none;
+                }
+              }
+            }
+
+            .msg {
+              ._none;
+              ._abs;
+              left: -166px;
+              top: 2px;
+              ._text(14px, 18px);
+              color: #404446;
+              border: 1px solid #cbd5da;
+              ._rad(3px, 3px, 3px, 3px);
+              ._bgc(#ffffff);
+              ._box(0, 0px, 25px, rgba(0, 0, 0, 0.15));
+              padding: 11px 10px 11px 10px;
+              z-index: 2;
+
+              &:before {
+                ._cont;
+                ._abs;
+                z-index: 1;
+                top: 13px;
+                left: 100%;
+                border-left: 5px solid #d4dcde;
+                border-top: 4px solid transparent;
+                border-bottom: 4px solid transparent;
+              }
+
+              &:after {
+                ._cont;
+                ._abs;
+                z-index: 2;
+                top: 14px;
+                left: 100%;
+                border-left: 4px solid #ffffff;
+                border-top: 3px solid transparent;
+                border-bottom: 3px solid transparent;
+              }
+            }
+
+            &:hover {
+              .msg {
+                ._blo;
+              }
+            }
+          }
+
+          .name {
+            ._text(24px, 29px);
+
+            a {
+              color: #009fe5;
+
+              &:hover {
+                ._xu;
+                color: #006fa0;
+              }
+            }
+          }
+
+          .reviews {
+            color: #65c300;
+            ._text(14px, 17px);
+
+            a {
+              color: #65c300;
+
+              &:hover {
+                ._u;
+              }
+            }
+
+            .fa {
+              ._none;
+              margin-right: 5px;
+              font-size: 16px;
+            }
+          }
+        }
+
+        .occupation {
+          ._text(16px, 19px);
+          color: #636c70;
+          margin-top: 13px;
+
+          a {
+            color: #636c70;
+
+            &:hover {
+              ._xu;
+              color: #009fe5;
+            }
+          }
+        }
+
+        .contacts {
+          ._text(14px, 17px);
+          color: #aab1b5;
+          margin-top: 5px;
+
+          div + div {
+            margin-top: 3px;
+          }
+        }
+      }
+
+      & + .item {
+        border-top: 1px solid #cbd5da;
+      }
+
+      &:last-child {
+        border-bottom: 0px solid #cbd5da;
+      }
+    }
+
+    .all {
+      margin-top: 10px;
+
+      a {
+        ._blo;
+        padding: 10px 0;
+        ._text(14px, 10px);
+      }
+    }
+
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .signup_block.my_doctors {
+    .col2_y {
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .signup_block.my_doctors {
+    > .wrap {
+      padding-bottom: 40px;
+    }
+
+    .col2_y {
+      .list {
+        padding-bottom: 0px;
+      }
+
+      .item {
+        padding-bottom: 30px;
+
+        .image {
+          ._none;
+        }
+
+        .text {
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+}

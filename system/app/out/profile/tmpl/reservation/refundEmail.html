@@ -1,0 +1,75 @@
+<div>
+    <h1>Refund request</h1>
+    <h2>{{$resData.title}} - {{$resData.service_price}} Eur</h2>
+    <h3>Reason:</h3>
+    <p>
+        {{$resData.cancellation_reason}}
+    </p>
+    <br>
+    <hr>
+    <br>
+    <div>
+        <p><strong>Reservation ID:</strong> {{$resData.id}}</p>
+        <p><strong>Start time:</strong> {{$resData.start}}</p>
+        <p><strong>End time:</strong> {{$resData.end}}</p>
+        <p><strong>User ID:</strong> {{$resData.profile_id}}</p>
+        <h2>Service</h2>
+        <p><strong>Service title:</strong> {{$resData.title}}</p>
+        <p><strong>Service price:</strong> {{$resData.service_price}} Eur</p>
+        <hr>
+        <h2>User info:</h2>
+        <p><strong>Full name:</strong> {{$resData.pname}} {{$resData.psurname}}</p>
+        <p><strong>P/k:</strong> {{$resData.pcode}}</p>
+        <p><strong>Phone:</strong> {{$resData.p_phone}}</p>
+        <p><strong>Email:</strong> {{$resData.email}}</p>
+        <p><strong>Return money to:</strong> {{$resData.refundInfo}}</p>
+        <hr>
+        <h2>Doctor info:</h2>
+        <p><strong>Clinic ID:</strong> {{$resData.clinic_id}}</p>
+        <p><strong>Clinic title:</strong> {{$resData.clinic_name}}</p>
+        <p><strong>Clinic phone:</strong> {{$resData.clinic_phone}}</p>
+        <p><strong>Clinic email:</strong> {{$resData.clinic_email}}</p>
+        <p><strong>Doctor ID:</strong> {{$resData.doctor_id}}</p>
+        <p><strong>Doctor name:</strong> {{$resData.name}}</p>
+        <p><strong>Doctor surname:</strong> {{$resData.surname}}</p>
+        <p><strong>Doctor phone:</strong> {{$resData.doctor_phone}}</p>
+    </div>
+    <br>
+    <hr>
+    <div>
+        <h2>Order data</h2>
+        <table border="1" width="100%" style="border-collapse: collapse">
+            <tr>
+                <th style="width:30%; padding: 7px 5px;">Key</th>
+                <th style="width:70%; padding: 7px 5px;">Value</th>
+            </tr>
+            {{foreach from=$orderData key=k item=i}}
+            <tr>
+                <td style="padding: 7px 5px;"><strong>{{$k}}</strong></td>
+                <td style="padding: 7px 5px;">{{$i}}</td>
+            </tr>
+            {{/foreach}}
+        </table>
+    </div>
+    <br>
+    <div>
+        <h2>Transaction data</h2>
+        <table border="1" width="100%" style="border-collapse: collapse">
+            <tr>
+                <th style="width:30%; padding: 7px 5px;">Key</th>
+                <th style="width:70%; padding: 7px 5px;">Value</th>
+            </tr>
+            {{foreach from=$transactionData key=k item=i}}
+            <tr>
+                <td style="padding: 7px 5px;"><strong>{{$k}}</strong></td>
+                <td style="padding: 7px 5px;">{{$i}}</td>
+            </tr>
+            {{/foreach}}
+        </table>
+    </div>
+</div>
+<br>
+<hr>
+<div>
+    <p>This email was generated automatically by PIEARSTA.LV</p>
+</div>

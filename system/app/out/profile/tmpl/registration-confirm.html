@@ -1,0 +1,29 @@
+<div id="content">
+    <div class="signup_block profils"><div class="wrap">
+        {{if $web.env == 'prod'}}
+
+<!--        <script nonce="{{$web.cspNonce}}">-->
+<!--            window.dataLayer.push({-->
+<!--                'event': 'piearsta_registration_success'-->
+<!--            });-->
+<!--        </script>-->
+
+        {{/if}}
+        <div class="col2_y">
+            {{assign var="emailParam" value=$userData.email|gLParam:'{emailParam}'}}
+            <div class="welcome_msg">
+                <h2>{{'profile_welcome_title'|gL:'Lūdzu apstipriniet Jūsu reģistrāciju!'}}</h2>
+                <p>
+                    {{'profile_welcome_lead'|gL:'Uz <span class="bold">{emailParam}</span> tika nosūtīts e-pasts ar norādītajām instrukcijām. Ja kāda iemesla dēļ Jūs nesaņēmāt e-pastu, <a href="#">sūtīt atkārtoti</a>.':'':$emailParam}}
+                </p>
+                <div>
+                    {{'profile_welcome_lead2'|gL:'Dažreiz vēstule var nokrīst SPAM mapē, lūdzu parbaudiet.'}}
+                    <a href="#" class="resendActivationLink">Nosūtīt reģistrācijas apstiprināšanas e-pastu atkārtoti.</a>
+                </div>
+            </div>
+            <div>
+                <a href="#" class="profileRegistrationCancel" data-userid="{{$userData.id}}">Atcelt</a>
+            </div>
+        </div>
+    </div></div>
+</div>

@@ -1,0 +1,66 @@
+<div class="content">
+	<form class="forma" method="post" action="" onsubmit="return false;">
+		<fieldset>
+		    <legend>FORM</legend>
+			<table class="search-table" cellpadding="0" cellspacing="0">
+			    <tr>
+			        <td>
+			            <label for="filterModule">{{'select_module'|gLA:'Select module'}}:</label>
+			            <select id="filterModule" name="filterModule" onchange="changeFilter(); return false;">
+							<option value="">{{'select_option'|gLA:'-- Select --'}}</option>
+							{{$mList}}
+						</select>
+			        </td>
+			        <td>
+			            <label for="notTranslated">{{'not_translated'|gLA:'Not translated'}}:</label>
+			            <select id="notTranslated" name="notTranslated" onchange="changeFilter(); return false;">
+			                <option value="">{{'unselected'|gLA:'Unselected'}}</option>
+			                {{$lList}}
+			            </select>
+			        </td>
+			        <td>
+			            <label for="filterSearch">{{'content'|gLA:'Content'}}:</label>
+			            <input class="long" type="text" id="filterSearch" name="filterSearch" />
+			        </td>
+			        <td class="bttns">
+	                   <div class="btn"><a href="javascript:;" onclick="changeFilter(); return false;"><span>{{'m_search'|gLA:'Search'}}</span></a></div>
+	                   <div class="clr"><!-- clear --></div>
+	               </td>
+	               <td class="bttns">
+	                   <div class="btn"><a href="javascript:;" onclick="clearFilter(); return false;"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+	                   <div class="clr"><!-- clear --></div>
+	               </td>
+			    </tr>
+			</table>
+	
+	{{$tTable}}
+	
+	<div id="modulePath">
+	</div>
+	
+	{{$bTable}}
+	
+		</fieldset>
+	</form>
+	
+	<script type="text/javascript">
+		moduleTable.mainUrl = '{{$MAIN_URL}}';
+		moduleTable.moduleName = '{{$MODULE_NAME}}';
+		moduleTable.usePaging = true;
+
+		$(function () { 
+
+			$('#filterSearch').keyup(function(e){
+				if (!e) var e = window.event;
+				var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : null;
+				if (keyCode == 13) {
+					changeFilter();
+					
+				}
+				return false;	
+			});
+
+			updateModule();
+		});	
+	</script>
+</div>	

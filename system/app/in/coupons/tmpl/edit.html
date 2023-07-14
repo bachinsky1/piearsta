@@ -1,0 +1,67 @@
+<div class="content">
+    <form id="edit_form">
+        <input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+
+		<div id="couponsTabs">
+			<ul>
+					
+				<li>
+					<a rel="general_data_form" href="#general_data_form"  >
+						{{'general'|gLA:'Main info'}}
+					</a>
+				</li>
+				<li>
+					<a rel="active_coupons" href="#active_coupons"  >
+						{{'active_coupons'|gLA:'Active coupons'}}
+					</a>
+				</li>
+					
+			</ul>
+
+			{{include file="general_coupon_data.html"}}
+			{{include file="active_coupons.html"}}
+
+		</div>
+
+
+		<table class="bttns-table">
+	        <tr>
+	            <td>
+	            	{{if $edit.id}}
+	                <div class="btn orange"><a href="javascript:;" onclick="checkFields('apply');"><span>{{'apply'|gLA:'Apply'}}</span></a></div>
+	                {{/if}}
+	                <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save'|gLA:'Save'}}</span></a></div>
+	                <div class="btn cancel"><a href="javascript:;" onclick="window.location.href = moduleTable.getRequestUrl();"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+	            </td>
+	        </tr>
+	    </table>
+		
+    </form>
+</div>
+<script type="text/javascript">
+    moduleTable.mainUrl = '{{$MAIN_URL}}';
+	moduleTable.moduleName = '{{$MODULE_NAME}}';
+
+	$(document).ready(function() {
+		
+		var tabindex = 1;
+		$('#editForma :input,select').each(function() {
+			if (this.type != "hidden") {
+				var $input = $(this);
+				$input.attr("tabindex", tabindex);
+				tabindex++;
+			}
+		});
+		
+		loadCmsTabs();
+		
+		$('#couponsTabs').tabs();	
+
+		
+		$("#date_to").datepicker();
+
+          loadUploadImgButton('{{$edit.uploadFolder}}', 'lead_image');
+          loadUploadImgButton('{{$edit.uploadFolder}}', 'text_image');
+	});
+		
+</script>

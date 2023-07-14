@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classificators>
+	<classificator>
+		<piearstaId>{YOUR_SYSTEM_ID}</piearstaId>
+		<name>{NAME}</name>
+		<gcoords>{GCOORDS}</gcoords>
+	</classificator>
+</classificators>
+	

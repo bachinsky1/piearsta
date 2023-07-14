@@ -1,0 +1,74 @@
+<!-- <link rel="stylesheet" type="text/css" href="{{$AD_CSS_FOLDER}}critical.css?v={{$AD_CSS_VERSION}}" /> -->
+<link href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css" rel="preload" as="style" fetchpriority="low" crossorigin>
+
+<noscript data-css-lazyload>
+	<link href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css" rel="stylesheet" crossorigin fetchpriority="low">
+	<!-- more stylesheets, same as above preloads -->
+</noscript>
+<!--[if lt IE 9]>
+	<script src="{{$AD_JS_FOLDER}}ielte8.js"></script>
+<![endif]-->
+<script nonce="{{$web.cspNonce}}" type="text/javascript" src="{{$AD_JS_FOLDER}}{{$web.jsFile}}.js"></script>
+
+<script type="text/javascript" nonce="{{$web.cspNonce}}">
+
+	var webLang = '{{$web.lang}}';
+
+	var messages = {};
+	messages.wait_pleaseWait = "{{'profile_wait_please_wait'|gL:'Please wait...'}}";
+	messages.wait_connectingPaymentSystem = "{{'profile_wait_connectingPaymentSystem'|gL:'Connecting payment system...'}}";
+	messages.wait_loadingServiceDescription = "{{'profile_wait_loadingServiceDescription'|gL:'Loading service description...'}}";
+	messages.error = "{{'profile_error'|gL:'Error'}}";
+	messages.selectOtherTime = "{{'profile_select_other_time'|gL:'Please select other time.'}}";
+	messages.goBack = "{{'profile_reservation_goBack'|gL:'Go back'}}";
+	messages.close = "{{'profile_close'|gL:'Close'}}";
+	messages.monthNames = ['{{'month_January'|gL}}','{{'month_February'|gL}}','{{'month_March'|gL}}','{{'month_April'|gL}}','{{'month_May'|gL}}','{{'month_June'|gL}}','{{'month_July'|gL}}','{{'month_August'|gL}}','{{'month_September'|gL}}','{{'month_October'|gL}}','{{'month_November'|gL}}','{{'month_December'|gL}}'];
+	messages.calendarMessages = {
+	    selectTime: "{{'calendar_select_time'|gL:'Please select e-consultation time'}}",
+	    timeNotSelected: "{{'profile_reservation_time_not_selected'|gL:'Laiks nav izvēlets'}}",
+	    slectedAnyTime: "{{'profile_reservation_any_time'|gL:'Jebkurā laikā'}}",
+	    empty: "{{'doctors_list_empty_calendar'|gL:'У врача не указан рабочий график'}}",
+	    busy: "{{'doctors_list_busy_calendar'|gL:'На данный момент всё время записи занято'}}",
+	    later: {
+	        '1': "{{'doctor_calendar_until'|gL:'Līdz'}}",
+	        '2': "{{'doctor_calendar_no_free_slots'|gL:'brīvu pieraksta laiku nav'}}",
+        },
+	    nearest: {
+	        '1': "{{'doctor_calendar_nearest_free_time'|gL:'Tuvākais pieraksta laiks'}}",
+	        '2': "{{'doctors_list_empty_week_nearest'|gL:'Pāriet uz tuvāko pieejamo ārsta pieņemšanas dienu'}}",
+        },
+    };
+	messages.new_pass_should_diff_from_old = "{{'new_pass_should_diff_from_old'|gl:'New password should differ from old by at least 40%'}}";
+
+	const decodeHTML = function(html){
+	const textarea = document.createElement('textarea');
+	textarea.innerHTML = html;
+	return textarea.value;
+	};
+	const getItemsFromContainerText = function(container, selector){
+		const parser = new DOMParser();
+		const parsedHtml = parser.parseFromString(decodeHTML(container.textContent), 'text/html');
+
+		return parsedHtml.querySelectorAll(selector);
+	};
+	function loadCss(){
+		const cssContainers = document.querySelectorAll('noscript[data-css-lazyload]');
+		if(!cssContainers){
+			return;
+		}
+		const styleSheets = document.createDocumentFragment();
+		for(const cssContainer of cssContainers){
+			const sheets = getItemsFromContainerText(cssContainer, 'link[rel="stylesheet"]');
+			styleSheets.append(...sheets);
+			cssContainer.remove();
+		}
+		document.head.append(styleSheets);
+	}
+	loadCss();
+</script>
+
+{{if $popupMessage}}
+<script nonce="{{$web.cspNonce}}">
+    window.popupMessage = "{{$popupMessage}}";
+</script>
+{{/if}}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="{{$web.lang}}" class="no-js" prefix="og: http://ogp.me/ns#">
+	<head>
+		{{if $canonicalUrl}}
+		<link rel="canonical" href="{{$canonicalUrl}}" />
+		{{/if}}
+		<title>{{$web.pageTitle|stripslashes|replace:'"':''|strip_tags}}</title>
+		<meta name="description" content="{{$web.pageDescription|stripslashes|replace:'"':''|strip_tags}}"/>
+		<meta name="keywords" content="{{$web.pageKeywords|stripslashes|replace:'"':''|strip_tags}}"/>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta content="{{'siteAuthor'|gL:'www.beattum.com'}}" name="author" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+
+		<meta property="og:url" content="{{$smarty.server.REQUEST_SCHEME}}://{{$smarty.server.HTTP_HOST}}{{$smarty.server.REQUEST_URI}}" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="{{$web.pageTitle|stripslashes|replace:'"':''|strip_tags}}" />
+		<meta property="og:description" content="{{$web.pageDescription|stripslashes|replace:'"':''|strip_tags}}" />
+		<meta property="og:image" content="http://{{$smarty.server.HTTP_HOST}}{{$AD_IMAGE_FOLDER}}piearsta-logo.png" />
+
+		<script nonce="{{$web.cspNonce}}" id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3e142cce-c17b-4c4c-8841-1ae48aea5bbe" data-blockingmode="auto" data-culture="{{$web.lang}}" type="text/javascript"></script>
+
+		<link rel="icon" href="/favicon.ico?v=1">
+		<link rel="shortcut icon" href="/favicon.ico?v=1">
+		{{if $ctrAr.active.webmasters}}<meta name="google-site-verification" content="{{$ctrAr.active.webmasters}}" />{{/if}}
+		<link rel="stylesheet" type="text/css" href="{{$CRITICAL_CSS}}?v={{$AD_CSS_VERSION}}" /> 
+		{{$PAGE_HEAD_TEMPLATE}}
+
+		<!-- Google tag (gtag.js) -->
+		<!--	Analitics run only if user consent statiscal cookies	-->
+		{{if $cookieConsent.statistics}}
+			<script nonce="{{$web.cspNonce}}" async src="https://www.googletagmanager.com/gtag/js?id=G-QYKCEMG98B"></script>
+			<script nonce="{{$web.cspNonce}}">
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+				gtag('config', '{{$ctrAr.active.google_analytics}}');
+			</script>
+		{{/if}}
+
+		<script nonce="{{$web.cspNonce}}">
+
+			window.addEventListener('load', function () {
+
+				let initialConsent = {
+					preferences: {{if $cookieConsent.preferences}}true{{else}}false{{/if}},
+					statistics: {{if $cookieConsent.statistics}}true{{else}}false{{/if}},
+					marketing: {{if $cookieConsent.marketing}}true{{else}}false{{/if}},
+				}
+
+				window.addEventListener('CookiebotOnAccept', function (e) {
+
+					let changed = false
+
+					if(!changed && initialConsent.preferences !== Cookiebot.consent.preferences) {
+						changed = true
+					}
+
+					if(!changed && initialConsent.statistics !== Cookiebot.consent.statistics) {
+						changed = true
+					}
+
+					if(!changed && initialConsent.marketing !== Cookiebot.consent.marketing) {
+						changed = true
+					}
+
+					if(changed) {
+
+						location.reload()
+						// console.log('CookiebotOnAccept event ACCEPT -- reload needed')
+					} else {
+						// console.log('CookiebotOnAccept event ACCEPT -- NO reload')
+					}
+				});
+
+				window.addEventListener('CookiebotOnDecline', function () {
+
+					let changed = false
+
+					if(!changed && initialConsent.preferences !== Cookiebot.consent.preferences) {
+						changed = true
+					}
+
+					if(!changed && initialConsent.statistics !== Cookiebot.consent.statistics) {
+						changed = true
+					}
+
+					if(!changed && initialConsent.marketing !== Cookiebot.consent.marketing) {
+						changed = true
+					}
+
+					if(changed) {
+
+						location.reload()
+						// console.log('CookiebotOnDecline event DECLINE -- reload needed')
+					} else {
+						// console.log('CookiebotOnDecline event DECLINE -- NO reload')
+					}
+				});
+			})
+
+		</script>
+
+	</head>
+	
+	<body>
+
+		<div class="ver2"></div>
+		<div class="ver3"></div>
+		
+		<section id="page" class="{{$web.pageClass}}">
+			
+			{{if $CUSTOM_HEADER}}
+				{{$CUSTOM_HEADER}}
+			{{else}}
+				{{$PAGE_HEADER_TEMPLATE}}
+			{{/if}}
+
+			{{if $BEFORE_CONTENT}}
+				{{$BEFORE_CONTENT}}
+			{{/if}}
+
+			{{$PAGE_BODY_TEMPLATE}}
+
+			{{if $AFTER_CONTENT}}
+				{{$AFTER_CONTENT}}
+			{{/if}}
+
+			<div class="footer_push"></div>
+		</section>
+
+		{{if $CUSTOM_FOOTER}}
+			{{$CUSTOM_FOOTER}}
+		{{else}}
+			{{$PAGE_FOOTER_TEMPLATE}}
+		{{/if}}
+
+<!--		<script id="CookieDeclaration" src="https://consent.cookiebot.com/5b141122-1c87-4a28-84b8-e61edef198e9/cd.js" type="text/javascript" async></script>-->
+
+	<script nonce="{{$web.cspNonce}}">
+
+		window.userLoggedIn = {{if $isLoggedUser}}true{{else}}false{{/if}};
+
+			{{if $schedule_id && !$dc}}
+				window.scheduleId = '{{$schedule_id}}';
+			{{/if}}
+
+		window.site = {};
+		window.site.ShowOnlyFreeSlots = {{if $ShowOnlyFreeSlots}}true{{else}}false{{/if}};
+		window.site.loginUrl = '{{$siteData.mirros_signin_page|getLM2}}';
+
+		{{if $find}}
+			window.findMore = {{$find}};
+		{{/if}}
+
+		{{if $maniDatiUrl}}
+			profile.maniDatiUrl = '{{$maniDatiUrl}}';
+		{{/if}}
+
+		{{if $verification}}
+
+			profile.verification = {};
+			profile.verification.gatewayTimeout = {{$verification.gatewayTimeout}};
+			profile.verification.smartidTimeout = {{$verification.smartidTimeout}};
+
+			var verification = {};
+			verification.allowedCountries = JSON.parse('{{$verification.allowedCountries}}');
+			verification.isVerifiable = {{if $userData.isVerifyable}}1{{else}}0{{/if}};
+
+		{{/if}}
+
+		{{if $timeSelectWidget}}
+			window.site.timeSelectWidget = {};
+			window.site.timeSelectWidget.header = '{{$timeSelectWidget.header}}';
+		{{/if}}
+
+		{{if $sessionTimeouts.sessionTimeout && $sessionTimeouts.sessionTimeoutWarnBefore}}
+
+			profile.sessionTimeouts.sessLength = {{$sessionTimeouts.sessionTimeout}};
+			profile.sessionTimeouts.sessWarnBefore = {{$sessionTimeouts.sessionTimeoutWarnBefore}};
+
+		{{/if}}
+
+        {{if $sessionTimeoutPopup}}
+
+        	profile.sessionPopupHtml = "{{$sessionTimeoutPopup}}";
+
+        {{/if}}
+
+		{{if $calendarData}}
+
+			profile.filterCalendar = JSON.parse('{{$calendarData}}');
+
+		{{/if}}
+
+	</script>
+
+
+		<div class="spinner-container-calendar">
+			<div class="spinner-content">
+				<div class="spinner-content-inner">
+					<div class="spinner-msg"></div>
+					<div class="loader"></div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

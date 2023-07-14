@@ -1,0 +1,111 @@
+<div class="popup_bg"></div>
+<div class="popup w700">
+    <div class="close"><i class="fa fa-times"></i></div>
+    <div class="cont">
+
+        <h2>{{'profile_consultation_open_header'|gL:'Pieteikums e-konsultācijai'}}</h2>
+
+        {{if $item.doctor_phone}}
+            {{assign var="phone_number" value=$item.doctor_phone|gLParam:'{phone_number}'}}
+        {{else}}
+            {{assign var="phone_number" value=$item.clinic_phone|gLParam:'{phone_number}'}}
+        {{/if}}
+
+        <div class="info warning">
+            {{if $item.status == 0}}
+                <h4>{{'profile_consultation_message_title'|gL:'Uzmanību!'}}</h4>
+                <p>{{'profile_consultation_message_text'|gL:'Pieteikums ir nosūtīts e-konsultācijai, ārsta atbilde būs 24 stundu laikā. Informācija pa tālruni: {phone_number}!':'':$phone_number}}</p>
+            {{elseif $item.status == 2}}
+                <h4>{{'profile_consultation_message_feedback_title'|gL:'Uzmanību!'}}</h4>
+                <p>{{'profile_consultation_message_feedback_text'|gL:'Ārsts atbildēja uz jūsu konsultācijas pieprasījumu.'}}</p>
+            {{/if}}
+        </div>
+
+        <hr>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_doctor'|gL:'Ārsts'}}:</div>
+            <div class="col2"><a target="_blank" href="{{$siteData.mirrors_doctors_page|getLM2}}{{$item.doctor_url}}/{{$item.clinic_url}}/">{{$item.name}} {{$item.surname}}</a></div>
+        </div>
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_clinic'|gL:'Iestadē'}}:</div>
+            <div class="col2">
+                <div><a target="_blank" href="{{$siteData.mirrors_clinics_page|getLM2}}{{$item.clinic_url}}/">{{$item.clinic_name}}</a></div>
+                <div class="note">{{$item.clinic_address}}</div>
+            </div>
+        </div>
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_service'|gL:'Pakalpojums'}}:</div>
+            <div class="col2">{{$item.title}}</div>
+        </div>
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_client'|gL:'Pacients'}}:</div>
+            <div class="col2">
+                {{if $item.person_id}}
+                {{$item.ppname}} {{$item.ppsurname}}
+                {{else}}
+                {{$userData.name}} {{$userData.surname}}
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_status'|gL:'Status'}}:</div>
+            <div class="col2">
+                {{if $item.status == 0}}
+                    <span class="yellow">{{'profile_consultation_status_0'|gL:'New'}}</span>
+                {{elseif $item.status == 1}}
+                    <span class="redtext">{{'profile_consultation_status_1'|gL:'Declined by doctor'}}</span>
+                {{elseif $item.status == 2}}
+                    <span class="green">{{'profile_consultation_status_2'|gL:'Feedback received'}}</span>
+                {{/if}}
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_consultation_sudzibas'|gL:'Sudzibas'}}</div>
+            <div class="col2 sudzibas-scrollable">
+                {{$item.sudzibas}}
+            </div>
+        </div>
+
+        {{if $item.doctorComment || $item.doctorLink}}
+
+        <hr>
+
+        <h3 class="doctor-feedback-header">Doctor feedback</h3>
+
+        <br>
+
+        <!--    Doctor comment    -->
+        {{if $item.doctorComment}}
+        <div class="line w2">
+            <div class="col1">{{'profile_consultation_comment'|gL:'Ārsta komentārs:'}}</div>
+            <div class="col2 sudzibas-scrollable">
+                {{$item.doctorComment}}
+            </div>
+        </div>
+        {{/if}}
+
+        <!--    Doctor sent link to video-conference, chat etc.    -->
+        {{if $item.doctorLink}}
+        <div class="line w2">
+            <div class="col1">{{'profile_consultation_link'|gL:'Konsultācijas saite'}}</div>
+            <div class="col2 sudzibas-scrollable">
+                {{$item.doctorLink}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{/if}}
+
+        <hr class="ver1 ver2">
+
+        <div class="btn_cont mob_mt40">
+            <a href="#" class="btnw w2 red profileClosePopup">{{'profile_close'|gL:'Aizveriet'}}</a>
+        </div>
+
+    </div>
+</div>

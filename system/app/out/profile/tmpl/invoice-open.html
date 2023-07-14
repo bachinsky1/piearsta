@@ -1,0 +1,18 @@
+<div class="popup_bg"></div>
+<div class="popup w700 invoice-order">
+    <div class="close"><i class="fa fa-times"></i></div>
+    <div class="cont">
+        <h3>{{$item.bb}}</h3>
+        <h1>{{'profile_reservation_invoice'|gL:'Invoice'}}</h1>
+        <hr>
+        {{$item.order_html}}
+        <div class="invoice_info_message">{{'profile_invoice_info_message'|gL:'Rēķins ir sagatavots elektroniski un derīgs bez paraksta'}}</div>
+        <div class="payment_status">
+            <h3>{{$item.payment_status}}</h3>
+        </div>
+        {{$item.payment_data}}
+        <div class="btn_cont mob_mt40">
+            <a href="#" data-ord="{{$item.orderId}}" class="btnw w2 printOrdBtn openInvoicePdf">{{'profile_reservation_print_invoice'|gL:'Print invoice'}}</a>
+        </div>
+    </div>
+</div>

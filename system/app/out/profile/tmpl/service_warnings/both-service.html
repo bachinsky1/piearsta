@@ -1,0 +1,29 @@
+<div class="service-info-warning both-paid-and-free-service">
+    <div class="info warning">
+        <h4>{{'profile_reservation_info_warning'|gL:'Uzmanību!':$item.setLang}}</h4>
+        <p>
+            {{'profile_reservation_payment_type_country_pay_info_text1'|gL:'Pieraksta laikā ir iespējams saņemt gan Valsts apmaksājamus gan arī maksas pakalpojumus.<br />Lūdzu paņem līdzi nosūtījumu pie speciālista, personas apliecinošu dokumentu, apdrošināšanas polisi. Pēc pieraksta pieteikuma apstiprināšanas, lūdzu sazinies ar ārstniecības iestādes reģistratūru lai noskaidrotu pakalpojumu apmaksas veidu un kārtību':$item.setLang}}
+            <br>
+            <br>
+            {{if $item.clinic_phone}}
+            {{'profile_reservation_payment_type_pay_phone'|gL:'Tālrunis':$item.setLang}}: {{$item.clinic_phone}},
+            {{/if}}
+
+            {{if $item.clinic_email}}
+            {{'profile_reservation_payment_type_pay_email'|gL:'e-pasts':$item.setLang}}: <a href="mailto:{{$item.clinic_email}}">{{$item.clinic_email}}</a>,
+            {{/if}}
+
+            {{if $item.clinic_url}}
+            <a target="_blank" href="{{$siteData.mirrors_clinics_page|getLM2}}{{$item.clinic_url}}/">Iestādes profils</a>
+            {{/if}}
+        </p>
+    </div>
+    <hr>
+    <div class="checkbox_field">
+        <label class="item blue">
+            <input type="checkbox" class="" id="country_agreement" value="1">
+            <span class="box"><i class="fa fa-check"></i></span>
+            {{'profile_reservation_payment_type_country_agreement'|gL:'Piekrītu <a href="/raksti/veselibas-centrs-spice.html" target="_blank">valsts apamāksašanas noteikumiem</a>':$item.setLang}}
+        </label>
+    </div>
+</div>

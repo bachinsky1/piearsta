@@ -1,0 +1,46 @@
+<div class="internal popupTFAConfigure">
+
+    <div class="popupTFAConfigureHeader">
+        <h2 class="tfa_header">{{'profile_tfa_configure_popup_header'|gL:'Конфигурировать двухфакторную аутентификацию'}}</h2>
+        <hr>
+    </div>
+
+    {{if $item.maxAttemptsReached}}
+        <div class="info-block">
+            <div class="imageContainer">
+                <img src="https://www.policedsc.com/images/2_Step_Logo_Full.png">
+            </div>
+            <div class="messageContainer">
+                <h3>{{'profile_tfa_configure_code_failed'|gL:'Не удалось сконфигурировать двухфакторную аутентификацию!'}}</h3>
+                <div>
+                    {{'profile_tfa_configure_failed_msg'|gL:'Максимальное количество попыток достигнуто.'}}
+                </div>
+            </div>
+        </div>
+
+        <div class="btn_cont">
+            <a class="btn btng w1 close-btn">{{'profile_reservation_ok'|gL:'OK'}}</a>
+        </div>
+    {{else}}
+        <div class="info-block">
+            <div class="imageContainer">
+                <img src="/img/2-f-a.png">
+            </div>
+            <div class="messageContainer">
+                <h3>{{'profile_tfa_configure_code_correct'|gL:'Код введен правильно!'}}</h3>
+                <div>
+                    {{'profile_tfa_configure_configured_msg'|gL:'Двухфакторная аутентификация успешно сконфигурирована!'}}
+                </div>
+            </div>
+        </div>
+
+        <div class="btn_cont">
+            <a class="btn btng w1 close-btn">{{'profile_reservation_ok'|gL:'OK'}}</a>
+        </div>
+    {{/if}}
+
+
+
+    <div class="hiddens"></div>
+
+</div>

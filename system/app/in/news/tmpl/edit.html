@@ -1,0 +1,189 @@
+<div class="content">
+	<div id="modulePath">
+	<div class="error-msg" id="errorBlock" style="display:none;"></div>
+	<input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+	<input type="hidden" name="content_id" class="simple" id="content_id" value="{{$edit.content_id}}" />
+	<table class="holder-table">
+		<tr>
+			<td class="left-td">
+				<table class="inner-table">
+					<tr>
+						<td colspan="2"><strong>{{'general_data'|gLA:'General data'}}</strong></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_title'|gLA:'Title'}}*:</td>
+			            <td><input type="text" class="long simple" name="title" id="title" value="{{$edit.title|clear}}" /></td>
+			        </tr>
+			        <tr>
+						<td>{{'enabled'|gLA:'Enabled'}}</td>
+						<td><input type="checkbox" value="1" id="enable" class="active simple" {{if $edit.enable}} checked="checked" {{/if}} /></td>
+					</tr>
+			        <tr>
+			            <td>{{'m_date'|gLA:'Date'}}:</td>
+			            <td><input type="text" class="long simple" name="date_to" id="date_to" value="{{if $edit.date_to}}{{'d-m-Y'|date:$edit.date_to|clear}}{{/if}}" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_lead'|gLA:'Lead text'}}:</td>
+			            <td>
+			            	<textarea name="lead" id="lead" class="simple" cols="100" rows="4" class="t-desc">{{$edit.lead|clear}}</textarea>
+			            	<p class="SymbCounter lead"><span class="SymbCount"></span> / <span class="SymbMax">{{$leadTextLength}}</span></p>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_lead_image'|gLA:'Lead image'}}:</td>
+			            <td>
+			            	<div id="lead_imageDiv">
+			            	{{if $edit.lead_image}}
+			            	<img width="100" alt="" src="{{$AD_UPLOAD_FOLDER}}{{$edit.uploadFolder}}small/{{$edit.lead_image}}"><a href="#" onclick="emptyUploadFile('lead_image'); return false;">{{'m_delete'|gLA:'Delete'}}</a>
+							<input type="hidden" class="simple" name="lead_image" id="lead_image" value="{{$edit.lead_image}}">
+			            	{{/if}}
+			            	</div>
+			            	<a href="#" id="lead_imageButton" class="select-btn">{{'upload'|gLA:'Upload'}}</a>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_lead_image_alt'|gLA:'Lead image alt text'}}:</td>
+			            <td><input type="text" class="long simple" name="lead_image_alt" id="lead_image_alt" value="{{$edit.lead_image_alt|clear}}" /></td>
+			        </tr>
+					<tr>
+			            <td>{{'m_text'|gLA:'Text'}}:</td>
+			            <td>
+			            	<textarea name="text" id="text" class="simple" cols="100" rows="6">{{$edit.text|clear}}</textarea>
+			            	<p class="wys"><a href="#" onclick="openCkEditor('text', 'advanced'); return false;">{{'wysiwyg'|gLA:'WYSIWYG'}}</a></p>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_text_image'|gLA:'Text image'}}:</td>
+			            <td>
+			            	<div id="text_imageDiv">
+			            	{{if $edit.text_image}}
+			            	<img width="100" alt="" src="{{$AD_UPLOAD_FOLDER}}{{$edit.uploadFolder}}big/{{$edit.text_image}}"><a href="#" onclick="emptyUploadFile('text_image'); return false;">{{'m_delete'|gLA:'Delete'}}</a>
+							<input type="hidden" class="simple" name="text_image" id="text_image" value="{{$edit.text_image}}">
+			            	{{/if}}
+			            	</div>
+			            	<a href="#" id="text_imageButton" class="select-btn">{{'upload'|gLA:'Upload'}}</a>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_text_image_alt'|gLA:'Text image alt text'}}:</td>
+			            <td><input type="text" class="long simple" name="text_image_alt" id="text_image_alt" value="{{$edit.text_image_alt|clear}}" /></td>
+			        </tr>
+			        <tr>
+						<td colspan="2"><strong>{{'files_block'|gLA:'Files block'}}</strong></td>
+			        </tr>
+			         <tr>
+			            <td><a href="#" onclick="addFilesBlock('filesBlock', '{{$edit.uploadFolder}}'); return false;" title="{{'add_block'|gLA:'Add block'}}">{{'add_block'|gLA:'Add block'}}</a></td>
+			            <td id="filesBlock">
+			            {{if $edit.files && $edit.files|@count > 0}}
+			            	{{section name=item loop=$edit.files}}	
+			            	<p class="files-block" id="files-block{{$smarty.section.item.index_next}}">
+			            		<input class="files" type="text" id="fileTitle_{{$smarty.section.item.index_next}}" value="{{$edit.files[item].fileTitle}}" />
+			            		<input type="text" id="fileName_{{$smarty.section.item.index_next}}" value="{{$edit.files[item].fileName}}" />
+			            		<a href="#" id="fileButton_{{$smarty.section.item.index_next}}" class="select-btn">{{'upload'|gLA:'Upload'}}</a>
+			            		<strong>
+			            			<a href="#" onclick="$('#files-block{{$smarty.section.item.index_next}}').remove(); return false" title="{{'remove'|gLA:'Remove'}}">{{'remove'|gLA:'Remove'}}</a>
+			            		</strong>
+			            	</p>
+			            	<script type="text/javascript">
+			            		loadUploadButton('{{$edit.uploadFolder}}', 'files-block' + {{$smarty.section.item.index_next}}, {{$smarty.section.item.index_next}});
+							</script>
+			            	
+			            	{{/section}}
+			            {{/if}}
+			            </td>
+			        </tr>
+			        <tr>
+						<td colspan="2"><strong>{{'links_block'|gLA:'Links block'}}</strong></td>
+			        </tr>
+			         <tr>
+			            <td><a href="#" onclick="addLinksBlock('linkBlock'); return false;" title="{{'add_block'|gLA:'Add block'}}">{{'add_block'|gLA:'Add block'}}</a></td>
+			            <td id="linkBlock">
+			            {{if $edit.links && $edit.links|@count > 0}}
+			            	{{section name=item loop=$edit.links}}	
+			            	<p class="links-block" id="links-block{{$smarty.section.item.index_next}}">
+			            		<input class="links" type="text" id="linkTitle_{{$smarty.section.item.index_next}}" value="{{$edit.links[item].linkTitle}}" />
+			            		<input type="text" id="linkUrl_{{$smarty.section.item.index_next}}" value="{{$edit.links[item].linkUrl}}" />
+			            		<input type="hidden" id="linkUrlId_{{$smarty.section.item.index_next}}" value="{{$edit.links[item].linkUrlId}}" />
+			            		<a href="#" onclick="openSiteMapDialog('linkUrlId_{{$smarty.section.item.index_next}}', 'linkUrl_{{$smarty.section.item.index_next}}', ''); return false;" class="select-btn">{{'select'|gLA:'Select'}}</a>
+			            		<select id="linkDocId_{{$smarty.section.item.index_next}}" name="linkDocId_{{$smarty.section.item.index_next}}">
+									<option value="0">Select</option>
+								</select>
+			            		<select id="linkTarget_{{$smarty.section.item.index_next}}">select
+			            			<option value="_blank" {{if $edit.links[item].linkTarget == '_blank'}} selected="selected"{{/if}}>_blank</option>
+			            			<option value="_self" {{if $edit.links[item].linkTarget == '_self'}} selected="selected"{{/if}}>_self</option>
+			            		</select>
+			            		<strong>
+			            			<a href="#" onclick="$('#links-block{{$smarty.section.item.index_next}}').remove(); return false" title="{{'remove'|gLA:'Remove'}}">{{'remove'|gLA:'Remove'}}</a>
+			            		</strong>
+			            	</p>
+			            	
+			            	<script type="text/javascript">
+			            		{{if $edit.links[item].linkDocId}}
+			            		getDocumentsList('linkUrlId_{{$smarty.section.item.index_next}}', 'linkDocId_{{$smarty.section.item.index_next}}', '{{$edit.links[item].linkDocId}}');
+			            		{{/if}}
+							</script>
+			            	{{/section}}
+			            {{/if}}
+			            </td>
+			        </tr>
+			        <tr>
+						<td colspan="2"><strong>{{'seo_block'|gLA:'Seo block'}}</strong></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_page_url'|gLA:'Page url'}}:</td>
+			            <td><input type="text" class="long simple" name="page_url" id="page_url" value="{{$edit.page_url|clear}}" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_page_title'|gLA:'Page title'}}:</td>
+			            <td><input type="text" class="long simple" name="page_title" id="page_title" value="{{$edit.page_title|clear}}" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_page_keywords'|gLA:'Page keywords'}}:</td>
+			            <td><input type="text" class="long simple" name="page_keywords" id="page_keywords" value="{{$edit.page_keywords|clear}}" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_page_description'|gLA:'Page description'}}:</td>
+			            <td><input type="text" class="long simple" name="page_description" id="page_description" value="{{$edit.page_description|clear}}" /></td>
+			        </tr>
+    			</table>
+    		</td>
+		</tr>
+	</table>
+    <table class="bttns-table">
+        <tr>
+            <td>
+            	{{if $edit.id}}
+                <div class="btn orange"><a href="javascript:;" onclick="checkFields('apply');"><span>{{'apply'|gLA:'Apply'}}</span></a></div>
+                {{/if}}
+                <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save'|gLA:'Save'}}</span></a></div>
+                <div class="btn cancel"><a href="javascript:;" onclick="window.location.href = moduleTable.getRequestUrl() + '#content_id:{{$edit.content_id}}/';"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+            </td>
+        </tr>
+    </table>
+    </form>
+
+    <script type="text/javascript">
+	    moduleTable.mainUrl = '{{$MAIN_URL}}';
+            moduleTable.moduleName = '{{$MODULE_NAME}}';
+            
+            $(document).ready(function() {
+
+                    var tabindex = 1;
+                    $('#editForma :input,select').each(function() {
+                            if (this.type != "hidden") {
+                                    var $input = $(this);
+                                    $input.attr("tabindex", tabindex);
+                                    tabindex++;
+                            }
+                    });
+
+                    $("#date_to").datepicker();
+
+                    loadUploadImgButton('{{$edit.uploadFolder}}', 'lead_image');
+                    loadUploadImgButton('{{$edit.uploadFolder}}', 'text_image');
+
+            });
+			
+	</script>
+	</div>
+</div>

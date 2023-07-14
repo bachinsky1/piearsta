@@ -1,0 +1,82 @@
+.signup_block.coupons{
+	.col2_y{
+		.list{._clear;margin-top:20px;
+			.item{._left;width:220px;margin-bottom:40px;
+				.image{._blo;
+					img{._blo;max-width:100%;}
+				}
+				.terms{._clear;margin-top:8px;
+					.percent{color:#65c300;._b;._text(22px,26px);._left;}
+					.date{color:#636c70;._text(13px,16px);._right;margin-top:8px;}
+				}
+				.title{._blo;._xu;margin-right:-10px;height:84px;._ovh;margin-top:10px;
+					h3{._text(22px,28px);}
+					&:hover{color:#006fa0;}
+				}
+				.author{color:#636c70;._text(13px,16px);margin-top:9px;}
+				.btn_block{._clear;padding-top:20px;border-top:1px solid #d4dcde;margin-top:16px;
+					.btn_cont{._left;width:110px;margin-top:0px;
+						.btng{._blo;padding-left:0;padding-right:0;width:110px;}
+					}
+					.price{._right;width:90px;margin-top:2px;
+						.old{color:#636c70;._text(14px,17px);text-decoration:line-through;}
+						.new{color:#000000;._text(18px,22px);}
+					}
+				}
+				&+.item{margin-left:20px;}
+				&:nth-child(3n){clear:right;}
+				&:nth-child(4n){margin-left:0;}
+				&:hover{
+					.image{._rel;max-width:220px;
+						&:before{._cont;._abs;top:0;left:0;right:0;bottom:0;._bgc(#000000);opacity:0.1;}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	.signup_block.coupons{
+		.col2_y{
+			.list{
+				.item{
+					.btn_block{max-width: 220px;}
+					&:nth-child(3n){margin-right: 0;}
+					&:hover{
+						.image{._rel;max-width:100%;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.signup_block.coupons{
+		.col2_y{
+			.list{._bgc(#ffffff);._m0p0;padding:20px;
+				.item{clear:none;margin-bottom:50px;
+					.terms{
+						.date{._text(11px,14px);}
+					}
+					.title{height:100px;margin-top:13px;
+						h3{._text(20px,25px);}
+					}
+					.btn_block{border-top:0;padding-top:0;margin-top:19px;max-width: 180px;
+						.btn_cont{.btng{width:100px;}a{width:100px;}}
+						.price{width:75px;margin-right:-10px;}
+					}
+					&:hover{
+						.image{._rel;max-width:100%;
+						}
+					}
+					&+.item{margin-left:0px;}
+					&:nth-child(2n){clear:right;margin-left:20px;}
+					&:nth-child(3n){clear:none;margin-left:0;}
+				}
+			}
+		}
+	}
+}

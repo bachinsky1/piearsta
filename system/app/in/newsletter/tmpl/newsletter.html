@@ -1,0 +1,49 @@
+<div class="content">
+    <form class="forma" method="post" action="" onsubmit="return false;">
+        <fieldset>
+            <legend>FORM</legend>
+            <table class="search-table" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>{{'lang'|gLA:'Language'}}</td>
+                    <td>
+                        <select id="filterLanguage" name="filterLanguage" onchange="changeFilter(); return false;">
+                            <option value="">{{$_select_option}}</option>
+                            {{$languageOptions}}
+                        </select>
+                    </td>
+                    <td>{{'email'|gLA:'Email'}}</td>
+                    <td>
+                        <input type="text" name="filterEmail" id="filterEmail" value="" onchange="changeFilter(); return false;"/>
+                    </td>
+                    <td class="bttns">
+                        <div class="btn"><a href="javascript:;" onclick="changeFilter(); return false;"><span>{{'m_search'|gLA:'Search'}}</span></a></div>
+                        <div class="clr"><!-- clear --></div>
+                    </td>
+                    <td class="bttns">
+                        <div class="btn"><a href="javascript:;" onclick="clearFilter(); return false;"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+                        <div class="clr"><!-- clear --></div>
+                    </td>
+                </tr>
+            </table>
+
+            {{$tTable}}
+
+            <div id="modulePath">
+            </div>
+
+            {{$bTable}}
+
+        </fieldset>
+    </form>
+
+
+    <script type="text/javascript">
+		moduleTable.mainUrl = '{{$MAIN_URL}}';
+		moduleTable.moduleName = '{{$MODULE_NAME}}';
+
+		$(function () {
+
+			updateModule();
+		});
+    </script>
+</div>

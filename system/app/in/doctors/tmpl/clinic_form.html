@@ -1,0 +1,23 @@
+<div id="clinics_form{{$clinic.id}}">
+	<table class="inner-table">
+		<tr>
+			{{foreach name=sh from=$clinic.shedule.interval item=i key=k}}
+			<td>
+				{{assign var="dd" value=$i.full}}
+				<strong>{{$i.full}}</strong>
+				<br />
+				{{if $clinic.shedule.data[$dd]}}
+				{{foreach name=shdd from=$clinic.shedule.data[$dd] item=ii key=kk}}
+				{{$ii.start_time}}<br />
+				{{/foreach}}	
+				{{/if}}
+			</td>
+			{{/foreach}}
+		</tr>
+		<tr>
+			<td colspan="7">
+			<strong>Last time:</strong> {{$clinic.shedule.lastDate}}
+			</td>
+		</tr>
+	</table>
+</div>

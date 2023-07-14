@@ -1,0 +1,191 @@
+<div id="general_data_form" class="main-tab">
+	<table class="holder-table">
+	    <tr>
+		<td class="left-td">
+		    <table class="inner-table">
+			<tr>
+			    <td colspan="2"><strong>{{'general_data'|gLA:'General data'}}</strong></td>
+			</tr>
+			<tr>
+			    <td>
+				Statistic:
+			    </td>
+			    <td>
+			    	From Web: {{$edit.web_count}}, From Terminal: {{$edit.terminal_count}}
+			    </td>
+			</tr>
+			<tr>
+	          <td>Name*:</td>
+	          <td>
+				<div class="error-msg" style="display:none;">{{'m_title_error'|gLA:'Title in all languages required!'}}</div>
+	          	<div class="block-holder open">
+				<div class="inner-block">
+					<ul class="lang-tabs">
+						{{foreach name=langauges key=lk item=lng from=$langauges}}
+						<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+						{{/foreach}}
+					</ul>
+	                           
+					<div class="areaBlock">
+						{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+						<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+							<input rel="{{$lng.lang}}" type="text" class="long simple required" name="name" id="name_{{$lng.lang}}" value="{{$edit.name[$lng.lang]|clear}}" />
+							<div class="clr"><!-- clear --></div>
+						</div>
+						{{/foreach}}
+					</div>             
+				</div>
+			</div>							
+	         </td> 
+	      </tr>
+	      <tr>
+	          <td>Surname*:</td>
+	          <td>
+				<div class="error-msg" style="display:none;">{{'m_title_error'|gLA:'Title in all languages required!'}}</div>
+	          	<div class="block-holder open">
+				<div class="inner-block">
+					<ul class="lang-tabs">
+						{{foreach name=langauges key=lk item=lng from=$langauges}}
+						<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+						{{/foreach}}
+					</ul>
+	                           
+					<div class="areaBlock">
+						{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+						<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+							<input rel="{{$lng.lang}}" type="text" class="long simple required" name="surname" id="surname_{{$lng.lang}}" value="{{$edit.surname[$lng.lang]|clear}}" />
+							<div class="clr"><!-- clear --></div>
+						</div>
+						{{/foreach}}
+					</div>             
+				</div>
+			</div>							
+	         </td> 
+	      </tr>
+			<tr>
+			    <td>{{'m_phone'|gLA:'Phone'}}*:</td>
+			    <td><input type="text" class="long simple" name="phone" id="phone" value="{{$edit.phone|clear}}" /></td>
+			</tr>
+			<tr>
+			    <td>{{'m_email'|gLA:'E-mail'}}*:</td>
+			    <td><input type="text" class="long simple" name="email" id="email" value="{{$edit.email|clear}}" /></td>
+			</tr>
+			<tr>
+		          <td>Description*:</td>
+		          <td>
+				<div class="block-holder open">
+					<div class="inner-block">
+						<ul class="lang-tabs">
+							{{foreach name=langauges key=lk item=lng from=$langauges}}
+							<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+							{{/foreach}}
+						</ul>
+						<div class="areaBlock">
+							{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+							<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+								<textarea class="long required simple" id="description_{{$lng.lang}}" rel="{{$lng.lang}}" name="description">{{$edit.description[$lng.lang]|clear}}</textarea>
+								<div class="clr"><!-- clear --></div>
+							</div>
+							{{/foreach}}
+						</div>             
+					</div>
+				</div>							
+		         </td>
+		      </tr>
+			<tr>
+			    <td>{{'m_photo'|gLA:'Photo'}}:</td>
+			    <td>
+				<div id="photoDiv">
+				    {{if $edit.photo}}
+				    <img width="100" alt="" src="{{$AD_UPLOAD_FOLDER}}{{$edit.uploadFolder}}list/{{$edit.photo}}"><a href="#" onclick="emptyUploadFile('photo'); return false;">{{'m_delete'|gLA:'Delete'}}</a>
+				    <input type="hidden" class="simple" name="photo" id="photo" value="{{$edit.photo}}">
+				    {{/if}}
+				</div>
+				<a href="#" id="photoButton" class="select-btn">{{'upload'|gLA:'Upload'}}</a>
+			    </td>
+			</tr>
+			<tr>
+			    <td>
+				{{'m_clinics'|gLA:'Clinics'}}:
+				<br />
+				<button type="button" data-name="clinics[]" data-type="clinics" data-key="id" data-value="name" class="add-select">+</button>
+			    </td>
+			    <td class="clinics-container"></td>
+			</tr>
+			<tr>
+			    <td>
+				{{'m_specialities'|gLA:'Specialities'}}:
+				<br />
+				<button type="button" data-name="specialities[]" data-type="specialities" class="add-select">+</button>
+			    </td>
+			    <td class="specialities-container"></td>
+			</tr>
+			<tr>
+			    <td>
+				{{'m_services'|gLA:'Services'}}:
+				<br />
+				<button type="button" data-name="services[]" data-type="services" class="add-select">+</button>
+			    </td>
+			    <td class="services-container"></td>
+			</tr>
+		    </table>
+		</td>
+	    </tr>
+	</table>
+</div>
+<script type="text/javascript">
+	    moduleTable.mainUrl = '{{$MAIN_URL}}';
+	    moduleTable.moduleName = '{{$MODULE_NAME}}';
+	    
+	    externalContent = {{$edit.external|@json_encode}};
+	    
+	    {{foreach from=$edit.clinics item=clinic key=key}}
+	    buildSelect($('.clinics-container'), 'clinics[]', externalContent['clinics'], 'id', 'name', {{$clinic.id}});
+	    {{/foreach}}
+	    
+	    {{foreach from=$edit.specialities item=speciality key=key}}
+	    buildSelect($('.specialities-container'), 'specialities[]', externalContent['specialities'], 'c_id', 'title', {{$speciality.c_id}});
+	    {{/foreach}}
+	    
+	    {{foreach from=$edit.services item=service key=key}}
+	    buildSelect($('.services-container'), 'services[]', externalContent['services'], 'c_id', 'title', {{$service.c_id}});
+	    {{/foreach}}
+	    
+	    $(document).ready(function() {
+			$('.add-select').on('click', function(e) {
+			    type = $(this).data('type');
+			    if (externalContent[type]) {
+				target = $(this).parents('td').next();
+				buildSelect(target, $(this).data('name'), externalContent[type], $(this).data('key'), $(this).data('value'));
+			    }
+			});
+			
+			$('.rm-select').live('click', function(e) {
+			    removeSelect($(this));
+			});
+			
+			
+			var tabindex = 1;
+			$('.modulePath :input,select').each(function() {
+			    if (this.type != "hidden") {
+				var $input = $(this);
+				$input.attr("tabindex", tabindex);
+				tabindex++;
+			    }
+			});
+			
+			{{if $view}}
+			
+			$('.add-select').remove();
+			$('.rm-select').remove();
+			$('.simple').attr('readonly', true).attr('disabled', true);
+			$('.custom_select').find('select').attr('readonly', true).attr('disabled', true);
+			
+			{{else}}
+			
+			loadUploadImgButton('{{$edit.uploadFolder}}', 'photo');
+			
+			{{/if}}
+		
+	    });
+</script>

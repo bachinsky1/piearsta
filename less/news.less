@@ -1,0 +1,241 @@
+.news_block {
+  > .wrap {
+    padding: 54px 0 57px;
+  }
+
+  h2 {
+    ._text(30px, 36px);
+  }
+
+  .list {
+    ._clear;
+    margin-left: -20px;
+    padding-top: 17px;
+
+    .item {
+      ._left;
+      width: 30%;
+      margin: 22px 16px;
+
+      .date {
+        ._text(14px, 17px);
+        color: #000000;
+        margin-bottom: 18px;
+        display: none;
+      }
+
+      .link {
+        ._clear;
+        ._xu;
+        position: relative;
+        display: inline-block;
+        height: 189px;
+        width: 288px;
+
+        &:before {
+          ._abs;
+          ._cont;
+          width: 288px;
+          height: 190px;
+          background: url("/img/design/news-no-image.png") no-repeat;
+          background-size: cover;
+          border-radius: 10px;
+          top: 0;
+          left: 0;
+          visibility: visible;
+          z-index: -1;
+        }
+
+        &:after {
+          ._abs;
+          ._cont;
+          width: 44px;
+          height: 44px;
+          background: url("/img/design/forward-bttn.png") no-repeat;
+          border-radius: 4px;
+          bottom: -5px;
+          right: -5px;
+          visibility: visible;
+          z-index: 2;
+        }
+
+        .image {
+          width: 299px;
+          margin-right: 20px;
+          ._abs;
+
+
+          img {
+            ._blo;
+			  width: 100%;
+			  height: auto;
+            border-radius: 10px;
+
+          }
+        }
+
+        .title {
+          width: 100%;
+          padding: 15px 0 11px;
+
+          h3 {
+            ._text(16px, 20px);
+            color: #636c70;
+            padding-top: 200px;
+          }
+        }
+
+        &:hover {
+          color: #006fa0;
+
+          .image {
+            &:before {
+              ._cont;
+              ._abs;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              ._bgc(#000000);
+              opacity: 0.1;
+              border-radius: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .all {
+    ._text(14px, 17px);
+    ._b;
+    margin-top: 32px;
+  }
+
+  &.bt {
+    border-top: 1px solid #e0e6e9;
+  }
+}
+
+@media (min-width: 1024px) {
+  .news_block {
+    .list {
+      .cont {
+        .slide {
+          width: auto !important;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .news_block {
+    .list {
+      margin-left: 0;
+      padding-top: 13px;
+
+      .item {
+        float: none;
+        width: auto;
+        margin-left: 0;
+        margin-top: 24px;
+
+        .link {
+          .title {
+            float: none;
+            width: auto;
+          }
+        }
+      }
+    }
+
+    .all {
+      margin-top: 37px;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .news_block {
+    .list {
+      .item {
+        .link {
+          height: auto;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+
+          &:before {
+            content: none;
+          }
+
+          &:after {
+            content: none;
+          }
+
+          .image {
+            position: relative;
+          }
+
+          .title {
+
+            h3 {
+              font-size: 22px;
+              line-height: 28px;
+              height: auto;
+              padding-top: 0;
+              float: left;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .news_block {
+    .list {
+      padding-top: 30px;
+
+      .item {
+        float: none;
+        width: auto;
+        margin-top: 0;
+
+        .date {
+          margin-bottom: 12px;
+        }
+
+        .link {
+          .image {
+            ._none;
+          }
+
+          .title {
+            float: none;
+            width: auto;
+            border-top: 0;
+            border-bottom: 0;
+            padding: 0 0 0 5px;
+            height: auto;
+
+            h3 {
+              ._text(20px, 25px);
+            }
+          }
+        }
+
+        & + .item {
+          margin-top: 30px;
+        }
+      }
+    }
+
+    .all {
+      margin-top: 30px;
+    }
+  }
+}

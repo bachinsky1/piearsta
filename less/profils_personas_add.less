@@ -1,0 +1,92 @@
+.signup_block.personas_add, .signup_block.profil_edit{
+	.col2_y{
+		.cont{border:1px solid #cbd5da;padding:20px 25px;._bgc(#ffffff);color:#636c70;margin-bottom:20px;._clear;}
+		.twocol{._clear;margin: 12px 0;
+			.cinput{padding:14px 11px 12px;
+				input{._text(16px,18px);}
+				&.wrong{border-color:#f9b2ce;}
+			}
+			.label{._inb;width:25%;._alr;._text(16px,18px);padding: 14px 0 12px;margin-top: 6px;}
+			.field{._inb;width: 73%;._right;margin-left: 10px;margin-top:6px;color:#000;._text(16px,18px);
+				.cinput{width: 250px;}
+				.error_msg{margin-top:6px;._text(13px,16px);color:#ea005e;}
+			}
+			.gender_select{width: 200px;
+				.arrow_icon{color:#65c300;}
+			}
+			&.radio_field{
+				.options{margin-top: 12px;
+					label{margin-right: 15px;margin-top:5px;
+						input{margin-right: 10px;}
+					}
+				}
+			}
+			.cselect{width: auto;._inb;margin-right: 5px;
+				.arrow_icon{color:#65c300;}
+				&.day{width: 80px;}
+				&.month{width: 140px;}
+				&.year{width: 140px;}
+			}
+			&.noresident{._none;}
+		}
+		.field.separated_inputs{
+			.inputcont{width:80px;._left;
+				.cinput{width:auto;}
+				&.w70{width:70px;}
+			}
+			.separator{._text(16px,46px);._vam;._alc;width:20px;._left;}
+		}
+		.btn_cont.back{._clear;
+			.btng{._left;}
+			.forgot{._blo;._left;
+				a{._blo;._alc;._text(16px,30px);padding:10px 30px;}
+			}
+			.delete{._right;._text(13px,44px);
+				a{color:#636c70;._blo;padding-left: 20px;padding-right: 2px;
+					&:hover{color:#006fa0;}
+				}
+			}
+		}
+	}	
+}
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	
+}
+
+@media (max-width: 767px) {
+	.signup_block.personas_add, .signup_block.profil_edit{
+		.col2_y {
+			.twocol{
+				.label{._blo;width:auto;._all;._text(14px,18px);padding:4px 0 0;margin-top:0px;color:#404446;}
+				.field{._blo;width: auto;margin-left: 0;float:none;
+					.cinput{width: auto;}
+				}
+				.gender_select{width: auto;}
+				&.radio_field{
+					.label{._inb;._left;width: 150px;margin-top:10px;}
+					.field{._inb;._left;}
+					.options{margin-top: 8px;
+						label{margin-right: 15px;._inb;
+							input{margin-right: 10px;}
+						}
+					}
+				}
+				.cselect{width: auto;._inb;margin-right:4px;
+					&.day{width: 80px;}
+					&.month{width: 140px;}
+					&.year{width: 130px;margin-right:0px;margin-left: 1px;}
+				}
+				.field.separated_inputs{
+					.inputcont{width:130px;
+						&.w70{width:130px;}
+					}
+				}
+			}	
+			.btn_cont.back{._clear;
+				.btng{width: 50%;}
+			}
+		}
+	}
+}

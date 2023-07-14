@@ -1,0 +1,134 @@
+<div class="popup_bg"></div>
+<div class="popup w700">
+	<div class="close"><i class="fa fa-times"></i></div>
+	<div class="cont">
+		<h2>{{'profile_reservation_cancel_title'|gL:'Atcelt pierakstu'}}</h2>
+		<hr>
+
+		<div class="field3">
+			<div class="label"><label>{{'profile_reservation_cancel_field_reason'|gL:'Lūdzu ierakstiet iemeslu'}}</label></div>
+            <select id="reason">
+                {{ if $cancelationReasons|@count > 1 }}
+                <option value="" selected class="select-placeholder">{{'select_option'|gL:'- select an option -'}}</option>
+                {{ /if }}
+                {{foreach from=$cancelationReasons key=k item=i}}
+                <option value="{{$k}}">
+                {{$i}}
+                </option>
+                {{/foreach}}
+            </select>
+			<div class="field3 reason_other">
+				<div class="label"><label>{{'profile_reservation_cancel_field_reason_other'|gL:'Lūdzu ierakstiet iemeslu'}}</label></div>
+				<div class="sel_cont w2"><div class="cinput"><textarea class="reservation_cancel" id="status_reason_other"></textarea></div></div>
+			</div>
+		</div>
+
+		{{if $payment}}
+
+		{{if $orderPreliminaryPaid}}
+
+		{{if $supportEmail}}
+		{{assign var="supportEmail" value=$supportEmail|gLParam:'{supportEmail}'}}
+		{{/if}}
+
+		<div class="field3">
+			{{'profile_reservation_cancel_preliminary_paid_order_message'|gL:'Pagaidām nēesam saņēmuši apstiprinājumu no bankas par maksājuma veikšanu. Ja tomēr nauda ir atskaitīta no Jūsu bankas konta un Jūs vēlaties to saņemt atpakaļ, rakstiet uz {supportEmail} pievienojot maksājuma uzdevuma izdruku!':'':$supportEmail}}
+		</div>
+
+		{{else}}
+
+		<div class="field3">
+
+			{{if $payment.method == 'cards' OR $payment.method == 'card'}}
+			<div class="field3">
+				<h3><strong>{{'profile_reservation_payment_cards'|gL:'Samaksāts ar maksājuma karti'}}</strong></h3>
+				<!--<p>Card number: <strong>{{if $payment.pan}}{{$payment.pan}}{{else}}unknown{{/if}}</strong></p>-->
+			</div>
+			{{elseif $payment.method == 'insurance'}}
+			<div class="field3">
+				<h3><strong>{{'profile_reservation_payment_insurance'|gL:'Samaksāts ar apdrošināšanas polisi'}}</strong></h3>
+			</div>
+			{{elseif $payment.method == 'dccard'}}
+			<div class="field3">
+				<h3><strong>{{'profile_reservation_payment_dccard'|gL:'Samaksāts ar DigitalClinic abonementu'}}</strong></h3>
+			</div>
+			{{else}}
+			<div class="field3">
+				<h3><strong>{{'profile_reservation_payment_ibank'|gL:'Samaksāts internetbankā'}}</strong></h3>
+			</div>
+			{{/if}}
+
+			<div class="field3 checkbox_field">
+				<label class="item blue">
+					<input type="checkbox" class="profile" id="refund" name="refund">
+					<span class="box">
+						<i class="fa fa-check"></i>
+					</span>
+					{{'form_refund_cancelled_order'|gL:'I want my payment refund'}}
+				</label>
+			</div>
+
+			{{if $payment.method != 'cards' AND $everyPayCard != true }}
+			<div class="field3 refund">
+				<div class="label">
+					<label>Lūdzu, norādiet konta numuru, uz kuru veikt naudas atmaksu</label>
+				</div>
+				<div class="sel_cont w2">
+					<div class="cinput">
+						<input type="text" id="refund_account" name="refund_account">
+					</div>
+				</div>
+                <div class="warning_msg"></div>
+			</div>
+			{{/if}}
+
+			<div class="refund_account_error_case" style="display: none">
+				<div class="label">
+					<label>{{'refund_request_error_message'|gL:'Ir notikusi naudas atmaksas pieprasījuma kļūda!'}}</label>
+				</div>
+				<div class="sel_cont w2">
+					<div class="cinput">
+						<input type="text" id="refund_account_error_case" name="refund_account_error_case">
+					</div>
+				</div>
+				<div class="warning_msg"></div>
+			</div>
+
+			<div class="field3">
+				{{if $amount}}
+				{{assign var="amount" value=$amount|gLParam:'{amount}'}}
+				<p>{{'refund_conditions_message'|gL:'Atmaksa {amount}.':'':$amount tiks veikta saskaņā ar <a
+						href="/lietosanas-noteikumi/" target="_blank">lietošanas noteikumiem </a>'}}</p>
+				{{else}}
+				{{assign var="amount" value=''|gLParam:'{amount}'}}
+				{{if $everyPayRefundEnabled}}
+				<p style="color:red;">{{'refund_amount_zero_text'|gL:'Nav summas, ko atmaksāt saskaņā ar
+					<a href="/lietosanas-noteikumi/" target="_blank">lietošanas noteikumiem</a>'}}</p>
+				{{else}}
+				<p>{{'refund_conditions_message'|gL:'Atmaksa {amount}.':'':$amount tiks veikta saskaņā ar <a
+						href="/lietosanas-noteikumi/" target="_blank">lietošanas noteikumiem </a>'}}</p>
+				{{/if}}
+				{{/if}}
+
+			</div>
+
+		</div>
+		{{/if}}
+		{{/if}}
+
+		<input type="hidden" id="status_reason" name="status_reason">
+		<input type="hidden" id="payment_method" name="payment_method" value="{{$payment.method}}">
+
+		<div class="btn_cont">
+			<a href="#" class="btnw w4 cancelReservation" data-resid="{{$item.id}}">{{'profile_reservation_cancel_submit'|gL:'Atcelt pierakstu'}}</a>
+			<div class="cancel"><a class="closePopup" href="#">{{'profile_reservation_cancel_cancel'|gL:'Neatcelt, es pardomāju'}}</a></div>
+		</div>
+	</div>
+</div>
+
+<script nonce="{{$web.cspNonce}}">
+	profile.IBAN = {
+		warning: '{{$iban.warning}}',
+		ok: '{{$iban.ok}}',
+	};
+</script>

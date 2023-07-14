@@ -1,0 +1,24 @@
+{{if $partners|@count > 0}}
+<div class="partners_block bt"><div class="wrap">
+	<div class="arrows1 ver2 ver3">
+		<div class="arrow_left"><i class="fa fa-angle-left"></i></div>
+		<div class="arrow_right"><i class="fa fa-angle-right"></i></div>
+	</div>
+	<h2>{{'startpage_partners_title'|gL:'Sadarbības partneri'}}</h2>
+	<div class="list">
+		<div class="arrow_left ver1"><i class="fa fa-angle-left"></i></div>
+		<div class="arrow_right ver1"><i class="fa fa-angle-right"></i></div>
+		<div class="cont">
+			<div class="slide">
+				{{foreach from=$partners name=partners key=k item=partner}}
+					{{if $partner.page_url}}
+					<a href="{{$partner.page_url}}" target="{{$partner.url_target}}" class="item"><img alt="{{$partner.title|clear}}" src="{{$AD_UPLOAD_FOLDER}}partners/{{$partner.logo}}"></a>
+					{{else}}
+					<img alt="{{$partner.title|clear}}" src="{{$AD_UPLOAD_FOLDER}}partners/{{$partner.logo}}">
+					{{/if}}
+				{{/foreach}}
+			</div>
+		</div>
+	</div>
+</div></div>
+{{/if}}

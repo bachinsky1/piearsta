@@ -1,0 +1,21 @@
+.payment_info_block .dt_tab_wrap {
+  margin-top: 50px;
+}
+.payment_info_block h1 {
+  margin-bottom: 30px;
+}
+.payment_info_block .block_content {
+  margin-bottom: 30px;
+}
+.payment_info_block .block_content p {
+  margin: 15px 0;
+}
+.payment_info_block .pull_right {
+  float: right;
+}
+.payment_info_block .link-horizontal {
+  padding-left: 10px;
+}
+.payment_info_block .button_block {
+  margin-top: 30px;
+}

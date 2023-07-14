@@ -1,0 +1,12 @@
+RewriteEngine On
+
+#RewriteCond %{HTTP_HOST} !^www\.(.*)$ [NC]
+#RewriteRule ^(.*)$ http://www.efumo.lv/$1 [R=301,L]
+   
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(.+)$ $1 [L]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+)$ $1 [L]
+
+RewriteRule ^(.+)$ index.php [L]
+

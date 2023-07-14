@@ -1,0 +1,97 @@
+<td id="editForma" colspan="9" class="open">
+	<div class="error-msg" id="errorBlock" style="display:none;"></div>
+	<input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+	<table class="holder-table">
+		<tr>
+			<td>
+				<table class="inner-table">
+					<tr>
+						<td colspan="2"><strong>{{'general_data'|gLA:'General data'}}</strong></td>
+			        </tr>
+			        <tr>
+			            <td>{{'name'|gLA:'Name'}}:</td>
+			            <td><input type="text" class="long" name="name" id="name" value="{{$edit.name}}" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_enable'|gLA:'Enable'}}:</td>
+			            <td><input type="checkbox" name="enable" id="enable" value="1" {{if $edit.enable}} checked="checked" {{/if}} /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_all_pages'|gLA:'All pages'}}:</td>
+			            <td><input type="checkbox" name="all_pages" id="all_pages" value="1" {{if $edit.all_pages}} checked="checked" {{/if}} /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_public'|gLA:'Public'}}:</td>
+			            <td><input type="checkbox" name="public" id="public" value="1" {{if $edit.public}} checked="checked" {{/if}} /></td>
+			        </tr>
+    			</table>
+    		</td>
+    		<td>
+    			<table class="inner-table">
+			        <tr>
+			            <td colspan="4"><strong>{{'translations'|gLA:'Translations'}}</strong></td>
+			        </tr>
+			        <tr>
+                        <td>
+                        	<div>
+								<div class="block-holder open">
+	                                <div class="inner-block">
+	                                    <ul class="lang-tabs">
+	                                    	{{foreach name=languages key=lk item=lng from=$languages}}
+	                                    	<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.label}}</a></li>
+								            {{/foreach}}
+	                                    </ul>
+	                                   
+	                                    <div class="areaBlock">
+		                                    {{foreach name=languages2 key=lk item=lng from=$languages}}
+		                                   	<div class="text-block{{if $smarty.foreach.languages2.first}} open{{/if}}">
+		                                        <textarea name="value_{{$lk}}" id="value_{{$lk}}" cols="20" rows="5">{{$edit.translations[$lk]}}</textarea>
+		                                        <div class="clr"><!-- clear --></div>
+		                                    </div>
+								            {{/foreach}}
+							            </div>             
+	                                </div>
+	                            </div>
+                            </div>
+                        </td>
+                    </tr>	        
+				</table>
+			</td>
+		</tr>
+	</table>
+    <table class="bttns-table">
+        <tr>
+            <td>
+                <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save_and_close'|gLA:'Save and close'}}</span></a></div>
+                <div class="btn cancel"><a href="javascript:;" onclick="$('#edit_{{$edit.id}}').html('');"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+            </td>
+        </tr>
+    </table>
+    </form>
+    
+    <script type="text/javascript">
+    $(function () {
+	    $('ul.lang-tabs a').click(function() {
+			var curChildIndex = $(this).parent().prevAll().length + 1;
+			$(this).parent().parent().children('.active').removeClass('active');
+			$(this).parent().addClass('active');
+			$(this).parent().parent().next('.areaBlock').children('.open').fadeOut('fast',function() {
+				$(this).removeClass('open');
+				$(this).parent().children('div:nth-child('+curChildIndex+')').fadeIn('normal',function() {
+					$(this).addClass('open');
+				});
+			});
+			return false;
+		});
+	
+		var tabindex = 1;
+		$('#editForma :input,select').each(function() {
+			if (this.type != "hidden" && this.id != "cmsLang") {
+				var $input = $(this);
+				$input.attr("tabindex", tabindex);
+				tabindex++;
+			}
+		});
+	 });		
+	</script>
+</td>

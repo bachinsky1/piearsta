@@ -1,0 +1,142 @@
+<div class="hero_block internal_filter v2">
+    <div class="wrap">
+		<div class="titles">
+			<h1>{{'clinics_list_title'|gL:'Atrodi iestādi'}}</h1>
+		</div>
+		<form class="search">
+			<div class="field">
+				<div class="cinput mainSearch">
+					<input type="text"
+						   value="{{$filters.clinics_filter_search|clear}}"
+						   id="clinics_filter_search"
+						   data-default="{{'clinics_filter_search_default_text'|gL:'Ievādiet iestādes nosaukumu'}}"
+						   placeholder="{{'clinics_filter_search_default_text'|gL:'Ievādiet iestādes nosaukumu'}}"
+						   class="autocomplete">
+				</div>
+			</div>
+			<div class="right">
+				<div class="btn_cont">
+					<input type="submit" class="btng search-btn" value="{{'clinics_find_clinic'|gL:'Meklēt iestādi'}}">
+				</div>
+				<div class="ver1 ver2 advanced{{if $showAdvanced}} on{{/if}}">
+					<a href="#">
+						<span class="off"><span class="ver1i ver2i">{{'clinics_advanced_search'|gL:'Detalizēta meklēšana'}}</span></span>
+						<span class="on l1"><span class="ver1i ver2i">{{'clinics_close_advanced_search'|gL:'Aizvērt'}}</span></span>
+					</a>
+				</div>
+			</div>
+			<div class="collapsible"{{if $showAdvanced}} style="display: block;"{{/if}}>
+				<div class="field2">
+					<div class="label">
+						<label>{{'clinics_filter_city_title'|gL:'Pilsēta'}}</label>
+					</div>
+					<div class="cselect default">
+						<div class="textcont">
+							<div class="textouter">
+								<div class="text">{{if $filters.cilnics_filter_city}}{{$cityList[$filters.cilnics_filter_city].title|clear}}{{else}}{{'clinics_filter_city_default_text'|gL:'Izvēlies pilsētu'}}{{/if}}</div>
+							</div>
+							<div class="arrow_icon">
+								<i class="fa fa-angle-down"></i>
+							</div>
+						</div>
+						<select id="cilnics_filter_city" data-default="{{'clinics_filter_city_default_text'|gL:'Izvēlies pilsētu'}}">
+							<option{{if !$filters.cilnics_filter_city}} selected="selected"{{/if}} value="">{{'clinics_filter_city_default_text'|gL:'Izvēlies pilsētu'}}</option>
+							{{foreach from=$cityList item=city}}
+							<option{{if $filters.cilnics_filter_city && $filters.cilnics_filter_city == $city.id}} selected="selected"{{/if}} value="{{$city.id}}">{{$city.title|clear}}</option>
+							{{/foreach}}
+						</select>
+					</div>
+				</div>
+				<div class="field2 service-ac-field">
+
+					{{if $filters.doctors_filter_services}}
+					{{assign var="serv_value" value=$filters.doctors_filter_services|clear}}
+					{{else}}
+					{{assign var="serv_value" value=''}}
+					{{/if}}
+
+					<div class="label">
+						<label>{{'doctors_filter_services_title'|gL:'Pakalpojums'}}</label>
+					</div>
+					<div class="cinput default">
+						<input type="text"
+							   value="{{$serv_value}}"
+							   id="doctors_filter_services"
+							   data-default="{{'doctors_filter_services_default_text'|gL:'Izvēlies pakalpojumu'}}"
+							   placeholder="{{'doctors_filter_services_default_text'|gL:'Izvēlies pakalpojumu'}}"
+							   class="service-autocomplete">
+					</div>
+
+				</div>
+				<div class="reset">
+					<a href="#">{{'clinics_clear_filters'|gL:'Noņemt filtrus'}}</a>
+				</div>
+				<div class="right ver3">
+					<div class="btn_cont">
+						<input class="btng search-btn" type="submit" value="{{'clinics_find_clinic'|gL:'Meklēt iestādi'}}">
+					</div>
+					<div class="advanced">
+						<a href="#">
+							<span class="off"><span class="ver3i">{{'clinics_advanced_search'|gL:'Detalizēta meklēšana'}}</span></span>
+							<span class="on l1"><span class="ver3i">{{'clinics_close_advanced_search'|gL:'Aizvērt'}}</span></span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</form>
+    </div>
+</div>
+
+<script nonce="{{$web.cspNonce}}">
+
+$(function(){
+
+	monkeyPatchAutocomplete();
+
+	$(".service-autocomplete").autocomplete({
+		source: function( request, response ) {
+			$.ajax({
+				url: "/clinics/serviceAutocomplete/",
+				dataType: "json",
+				data: {
+					q: request.term
+				},
+
+				success: function( data ) {
+					response( data );
+				}
+			});
+		},
+		autoFocus: true,
+		minLength: 3,
+		position: { my : "left-12 top+20" },
+		appendTo: ".cinput.focused input"
+	});
+	
+	$(".autocomplete").autocomplete({
+		source: function( request, response ) {
+	        $.ajax({
+	        	url: "/clinics/autocomplete/",
+				dataType: "json",
+				data: {
+					q: request.term
+				},
+				 
+				success: function( data ) {
+					response( data );
+				}
+			});
+		},
+		autoFocus: false,
+		minLength: 3,
+		position: { my : "left-12 top+20" },
+		appendTo: ".cinput.focused input"
+	});
+
+	jQuery.ui.autocomplete.prototype._resizeMenu = function () {
+		var ul = this.menu.element;
+		ul.outerWidth(this.element.outerWidth()+24);
+	}
+});
+
+</script>

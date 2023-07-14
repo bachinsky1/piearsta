@@ -1,0 +1,39 @@
+{{if $coupons|@count > 0}}
+<div class="offers_block bt"><div class="wrap">
+	<h2>{{'startpage_coupons_title'|gL:'Piedavājumi veselībai un skaistumam'}}</h2>
+	<div class="list">
+		{{foreach from=$coupons name=coupons key=k item=item}}		
+		<div class="item {{if $smarty.foreach.coupons.last}} ver1 ver2{{/if}}">
+			{{if $item.lead_image}}
+			<a href="{{$siteData.mirros_coupon_page|getLM}}{{$item.page_url|clear}}.html" class="image"><img alt="{{$item.title|clear}}" src="{{$AD_UPLOAD_FOLDER}}{{$couponConfig.uploadFolder}}small/{{$item.lead_image}}"></a>
+			{{/if}}
+			<div class="terms">
+				<div class="percent">{{$item.discount}}%</div>
+				<div class="date"><span class="ver1i ver2i">{{'coupon_enabled_to'|gL:'Akcija spēkā'}}</span><span class="ver3i">{{'enabled_to'|gL:'Spēkā'}}</span> {{'coupon_to'|gL:'līdz'}} {{$item.date_to|date_format:"%d.%m.%y."}}</div>
+			</div>
+			<a href="{{$siteData.mirros_coupon_page|getLM}}{{$item.page_url|clear}}.html" class="title"><h3>{{$item.title|clear}}</h3></a>
+			<div class="author">{{$item.company|clear}}</div>
+			<div class="btn_block">
+				<div class="btn_cont"><a href="{{$siteData.mirros_coupon_page|getLM}}{{$item.page_url|clear}}.html" class="btng">{{'view_more'|gL:'Apskatīt'}}</a></div>
+				<div class="price">
+					<div class="old">€{{$item.price}}</div>
+					<div class="new">€{{$item.discount_price}}</div>
+				</div>
+			</div>
+		</div>
+		{{/foreach}}
+		{{if $BANNERS.startpage_coupons}}
+		<div class="item ver1">
+			{{if $BANNERS.startpage_coupons.url}}
+			<a href="{{$BANNERS.startpage_coupons.url}}" target="{{$BANNERS.startpage_coupons.target}}" class="banner"><img alt="{{$BANNERS.startpage_coupons.alt}}" src="{{$BANNERS.startpage_coupons.image}}"></a>
+			{{else}}
+			<img alt="{{$BANNERS.startpage_coupons.alt}}" src="{{$BANNERS.startpage_coupons.image}}">
+			{{/if}}
+			
+		</div>
+		{{/if}}
+		
+	</div>
+	<div class="all"><a href="{{$siteData.mirros_coupon_page|getLM}}">{{'startpage_all_coupons'|gL:'Visi piedavājumi'}}</a></div>
+</div></div>
+{{/if}}

@@ -1,0 +1,63 @@
+<div class="single_header"><div class="wrap">
+	<h1>{{$web.title}}</h1>
+</div></div>
+<div class="cont_coupons"><div class="wrap">
+	<div class="col2 ver1">
+		<div class="item">
+			{{if $BANNERS.side_banner}}
+				{{if $BANNERS.side_banner.url}}
+				<a href="{{$BANNERS.side_banner.url}}" target="{{$BANNERS.side_banner.target}}" class="side_banner ver1"><img alt="{{$BANNERS.side_banner.alt}}" src="{{$BANNERS.side_banner.image}}"></a>
+				{{else}}
+				<img class="side_banner ver1" alt="{{$BANNERS.side_banner.alt}}" src="{{$BANNERS.side_banner.image}}">
+				{{/if}}
+			{{/if}}	
+		</div>
+	</div>
+	<div class="col1">
+		<div class="list">
+			{{foreach from=$coupons name=coupons key=k item=item}}
+			<div class="item">
+				{{if $item.lead_image}}
+				<a href="{{$siteData.mirros_coupon_page|getLM}}{{$item.page_url|clear}}.html" class="image"><img alt="{{$item.title|clear}}" src="{{$AD_UPLOAD_FOLDER}}{{$couponConfig.uploadFolder}}small/{{$item.lead_image}}"></a>
+				{{/if}}
+				<div class="terms">
+					<div class="percent">{{$item.discount}}%</div>
+					<div class="date">
+						<span class="ver1i ver2i">
+							{{'coupon_enabled_to'|gL:'Akcija spēkā'}}
+						</span>
+						<span class="ver3i">{{'enabled_to'|gL:'Spēkā'}}</span> {{'coupon_to'|gL:'līdz'}} {{$item.date_to|date_format:"%d.%m.%y."}}
+					</div>
+				</div>
+				<a href="{{$siteData.mirros_coupon_page|getLM}}{{$item.page_url|clear}}.html" class="title"><h3>{{$item.title|clear}}</h3></a>
+				<div class="author">{{$item.company|clear}}</div>
+				<div class="btn_block">
+					<div class="btn_cont"><a href="{{$siteData.mirros_coupon_page|getLM}}{{$item.page_url|clear}}.html" class="btng">{{'view_more'|gL:'Apskatīt'}}</a></div>
+					<div class="price">
+						<div class="old">€{{$item.price}}</div>
+						<div class="new">€{{$item.discount_price}}</div>
+					</div>
+				</div>
+			</div>
+			{{/foreach}}
+		</div>
+	</div>
+	{{if $pager.previous || $pager.next}}
+	<div class="pagination">
+		{{if $pager.previous}}
+			<a href="{{$web.url}}page:{{$pager.previous}}/" title="{{'pagerPrevious'|gL:'Previous'}}" class="arrow left"><i class="fa fa-angle-left"></i></a>
+		{{/if}}
+		<div class="numbers">
+		{{section name=pagination loop=$pager.total_pages}} 
+			<a href="{{$web.url}}page:{{$smarty.section.pagination.iteration}}/" title="{{$smarty.section.pagination.iteration}}" class="nr {{if $pager.current_page == $smarty.section.pagination.iteration}} active{{/if}}">{{$smarty.section.pagination.iteration}}</a>
+		{{/section}}
+		</div>
+		<div class="text">{{$pager.current_page}} {{'pagerFrom'|gL:'no'}} {{$pager.total_pages}}</div>
+		{{if $pager.next}}
+			<a href="{{$web.url}}page:{{$pager.next}}/" title="{{'pagerNext'|gL:'Next'}}" class="arrow right"><i class="fa fa-angle-right"></i></a>
+		{{/if}}
+		
+	</div>
+	{{/if}}
+	<div class="sp100-100-40"></div>
+</div></div>		

@@ -1,0 +1,1 @@
+ALTER TABLE mod_profiles ADD COLUMN `passwordLastChanged` DATETIME NULL DEFAULT NULL AFTER `password`;

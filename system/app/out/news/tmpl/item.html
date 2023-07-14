@@ -1,0 +1,43 @@
+<div class="col1_z wrapt wrapm">
+	<div class="sp44-35-35"></div>
+	<h1>{{$news.title|clear}}</h1>
+	{{if $news.date_to}}
+		<div class="opendoc_date">{{$news.date_to_formated}}</div>
+	{{/if}}
+	<div class="opendoc">
+		{{if $news.text_image}}
+		<img src="{{$AD_UPLOAD_FOLDER}}{{$newsConfig.uploadFolder}}big/{{$news.text_image}}" alt="{{if $news.text_image_alt}}{{$news.text_image_alt|clear}}{{else}}{{$news.title|clear}}{{/if}}" />
+		{{/if}}
+		
+		<p>{{$news.lead}}</p>
+    	{{$news.text}}
+	</div>
+	<div class="opendoc_options">
+		{{if $news.links && $news.links|@count > 0}}
+		<div class="block">
+			<h2>{{'newsLinksBlockTitle'|gL:'Pievienotās saites'}}</h2>
+			<ul>
+				{{section name=item loop=$news.links}}
+					<li>
+						<a href="{{if $news.links[item].linkDocId}}{{$news.links[item].linkUrlId|getLink}}{{$news.links[item].linkDocId|getDocUrl}}.html{{elseif $news.links[item].linkUrlId}}{{$news.links[item].linkUrlId|getLink}}{{else}}{{$news.links[item].linkUrl}}{{/if}}" target="{{$news.links[item].linkTarget}}" title="{{if $news.links[item].linkTitle}}{{$news.links[item].linkTitle}}{{else}}{{if $news.links[item].linkUrlId}}{{$news.links[item].linkUrlId|getLink}}{{else}}{{$news.links[item].linkUrl}}{{/if}}{{/if}}">
+							<i class="fa fa-minus"></i><span class="u">{{if $news.links[item].linkTitle}}{{$news.links[item].linkTitle}}{{else}}{{if $news.links[item].linkUrlId}}{{$news.links[item].linkUrlId|getLink}}{{else}}{{$news.links[item].linkUrl}}{{/if}}{{/if}}</span>
+						</a>
+					</li>
+				{{/section}}
+			</ul>
+		</div>
+		{{/if}}
+		{{if $news.files && $news.files|@count > 0}}
+		<div class="block">
+			<h2>{{'newsFilesBlockTitle'|gL:'Pievienotie faili'}}</h2>
+			<ul>
+				{{section name=item loop=$news.files}}
+				<li><a href="/download.php?file={{$news.files[item].path}}{{$news.files[item].fileName}}"><i class="fa fa-file"></i><span class="u">{{$news.files[item].fileTitle}}</span>&nbsp;&nbsp;<span class="xu">*.{{$news.files[item].ext}}, {{$news.files[item].size}}</span></a></li>
+				{{/section}}
+			</ul>
+		</div>
+		{{/if}}
+	</div>
+	<div class="backlink"><a href="{{$backLink}}"><i class="fa fa-angle-left"></i>{{'backTitle'|gL:'Back'}}</a></div>
+	<div class="sp100-100-40"></div>
+</div>

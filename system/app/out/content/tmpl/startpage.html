@@ -1,0 +1,35 @@
+<div id="content" class="startPage">
+
+	<!--  -->
+	{{include file="blocks_heroBlock.html"}}
+
+	{{include file="blocks_testimonialBlock.html"}}
+
+	{{if $BANNERS.startpage_big}}
+	<div class="banner_block ver1 ver2"><div class="wrap">
+		{{if $BANNERS.startpage_big.url}}
+			<a href="{{$BANNERS.startpage_big.url}}" target="{{$BANNERS.startpage_big.target}}">
+			{{/if}}
+			<img alt="{{$BANNERS.startpage_big.alt}}" src="{{$BANNERS.startpage_big.image}}">
+			{{if $BANNERS.startpage_big.url}}
+			</a>
+			{{/if}}
+	</div></div>
+	{{/if}}
+
+	{{$TEMPLATE_NEWS_MODULE}}
+
+	{{if $showHelLine}}
+	{{include file="helpline.html"}}
+	{{/if}}
+
+	{{include file="blocks_findBlock.html"}}
+
+	{{$COUPONS_MODULE}}
+	{{$PARTNERS_CONTENT}}	
+</div>
+
+{{if $announcement}}
+	{{$announcement.popup}}
+{{/if}}
+

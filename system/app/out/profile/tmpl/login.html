@@ -1,0 +1,74 @@
+<div id="content">
+	<div class="authorization_block p2"><div class="wrap">
+		<div class="dt_tab_wrap">
+			<h1>{{'profile_sign_in_page_header'|gL:'Prieks Tevi redzēt! Lūdzu autorizējies:'}}</h1>
+			<p class="intro-text">{{'profile_sign_in_intro_text'|gL:'Lietotāja autorizācija ļauj portāla Piearsta.lv lietotājam izmantot portāla pakalpojumus - pierakstīties pašam vai pierakstīt citas personas pie ārsta
+				vai speciālista , kā arī pieteikt ārstu vai speciālistu.'}}</p>
+			<div class="form">
+				<div class="field">
+					<div class="label"><label>{{'form_login_default'|gL:'E-pasts'}}</label></div>
+					<div class="cinput"><input class="login" id="email" type="text"></div>
+				</div>
+				<div class="field">
+					<div class="label"><label>{{'form_password_default'|gL:'Parole'}}</label></div>
+					<div class="cinput">
+						<input class="login" id="password" type="password" type="text">
+					</div>
+				</div>
+                                <input class="login" id="url" type="hidden" value="{{$tpl.url}}">
+				{{  if $vroomId }}
+				<input class="login" id="vroomId" type="hidden" value="{{$vroomId}}">
+				{{ /if }}
+
+				<div class="linkContainer">
+					<div class="forgot"><a href="{{$siteData.mirros_forgotpassword_page|getLM}}">{{'header_forgot_password'|gL:'Aizmirsi paroli?'}}</a></div>
+					<div class="reg_line"><a href="/registration_start/">{{'header_registration'|gL:'Reģistrēties'}}</a></div>
+				</div>
+
+				<div class="btn_cont loginBtns">
+					<a href="#" class="btng profileLogin">{{'header_login_passw'|gL:'Piesledzies'}}</a>
+					<p>{{'or'|gL:'vai'}}</p>
+					<a href="/dmss-auth" class="btnw dmssAuthLink">{{'header_login_dmss'|gL:'Piesledzies ar digitalo identitati'}}</a>
+				</div>
+			</div>
+		</div>
+	</div></div>
+</div>
+
+{{if $user_exists_message}}
+<div class="popup_bg"></div>
+<div class="popup w700 verificationFailedPopup">
+	<div class="close"><i class="fa fa-times"></i></div>
+	<div class="cont">
+		<h2>{{'registration_user_exists'|gL:'Registration failed'}}</h2>
+		<p>{{'registration_user_exists_text'|gL:'User with this person id already exists. You may try to login.'}}</p>
+		<div class="btn_cont">
+			<a href="#" class="btnw w9 profileClosePopup">{{'header_close'|gL:'Close'}}</a>
+		</div>
+	</div>
+</div>
+{{/if}}
+
+{{if $user_not_exists_message}}
+<div class="popup_bg"></div>
+<div class="popup w700 verificationFailedPopup">
+	<div class="close"><i class="fa fa-times"></i></div>
+	<div class="cont">
+		<h2>{{'login_user_not_exists'|gL:'Login failed'}}</h2>
+		<p>{{'login_user_not_exists_text'|gL:'User not exists on Piearsta yet. You may try to register.'}}</p>
+		<div class="btn_cont">
+			<a href="#" class="btnw w9 profileClosePopup">{{'header_close'|gL:'Close'}}</a>
+		</div>
+	</div>
+</div>
+{{/if}}
+
+<script type="text/javascript" nonce="{{$web.cspNonce}}">
+$(document).ready(function(){
+	$('.login').keypress(function (e) {
+		if (e.which == 13) {
+			profile.profileLogin();
+		}
+	});
+});
+</script>

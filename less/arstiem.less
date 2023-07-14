@@ -1,0 +1,185 @@
+@backgroundColor: #e9eff1;
+
+.add-doctor {
+  background-color: @backgroundColor;
+  padding: 30px 0;
+
+  .wrap {
+    position: relative;
+  }
+}
+
+.arstiem-block {
+  display: inline-block;
+  width: 60%;
+  padding-right: 40px;
+  border-right: 1px solid lightgrey;
+
+  .cinput {
+
+    textarea {
+      height: auto;
+    }
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+
+  form {
+    margin-top: 30px;
+
+    & > div {
+      margin-bottom: 15px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    .twocol {
+
+      & > div {
+        display: inline-block;
+      }
+
+      .label {
+        box-sizing: border-box;
+        width: 25%;
+        padding-right: 10px;
+        vertical-align: middle;
+        text-align: right;
+      }
+
+      .field {
+        width: 73%;
+        vertical-align: middle;
+      }
+    }
+
+    .label {
+      margin-bottom: 6px;
+    }
+
+    .btng {
+      width: 160px;
+      margin-top: 20px;
+    }
+  }
+}
+
+.right-side {
+  box-sizing: border-box;
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  padding-left: 40px;
+  width: 35%;
+  transform: translateY(-50%);
+
+  .helpline {
+
+    .i {
+      font-size: 24px;
+      line-height: 24px;
+      text-align: center;
+      font-style: italic;
+      width: 36px;
+      height: 24px;
+      font-weight: 700;
+      padding: 6px 0;
+      margin-bottom: 10px;
+      border: 2px solid #009fe5;
+      border-radius: 50% 50% 50% 50%;
+      font-family: 'Times New Roman', Arial, Helvetica, sans-serif;
+      color: #009fe5;
+    }
+
+    .text {
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid lightgrey;
+    }
+
+    .wrap {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+
+  .add-doctor {
+
+    .wrap {
+
+      & > div {
+        position: relative;
+        display: block;
+        top: auto;
+        transform: none;
+        width: auto;
+      }
+
+      .right-side {
+        padding-left: 0;
+
+        .helpline {
+
+          .wrap {
+            margin-left: 0;
+
+            &::after {
+              content: " ";
+              display: block;
+              height: 0;
+              clear: both;
+              visibility: hidden;
+            }
+
+            .text {
+              display: none;
+              float: left;
+              padding: 9px 0;
+              margin: 0;
+              border-bottom: none;
+            }
+
+            .phone, .mail {
+              float: left;
+              padding: 9px 0;
+              margin-left: 20px;
+            }
+          }
+        }
+
+        .i {
+          float: left;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+
+  .arstiem-block {
+    padding-right: auto;
+    border-right: none;
+    margin-bottom: 60px;
+
+    form {
+
+      //.btng {
+      //  width: 100%;
+      //}
+    }
+  }
+}

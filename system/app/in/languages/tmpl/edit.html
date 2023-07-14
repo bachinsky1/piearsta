@@ -1,0 +1,56 @@
+<td id="editForma" colspan="9" class="open">
+	<div class="error-msg" id="errorBlock" style="display:none;"></div>
+	<input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+	<table class="holder-table">
+		<tr>
+			<td>
+				<table class="inner-table">
+			        <tr>
+			            <td>{{'m_title'|gLA:'Title'}}:</td>
+			            <td><input type="text" class="long" name="title" id="title" value="{{$edit.title}}" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'name'|gLA:'Name'}}:</td>
+			            <td>
+			            	{{if $edit.id}}
+			            	{{$edit.lang}}
+			            	{{else}}
+			            	<input type="text" class="long" name="lang" id="lang" value="{{$edit.lang}}" />
+			            	{{/if}}
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_enable'|gLA:'Enable'}}:</td>
+			            <td><input type="checkbox" name="enable" id="enable" value="1" {{if $edit.enable}} checked="checked" {{/if}} {{if $edit.default}}disabled = "disabled"{{/if}}  /></td>
+			        </tr>
+    			</table>
+    		</td>
+		</tr>
+	</table>
+    <table class="bttns-table">
+        <tr>
+            <td>
+            	{{if $edit.id}}
+                <div class="btn orange"><a href="javascript:;" onclick="checkFields('apply');"><span>{{'apply'|gLA:'Apply'}}</span></a></div>
+                {{/if}}
+                <div class="btn"><a href="javascript:;" onclick="checkFields('next');"><span>{{'save_and_next'|gLA:'Save and next'}}</span></a></div>
+                <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save_and_close'|gLA:'Save and close'}}</span></a></div>
+                <div class="btn cancel"><a href="javascript:;" onclick="$('#edit_{{$edit.id}}').html('');"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+            </td>
+        </tr>
+    </table>
+    </form>
+    
+    <script type="text/javascript">
+
+		var tabindex = 1;
+		$('#editForma :input,select').each(function() {
+			if (this.type != "hidden" && this.id != "cmsLang") {
+				var $input = $(this);
+				$input.attr("tabindex", tabindex);
+				tabindex++;
+			}
+		});
+		
+	</script>
+</td>

@@ -1,0 +1,22 @@
+<div class="popup_bg"></div>
+<div class="popup w600">
+	<div class="close"><i class="fa fa-times"></i></div>
+	<div class="cont">
+		<h2>{{'profile_reservation_cancel_ok_title'|gL:'Pieraksts ir atcelts!'}}</h2>
+		{{if $orderPreliminaryPaid}}
+
+		{{if $supportEmail}}
+		{{assign var="supportEmail" value=$supportEmail|gLParam:'{supportEmail}'}}
+		{{/if}}
+
+		<h3>{{'profile_reservation_cancel_ok_preliminary_paid_order_text'|gL:'Pagaidām nēesam saņēmuši apstiprinājumu no bankas par maksājuma veikšanu. Ja tomēr nauda ir atskaitīta no Jūsu bankas konta un Jūs vēlaties to saņemt atpakaļ, rakstiet uz {supportEmail} pievienojot maksājuma uzdevuma izdruku!':'':$supportEmail}}</h3>
+		{{else}}
+		<h3>{{'profile_reservation_cancel_ok_text'|gL:'Esam saņēmuši un nosūtījuši turpmākai apstrādei Jūsu pieteikumu naudas atmaksai! Atmaksa tiks nosūtīta uz Jūsu kontu tuvākajās dienās.'}}</h3>
+		{{/if}}
+		<hr>
+		<div class="btn_cont">
+			<a href="{{$siteData.mirrors_doctors_page|getLM2}}{{$item.doctor_url}}/{{$item.clinic_url}}/" class="btnw w6">{{'profile_reservation_another_time'|gL:'Pierakstīties citā laikā'}}</a>
+			<a href="{{$siteData.mirrors_doctors_page|getLM2}}" class="btnw w6">{{'profile_reservation_another_doctor'|gL:'Pierakstīties pie cita ārsta'}}</a>
+		</div>
+	</div>
+</div>

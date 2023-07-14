@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="{{$web.lang}}">
+	<head>
+		<meta charset="utf-8">
+		<meta id="Viewport" name="viewport" content="width=device-width">
+		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+		<title>Piearsta.lv</title>
+		<link rel="stylesheet" href="{{$item.cssFolder}}font-awesome.min.css">
+		<link rel="stylesheet" href="{{$item.cssFolder}}pdfcss.css">
+	</head>
+	<body class="margins" style="height:1000px;">
+		<div id="page" class="w1080">
+			<div class="min1571">
+				<img class="logo"alt="" src="{{$item.imageFolder}}pdf_logo.png">
+				<div class="sp104"></div>
+				<div class="f30">{{'profile_reservation_open_time'|gL:'Pierakstīšanas laiks'}}</div>
+				<div class="spm5"></div>
+				<div class="f48 b">{{$item.start|date_format:"%H:%M"}}, {{$item.start|date_format:"%d. %B"}}</div>
+				<div class="sp27"></div>
+				<table class="table1 f24">
+					<tr>
+						<td class="fblack6 w320 pt14">{{'profile_reservation_doctor'|gL:'Ārsts'}}</td>
+						<td class="pt14">{{$item.name}} {{$item.surname}}</td>
+					</tr>
+					<tr>
+						<td class="fblack6">{{'profile_reservation_clinic'|gL:'Iestadē'}}</td>
+						<td>
+							<div>{{$item.clinic_name}}</div>
+							<div class="sp8"></div>
+							<div class="f18">{{$item.clinic_address}}</div>
+							<div class="sp13"></div>
+						</td>
+					</tr>
+					<tr>
+						<td class="fblack6">{{'profile_reservation_service'|gL:'Pakalpojums'}}</td>
+						<td>{{$item.title}}</td>
+					</tr>
+					<tr>
+						<td class="fblack6">{{'profile_reservation_client'|gL:'Pacients'}}</td>
+						<td>
+							{{if $item.profile_person_id}}
+							{{$item.ppname}} {{$item.ppsurname}}
+							{{else}}
+							{{$userData.name}} {{$userData.surname}}
+							{{/if}}
+						</td>
+					</tr>
+					<tr>
+						<td class="fblack6">{{'profile_reservation_payment_type'|gL:'Maksāšanas veids'}}</td>
+						<td>
+							{{if $item.payment_type == 1}}
+							{{'profile_reservation_payment_type_country'|gL:'Valsts'}}
+							{{elseif $item.payment_type == 2}}
+							{{'profile_reservation_payment_type_client'|gL:'Klient'}}
+							{{else}}
+							{{'profile_reservation_payment_type_mix'|gL:'Miks'}}
+							{{/if}}
+						</td>
+					</tr>
+					<tr>
+						<td class="fblack6">{{'profile_reservation_status'|gL:'Status'}}</td>
+						<td class="b">
+							{{if $item.status == 0}}
+							{{'profile_reservation_status_0'|gL:'Gaida apstiprinājumu'}}
+							{{elseif $item.status == 1}}
+							{{'profile_reservation_status_1'|gL:'Noraidīts'}}
+							{{elseif $item.status == 2}}
+							{{'profile_reservation_status_2'|gL:'Aktīvs'}}
+							{{elseif $item.status == 3}}
+							{{'profile_reservation_status_3'|gL:'Atcelts'}}
+							{{elseif $item.status == 4}}
+							{{'profile_reservation_status_4'|gL:'Arhīvets'}}
+							{{/if}}
+						</td>
+					</tr>
+				</table>
+				<div class="sp56"></div>
+				{{if $item.warning}}
+				<div class="orangeborder">
+					<table>
+						<tr>
+							<td class="w80 forange f60"><i class="fa fa-exclamation-circle"></i></td>
+							<td>
+								<div class="sp7"></div>
+								<div class="f30 b">{{'profile_reservation_warning'|gL:'Uzmanību!'}}</div>
+								<div class="sp18"></div>
+								<div class="f2430">{{$item.warning}}</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				{{/if}}
+			</div>
+		</div>
+	</body>
+</html>

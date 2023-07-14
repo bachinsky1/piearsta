@@ -1,0 +1,22 @@
+<div class="service-info-warning pre-paid-service">
+    <div class="info warning">
+        <h4>{{'profile_reservation_info_warning'|gL:'Uzmanību!':$item.setLang}}</h4>
+        <p>
+            {{'profile_reservation_payment_type_pay_info_text_new1'|gL:'Tu esi pierakstījies uz Maksas pakalpojumu. Cena: ':$item.setLang}}<span class="service-price">0,00</span> €.
+            <br>
+            <br>
+            {{if $item.clinic_phone}}
+            {{'profile_reservation_payment_type_pay_phone'|gL:'Tālrunis':$item.setLang}}: {{$item.clinic_phone}},
+            {{/if}}
+
+            {{if $item.clinic_email}}
+            {{'profile_reservation_payment_type_pay_email'|gL:'e-pasts':$item.setLang}}: <a href="mailto:{{$item.clinic_email}}">{{$item.clinic_email}}</a>,
+            {{/if}}
+
+            {{if $item.clinic_url}}
+            <a target="_blank" href="{{$siteData.mirrors_clinics_page|getLM2}}{{$item.clinic_url}}/">Iestādes profils</a>
+            {{/if}}
+        </p>
+    </div>
+    <hr>
+</div>

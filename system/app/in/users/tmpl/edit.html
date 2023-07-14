@@ -1,0 +1,107 @@
+<td id="editForma" colspan="9" class="open">
+	<div class="error-msg" id="errorBlock" style="display:none;"></div>
+	<input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+	<table class="holder-table">
+		<tr>
+			<td class="left-td">
+				<table class="inner-table">
+					<tr>
+						<td colspan="2"><strong>{{'general_data'|gLA:'General data'}}</strong></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_username'|gLA:'Username'}}:</td>
+			            <td><input type="text" class="long" name="username" id="username" value="{{$edit.username}}" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_password'|gLA:'Password'}}:</td>
+			            <td><input type="password" class="long" name="password" id="password" value="" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_password2'|gLA:'Confirm password'}}:</td>
+			            <td><input type="password" class="long" name="password2" id="password2" value="" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_name'|gLA:'Name'}}:</td>
+			            <td><input type="text" class="long" name="name" id="name" value="{{$edit.name}}" /></td>
+			        </tr>
+					{{if $groups}}
+					<tr id="user_group">
+			            <td>{{'m_group'|gLA:'User group'}}:</td>
+			            <td>
+							<select onchange="getRolesGroup();" class="long" name="type" id="group_id">
+								<option value=""></option>
+								{{foreach key=k item=gr from=$groups}}
+								<option value="{{$gr.id}}" {{if $gr.id eq $edit.group_id}}selected="selected"{{/if}}>{{$gr.name}}</option>
+								{{/foreach}}
+							</select>
+						</td>
+			        </tr>
+					{{/if}}
+			        <tr>
+			            <td>{{'m_enable'|gLA:'Enable'}}:</td>
+			            <td><input type="checkbox" name="enable" id="enable" value="1" {{if $edit.enable}} checked="checked" {{/if}} /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_admin'|gLA:'Admin'}}:</td>
+			            <td><input type="checkbox" onchange="checkForAdmin();" name="admin" id="admin" value="1" {{if $edit.admin}} checked="checked" {{/if}} /></td>
+			        </tr>
+    			</table>
+    		</td>
+			<td>
+    			<table id="userModules" class="inner-table">
+			        <tr>
+			            <td colspan="4"><strong>{{'modules_list'|gLA:'Modules list'}}</strong></td>
+			        </tr>
+			        <tr>
+                        <td>
+                        	<div>
+	                        	{{foreach key=k item=m from=$modules}}
+								<div class="block-holder{{if ($k == 0)}} open{{/if}}">
+	                                <h4><a href="#">{{$m.name}}</a></h4>
+	                                <div class="inner-block">
+                                    	{{foreach key=rk item=r from=$roles}}
+                                    	<label for="{{$r}}_{{$m.id}}">{{"role_$r"|gLA:"$r"}}:</label> <input class="roles" type="checkbox" value="1" id="{{$r}}_{{$m.id}}" {{if $edit.roles[$m.id][$r]}} checked="checked"{{/if}} />
+							            {{/foreach}}
+	                                </div>
+	                            </div>
+								{{/foreach}}
+							</div>
+                        </td>
+                    </tr>	        
+				</table>
+			</td>
+		</tr>
+	</table>
+    <table class="bttns-table">
+        <tr>
+            <td>
+                <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save_and_close'|gLA:'Save and close'}}</span></a></div>
+                <div class="btn cancel"><a href="javascript:;" onclick="$('#edit_{{$edit.id}}').html('');"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+            </td>
+        </tr>
+    </table>
+    </form>
+    
+    <script type="text/javascript">
+    $(function () {
+
+    	checkForAdmin();
+        
+		$('div.block-holder h4').click(function() {
+			$(this).parent().parent().children('.open').removeClass('open');
+			$(this).parent().addClass('open');
+			
+			return false;
+		});
+
+		var tabindex = 1;
+		$('#editForma :input,select').each(function() {
+			if (this.type != "hidden" && this.id != "cmsLang") {
+				var $input = $(this);
+				$input.attr("tabindex", tabindex);
+				tabindex++;
+			}
+		});
+    });	
+	</script>
+</td>

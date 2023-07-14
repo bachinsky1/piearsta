@@ -1,0 +1,27 @@
+<div class="content">
+	<form class="forma" method="post" action="" onsubmit="return false;">
+		<fieldset>
+		    <legend>FORM</legend>
+	
+	{{$tTable}}
+	
+	<div id="modulePath">
+	</div>
+	
+	{{$bTable}}
+	
+		</fieldset>
+	</form>
+	
+	<script type="text/javascript">
+		moduleTable.mainUrl = '{{$MAIN_URL}}';
+		moduleTable.moduleName = '{{$MODULE_NAME}}';
+		moduleTable.usePaging = true;
+
+		$(document).ready(function() {
+			
+			updateModule();	
+			
+		});
+	</script>
+</div>	

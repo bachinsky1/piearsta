@@ -1,0 +1,44 @@
+<div class="col1_z"><div class="wrapt wrapm">
+	<div class="doclist">
+		{{if $news|@count > 0}}
+		{{foreach name=item from=$news key=k item=news}}
+		<article>
+			{{if $news.lead_image}}
+				<a href="{{$news.page_url}}.html" title="{{$news.title|clear}}" class="img">
+					<img src="{{$AD_UPLOAD_FOLDER}}{{$newsConfig.uploadFolder}}small/{{$news.lead_image}}" alt="{{if $news.lead_image_alt}}{{$news.lead_image_alt|clear}}{{else}}{{$news.title|clear}}{{/if}}" />
+				</a>
+			{{/if}}
+			<h2>
+				<a href="{{$news.page_url}}.html" title="{{$news.title|clear}}">
+					{{$news.title|clear}}
+				</a>
+			</h2>
+			{{if $news.date_to}}
+			<div class="date">{{$news.date_to_formated}}</div>
+			{{/if}}
+			<div class="conText">
+				<p>{{$news.lead|clear}}</p>
+			</div>	
+		</article>
+		{{/foreach}}
+		{{/if}}
+	</div>
+	{{if $pager.previous || $pager.next}}
+	<div class="pagination">
+		{{if $pager.previous}}
+			<a href="{{$web.url}}page:{{$pager.previous}}/" title="{{'pagerPrevious'|gL:'Previous'}}" class="arrow left"><i class="fa fa-angle-left"></i></a>
+		{{/if}}
+		<div class="numbers">
+		{{section name=pagination loop=$pager.total_pages}} 
+			<a href="{{$web.url}}page:{{$smarty.section.pagination.iteration}}/" title="{{$smarty.section.pagination.iteration}}" class="nr {{if $pager.current_page == $smarty.section.pagination.iteration}} active{{/if}}">{{$smarty.section.pagination.iteration}}</a>
+		{{/section}}
+		</div>
+		<div class="text">{{$pager.current_page}} {{'pagerFrom'|gL:'no'}} {{$pager.total_pages}}</div>
+		{{if $pager.next}}
+			<a href="{{$web.url}}page:{{$pager.next}}/" title="{{'pagerNext'|gL:'Next'}}" class="arrow right"><i class="fa fa-angle-right"></i></a>
+		{{/if}}
+		
+	</div>
+	{{/if}}
+	<div class="sp100-100-40"></div>
+</div></div>

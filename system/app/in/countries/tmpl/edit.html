@@ -1,0 +1,122 @@
+<td id="editForma" colspan="9" class="open">
+	<div class="error-msg" id="errorBlock" style="display:none;"></div>
+	<input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+	<table class="holder-table">
+		<tr>
+			<td>
+				<table class="inner-table">
+			        <tr>
+			            <td>{{'m_title'|gLA:'Title'}}:</td>
+			            <td><input type="text" class="long" name="title" id="title" value="{{$edit.title}}" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_gAnalytics'|gLA:'Google Analytics'}}:</td>
+			            <td><input type="text" class="long" name="google_analytics" id="google_analytics" value="{{$edit.google_analytics}}" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_webmasters'|gLA:'Webmasters'}}:</td>
+			            <td><input type="text" class="long" name="webmasters" id="webmasters" value="{{$edit.webmasters}}" /></td>
+			        </tr>			         
+			        <tr>
+						<td colspan="2"><strong>{{'domain_names'|gLA:'Domain names'}}</strong></td>
+			        </tr>
+			        <tr>
+			        	<td>{{'domain'|gLA:'Domain'}}</td>
+			        	<td>{{'is_default_domain'|gLA:'Default'}}</td>
+			        </tr>
+			        {{foreach key=k item=domain from=$edit.domains}}
+					<tr id="domain_row_{{$k}}">
+			            <td>
+			            	<input type="text" class="long" name="domain_{{$domain.id}}" id="domain_{{$domain.id}}" value="{{$domain.url}}" />
+			            </td>
+			            <td>
+			            	<input type="radio" name="default_domain" id="default_domain" value="{{$domain.id}}" title="{{'is_default_domain'|gLA:'Default'}}" {{if $domain.default}}checked="checked"{{/if}}/>
+			        	</td>
+			        </tr>
+				  	{{/foreach}}
+				  	<tr>
+						<td colspan="2"><strong>{{'languages'|gLA:'Languages'}}</strong></td>
+			        </tr>
+			        <tr>
+			            <td>{{$_lang_name}}</td>
+			            <td>{{'lang_enable'|gLA:'Enable'}}</td>
+			            <td>{{'lang_default'|gLA:'Default'}}</td>
+			            <td>{{'main_page'|gLA:'Main page'}}</td>
+			        </tr>
+			        {{foreach key=k item=lang from=$edit.langs}}
+					<tr>
+			            <td>{{$lang.title}}:</td>
+			            <td><input type="checkbox" name="langs_{{$lang.id}}" id="langs_{{$lang.id}}" value="1" {{if $lang.info}} checked="checked" {{/if}} /></td>
+			            <td><input type="radio" name="default" id="default_{{$lang.id}}" value="{{$lang.id}}" {{if $lang.info.default}} checked="checked" {{/if}} /></td>
+			            <td>
+			            	<input type="hidden" name="main_id_{{$lang.id}}" id="main_id_{{$lang.id}}" value="{{$lang.info.main_id}}" />
+			            	<input type="text" class="short" name="main_title_{{$lang.id}}" id="main_title_{{$lang.id}}" value="{{$lang.info.main_title}}" />
+			            	<a href="#" onclick="openSiteMapDialog('main_id_{{$lang.id}}', 'main_title_{{$lang.id}}', ''); return false;" class="select-btn">{{'select'|gLA:'Select'}}</a>
+							<a href="#" onclick="$('#main_id_{{$lang.id}}').val(''); $('#main_title_{{$lang.id}}').val(''); return false;">{{'clear'|gLA:'Clear'}}</a>
+			            </td>
+			        </tr>
+				  	{{/foreach}}
+			        
+    			</table>
+    		</td>
+		</tr>
+	</table>
+    <table class="bttns-table">
+        <tr>
+            <td>
+            	{{if $edit.id}}
+                <div class="btn orange"><a href="javascript:;" onclick="checkFields('apply');"><span>{{'apply'|gLA:'Apply'}}</span></a></div>
+                {{/if}}
+                <div class="btn"><a href="javascript:;" onclick="checkFields('next');"><span>{{'save_and_next'|gLA:'Save and next'}}</span></a></div>
+                <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save_and_close'|gLA:'Save and close'}}</span></a></div>
+                <div class="btn cancel"><a href="javascript:;" onclick="$('#edit_{{$edit.id}}').html('');"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+            </td>
+        </tr>
+    </table>
+    </form>
+    
+    <script type="text/javascript">
+
+		var tabindex = 1;
+		$('#editForma :input,select').each(function() {
+			if (this.type != "hidden" && this.id != "cmsLang") {
+				var $input = $(this);
+				$input.attr("tabindex", tabindex);
+				tabindex++;
+			}
+		});
+        
+        priew_id = $('input[name=default]:checked').attr('id');
+        
+        $('input[name=default]').click(function(){
+            id = $(this).attr('id').replace('default_', '');
+           
+            if(!$('#langs_'+id).is(":checked")){
+                $('#errorBlock').html("{{'m_default_lang_error'|gLA:"Can't set as default language, because this language is disabled!":'':'':true}}");
+                $('#errorBlock').show();
+                $('#default_'+id).attr('checked', '');
+                $('#'+priew_id).attr('checked', 'checked');
+            } else {
+                $('#errorBlock').html('');
+                $('#errorBlock').hide();
+                priew_id = 'default_'+id;
+            }
+        });
+            
+        $('input[type=checkbox]').click(function(){
+            id = $(this).attr('id').replace('langs_', '');
+            if($('#default_'+id).is(":checked")){
+                $('#errorBlock').html("{{'m_default_lang_checkbox_error'|gLA:"Can't disable, because this language is set as default. Change default language!":'':'':true}}");
+                $('#errorBlock').show();
+                $('#langs_'+id).attr('checked', 'checked');
+            } else {
+                $('#errorBlock').html('');
+                $('#errorBlock').hide();
+            }
+        });
+    
+		loadUploadImgButton('{{$edit.uploadFolder}}', 'lead_image');
+		loadUploadImgButton('{{$edit.uploadFolder}}', 'image');
+		loadUploadImgButton('{{$edit.uploadFolder}}', 'image_small');
+	</script>
+</td>

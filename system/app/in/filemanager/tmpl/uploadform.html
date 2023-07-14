@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{AD_CMS_LANGUAGE}" lang="{AD_CMS_LANGUAGE}"> 
+<head>
+<title>.:: AD Web ::. Popup Window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/{AD_CMS_CSS_FOLDER}inline.css" />
+<link rel="stylesheet" type="text/css" href="/{AD_CMS_MODULE_WEB_FOLDER}{MODULE_NAME}/css/{MODULE_NAME}.css" />
+<script type="text/javascript" src="/{AD_JS_FOLDER}prototype.js"></script>
+<script type="text/javascript" src="/{AD_CMS_JS_FOLDER}functions.js"></script>
+<script type="text/javascript" src="/{AD_JS_FOLDER}functions.js"></script>
+<script type="text/javascript" src="/{AD_CMS_JS_FOLDER}json.js"></script>
+<script type="text/javascript" src="/{AD_CMS_MODULE_WEB_FOLDER}{MODULE_NAME}/js/{MODULE_NAME}.js"></script>
+<script type="text/javascript" src="/{AD_CMS_JS_FOLDER}langMsg.php?module={MODULE_NAME}"></script>
+</head>
+
+<body>
+	<div id="uploadform">
+	<form action="main.php" name="fileform" id="fileform" method="post" enctype="multipart/form-data" onsubmit="return dosubmit();">
+	   <input type="hidden" name="folder" value="{uploadFolder}" />
+	   <input type="hidden" name="dialog" value="y" />
+	   <input type="hidden" name="action" value="uploadFiles" />
+	   <input type="hidden" name="module" value="{MODULE_NAME}" />
+	
+		<div id=uploadfileinput><input type="file" id="userfile" name="userfile" size="30" class="uploadfile"></div>
+		<p id="uploading">
+			<img src="/{AD_CMS_IMAGE_FOLDER}filemanager/indicator.gif" alt="{cms_lang_upload_progress}" title="{cms_lang_upload_progress}" border="0" />
+			{cms_lang_upload_progress}
+		</p>
+		<ul id="uploadfilelist"></ul>
+		<div id=uploadoptions><input type="checkbox" name="unzip" id="unzip" value="1"><label for="zip">{cms_lang_uzip}</label></div>
+		
+	  <button class="btn" type="submit" name="uploadButton" id="uploadButton"><strong>{cms_lang_upload_files}</strong></button>
+	</form>
+	
+	<script type="text/javascript">
+		var FileSelector = new MultiSelector($('uploadfilelist'), 5);
+		FileSelector.addElement($('userfile'));
+		
+		Element.hide('uploading');
+		
+		function dosubmit() {
+			if (checkUploadFiles()) {
+				Element.hide('uploadfileinput');
+				Element.show('uploading');
+				//$('uploadButton').click();
+				return true;
+			} else {
+				alert(langStrings.getMsg('nothingToUpload','Nothing to upload'));
+				return false;
+			}	
+		}		
+	</script>
+	</div>
+
+</body>
+</html>

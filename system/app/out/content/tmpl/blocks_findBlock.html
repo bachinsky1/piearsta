@@ -1,0 +1,72 @@
+{{if $cl|@count > 0 OR $clinicsList|@count > 0}}
+<div id="find_block" class="find_block"><div class="wrap">
+    <h2>{{'startpage_search_doctor_by'|gL:'Atrodi ārstu pēc ...'}}</h2>
+    <div class="list">
+
+        {{if $cl[1]}}
+        <div class="item">
+            <div class="trigger"><i class="fa fa-plus"></i><i class="fa fa-minus"></i>{{$clConfig.types[1]|gL}}</div>
+            <div class="expand">
+                {{foreach from=$cl[1] item=data name=values}}
+                {{if $data|@is_array}}
+                <div class="line"><a href="{{$siteData.mirrors_doctors_page|getLM}}?{{$clConfig.keys[1]}}={{$data.original_id}}">{{$data.title}}</a></div>
+                {{/if}}
+                {{/foreach}}
+                {{if $cl[1].showMore}}
+                <div class="find-more" data-find="cities">{{'more'|gL:'Vairāk'}}</div>
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{if $cl[3]}}
+        <div class="item">
+            <div class="trigger"><i class="fa fa-plus"></i><i class="fa fa-minus"></i>{{$clConfig.types[3]|gL}}</div>
+            <div class="expand">
+                {{foreach from=$cl[3] item=data name=values}}
+                {{if $data|@is_array}}
+                <div class="line"><a href="{{$siteData.mirrors_doctors_page|getLM}}?{{$clConfig.keys[3]}}={{$data.title}}">{{$data.title}}</a></div>
+                {{/if}}
+                {{/foreach}}
+                {{if $cl[3].showMore}}
+                <div class="find-more" data-find="specialties">{{'more'|gL:'Vairāk'}}</div>
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{if $clinicsList}}
+        <div class="item">
+            <div class="trigger"><i class="fa fa-plus"></i><i class="fa fa-minus"></i>{{'classificator_clinics'|gL:'Clinica'}}</div>
+            <div class="expand">
+                {{foreach from=$clinicsList item=data name=values}}
+                {{if $data|@is_array}}
+                <div class="line"><a href="{{$siteData.mirrors_doctors_page|getLM}}?doctors_filter_clinic={{$data.original_id}}">{{$data.title}}</a></div>
+                {{/if}}
+                {{/foreach}}
+                {{if $clinicsList.showMore}}
+                <div class="find-more" data-find="clinics">{{'more'|gL:'Vairāk'}}</div>
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{if $cl[5]}}
+        <div class="item">
+            <div class="trigger"><i class="fa fa-plus"></i><i class="fa fa-minus"></i>{{$clConfig.types[5]|gL}}</div>
+            <div class="expand">
+                {{foreach from=$cl[5] item=data name=values}}
+                {{if $data|@is_array}}
+                <div class="line"><a href="{{$siteData.mirrors_doctors_page|getLM}}?{{$clConfig.keys[5]}}={{$data.original_id}}">{{$data.title}}</a></div>
+                {{/if}}
+                {{/foreach}}
+                {{if $cl[5].showMore}}
+                <div class="find-more" data-find="ics">{{'more'|gL:'Vairāk'}}</div>
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
+
+    </div>
+</div></div>
+{{/if}}

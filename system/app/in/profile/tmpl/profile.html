@@ -1,0 +1,61 @@
+<div class="content">
+	<form class="forma" method="post" action="" onsubmit="return false;">
+		<fieldset>
+			<table class="search-table" cellpadding="0" cellspacing="0">
+			    <tr>
+			        <td>
+			            <label for="filterName">{{'name'|gLA:'Name'}}:</label>
+			            <input class="filter" type="text" id="filterName" name="filterName" />
+			        </td>
+			        <td>
+			            <label for="filterLastName">{{'last_name'|gLA:'Surname'}}:</label>
+			            <input class="filter" type="text" id="filterLastName" name="filterLastName" />
+			        </td>
+			        <td>
+			            <label for="filterEmail">{{'email'|gLA:'Email'}}:</label>
+			            <input class="filter" type="text" id="filterEmail" name="filterEmail" />
+			        </td>
+			        <td>
+			            <label for="filterPhone">{{'phone'|gLA:'Phone'}}:</label>
+			            <input class="filter" type="text" id="filterPhone" name="filterPhone" />
+			        </td>
+			        <td class="bttns">
+	                   <div class="btn"><a href="javascript:;" onclick="changeFilter(); return false;"><span>{{'m_search'|gLA:'Search'}}</span></a></div>
+	                   <div class="clr"><!-- clear --></div>
+	               </td>
+	               <td class="bttns">
+	                   <div class="btn"><a href="javascript:;" onclick="clearFilter(); return false;"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+	                   <div class="clr"><!-- clear --></div>
+	               </td>
+	               <td class="bttns">
+	                   <div class="btn"><a target="_blank" href="export/" ><span>{{'xls_export'|gLA:'.xls Export All'}}</span></a></div>
+	                   <div class="clr"><!-- clear --></div>
+	               </td>
+			    </tr>
+			</table>
+			
+			{{$tTable}}
+			
+			<div id="modulePath">
+			</div>
+			
+			{{$bTable}}
+	
+		</fieldset>
+	</form>
+	
+	<script type="text/javascript">
+		moduleTable.mainUrl = '{{$MAIN_URL}}';
+		moduleTable.moduleName = '{{$MODULE_NAME}}';
+		moduleTable.usePaging = true;
+		{{if $MODULE_FROM}}
+	    moduleTable.from = {{$MODULE_FROM}};
+	    {{/if}}
+
+		$(document).ready(function() {
+			
+			updateModule();	
+			
+		});
+	</script>
+</div>	

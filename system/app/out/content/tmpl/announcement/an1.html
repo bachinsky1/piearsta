@@ -1,0 +1,110 @@
+<div class="announce-cont">
+    <a href="https://digitalclinic.piearsta.lv/lv" target="_blank">
+    <div class="announce-inner">
+
+        <h2>
+<!--            {{'announce_1_maintext'|gL:'Izmanto <br><span class="announce-highlighted">attalinātes <br>konsultācijas </span> <br>iespēju'}}-->
+            {{'announce_1_maintext2'|gL:'Saņem <br>attālinātu ārsta <br>konsultāciju'}}
+        </h2>
+
+        <div class="announce-link paPopupOpenTrue">
+
+            <div class="announce-link-label">
+                {{'read_more'|gL:'Lasīt vairāk'}}
+            </div>
+
+            <div class="announce-link-btn">
+                <i class="fa fa-chevron-right"></i>
+            </div>
+
+        </div>
+
+    </div>
+    </a>
+</div>
+
+<style>
+
+    .announce-inner h2 {
+        left: 150px;
+        font-size: 33px;
+        line-height: 36px;
+        color: #296ac4;
+    }
+
+    .hero_block .image_cont .image {
+        background-image: url(/img/announcements/hero-bg1.jpg);
+        background-position: 56% bottom;
+    }
+
+    @media all and (min-width: 1601px) {
+        .hero_block .image_cont .image {
+            background-position: 50% bottom;
+        }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1600px) {
+        .hero_block .image_cont .image {
+            background-position: 52% bottom;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        h2 {
+            left: 97px;
+        }
+        .hero_block .image_cont .image {
+            background-image: url(/img/announcements/hero-bg1.jpg);
+
+        }
+        .hero_block.announcement .hero-right .announce-cont .announce-inner .announce-link {
+            right: 0;
+            color: #009be5;
+        }
+    }
+
+    @media all and (min-width: 1024px) {
+
+        .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner .announce-link {
+            right: 40px;
+            color: #009be5;
+        }
+    }
+
+    @media all and (max-width: 767px) {
+        .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner .announce-link {
+            position: relative;
+            margin-top: 42px;
+            justify-content: flex-end;
+            color: #000;
+        }
+
+        .hero_block .image_cont .image {
+            background-image: url(/img/announcements/mob-a1.jpg);
+            background-position: 56% center;
+        }
+    }
+
+    /* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+    @media only screen
+    and (min-device-width: 320px)
+    and (max-device-width: 568px)
+    and (-webkit-min-device-pixel-ratio: 2) {
+
+        .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner .announce-link {
+            margin: 30px 20px 0 0;
+        }
+    }
+
+    /* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+    @media only screen
+    and (min-device-width: 375px)
+    and (max-device-width: 667px)
+    and (-webkit-min-device-pixel-ratio: 2) {
+
+        .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner .announce-link {
+            margin: 30px 0 0 0;
+        }
+    }
+
+</style>

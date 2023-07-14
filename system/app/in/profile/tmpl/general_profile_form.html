@@ -1,0 +1,151 @@
+<div id="general_data_form" class="main-tab">
+	<table class="inner-table">
+		<tr>
+			<td colspan="2"><strong>Basic information</strong></td>
+		</tr>
+		<tr>
+            <td>{{'first_name'|gLA:'First name'}}:</td>
+            <td><input type="text" class="long simple" name="name" id="name" value="{{$edit.name}}" /></td>
+        </tr>
+        <tr>
+            <td>{{'last_name'|gLA:'Last name'}}:</td>
+            <td><input type="text" class="long simple" name="surname" id="surname" value="{{$edit.surname}}" /></td>
+        </tr>
+        <tr>
+			<td>{{'enabled'|gLA:'Enabled'}}</td>
+			<td><input type="checkbox" value="1" id="enable" class="active simple" {{if $edit.enable}} checked="checked" {{/if}} /></td>
+		</tr>
+        <tr>
+            <td>{{'email'|gLA:'Email'}}:</td>
+            <td><input type="text" class="long simple required" name="email" id="email" value="{{$edit.email}}" /></td>
+        </tr>
+        <tr>
+            <td>{{'phone'|gLA:'Phone'}}:</td>
+            <td><input type="text" class="long simple" name="phone" id="phone" value="{{$edit.phone}}" /></td>
+        </tr>
+        <tr>
+			<td>{{'resident'|gLA:'Resident'}}</td>
+			<td><input type="checkbox" value="1" id="resident" class="active simple" {{if $edit.resident}} checked="checked" {{/if}} /></td>
+		</tr>
+		<tr class="noresident">
+			<td>{{'person_number'|gLA:'Person Number(not resident)'}}:</td>
+            <td><input type="text" class="long simple" name="person_number" id="person_number" value="{{$edit.person_number}}" /></td>
+		</tr>
+        <tr  class="resident">
+            <td>{{'person_id'|gLA:'Person ID'}}:</td>
+            <td><input type="text" class="long simple" name="person_id" id="person_id" value="{{$edit.person_id}}" /></td>
+        </tr>
+        <tr>
+         <td>{{'gender'|gLA:'Gender'}}:</td>
+         <td>
+             <select name="gender" id="gender" class="required simple">
+                 <option value="0">{{'m_select_option'|gLA:'-- Select --'}}</option>
+                 {{foreach from=$genders item=item key=key}}
+          		<option {{if $key == $edit.gender}} selected="selected" {{/if}} value="{{$key}}">{{$item}}</option>
+          	{{/foreach}} 
+             </select>
+         </td>
+     	</tr>
+     	<tr>
+     		<td>{{'date_of_birth'|gLA:'Date of birth'}}:</td>
+     		<td>
+     			<select name="bd_date" id="bd_date" class="simple">
+					<option value="0">{{'m_select_option'|gLA:'-- Select --'}}</option>
+					{{section name=foo start=1 loop=31 step=1}}
+					<option {{if $edit.date_of_birth_splited[2] == $smarty.section.foo.index}}selected="selected"{{/if}} value="{{$smarty.section.foo.index}}">{{$smarty.section.foo.index}}</option>
+					{{/section}}
+				</select>
+				<select id="bd_month" class="simple">
+					<option value="0">{{'m_select_option'|gLA:'-- Select --'}}</option>
+					{{foreach from=$months item=m key=k}}
+					<option {{if $edit.date_of_birth_splited[1] == $k}}selected="selected"{{/if}} value="{{$k}}">{{$m|gL}}</option>
+					{{/foreach}}
+				</select>
+				<select id="bd_year" class="simple">
+					<option value="0">{{'m_select_option'|gLA:'-- Select --'}}</option>
+					{{section name=foo start=1900 loop=$smarty.now|date_format:"%Y" step=1}}
+					<option {{if $edit.date_of_birth_splited[0] == $smarty.section.foo.index}}selected="selected"{{/if}} value="{{$smarty.section.foo.index}}">{{$smarty.section.foo.index}}</option>
+					{{/section}}
+				</select>
+     		</td>
+     	</tr>
+     	<tr>
+            <td>{{'language'|gLA:'Language'}}:</td>
+            <td>
+            	<select id="lang" class="simple">
+					{{$langs}}
+				</select>
+            </td>
+        </tr>
+        <tr>
+            <td>{{'city'|gL:'City'}}:</td>
+            <td>
+            	<select id="city_id" class="simple">
+					<option></option>
+					{{foreach from=$cl.city item=item name=cl}}
+					<option value="{{$item.c_id}}" {{if $edit.city_id == $item.c_id}}selected="selected"{{/if}}>{{$item.title}}</option>
+					{{/foreach}}
+				</select>
+            </td>
+        </tr>
+        <tr>
+            <td>{{'district'|gL:'District'}}:</td>
+            <td>
+            	<select id="district_id" class="simple">
+					<option></option>
+					{{foreach from=$cl.district item=item name=cl}}
+					<option value="{{$item.c_id}}" {{if $edit.district_id == $item.c_id}}selected="selected"{{/if}}>{{$item.title}}</option>
+					{{/foreach}}
+				</select>
+            </td>
+        </tr>
+        <tr>
+            <td>{{'insurance'|gL:'Insurance company'}}:</td>
+            <td>
+            	<select id="insurance_id" class="simple">
+					<option></option>
+					{{foreach from=$cl.ic item=item name=cl}}
+					<option value="{{$item.c_id}}" {{if $edit.insurance_id == $item.c_id}}selected="selected"{{/if}}>{{$item.title}}</option>
+					{{/foreach}}
+				</select>
+            </td>
+        </tr>
+        <tr>
+            <td>{{'insurance_number'|gLA:'Insurance Number'}}:</td>
+            <td><input type="text" class="long simple" name="insurance_number" id="insurance_number" value="{{$edit.insurance_number}}" /></td>
+        </tr>
+        <tr>
+			<td>{{'email_notifications'|gLA:'Email notifications'}}</td>
+			<td><input type="checkbox" value="1" id="email_notifications" class="active simple" {{if $edit.email_notifications}} checked="checked" {{/if}} /></td>
+		</tr>
+		<tr>
+			<td>{{'sms_notifications'|gLA:'SMS notifications'}}</td>
+			<td><input type="checkbox" value="1" id="sms_notifications" class="active simple" {{if $edit.sms_notifications}} checked="checked" {{/if}} /></td>
+		</tr>
+ 	</table>
+</div>
+
+<script>
+$(document).ready(function(){
+	
+	if($('#resident').is(":checked")){
+		$('.noresident').hide();
+		$('.resident').show();
+	} else {
+		$('.resident').hide();
+		$('.noresident').show();
+	}
+	
+	$('#resident').change(function(){
+		if($('#resident').is(":checked")){
+			$('.noresident').hide();
+			$('.resident').show();
+		} else {
+			$('.noresident').show();
+			$('.resident').hide();
+		}
+	});
+	
+	
+});
+</script>

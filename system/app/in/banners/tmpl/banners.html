@@ -1,0 +1,40 @@
+<div class="content">
+    <table class="search-table" style="margin-bottom: 4px;">
+        <tr>
+            <td style="width: 150px;">{{'m_lang'|gLA:'Language'}}:</td>
+            <td>
+                <select class="long" id="lang" onchange="changeFilter(); return false;">
+                    <option value="0">{{'m_select_option'|gLA:'-- Select --'}}</option>
+                    {{$langs}}
+                </select>
+            </td>
+            <td class="bttns">
+                <div class="btn">
+                    <a href="javascript: void(0);" onclick="changeFilter(); return false;">
+                        <span>{{'m_search'|gLA:'Search'}}</span>
+                    </a>
+                </div>
+                <div class="btn" style="margin-left: 4px;">
+                    <a href="javascript: void(0);" onclick="clearFilter(); return false;">
+                        <span>{{'clear'|gLA:'Clear'}}</span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+    {{$tTable}}
+    <div id="modulePath"></div>
+    {{$bTable}}
+</div>
+<script type="text/javascript">
+    moduleTable.mainUrl = '{{$MAIN_URL}}';
+    moduleTable.moduleName = '{{$MODULE_NAME}}';
+    moduleTable.usePaging = true;
+    {{if $MODULE_FROM}}
+    moduleTable.from = {{$MODULE_FROM}};
+    {{/if}}
+    
+    $(function() {
+        updateModule();
+    });
+</script>

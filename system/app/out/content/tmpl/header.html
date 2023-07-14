@@ -1,0 +1,223 @@
+<header {{if $langMenu.langs|@count == 1}} class="nolang {{if $doctors_list}}nofollow{{/if}}"{{/if}}>
+	<section class="line1">
+
+		{{if $maintenanceWarning}}
+		<div class="alert-msg-wrapper" id="maintenanceAlert">
+			<div class="alert-msg-box">
+				<div class="a-close" id="maintenanceAlertAccepted">
+					<a href="#" class="close"></a>
+				</div>
+				<div>
+					<img src="/img/attention_warn.png" width="52" height="52" border="0" alt="">
+				</div>
+				<div>
+					<p><strong>{{'header_maintenance_warning_dear_user'|gL:'Cien. Lietotājs!'}}</strong></p>
+					<p>{{'header_maintenance_warning_message'|gL:'Šodien sākot no plkst. 22.00 plānojas maintenance activities.  Sakarā ar to vietne nebūs pieejama apmērām 4 st. laikā. Ceram uz Jūsu sapratni.'}}</p>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+
+		<div class="wrapd wrapt">
+		<div class="header_menu_mob">
+			<div class="trigger">
+				<div class="open">
+					<div class="icon"><i class="fa fa-times"></i></div>
+					<div class="text">{{'header_close'|gL:'Aizvērt'}}</div>
+				</div>
+				<div class="closed">
+					<div class="icon"><i class="fa fa-bars"></i></div>
+					<div class="text">{{'header_menu'|gL:'Menu'}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="controls">
+				<div class="block social">
+				    {{if $siteData.fbFollow}}
+						<a class='item fb' title="{{'soc_fb'|gL:'Facebook'}}" target="_blank" href="http://www.facebook.com/{{$siteData.fbFollow}}"></a>
+					{{/if}}
+                                        
+                    {{if $siteData.youtubeFollow}}
+						<a class="item youtube" title="{{'soc_youtube'|gL:'Youtube'}}" target="_blank" href="http://www.youtube.com/{{$siteData.youtubeFollow}}/"></a>
+					{{/if}}
+                                        
+<!--                    {{if $siteData.gplusFollow}}-->
+<!--						<a class="item gp" target="_blank" title="{{'soc_gp'|gL:'Follow us - Google Plus'}}" href="https://plus.google.com/{{$siteData.gplusFollow}}"></a>-->
+<!--					{{/if}}-->
+<!--                                        -->
+<!--					{{if $siteData.drFollow}}-->
+<!--						<a class="item dr" title="{{'soc_dr'|gL:'Draugiem'}}" target="_blank" href="http://www.draugiem.lv/{{$siteData.drFollow}}/"></a>-->
+<!--					{{/if}}-->
+<!--                                     -->
+<!--					{{if $siteData.twFollow}}-->
+<!--						<a class="item tw" target="_blank" title="{{'soc_tw'|gL:'Follow us - Twitter'}}" href="https://twitter.com/{{$siteData.twFollow}}"></a>-->
+<!--					{{/if}}-->
+<!--                                      				                                        -->
+<!--					{{if $siteData.lnFollow}}-->
+<!--						<a class="item in" target="_blank" title="{{'soc_ln'|gL:'Follow us - Linkedin'}}" href="https://www.linkedin.com/company/{{$siteData.lnFollow}}"></a>-->
+<!--					{{/if}}-->
+				</div>
+				<div class="block help"><a href="{{$siteData.mirros_help_page|getLM}}">{{'header_help'|gL:'Palidzība'}}</a></div>
+				{{if $langMenu.langs|@count > 1}}
+				<div class="block languages">
+					{{section name=item loop=$langMenu.langs}}
+					{{if $langMenu.langs[item].active}}
+					<div class="trigger">{{$langMenu.langs[item].title}}<i class="fa fa-angle-down"></i></div>
+					{{/if}}
+					{{/section}}
+
+					{{if $langMenu.langs|@count > 1}}
+					<div class="dropdown">
+						<div class="list">
+						{{section name=item loop=$langMenu.langs}}
+						{{if !$langMenu.langs[item].active}}
+						<a class="item" href="{{$langMenu.langs[item].link}}">{{$langMenu.langs[item].title}}</a>
+						{{/if}}
+						{{/section}}
+						</div>
+					</div>
+					{{/if}}
+
+				</div>
+				{{/if}}
+			</div>
+			<div class="authorization">
+				<div class="text">{{'header_login_lead_text'|gL:'Ieeja reģistrētiem lietotājiem'}}</div>
+				<div class="form nnn">
+					<div class="auth_form_top">
+						<div class="field w1">
+							<div class="error_msg" style="display:none;"></div>
+							<div class="cinput" data-type="email">
+								<input class="login loginhd" id="email" type="text" data-default="{{'form_login_default'|gL:'E-pasts'}}" placeholder="{{'form_login_default'|gL:'E-pasts'}}">
+							</div>
+						</div>
+						<div class="field w1">
+							<div class="cinput">
+								<input class="login" id="password" type="password" data-default="{{'form_password_default'|gL:'Parole'}}" placeholder="{{'form_password_default'|gL:'Parole'}}">
+							</div>
+							{{  if $vroomId }}
+							<input class="login" id="vroomId" type="hidden" value="{{$vroomId}}">
+							{{ /if }}
+						</div>
+						<div class="field w2">
+							<a href="#" class="btnw profileLogin">{{'header_login'|gL:'Ienākt'}}</a>
+						</div>
+					</div>
+
+					<div class="auth_form_bottom">
+						<div class="auth_form_bottom_left">
+							<div class="link"><a href="{{$siteData.mirros_forgotpassword_page|getLM}}">{{'header_forgot_password'|gL:'Aizmirsi paroli?'}}</a></div>
+							<div class="link"><a href="/registration_start/">{{'header_registration'|gL:'Reģistrēties'}}</a></div>
+						</div>
+						<div class="auth_form_bottom_right">
+							<div class="link"><a href="/dmss-auth" class="dmssLink dmssAuthLink">{{'header_login_dmss'|gL:'Piesledzies ar digitalo identitati'}}</a></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<a href="{{$mainpageId|getLM}}" class="logo">
+			{{if $content.id == $mainpageId}}{{else}}<h2>{{/if}}
+				<img alt="{{'logoTitle'|gL:'Logo Title'}}" src="{{$AD_IMAGE_FOLDER}}piearsta-logo-mobile.png" class="ver3ib">
+				<img alt="{{'logoTitle'|gL:'Logo Title'}}" src="{{$AD_IMAGE_FOLDER}}piearsta-logo.png" class="ver1ib ver2ib">
+			{{if $content.id == $mainpageId}}{{else}}</h2>{{/if}}
+		</a>
+
+		<div class="header__tabs-column">
+			<ul class="tabs">
+				<li class="tabs__tab">
+					<a class="tabs__tab-link lang">
+						<div class="item-arrow"></div>
+						{{assign var="switcherLanguage" value=$switcherLanguage}}</a>
+					<div class="lang-active" id="langArrow">{{'languages_panel_profile'|gL:'Lat'}}
+						<div class="arrow"><i class="fa fa-angle-down" ></i></div></div>
+					<div class="level_overlay" id="langShow" style="display: none">
+						{{foreach from=$allWebLanguages item=item name=allWebLanguages}}
+						{{if $switcherLanguage == $item.lang}}
+						{{assign var="switcherLanguage" value=$item.title}}
+						{{/if}}
+						<div class="menuList">
+							<a href="/{{$item.lang}}/{{$currentUrl}}">{{$item.title}}</a>
+						</div>
+						{{/foreach}}
+					</div>
+
+				</li>
+			</ul>
+		</div>
+	</div></section>
+	<span class="expand">
+
+		{{include file='top-menu-expand.html'}}
+
+		<div class="box">
+			<div class="authorization"><div class="cont">
+				<div><a href="{{$siteData.mirros_signin_page|getLM}}">{{'header_login'|gL:'Ienākt'}}</a></div>
+				<div><a href="{{$siteData.mirros_signup_page|getLM}}">{{'header_registration'|gL:'Reģistrēties'}}</a></div>
+				<div><a href="{{$siteData.mirros_help_page|getLM}}">{{'header_help'|gL:'Palidzība'}}</a></div>
+			</div></div>
+			{{if $langMenu.langs|@count > 1}}
+			<div class="languages"><div class="cont">
+				{{section name=item loop=$langMenu.langs}}
+				{{if $langMenu.langs[item].active}}
+				<div>{{$langMenu.langs[item].title}}</div>
+				{{/if}}
+				{{/section}}
+				{{section name=item loop=$langMenu.langs}}
+				{{if !$langMenu.langs[item].active}}
+				<div><a href="{{$langMenu.langs[item].link}}">{{$langMenu.langs[item].title}}</a></div>
+				{{/if}}
+				{{/section}}
+			</div></div>
+			{{/if}}
+		</div>
+	</span>
+	<section class="line2 ver1 ver2"><div class="wrapd wrapt">
+		{{include file='top-menu.html'}}
+	</div></section>
+</header>
+
+<script type="text/javascript" nonce="{{$web.cspNonce}}">
+
+		$(document).ready(function(){
+			$('.login').keypress(function (e) {
+				if (e.which == 13) {
+					profile.profileLogin();
+				}
+			});
+		});
+
+		document.addEventListener("DOMContentLoaded", function () {
+
+			let maintenanceAlert = document.getElementById('maintenanceAlert');
+
+			if (maintenanceAlert){
+				let maintenanceAlertAccepted = document.getElementById('maintenanceAlertAccepted');
+
+				var maintenanceAccepted = getCookie('maintenance_accepted');
+
+				if (maintenanceAccepted != 'true') {
+					maintenanceAlert.style.display = 'block';
+					maintenanceAlert.style.height = '110px';
+				}
+
+				maintenanceAlertAccepted.addEventListener("click", function () {
+					document.cookie = 'maintenance_accepted=true';
+					maintenanceAlert.style.display = 'none';
+				});
+
+			}
+
+			function getCookie(cookieName) {
+				let cookie = {};
+				document.cookie.split(';').forEach(function (el) {
+					let [key, value] = el.split('=');
+					cookie[key.trim()] = value;
+				})
+				return cookie[cookieName];
+			}
+		});
+
+</script>

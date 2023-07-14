@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{$AD_CMS_LANGUAGE}}" lang="{{$AD_CMS_LANGUAGE}}">
+<head>
+	<title>{{'title'|gLA:'Beattum CMS 2.5.5':'':true}}</title>
+	<meta name="title" content="{{'title'|gLA:'Beattum CMS 2.5.5':'':true}}" />
+	<meta name="description" content="{{'description'|gLA:'Beattum CMS - Content managment system':'':true}}" />
+	<meta name="keywords" content="{{'keywords'|gLA:'Beattum CMS':'':true}}" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<meta content="www.Beattum.lv" name="author" />
+	<meta name="robots" content="noindex, nofollow" />
+	<link type="image/ico" href="{{$AD_CMS_IMAGE_FOLDER}}favicon.ico" rel="shortcut icon"/>
+	<link rel="stylesheet" type="text/css" href="{{$AD_CMS_CSS_FOLDER}}main.css" media="screen, projection" />   
+    <!--[if lte IE 7]>
+        <link rel="stylesheet" type="text/css" href="{{$AD_CMS_CSS_FOLDER}}ie.css"/>
+    <![endif]-->
+    <!--[if IE 6]>
+        <link rel="stylesheet" type="text/css" href="{{$AD_CMS_CSS_FOLDER}}ie6.css"/>
+    <![endif]-->
+	<script type="text/javascript" src="{{$AD_CMS_JS_FOLDER}}jquery.js"></script>
+	<script type="text/javascript" src="{{$AD_CMS_JS_FOLDER}}functions.js"></script>
+	<script type="text/javascript" src="{{$AD_JS_FOLDER}}functions.js"></script>
+	<script type="text/javascript" src="{{$AD_CMS_JS_FOLDER}}moduleTable.js"></script>
+	<script type="text/javascript" src="{{$AD_CMS_JS_FOLDER}}json.js"></script>
+	<script type="text/javascript" src="{{$AD_CMS_JS_FOLDER}}jquery.cookie.js"></script>
+	<script type="text/javascript" src="{{$AD_CMS_JS_FOLDER}}jquery.tree.js"></script>
+	<script type="text/javascript" src="{{$AD_CMS_JS_FOLDER}}ajax-uploader.js"></script>
+	
+	<!-- jQueryUI -->
+	<script type="text/javascript" src="{{$AD_CMS_JS_FOLDER}}jquery-ui/jquery-ui-1.8.2.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{$AD_CMS_CSS_FOLDER}}jquery-ui/jquery-ui.css" media="screen, projection" />
+	
+	<!-- CKEditor -->
+	<script type="text/javascript" src="{{$AD_CKEDITOR_FOLDER}}ckeditor.js"></script>
+	<script type="text/javascript" src="{{$AD_CKEDITOR_FOLDER}}adapters/jquery.js"></script> 
+	<script type="text/javascript" src="{{$AD_CMS_JS_FOLDER}}jquery_ckeditor_fixer.js"></script>
+	 
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			 $.datepicker.setDefaults({
+				dateFormat: 'dd-mm-yy'
+			});
+		  });
+	</script>
+	{{$MODULE_HEAD}}
+	
+</head>
+<body>
+<div id="ajax-loader"></div>
+<div id="loader"><img src="{{$AD_CMS_IMAGE_FOLDER}}preloader.gif" alt="{{'ajax_loader'|gLA:'Loading...':'':true}}" /></div>
+
+<div id="wrapper">
+	<div id="header">
+		<h1 id="logo"><img src="{{$AD_CMS_IMAGE_FOLDER}}design/cms.png" alt="{{'title'|gLA:'Beattum CMS 2.5.5':'':true}}" /></h1>
+		<div class="inner">
+			<p class="log-out"><a href="?logout" title="{{'logout'|gLA:'Log out':'':true}}">{{'logout'|gLA:'Log out':'':true}}</a></p>
+			<form id="language-form" method="post" action="">
+				<fieldset>
+					<legend>{{'language_changer'|gLA:'Interface language':'':true}} form</legend>
+					<label for="cmsLang">{{'language_changer'|gLA:'Interface language':'':true}}:</label>
+					<select onchange="$('#language-form').submit();" id="cmsLang" name="cmsLang">
+						{{$language_menu}}
+					</select>
+				</fieldset>
+			</form>
+		</div>
+		<div class="clr"><!-- clear --></div>
+	</div>
+	<ul id="menu">
+		{{section name=item loop=$mainMenu}}
+        <li {{if $mainMenu[item].active}}  class="active"{{/if}}>
+        	<a href="{{$mainMenu[item].link}}">
+        		<span>{{$mainMenu[item].name}}</span>
+        	</a>
+        </li>
+        {{/section}}
+    </ul>
+    <div class="clr"><!-- clear --></div>
+	<div id="holder">
+		{{if $modules_Menu}}
+			{{$modules_Menu}}
+		{{/if}}
+		
+		
+		{{$ADMIN_MODULE_BLOCK}}
+		
+		<div class="clr"><!-- clear --></div>
+	</div>
+</div>
+</body>
+</html>

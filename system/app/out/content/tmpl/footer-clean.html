@@ -1,0 +1,16 @@
+<footer>
+	<div class="copyline"><div class="wrap">
+		<div class="cont">
+			<div class="copy ver1 ver2">{{'footer_copyright'|gL:'&copy; 2014  Visas autortiesības aizsargātas'}}</div>
+			{{if $menu.FOOTER|@count > 0}}
+			<div class="links">
+				{{foreach from=$menu.FOOTER item=mt name=topmenu}}
+					<div class="item"><a href="{{$mt.url}}">{{$mt.title}}</a></div>
+				{{/foreach}}
+			</div>
+			{{/if}}
+			<div class="copy ver3">{{'footer_copyright'|gL:'&copy; 2014  Visas autortiesības aizsargātas'}}</div>
+		</div>
+		<div class="to_the_top" data-goto="page"><i class="fa fa-angle-up"></i></div>
+	</div></div>
+</footer>

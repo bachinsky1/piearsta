@@ -1,0 +1,43 @@
+<div class="signup_block messages">
+	<div class="wrap">
+		<div class="col2_y" id="innerContent" data-type="Messages" data-url="/profile/moreMessages/">
+			<div class="header_block">
+				<h2>{{$web.title}}</h2>
+			</div>
+			<div class="cont">
+
+				<div class="btn_cont">
+					<a class="btnw deleteMultiMessages" href="#"><i class="fa fa-trash-o"></i><span class="text">{{'profile_messages_delete'|gL:'Dzēst'}}</span></a>
+				</div>
+
+				<div class="item-count">{{'profile_rezervations_found'|gL:'Reservations found'}}: <span></span></div>
+
+				<br>
+
+				<div class="table_header">
+					<table class="table1">
+						<thead>
+						<tr>
+							<th><label class="item blue"><input type="checkbox" class="messagesAll" value="messagesAll"><span class="box"><i class="fa fa-check"></i><i class="fa fa-minus"></i></span></label></th>
+							<th><div>{{'profile_messages_subject'|gL:'Subject'}}</div></th>
+							<th><div>{{'profile_messages_created'|gL:'Date'}}</div></th>
+						</tr>
+						</thead>
+					</table>
+				</div>
+
+				<div class="item_list_cont"></div>
+
+				<div class="more" style="display: none">
+					<div class="btn_cont"><a href="#" rel="{{$current_page}}" class="btnw res-show-more">{{'doctors_show_more'|gL:'Radīt vairāk'}}</a></div>
+				</div>
+
+				<div class="res-empty" style="display: none">
+					<br />
+					<div>{{'profile_messages_no_messages'|gL:'Jums nav ziņojumu.'}}</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

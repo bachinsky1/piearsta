@@ -1,0 +1,67 @@
+<div class="popup_bg"></div>
+<div class="popup w700 reservation-finish-popup-parent">
+    <div class="close"><i class="fa fa-times"></i></div>
+    <div class="cont reservation-finish">
+
+        {{if $finalStatus}}
+
+        <h2>{{'profile_unfinished_finished'|gL:'This reservation already finished'}}</h2>
+        <hr>
+        <p>{{'profile_reservation_status'|gL:'Reservation status'}}:
+            {{if $reservation.status == 0}}
+            <span class="status">{{'profile_reservation_status_0'|gL:'Gaida apstiprinājumu'}}</span>
+            {{elseif $reservation.status == 1}}
+            <span class="status">{{'profile_reservation_status_1'|gL:'Noraidīts'}}</span>
+            {{elseif $reservation.status == 2}}
+            <span class="status">{{'profile_reservation_status_2'|gL:'Aktīvs'}}</span>
+            {{elseif $reservation.status == 3}}
+            <span class="status">{{'profile_reservation_status_3'|gL:'Atcelts'}}</span>
+            {{elseif $reservation.status == 4}}
+            <span class="status">{{'profile_reservation_status_4'|gL:'Arhīvā'}}</span>
+            {{/if}}
+        </p>
+
+        <div class="btn_cont">
+            <div class="cancel">
+                <a class="btn cancel-btn">{{'profile_reservation_close'|gL:'Close'}}</a>
+            </div>
+        </div>
+
+        {{else}}
+
+        <h2>{{'profile_unfinished_you_have'|gL:'You have unfinished reservation'}}</h2>
+        <hr>
+        <div class="line">
+            <h3>{{'profile_reservation_open_time'|gL:'Pierakstīšanas laiks'}}</h3>
+            <h2>{{$reservation.start|date_format:"%H:%M"}}, {{$reservation.start_time_date_month}}</h2>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_doctor'|gL:'Ārsts'}}:</div>
+            <div class="col2"><a target="_blank" href="{{$siteData.mirrors_doctors_page|getLM2}}{{$reservation.doctor_url}}/{{$reservation.clinic_url}}/">{{$reservation.name}} {{$reservation.surname}}</a></div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_clinic'|gL:'Iestadē'}}:</div>
+            <div class="col2">
+                <div><a target="_blank" href="{{$siteData.mirrors_clinics_page|getLM2}}{{$reservation.clinic_url}}/">{{$reservation.clinic_name}}</a></div>
+                <div class="note">{{$reservation.clinic_address}}</div>
+            </div>
+        </div>
+
+        <!-- params -->
+        <input type="hidden" id="resId" value="{{$resId}}">
+
+        <div class="btn_cont">
+            <a class="btn btng w3 finishResBtn">{{'profile_unfinished_finish'|gL:'Finish reservation'}}</a>
+
+            <div class="cancel">
+                <a class="btn cancel-btn">{{'profile_reservation_cancel'|gL:'Cancel.'}}</a>
+            </div>
+        </div>
+
+        {{/if}}
+
+
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="signup_block my_doctors">
+	<div class="wrap">
+		<div class="col2_y">
+			<div class="header_block">
+				<h2>{{$web.title}}</h2>
+			</div>
+			<div class="cont">
+				{{if $userData.doctors|@count > 0}}
+				<div class="list">
+					{{foreach from=$userData.doctors item=item name=pd}}
+					<div class="item">
+						<div class="image">
+							{{if $item.photo}}
+							<img alt="{{$item.name|clear}} {{$item.surname|clear}}" src="{{$AD_UPLOAD_FOLDER}}doctors/list/{{$item.photo}}">
+							{{else}}
+							<img alt="{{$item.name|clear}} {{$item.surname|clear}}" src="{{$AD_IMAGE_FOLDER}}avatar-small.png">
+							{{/if}}
+						</div>
+
+						<div class="text">
+							<div class="top">
+								<div class="fav_cont faved">
+									<div class="msg">{{'doctors_remove_from_my_list'|gL:'Izņemt no “Mani ārsti”'}}</div>
+									<a href="#" class="btng removeDoctor" data-docid="{{$item.id}}" data-clid="{{$item.clinic_id}}"><i class="fa fa-star-o"></i></a>
+								</div>
+								<div class="name"><a href="{{$siteData.mirrors_doctors_page|getLM}}{{$item.doctor_url}}/{{$item.clinic_url}}/">{{$item.name|clear}} {{$item.surname|clear}}</a></div>
+								{{if $item.reviews_count > 0}}
+								<div class="reviews"><i class="fa fa-comment"></i>{{$item.reviews_count}}<span class="word"> {{'doctors_reviews'|gL:'atsauksmes'}}</span></div>
+								{{/if}}
+							</div>
+							<div class="occupation"><a href="{{$siteData.mirrors_clinics_page|getLM}}{{$item.clinic_url}}/">{{$item.clinic_name|clear}}</a></div>
+							<div class="contacts">
+								<div>{{$item.clinic_address}}<span class="ver3i">, </span></div>
+								<div>{{$item.phone}}</div>
+							</div>
+						</div>
+					</div>
+					{{/foreach}}
+				</div>
+				<div class="all">
+					<a href="{{$siteData.mirrors_doctors_page|getLM}}">{{'profile_doctors_all'|gL:'Visi ārsti'}}</a>
+				</div>
+				{{else}}
+				<div class="all">
+					{{'profile_doctors_empty'|gL:'List is empty!'}}
+				</div>
+				<div class="all">
+					<a href="{{$siteData.mirrors_doctors_page|getLM}}">{{'profile_doctors_all'|gL:'Visi ārsti'}}</a>
+				</div>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</div>

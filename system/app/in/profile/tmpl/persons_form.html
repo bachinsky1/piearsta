@@ -1,0 +1,60 @@
+<div id="persons_form">
+	<table class="inner-table">
+		<tr>
+			<td>
+				<strong>Name</strong>
+			</td>
+			<td>
+				<strong>Surname</strong>
+			</td>
+			<td>
+				<strong>Gender</strong>
+			</td>
+			<td>
+				<strong>Resident</strong>
+			</td>
+			<td>
+				<strong>Person ID / Person Number</strong>
+			</td>
+			<td>
+				<strong>Phone</strong>
+			</td>
+			<td>
+				<strong>Date of birth</strong>
+			</td>
+		</tr>
+		{{foreach name=persons from=$edit.persons item=i key=k}}
+		<tr>
+			<td>
+				{{$i.name}}
+			</td>
+			<td>
+				{{$i.surname}}
+			</td>
+			<td>
+				{{$i.gender}}
+			</td>
+			<td>
+				{{if $i.resident}}
+				Yes
+				{{else}}
+				No
+				{{/if}}
+			</td>
+			<td>
+				{{if $i.resident}}
+				{{$i.person_id}}
+				{{else}}
+				{{$i.person_number}}
+				{{/if}}
+			</td>
+			<td>
+				{{$i.phone}}
+			</td>
+			<td>
+				{{$i.date_of_birth}}
+			</td>
+		</tr>
+		{{/foreach}}
+	</table>
+</div>

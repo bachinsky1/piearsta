@@ -1,0 +1,42 @@
+<div class="col1_y">
+	<ul class="menu1">
+		{{foreach from=$menu.PROFILE item=item name=topmenu}}
+			<li class="item {{if $item.active}}active{{/if}}">
+				<a href="{{$item.url}}">
+					{{if $item.active}}
+					<h1>
+						{{$item.title}}
+						{{if $item.number}}
+						<span class="number">{{$item.number}}</span>
+						{{/if}}
+					</h1>
+					{{else}}
+					{{$item.title}}
+					{{if $item.number}}
+					<span class="number">{{$item.number}}</span>
+					{{/if}}
+					{{/if}}
+				</a>
+			</li>
+		{{/foreach}}
+		<li class="item">
+			<a href="#" id="manidati_href">Mani izmekl&#x0113;jumi</a>
+		</li>
+	</ul>
+	<div class="menu2">
+		<div class="trigger">
+			<div class="text">{{$web.title}}</div>
+			<div class="menuicon"><i class="fa fa-bars"></i></div>
+		</div>
+		<div class="expand">
+			{{foreach from=$menu.PROFILE item=item name=topmenu}}
+			<a href="{{$item.url}}" class="item">{{$item.title}}{{if $item.number}}<span class="number">{{$item.number}}</span>{{/if}}</a>
+			{{/foreach}}
+		</div>
+	</div>
+	<div class="helpblock">
+		<h2>{{'profile_need_help?'|gL:'Vajadzīga palīdzība?'}}</h2>
+		<div class="info">{{'profile_need_help_phone'|gL:'+371 263 459 07'}}</div>
+		<div class="info"><a href="mailto:{{'profile_need_help_email'|gL:'Pieraksti_at_piearsta.lv'}}">{{'profile_need_help_email'|gL:'Pieraksti_at_piearsta.lv'}}</a></div>
+	</div>
+</div>

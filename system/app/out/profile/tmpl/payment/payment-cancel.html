@@ -1,0 +1,29 @@
+<div id="content">
+
+    <div class="payment payment_cancel_block"><div class="wrap">
+        <div class="dt_tab_wrap">
+            <h1>{{$web.title}}</h1>
+
+            <div class="block_content">
+                <p>{{'profile_reservation_payment_canceled_by_user'|gL:'Payment was canceled by user.'}}</p>
+            </div>
+
+            <div class="block_content">
+                <p>{{$content.content}}</p>
+            </div>
+
+            <input type="hidden" id="order_id" value="{{$info.orderId}}" >
+            <input type="hidden" id="reservation_id" value="{{$info.reservationId}}" >
+            <input type="hidden" id="slots" value="{{$info.slots}}" >
+            <input type="hidden" id="back_url" value="{{$info.backUrl}}" >
+
+            <div class="button_block">
+                <a href="{{$info.backUrl}}" class="btng" id="continue-btn">{{'profile_reservation_back'|gL:'Go back'}}</a>
+                <a href="#" class="cancelAddReservation" id="cancel-btn">{{'profile_reservation_cancel'|gL:'Cancel'}}</a>
+            </div>
+        </div>
+    </div></div>
+</div>
+<script nonce="{{$web.cspNonce}}">
+    history.pushState(null, document.title, location.href);
+</script>

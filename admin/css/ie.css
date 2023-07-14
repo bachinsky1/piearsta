@@ -1,0 +1,10 @@
+.clrfix, .clr{
+    zoom:1;
+    }
+input.radio{
+    margin-top:-1px;
+    }
+.tabs-block .fieldset input.check{
+		margin-top:-1px;
+		margin-left:-4px;
+		}

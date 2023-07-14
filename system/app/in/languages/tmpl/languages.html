@@ -1,0 +1,19 @@
+<div class="content">
+
+	{{$tTable}}
+	
+	<div id="modulePath">
+	</div>
+	
+	{{$bTable}}
+	
+	<script type="text/javascript">
+		moduleTable.mainUrl = '{{$MAIN_URL}}';
+		moduleTable.moduleName = '{{$MODULE_NAME}}';
+		moduleTable.usePaging = true;
+	
+		$(function () { 
+			updateModule();
+		});	
+	</script>
+</div>

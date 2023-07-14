@@ -1,0 +1,329 @@
+<div class="signup_block profil_edit">
+	<div class="wrap">
+		<div class="col2_y">
+			<div class="success_msg" style="display:none;">
+				<i class="fa fa-check-circle"></i><strong>{{'profile_edit_ok_msg'|gL:'Donec nibh ipsum, volutpat vitae  id, lobortis ac risus'}}</strong>
+			</div>
+
+			{{if $userData.confirm_personal_data == null}}
+			<div id="confirm-personal-data" class="item danger-style">
+				<div class="header_block">
+					<h2>{{'profile_confirm_personal_data_header'|gL:'Confirm personal data'}}</h2>
+				</div>
+				<div class="cont">
+					{{'profile_confirm_personal_data_content'|gL:'Please check your personal information and and press "Saglabāt" button'}}
+				</div>
+			</div>
+			{{/if}}
+
+			<div class="item">
+				<div class="header_block">
+					<h2>{{'profile_edit_title'|gL:'Personāla informācija'}}</h2>
+				</div>
+				<div class="cont">
+
+					{{if $verificationEnabled}}
+
+					<div class="twocol verification_block"{{if !$userData.isVerifyable}} style="display: none;"{{/if}}>
+
+					<div class="label"></div>
+
+					{{if $userData.verified && !$userData.verificationExpired}}
+					<div class="profile_verified">
+						<div data-hastip="{{'profile_verified_tooltip'|gL:'Your profile verified by '}}{{$userData.verifiedBy}}">
+							<i class="fa fa-check-circle"></i>
+							{{'profile_accreditation_verified'|gL:'Your profile verified by '}}{{$userData.verifiedBy}}
+						</div>
+					</div>
+					{{elseif $userData.verificationExpired}}
+					<div class="profile_verification_expired">
+						<div data-hastip="{{'profile_edit_verification_expired_tooltip'|gL:'Your profile verification expired, You may verify Your profile by clicking link Verify'}}">
+							<i class="fa fa-exclamation-circle"></i>
+							{{'profile_accreditation_expired'|gL:'Profile verification expired'}}
+						</div>
+						<a class="verify_link dmss_verify dmssAuthLink" href="/dmss-auth?verif=true">{{'profile_verify_profile'|gL:'Verify'}}</a>
+					</div>
+					{{else}}
+					<div class="profile_not_verified">
+						<div data-hastip="{{'profile_edit_not_verified_tooltip'|gL:'Your profile not verified, You may verify it by clicking link Verify'}}">
+							<i class="fa fa-exclamation-circle"></i>
+							{{'profile_accreditation_not_verified'|gL:'Your profile not verified'}}
+						</div>
+						<a class="verify_link dmss_verify dmssAuthLink" href="/dmss-auth?verif=true">{{'profile_verify_profile'|gL:'Verify'}}</a>
+					</div>
+					{{/if}}
+
+				</div>
+
+				{{/if}}
+
+				<div class="twocol">
+					<div class="label"><label>{{'form_name'|gL:'Vards'}}</label></div>
+					<div class="field">
+						<div class="cinput"><input type="text" id="name" name="name" class="profile" value="{{$userData.name|clear}}"></div>
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_surname'|gL:'Uzvārds'}}</label></div>
+					<div class="field">
+						<div class="cinput"><input type="text" id="surname" name="surname" class="profile" value="{{$userData.surname|clear}}"></div>
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_gender'|gL:'Dzimums'}}</label></div>
+					<div class="field">
+						<div class="gender_select {{$userData.gender|clear}}" data-male="{{'form_gender_male'|gL:'Vīrietis'}}" data-female="{{'form_gender_female'|gL:'Sieviete'}}">
+							<div class="textcont">
+								<div class="text">
+									{{if $userData.gender == 'male'}}
+									{{'form_gender_male'|gL:'Vīrietis'}}
+									{{elseif $userData.gender == 'female'}}
+									{{'form_gender_female'|gL:'Sieviete'}}
+									{{/if}}
+								</div>
+								<div class="gender_icon"><i class="fa fa-male"></i><i class="fa fa-female"></i></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select class="profile" id="gender" name="gender">
+								<option value=""></option>
+								<option value="male" {{if $userData.gender == 'male'}}selected="selected"{{/if}}>{{'form_gender_male'|gL:'Vīrietis'}}</option>
+								<option value="female" {{if $userData.gender == 'female'}}selected="selected"{{/if}}>{{'form_gender_female'|gL:'Sieviete'}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_bd'|gL:'Dzimšanas datums'}}</label></div>
+					<div class="field">
+						<div class="cselect day">
+							<div class="textcont">
+								<div class="textouter"><div class="text"></div></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select id="bd_date" name="bd_date" class="profile">
+								{{section name=foo start=1 loop=32 step=1}}
+								<option {{if $userData.date_of_birth_splited[2] == $smarty.section.foo.index}}selected="selected"{{/if}} value="{{$smarty.section.foo.index}}">{{$smarty.section.foo.index}}</option>
+								{{/section}}
+							</select>
+						</div>
+						<div class="cselect month">
+							<div class="textcont">
+								<div class="textouter"><div class="text"></div></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select id="bd_month" name="bd_month" class="profile">
+								{{foreach from=$profileConfig.months item=m key=k}}
+								<option {{if $userData.date_of_birth_splited[1] == $k}}selected="selected"{{/if}} value="{{$k}}">{{$m|gL}}</option>
+								{{/foreach}}
+							</select>
+						</div>
+						<div class="cselect year">
+							<div class="textcont">
+								<div class="textouter"><div class="text"></div></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select id="bd_year" name="bd_year" class="profile">
+								{{section name=foo loop=$fromthisyear max=115 step=-1}}
+								<option {{if $userData.date_of_birth_splited[0] == $smarty.section.foo.index}}selected="selected"{{/if}} value="{{$smarty.section.foo.index}}">{{$smarty.section.foo.index}}</option>
+								{{/section}}
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="twocol radio_field">
+					<div class="label"><label>{{'form_resident'|gL:'Latvijas rezidents'}}</label></div>
+					<div class="field">
+						<div class="options">
+							<label><input type="radio" class="profile" id="isResident" name="resident" value="1" {{if $userData.resident}}checked="checked"{{/if}}><span class="circle"><i class="fa fa-circle"></i></span>{{'form_resident_yes'|gL:'Jā'}}</label>
+							<label><input type="radio" class="profile" id="notResident" name="resident" value="0" {{if !$userData.resident}}checked="checked"{{/if}}><span class="circle"><i class="fa fa-circle"></i></span>{{'form_resident_no'|gL:'Nē'}}</label>
+						</div>
+					</div>
+				</div>
+
+				{{if $verificationEnabled}}
+				<div class="twocol">
+					<div class="label"><label for="country">{{'form_country'|gL:'Kuras valsts rezidents'}}</label></div>
+					<div class="field country-field">
+						<div class="cinput"><input type="text" class="profile country-autocomplete" id="country" name="country" value="{{$userData.country_string}}"></div>
+					</div>
+				</div>
+				{{/if}}
+
+				<div class="twocol resident">
+					<div class="label"><label>{{'form_personid'|gL:'Personas kods'}}</label></div>
+					<div class="field separated_inputs">
+						<div class="inputcont"><div class="cinput"><input type="text" class="profile twin" name="person_id" maxlength="6" value="{{$userData.pc[0]|clear}}"></div></div>
+						<div class="separator">-</div>
+						<div class="inputcont w70"><div class="cinput"><input type="text" class="profile twin" name="person_id" maxlength="5" value="{{$userData.pc[1]|clear}}"></div></div>
+					</div>
+				</div>
+				<div class="twocol noresident">
+					<div class="label"><label>{{'form_person_indentifier'|gL:'Personas identifikators'}}</label></div>
+					<div class="field">
+						<div class="cinput"><input type="text" id="person_number" name="person_number" class="profile" value="{{$userData.person_number}}"></div>
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_phone'|gL:'Telefons'}}</label></div>
+					<div class="field">
+						<div class="cinput"><input type="text" class="profile" id="phone" name="phone" value="{{$userData.phone}}"></div>
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_login_default'|gL:'E-pasts'}}</label></div>
+					<div class="field">
+						<div class="cinput"><input type="text" class="profile" id="email" name="email" value="{{$userData.email}}"></div>
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_city'|gL:'Jūsu pilsēta'}}</label></div>
+					<div class="field">
+						<div class="cselect">
+							<div class="textcont">
+								<div class="textouter"><div class="text">{{$userData.city|clear}}</div></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select id="city_id" name="city_id" class="profile">
+								<option></option>
+								{{foreach from=$cl.city item=item name=cl}}
+								<option value="{{$item.c_id}}" {{if $userData.city == $item.title}}selected="selected"{{/if}}>{{$item.title}}</option>
+								{{/foreach}}
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_language'|gL:'Valoda'}}</label></div>
+					<div class="field">
+						<div class="cselect">
+							<div class="textcont">
+								<div class="textouter"><div class="text">{{$userData.lang}}</div></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select id="userSelectedLang" name="userSelectedLang" class="profile">
+								{{foreach from=$allowedLanguages item=item name=allowedLanguages}}
+								<option value="{{$item.lang}}" {{if $userData.lang == $item.lang}}selected="selected"{{/if}}>{{$item.title}}</option>
+								{{/foreach}}
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item" id="insurance">
+			<div class="header_block">
+				<h2>{{'form_insurance'|gL:'Apdrošināšana'}}</h2>
+			</div>
+			<div class="cont">
+				<div class="twocol">
+					<div class="label"><label>{{'form_insurance_number'|gL:'Polises numurs'}}</label></div>
+					<div class="field">
+						<div class="cinput"><input type="text" id="insurance_number" name="insurance_number" class="profile" value="{{$userData.insurance_number|clear}}"></div>
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_insurance_company'|gL:'Apdrošinātājs'}}</label></div>
+					<div class="field">
+						<div class="cselect">
+							<div class="textcont">
+								<div class="textouter"><div class="text">{{$userData.insurance|clear}}</div></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select id="insurance_id" name="insurance_id" class="profile">
+								<option></option>
+								{{foreach from=$cl.ic item=item name=cl}}
+								<option value="{{$item.c_id}}" {{if $userData.insurance == $item.title}}selected="selected"{{/if}}>{{$item.title}}</option>
+								{{/foreach}}
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="dates-block">
+					<div class="field">
+						<div class="label">
+							<label>{{'form_insurance_from'|gL:'Полис годен с'}}
+								<div class="cinput"><input class="jq-calend profile" type="text" id="ins-from-jqui-calendar" name="insurance_start_date" readonly value="{{$userData.insurance_start_date_formated}}"><i class="fa fa-calendar"></i></div>
+							</label>
+						</div>
+					</div>
+					<div class="field">
+						<div class="label">
+							<label>{{'form_insurance_to'|gL:'до'}}
+								<div class="cinput"><input class="jq-calend profile" type="text" id="ins-to-jqui-calendar" name="insurance_end_date" readonly value="{{$userData.insurance_end_date_formated}}"><i class="fa fa-calendar"></i></div>
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="header_block">
+				<h2>{{'form_settings'|gL:'Uzstadījumi'}}</h2>
+			</div>
+			<div class="cont">
+				<div class="twocol">
+					<div class="label checkfield"><label>{{'form_notifications'|gL:'Paziņojumi'}}</label></div>
+					<div class="field checkfield">
+						<label class="item blue {{if $userData.email_notifications}}checked{{/if}}"><input type="checkbox" class="profile" id="email_notifications" name="email_notifications" {{if $userData.email_notifications}}checked="checked"{{/if}}><span class="box"><i class="fa fa-check"></i></span>{{'form_notifications_email'|gL:'Saņemt pierakstu paziņojumus <strong>uz e-pastu</strong>'}}</span></label>
+						<label class="item blue {{if $userData.newsletter}}checked{{/if}}"><input type="checkbox" class="profile" id="newsletter_notifications" name="newsletter_notifications" {{if $userData.newsletter}}checked="checked"{{/if}}><span class="box"><i class="fa fa-check"></i></span>{{'form_notifications_newsletter'|gL:'Saņemt portāla jaunumus un ziņas'}}</span></label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="btn_cont">
+			<a href="#" class="btng saveProfile">{{'profile_save'|gL:'Saglabāt'}}</a>
+			<div class="delete"><a class="deleteProfile" href="#">{{'profile_delete'|gL:'Dzēst profīlu'}}</a></div>
+		</div>
+	</div>
+</div>
+
+<!-- Verification messages -->
+
+{{if $verification_failed_message || $verification_mismatch_message}}
+	<div class="popup_bg"></div>
+	<div class="popup w700 verificationFailedPopup">
+		<div class="close"><i class="fa fa-times"></i></div>
+		<div class="cont">
+			<h2>{{'verification_failed'|gL:'Verification failed'}}</h2>
+			<p>{{'verification_failed_text'|gL:'Please check data in your profile and try again.'}}</p>
+			<div class="btn_cont">
+				<a href="#" class="btnw w9 profileClosePopup">{{'header_close'|gL:'Close'}}</a>
+			</div>
+		</div>
+	</div>
+{{/if}}
+
+{{if $verification_success_message}}
+<div class="popup_bg"></div>
+<div class="popup w700 verificationSuccessPopup">
+	<div class="close"><i class="fa fa-times"></i></div>
+	<div class="cont">
+		<h2>{{'verification_success'|gL:'Verification success'}}</h2>
+		<p>{{'verification_success_text'|gL:'Your profile verified.'}}</p>
+		<div class="btn_cont">
+			<a href="#" class="btnw w9 profileClosePopup">{{'header_close'|gL:'Close'}}</a>
+		</div>
+	</div>
+</div>
+{{/if}}
+
+
+<!-- Saving success message -->
+
+{{if $showSuccessMsg}}
+
+<script nonce="{{$web.cspNonce}}">
+
+	$(document).on('ready', function () {
+
+		var $successMsg = $('.success_msg');
+		$successMsg.show();
+		$('html,body').animate({scrollTop: $successMsg.offset().top});
+
+	});
+
+</script>
+
+{{/if}}
+

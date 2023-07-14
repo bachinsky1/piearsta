@@ -1,0 +1,105 @@
+<td id="editForma" colspan="9" class="open">
+	<div class="error-msg" id="errorBlock" style="display:none;"></div>
+	<input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+	<table class="holder-table">
+		<tr>
+			<td>
+				<table class="inner-table">
+					<tr>
+						<td colspan="2"><strong>{{'general_data'|gLA:'General data'}}</strong></td>
+			        </tr>
+			        <tr>
+			            <td>{{'name'|gLA:'Name'}}:</td>
+			            <td>
+                        	<div>
+								<div class="block-holder open">
+	                                <div class="inner-block">
+	                                    <ul class="lang-tabs">
+	                                    	{{foreach name=languages key=lk item=lng from=$languages}}
+	                                    	<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.label}}</a></li>
+								            {{/foreach}}
+	                                    </ul>
+	                                   
+	                                    <div class="areaBlock">
+		                                    {{foreach name=languages2 key=lk item=lng from=$languages}}
+											<div class="text-block{{if $smarty.foreach.languages2.first}} open{{/if}}">
+		                                        <input class="long required name" name="name_{{$lk}}" id="name_{{$lk}}" cols="20" rows="5" value="{{$edit.name[$lk]}}"/>
+		                                        <div class="clr"><!-- clear --></div>
+		                                    </div>
+								            {{/foreach}}
+							            </div>             
+	                                </div>
+	                            </div>
+                            </div>
+                        </td>
+			        </tr>
+					
+    			</table>
+    		</td>
+			<td>
+    			<table id="userModules" class="inner-table">
+			        <tr>
+			            <td colspan="4"><strong>{{'modules_list'|gLA:'Modules list'}}</strong></td>
+			        </tr>
+			        <tr>
+                        <td>
+                        	<div>
+	                        	{{foreach key=k item=m from=$modules}}
+								<div class="block-holder{{if ($k == 0)}} open{{/if}}">
+	                                <h4><a href="#">{{$m.name}}</a></h4>
+	                                <div class="inner-block">
+                                    	{{foreach key=rk item=r from=$roles}}
+                                    	<label for="{{$r}}_{{$m.id}}">{{"role_$r"|gLA:"$r"}}:</label> <input class="roles" type="checkbox" value="1" id="{{$r}}_{{$m.id}}" {{if $edit.roles[$m.id][$r]}} checked="checked"{{/if}} />
+							            {{/foreach}}
+	                                </div>
+	                            </div>
+								{{/foreach}}
+							</div>
+                        </td>
+                    </tr>	        
+				</table>
+			</td>
+		</tr>
+	</table>
+    <table class="bttns-table">
+        <tr>
+            <td>
+                <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save_and_close'|gLA:'Save and close'}}</span></a></div>
+                <div class="btn cancel"><a href="javascript:;" onclick="$('#edit_{{$edit.id}}').html('');"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+            </td>
+        </tr>
+    </table> 
+    <script type="text/javascript">
+    $(function () {
+		$('ul.lang-tabs a').click(function() {
+			var curChildIndex = $(this).parent().prevAll().length + 1;
+			$(this).parent().parent().children('.active').removeClass('active');
+			$(this).parent().addClass('active');
+			$(this).parent().parent().next('.areaBlock').children('.open').fadeOut('fast',function() {
+				$(this).removeClass('open');
+				$(this).parent().children('div:nth-child('+curChildIndex+')').fadeIn('normal',function() {
+					$(this).addClass('open');
+				});
+			});
+			return false;
+		});
+		$('div.block-holder h4').click(function() {
+			$(this).parent().parent().children('.open').removeClass('open');
+			$(this).parent().addClass('open');
+			
+			return false;
+		});
+		
+    	checkForAdmin();
+        
+		var tabindex = 1;
+		$('#editForma :input,select').each(function() {
+			if (this.type != "hidden" && this.id != "cmsLang") {
+				var $input = $(this);
+				$input.attr("tabindex", tabindex);
+				tabindex++;
+			}
+		});
+    });	
+	</script>
+</td>

@@ -1,0 +1,41 @@
+<div class="popup_bg"></div>
+<div class="popup w700">
+	<div class="close"><i class="fa fa-times"></i></div>
+	<div class="cont">
+		{{if $web.env == 'prod'}}
+
+<!--	    <script nonce="{{$web.cspNonce}}">-->
+<!--			if(window.dataLayer) {-->
+<!--				window.dataLayer.push({-->
+<!--					'event': 'piearsta_schedule_success'-->
+<!--				});-->
+<!--			}-->
+<!--        </script>-->
+
+		{{/if}}
+
+		<h2 class="with_icon"><i class="fa fa-paper-plane"></i>{{'profile_reservation_ok_title'|gL:'Pieraksta pieteikums ir nosūtīts'}}</h2>
+		<hr>
+		<p>
+			{{if $item.doctor_phone}}
+			{{assign var="phone_number" value=$item.doctor_phone|gLParam:'{phone_number}'}}
+			{{else}}
+			{{assign var="phone_number" value=$item.clinic_phone|gLParam:'{phone_number}'}}
+			{{/if}}
+			{{'profile_reservation_ok_lead'|gL:'Jums tika nosūīts epasts ar pieraksta informāciju. Pieraksta apstiprinājumu saņemsiet 24h laikā, ja pēc 24h laikā neesast to saņemuši, zvaniet {phone_number}.':'':$phone_number}}
+		</p>
+		{{if $dcAppointment}}
+			<p>
+				<a href="{{$dcUrl}}">{{'profile_back_to_digital_clinic'|gL:'Go back to Digital Clinic'}}</a>
+			</p>
+		{{/if}}
+		<div class="btn_cont">
+			<a class="btnw w3 profileClosePopup">{{'header_close'|gL:'Aizvērt'}}</a>
+			{{if $dcAppointment}}
+				<div class="btn-link">
+					<a class="" href="/profils/manas-konsultacijas/">{{'profile_consultation_ok_my_consultations'|gL:'Manas e-konsultācijas'}}</a>
+				</div>
+			{{/if}}
+		</div>
+	</div>
+</div>

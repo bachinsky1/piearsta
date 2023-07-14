@@ -1,0 +1,5 @@
+
+function updateModule() {
+	moduleTable.updateModule();
+}
+

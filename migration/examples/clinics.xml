@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clinics>
+	<clinica>
+		<piearstaId>{YOUR_SYSTEM_ID}</piearstaId>
+		<name>{NAME}</name>
+		<about>{ABOUT}</about>
+		<logo>{FULL_PATH_TO_LOGO}</logo>
+		<registration_number>{REGISTRATION_NUMBER}</registration_number>
+		<address>{ADDRESS}</address>
+		<phone>{PHONE}</phone>
+		<fax>{FAX}</fax>
+		<email>{EMAIL}</email>
+		<work_time>{WORK_TIME}</work_time>
+		<type>{TYPE}</type>
+		<terminal_id>{TERMINAL_ID}</terminal_id>
+		<client_id>{CLIENT_ID}</client_id>
+		<city>{CITY}</city>
+		<district>{DISTRICT}</district>
+		<zip>{ZIP}</zip>
+		<lat>{LAT}</lat>
+		<lng>{LNG}</lng>
+		<login>{LOGIN}</login>
+		<password>{LNG}</password>
+		<description>{DESCRIPTION}</description>
+		<keywords>{KEYWORDS}</keywords>
+	</clinica>
+</clinics>
+	

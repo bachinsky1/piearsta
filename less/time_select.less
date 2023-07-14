@@ -1,0 +1,458 @@
+/**
+  @
+  TimeSelect Widget Styles
+  @
+  @
+ */
+
+// tsWidget variables
+
+// colors
+@tsPrimary: #009fe5;
+@tsSecondary: #80ca00;
+@tsPrimaryLight: rgba(0, 174, 239, 0.24);
+@tsWeekend: red;
+@tsLightNeutral: silver;
+@tsSuperLightNeutral: whitesmoke;
+@tsDarkNeutral: grey;
+
+// other
+@tsBorderRadius: 10px;
+@tsTransitionDuration: 300ms;
+@baseFontSize: 12px;
+
+// widget styles scope start
+.ts-container {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  * {
+    box-sizing: border-box;
+    font-size: @baseFontSize;
+    line-height: 16px;
+    text-align: center;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
+  }
+
+  .ts-top-block {
+    position: relative;
+    text-align: left;
+    height: 30px;
+    margin-bottom: 15px;
+
+    @media (max-width: 767px) {
+      height: auto;
+    }
+
+    .ts-title {
+      position: relative;
+      display: inline-block;
+      margin-top: 5px;
+      font-size: 1.5em;
+    }
+
+    .ts-jqui-calendar {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: 0;
+      border: none;
+      opacity: 0.0001;
+    }
+
+    .ts-calendar-trigger {
+      float: right;
+      padding: 5px 15px;
+      height: auto;
+
+      i, span {
+        display: inline-block;
+        float: none;
+      }
+
+      span {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .ts-prev, .ts-next {
+    position: relative;
+    width: 4%;
+    height: 15%;
+    float: left;
+    cursor: pointer;
+    color: @tsSuperLightNeutral;
+    text-align: center;
+    background-color: @tsPrimary;
+    transition-property: background-color;
+    transition-duration: 300ms;
+
+    .fa {
+      position: absolute;
+      display: block;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &.disabled {
+      //background-color: @tsSuperLightNeutral;
+      background-color: transparent;
+      color: transparent;
+      border: none;
+      cursor: default;
+    }
+  }
+
+  .ts-prev {
+    margin-right: 1%;
+    border-radius: @tsBorderRadius 0 0 @tsBorderRadius;
+  }
+
+  .ts-next {
+    margin-left: 1%;
+    border-radius: 0 @tsBorderRadius @tsBorderRadius 0;
+  }
+
+  .ts-inner {
+    overflow: hidden;
+    position: relative;
+    width: 90%;
+    float: left;
+    border-top: 1px solid @tsLightNeutral;
+    border-right: 1px solid @tsLightNeutral;
+    border-bottom: 1px solid @tsLightNeutral;
+    border-left: 1px solid @tsLightNeutral;
+
+    .ts-info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60%;
+      min-height: 30px;
+      padding: 7px;
+      border: 1px solid @tsLightNeutral;
+      background-color: white;
+      box-shadow: lightgrey;
+      transform: translate(-50%, -50%);
+
+      .ts-info-inner {
+        width: 100%;
+
+        .ts-inner-timetable {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .ts-nearest-link {
+        cursor: pointer;
+      }
+    }
+
+    .ts-day {
+      float: left;
+      margin: 0;
+      padding: 0;
+      border-left: 1px solid @tsLightNeutral;
+
+      &:first-of-type {
+        border-left: none;
+      }
+
+      @media (max-width: 767px) {
+        width: calc(100% / 7) !important;
+        text-align: center;
+      }
+
+      &.ts-month-start {
+        border-left: 1px solid @tsPrimary;
+
+        &:first-of-type {
+          border-left: none;
+        }
+      }
+
+      .ts-month-cell {
+        height: 25px;
+        border-bottom: 1px solid @tsLightNeutral;
+        font-weight: bold;
+        font-size: 90%;
+        text-transform: uppercase;
+        color: @tsDarkNeutral;
+
+        span {
+          position: relative;
+          display: inline-block;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+
+      .ts-day-cell {
+        padding: 5px 0;
+        background-color: @tsSuperLightNeutral;
+        color: @tsDarkNeutral;
+
+        .ts-day-date {
+          display: block;
+          font-size: 16px;
+
+          span {
+            font-size: 12px;
+            text-transform: uppercase;
+
+            @media (max-width: 767px) {
+              font-size: 11px !important;
+              margin-left: 0 !important;
+            }
+          }
+        }
+
+        .ts-day-weekday {
+          display: block;
+          font-size: 10px;
+          font-weight: bold;
+        }
+      }
+
+      &.weekend {
+        background-color: @tsSuperLightNeutral;
+
+        .ts-day-cell {
+
+          .ts-day-date, .ts-day-weekday {
+            color: @tsWeekend;
+          }
+        }
+      }
+
+      .ts-time-container {
+
+        .ts-arrow-down, .ts-arrow-up {
+          margin: 3px;
+          padding: 3px;
+          cursor: pointer;
+
+          .fa {
+            color: @tsDarkNeutral;
+            font-size: 24px;
+          }
+
+          &:hover {
+
+            .fa {
+              color: @tsPrimary;
+            }
+          }
+
+          &.disabled, &.disabled:hover {
+            cursor: default;
+            color: transparent;
+            border: none;
+
+            .fa {
+              color: @tsLightNeutral;
+              color: transparent;
+            }
+          }
+        }
+
+        .ts-times {
+          overflow: hidden;
+          min-height: 100px;
+
+          .ts-timeslot {
+            margin: 0 5px;
+            padding: 7px 0;
+            color: @tsPrimary;
+
+            &:hover:not(.ts-invisible) {
+              background-color: @tsPrimary;
+              color: white;
+              cursor: pointer;
+            }
+
+            &.ts-selected {
+              background-color: @tsSecondary;
+              font-weight: bold;
+              color: white;
+
+              &:hover {
+                background-color: @tsSecondary;
+              }
+            }
+
+            &.ts-invisible {
+              &:hover {
+                background-color: transparent;
+              }
+            }
+
+            @media (max-width: 767px) {
+              margin: 0 1px;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Spinner container
+.ts-spinner-container-calendar {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+
+  &.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+// spinner message
+.ts-spinner-msg {
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+// Spinner
+.ts-loader {
+  color: #00AEEF;
+  font-size: 60px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: ts-load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: ts-load6 1.7s infinite ease, round 1.7s infinite ease;
+}
+
+.ts-spinner-container-calendar {
+  background-color: rgba(0,0,0,.6);
+  display: none;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+
+  .ts-spinner-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    //max-width: 250px;
+    //max-height: 150px;
+    background-color: @tsSuperLightNeutral;
+    //box-shadow: 0 0 15px 0 rgba(0,0,0,.4);
+
+    .ts-spinner-content-inner {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .ts-spinner-msg {
+    margin-bottom: 12px;
+    font-size: 0.8em;
+    color: #7f7f7f;
+    text-align: center;
+  }
+
+  .ts-loader {
+    font-size: 30px;
+    margin: 24px auto;
+  }
+}
+
+
+@-webkit-keyframes ts-load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes ts-load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-webkit-keyframes ts-round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes ts-round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

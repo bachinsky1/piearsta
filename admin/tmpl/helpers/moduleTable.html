@@ -1,0 +1,51 @@
+<div class="table-nav">
+	{{if $add OR $bulk}}
+	<ul class="action-nav">
+	    {{if $add}}
+	    <li>
+	        <div class="btn addNew"><a href="#addNew" onclick="return moduleEdit('');"><span>{{'add_new'|gLA:'Add new':'':true}}</span></a></div>
+	    </li>
+	    {{/if}}
+	    
+	    {{if $bulk}}
+	    <li class="select">
+	        <label for="multiaction{{$type}}">{{'bulk_actions'|gLA:'Bulk actions':'':true}}:</label>
+	        <select onchange="filterAction('{{$type}}');" name="multiaction{{$type}}" id="multiaction{{$type}}">
+	        	<option value="">{{'select_option'|gLA:'-- Select --'}}</option>       
+				<option value="enable">{{'m_enable'|gLA:'Enable':'':true}}</option>
+				<option value="disable">{{'m_disable'|gLA:'Disable':'':true}}</option>
+				<option value="delete">{{'m_delete'|gLA:'Delete':'':true}}</option>
+                {{if $copy}}
+                    <option value="copy">{{'m_copy'|gLA:'Copy':'':true}}</option>
+                {{/if}}
+	        </select>
+	    </li>
+	    <li class="check">
+	        <input type="checkbox" onclick="setAll(true, '{{$MODULE_NAME}}');" value="" id="selAll{{$type}}" class="radio" />
+	        <label for="selAll{{$type}}">{{'select_all'|gLA:'Select All':'':true}}</label>
+	    </li>
+	    <li class="check">
+	        <input type="checkbox" onclick="setAll(false, '{{$MODULE_NAME}}'); return true;" value="" id="disAll{{$type}}" class="radio" />
+	        <label for="disAll{{$type}}">{{'deselect_all'|gLA:'Deselect All':'':true}}</label>
+	    </li>
+	    {{/if}}    
+	</ul>
+	{{/if}}
+	{{if $pager}}
+	<div id="pager{{$type}}">
+	</div>
+	<div class="limit_to" style="float: right; margin-top: 4px;">
+        <label>{{'limit_to'|gLA:'Rows per page':'':true}}:</label>
+        <select name="limit_to" id="limit_to{{$type}}">
+            <option value="25">25</option>
+            <option value="40">40</option>
+            <option value="100">100</option>
+            <option value="150">150</option>
+            <option value="200">200</option>
+            <option value="250">250</option>
+            <option value="300">300</option>
+        </select>
+    </div>
+	{{/if}}	
+	<div class="clr"><!-- clear --></div>
+</div>

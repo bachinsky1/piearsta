@@ -1,0 +1,131 @@
+.add-doctor {
+  background-color: #e9eff1;
+  padding: 30px 0;
+}
+.add-doctor .wrap {
+  position: relative;
+}
+.arstiem-block {
+  display: inline-block;
+  width: 60%;
+  padding-right: 40px;
+  border-right: 1px solid lightgrey;
+}
+.arstiem-block .cinput textarea {
+  height: auto;
+}
+.arstiem-block .field {
+  margin-bottom: 20px;
+}
+.arstiem-block h1 {
+  margin-bottom: 30px;
+}
+.arstiem-block p {
+  margin-bottom: 10px;
+}
+.arstiem-block form {
+  margin-top: 30px;
+}
+.arstiem-block form > div {
+  margin-bottom: 15px;
+}
+.arstiem-block form > div:last-of-type {
+  margin-bottom: 0;
+}
+.arstiem-block form .twocol > div {
+  display: inline-block;
+}
+.arstiem-block form .twocol .label {
+  box-sizing: border-box;
+  width: 25%;
+  padding-right: 10px;
+  vertical-align: middle;
+  text-align: right;
+}
+.arstiem-block form .twocol .field {
+  width: 73%;
+  vertical-align: middle;
+}
+.arstiem-block form .label {
+  margin-bottom: 6px;
+}
+.arstiem-block form .btng {
+  width: 160px;
+  margin-top: 20px;
+}
+.right-side {
+  box-sizing: border-box;
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  padding-left: 40px;
+  width: 35%;
+  transform: translateY(-50%);
+}
+.right-side .helpline .i {
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  font-style: italic;
+  width: 36px;
+  height: 24px;
+  font-weight: 700;
+  padding: 6px 0;
+  margin-bottom: 10px;
+  border: 2px solid #009fe5;
+  border-radius: 50% 50% 50% 50%;
+  font-family: 'Times New Roman', Arial, Helvetica, sans-serif;
+  color: #009fe5;
+}
+.right-side .helpline .text {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid lightgrey;
+}
+.right-side .helpline .wrap {
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .add-doctor .wrap > div {
+    position: relative;
+    display: block;
+    top: auto;
+    transform: none;
+    width: auto;
+  }
+  .add-doctor .wrap .right-side {
+    padding-left: 0;
+  }
+  .add-doctor .wrap .right-side .helpline .wrap {
+    margin-left: 0;
+  }
+  .add-doctor .wrap .right-side .helpline .wrap::after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  .add-doctor .wrap .right-side .helpline .wrap .text {
+    display: none;
+    float: left;
+    padding: 9px 0;
+    margin: 0;
+    border-bottom: none;
+  }
+  .add-doctor .wrap .right-side .helpline .wrap .phone,
+  .add-doctor .wrap .right-side .helpline .wrap .mail {
+    float: left;
+    padding: 9px 0;
+    margin-left: 20px;
+  }
+  .add-doctor .wrap .right-side .i {
+    float: left;
+    margin-right: 20px;
+  }
+  .arstiem-block {
+    padding-right: auto;
+    border-right: none;
+    margin-bottom: 60px;
+  }
+}

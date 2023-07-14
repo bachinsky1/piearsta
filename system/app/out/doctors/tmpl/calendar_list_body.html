@@ -1,0 +1,35 @@
+<div class="week active" data-id="1">
+	{{foreach from=$doctor.shedule.intervalMobile name=weekShedule key=k item=in}}
+	{{assign var=fullDate value=$in.full}}
+    <div class="cell {{if $smarty.foreach.weekShedule.iteration > 1 && $fullMonth != $in.m}} bl {{/if}} {{if $in.wdn == 6 || $in.wdn == 7}} we{{/if}}" data-id="{{$fullDate}}">
+    <div class="arrow arrow_up"><i class="fa fa-angle-up"></i></div>
+	{{if $doctor.shedule.data[$fullDate]}}
+		{{foreach from=$doctor.shedule.data[$fullDate] name=times key=kt item=t}}
+			{{if $t.payment_type == 2}}
+			<a href="#" id="shedule_{{$t.id}}" data-id="{{$t.id}}" data-doctor-id="{{$doctor.id}}" data-clinic-id="{{$doctor.clinic_id}}" data-color-class="blue" class="line{{if !$t.booked && !$t.locked}} shedule blue{{/if}} {{if $smarty.foreach.times.iteration > 6}} hidden{{/if}}">{{$t.time_start}}</a>
+			{{elseif $t.payment_type == 1}}
+			<a href="#" id="shedule_{{$t.id}}" data-id="{{$t.id}}" data-color-class="green" class="line{{if !$t.booked && !$t.locked}} shedule green{{/if}} {{if $smarty.foreach.times.iteration > 6}} hidden{{/if}}">{{$t.time_start}}</a>
+			{{elseif $t.payment_type == 0}}
+			<a href="#" id="shedule_{{$t.id}}" data-id="{{$t.id}}" data-color-class="blue" class="line{{if !$t.booked && !$t.locked}} shedule blue{{/if}} {{if $smarty.foreach.times.iteration > 6}} hidden{{/if}}">{{$t.time_start}}</a>
+			{{/if}}
+		{{/foreach}}
+	{{/if}}
+	<div class="arrow arrow_down {{if $doctor.shedule.data[$fullDate]|@count > 7}}active{{/if}}"><i class="fa fa-angle-down"></i></div>
+    </div>
+    {{assign var=fullMonth value=$in.m}}
+    {{/foreach}}
+	{{if $doctor.local}}
+		<div class="message_cont">
+			<div class="message">
+				<div>{{'doctors_list_local_schedule_text'|gL:'Uzziniet ārsta pieņemšanas laikus, sazinoties ar viņu'}}</div>
+				<div class="link"><a href="mailto:{{$doctor.email|clear}}">{{$doctor.email|clear}}</a></div>
+			</div>
+		</div>
+	{{elseif !$doctor.shedule.data}}
+
+		{{assign var=sheduleData value=$doctor.shedule}}
+
+		{{include file="_message_block.html"}}
+
+	{{/if}}
+</div>

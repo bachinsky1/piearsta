@@ -1,0 +1,115 @@
+<script type="text/javascript" nonce="{{$web.cspNonce}}">
+var signedIn = {{if $userData.id}}true{{else}}false{{/if}};
+</script>
+{{foreach from=$doctors key=i item=doctor}}
+<div class="item dclist" data-doctor-id="{{$doctor.id}}" data-clinic-id="{{$doctor.clinic_id}}">
+    <div class="left">
+	
+	<div class="image">
+	    {{if $doctor.photo}}
+	    <img alt="" src="{{$AD_UPLOAD_FOLDER}}{{$doctorsConfig.uploadFolder}}list/{{$doctor.photo}}">
+	    {{else}}
+	    <img alt="" src="{{$AD_IMAGE_FOLDER}}avatar-small.png">
+	    {{/if}}
+		{{if $userData.id}}
+	    <div class="fav_cont{{if $doctor.profile_id}} faved{{/if}}">
+		<a href="#" data-id="{{$doctor.id}}" data-clinic="{{$doctor.clinic_id}}" class="btnw"><i class="fa fa-star-o"></i><i class="fa fa-star"></i></a>
+	    </div>
+		{{/if}}
+
+		{{if $doctor.consultations_enabled}}
+		<div class="btn-consultation-container show-desktop">
+			<a class="btng btn-small btn-consultation" {{if $doctor.consultation_price}}data-price="{{$doctor.consultation_price}}"{{/if}}>
+			{{'profile_consultation_book'|gL:'Pieteikt konsultāciju'}}<span>Pieraksties!</span>
+			</a>
+		</div>
+		{{/if}}
+
+	</div>
+	
+	<div class="text">
+
+		<div class="top">
+
+			<div class="name"><a href="{{$siteData.mirrors_doctors_page|getLM2}}{{$doctor.url}}/{{$doctor.clinic_url}}/">{{$doctor.name|clear}} {{$doctor.surname|clear}}</a></div>
+
+			{{if $doctor.reviews_count > 0}}
+			<div class="reviews">
+				<a href="{{$siteData.mirrors_doctors_page|getLM2}}{{$doctor.url}}/{{$doctor.clinic_url}}/#comments"><i class="fa fa-comment"></i><span class="word"> {{'reviews'|gL:'atsauksmes'}}:</span> {{$doctor.reviews_count}}</a>
+			</div>
+			{{/if}}
+
+			{{if $doctor.consultations_enabled}}
+			<div class="btn-consultation-container pull-right show-mobile">
+				<a class="btng btn-small btn-consultation" {{if $doctor.consultation_price}}data-price="{{$doctor.consultation_price}}"{{/if}}>
+				<span>@</span>{{'profile_consultation_book'|gL:'Pieteikt konsultāciju'}}
+				</a>
+			</div>
+			{{/if}}
+
+	    </div>
+
+	    <div class="occupation">
+		{{if $doctor.specialty.localized_title}}
+		    {{$doctor.specialty.localized_title}}
+		    <br />
+		{{else}}
+		    {{'doctors_without_specialties'|gL:'Specialitāte nav norādīta'}}
+		    <br />
+	    {{/if}}
+
+	    <a href="{{$siteData.mirrors_clinics_page|getLM2}}{{$doctor.clinic_url}}/">{{$doctor.clinic_name|clear}}</a></div>
+
+		<div class="contacts">
+
+			{{if $doctor.clinic_address}}
+				<div>
+					{{if $doctor.clinic_citytitle}}
+						{{$doctor.clinic_citytitle}},
+					{{/if}}
+
+					{{if $doctor.clinic_districttitle}}
+						{{$doctor.clinic_districttitle}},
+					{{/if}}
+
+					{{if $doctor.clinic_zip}}
+						{{$doctor.clinic_address}}, {{$doctor.clinic_zip}}
+					{{else}}
+						{{$doctor.clinic_address}}
+					{{/if}}
+				</div>
+			{{/if}}
+
+			{{if $doctor.phone}}
+				<div>{{$doctor.phone|clear}}</div>
+			{{/if}}
+
+			{{if $userData.id && $doctor.hasSubscription}}
+				<span class="specialLabel hasSubscription" data-hastip="{{'profile_subscription_available_hint'|gL:'При записи к этому доктору действует абонемент'}}">
+					<strong>A</strong>
+				</span>
+			{{/if}}
+
+			{{if $doctor.isDcDoctor}}
+				<span class="specialLabel dcDoctor" data-hastip="{{'profile_dc_available_doctor_hint'|gL:'Этот доктор доступен при записи через DigitalClinic'}}">
+					<strong>DC</strong>
+				</span>
+			{{/if}}
+
+	    </div>
+	</div>
+
+		{{if $doctor.consultations_enabled}}
+		<div class="btn-consultation-container show-tablet">
+			<a class="btng btn-small btn-consultation" {{if $doctor.consultation_price}}data-price="{{$doctor.consultation_price}}"{{/if}}>
+			<span>@</span>{{'profile_consultation_book'|gL:'Pieteikt konsultāciju'}}
+			</a>
+		</div>
+		{{/if}}
+
+    </div>
+    <div class="slide" id="calendar_list_body_{{$doctor.id}}_{{$doctor.clinic_id}}">
+		{{include file="calendar_list_body.html"}}
+    </div>
+</div>
+{{/foreach}}

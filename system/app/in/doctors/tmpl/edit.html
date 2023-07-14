@@ -1,0 +1,74 @@
+<div class="content">
+    <form id="edit_form">
+        <input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+
+		<div id="doctorTabs">
+			<ul>
+					
+				<li>
+					<a rel="general_data_form" href="#general_data_form"  >
+						{{'general'|gLA:'Main info'}}
+					</a>
+				</li>
+				{{foreach from=$edit.clinics item=item name=clicnics}}
+				<li>
+					<a rel="clinics_form{{$item.id}}" href="#clinics_form{{$item.id}}"  >
+						{{$item.name}}
+					</a>
+				</li>
+				{{/foreach}}	
+			</ul>
+
+			{{include file="general_doctor_data.html"}}
+			
+			{{foreach from=$edit.clinics item=item name=clicnics}}
+			{{include file="clinic_form.html" clinic=$item}}
+			{{/foreach}}
+			
+
+		</div>
+
+
+		<table class="bttns-table">
+	        <tr>
+	            <td>
+	            	{{if !$view}}
+					    {{if $edit.id}}
+					    <div class="btn orange"><a href="javascript:;" onclick="checkFields('apply');"><span>{{'apply'|gLA:'Apply'}}</span></a></div>
+					    {{/if}}
+					    <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save'|gLA:'Save'}}</span></a></div>
+					    {{if $edit.id}}
+					    <div class="btn cancel"><a href="javascript:;" onclick="window.location.href = moduleTable.getRequestUrl() + 'view/{{$edit.id}}/';"><span>{{'m_view'|gLA:'View'}}</span></a></div>
+					    {{/if}}
+				    {{/if}}
+				    <div class="btn cancel"><a href="javascript:;" onclick="window.location.href = moduleTable.getRequestUrl();"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+	            </td>
+	        </tr>
+	    </table>
+		
+    </form>
+</div>
+<script type="text/javascript">
+    
+    moduleTable.mainUrl		= '{{$MAIN_URL}}';
+    moduleTable.moduleName	= '{{$MODULE_NAME}}';
+    
+    $(document).ready(function() {
+
+    	$('ul.lang-tabs a').click(function() {
+			var curChildIndex = $(this).parent().prevAll().length + 1;
+			$(this).parent().parent().children('.active').removeClass('active');
+			$(this).parent().addClass('active');
+			$(this).parent().parent().next('.areaBlock').children('.open').fadeOut('fast',function() {
+				$(this).removeClass('open');
+				$(this).parent().children('div:nth-child('+curChildIndex+')').fadeIn('normal',function() {
+					$(this).addClass('open');
+				});
+			});
+			return false;
+		});
+
+    	$('#doctorTabs').tabs();	   
+    	
+    });
+</script>

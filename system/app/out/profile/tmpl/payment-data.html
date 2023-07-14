@@ -1,0 +1,65 @@
+<div class="payment-data">
+    <table>
+        <tr>
+            <td colspan="2" class="payer">
+                <h4>{{'profile_reservation_payer'|gL:'Payer'}}</h4>
+                <p>{{$item.payer}} (p.k {{$item.pk}})</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="date">
+                <h4>{{'profile_reservation_transaction_date'|gL:'Transaction date'}}</h4>
+                <p>{{$item.date}}</p>
+            </td>
+            <td class="order-id">
+                <h4>{{'profile_reservation_order_id'|gL:'Order id'}}</h4>
+                <p>{{$item.order_id}}</p>
+            </td>
+        </tr>
+        {{if $item.banklink}}
+        <tr>
+            <td colspan="2" class="bank">
+                <h4>{{'profile_reservation_paid_by'|gL:'Paid by'}}</h4>
+                <p>{{'profile_reservation_bank'|gL:'Bank'}}: ({{$item.payment_method}} internetbanka)</p>
+            </td>
+        </tr>
+        {{elseif $item.dcSubscription}}
+        <tr>
+            <td colspan="2" class="bank">
+                <h4>{{'profile_reservation_paid_by'|gL:'Paid by'}}</h4>
+                <p>{{'profile_reservation_dc_subscription'|gL:'Digital Clinic abonements'}}: ({{$item.dcSubscriptionNumber}})</p>
+            </td>
+        </tr>
+        {{elseif $item.insurance}}
+        <tr>
+            <td colspan="2" class="bank">
+                <h4>{{'profile_reservation_paid_by'|gL:'Paid by'}}</h4>
+                <p>{{'profile_reservation_insurance'|gL:'Apdrošināšanas polise'}}: ({{$item.insuranceName}} {{$item.insuranceNumber}})</p>
+            </td>
+        </tr>
+        {{else}}
+        {{if $item.pan}}
+        <tr>
+            <td class="paid-by">
+                <h4>{{'profile_reservation_paid_by'|gL:'Paid by'}}</h4>
+                <p>{{'profile_reservation_card'|gL:'Card'}}: {{$item.pan}}</p>
+            </td>
+            <td class="auth-code">
+
+                <h4>{{'profile_reservation_auth_code'|gL:'Auth code'}}</h4>
+                <p>{{$item.auth_code}}</p>
+            </td>
+        </tr>
+        {{else}}
+        {{if $item.card_everyPay}}
+        <tr>
+            <td colspan="2" class="bank">
+                <h4>{{'profile_reservation_paid_by'|gL:'Paid by'}}</h4>
+                <p>{{'profile_reservation_card'|gL:'Card'}}: {{$item.payment_method}}</p>
+            </td>
+        </tr>
+        {{/if}}
+        {{/if}}
+        {{/if}}
+    </table>
+</div>

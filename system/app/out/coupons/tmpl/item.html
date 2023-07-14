@@ -1,0 +1,101 @@
+<div class="twocols_z coupons"><div class="wrapd">
+	<div class="sp44-35-35"></div>
+	<div class="top"><div class="wrap">
+		{{if $userData.id}}
+		
+			{{if $coupon.id|array_key_exists:$userData.coupons}}
+			{{assign var=CID value=$coupon.id}}
+			<div class="cont_b_m">
+				<div class="btn_cont">
+					<a class="btnw pdfCoupon" href="#" data-coupid="{{$coupon.id}}">{{'coupons_show'|gL:'Skatīt kuponu'}}</a>
+				</div>
+				<div class="text_cont">
+					<div class="text print">
+						{{'coupons_printed'|gL:'Šis kupons bija izdrukāts'}} {{$userData.coupons[$CID].pcreated|date_format:"%d.%m.%Y."}}
+						&nbsp;&nbsp;&nbsp;
+						{{'coupons_printed_date_to'|gL:'Deriguma termiņš:'}} {{$userData.coupons[$CID].date_to|date_format:"%d.%m.%Y."}}
+					</div>
+				</div>
+			</div>	
+			{{else}}
+			<div class="cont_b_m">
+				<div class="btn_cont">
+					<a class="btng pdfCoupon" href="#" data-coupid="{{$coupon.id}}">{{'coupons_print'|gL:'Izdrukāt kuponu'}}</a>
+				</div>
+				<div class="text_cont">
+					<div class="text print">{{'coupons_print_lead'|gL:'Lai izmantot kuponu, viņu vajag izdrukāt'}}</div>
+				</div>
+			</div>	
+			{{/if}}
+		{{else}}
+		<div class="message">
+			<div>{{'coupons_not_registred_title'|gL:'Uzmanību!'}}</div>
+			<p>
+				{{'coupons_not_registred_lead'|gL:'Lai izmantot šo kuponu tev ir nepieciešams <a href="/login/">auterizēties</a>. Ja tev nav profīla, lūdzu <a href="/registration/">reģistrējies</a>.'}}
+			</p>
+		</div>
+		{{/if}}
+	</div></div>
+	
+	<div class="col2_z">
+		{{if $BANNERS.side_banner}}
+			{{if $BANNERS.side_banner.url}}
+			<a href="{{$BANNERS.side_banner.url}}" target="{{$BANNERS.side_banner.target}}" class="side_banner ver1"><img alt="{{$BANNERS.side_banner.alt}}" src="{{$BANNERS.side_banner.image}}"></a>
+			{{else}}
+			<img class="side_banner ver1" alt="{{$BANNERS.side_banner.alt}}" src="{{$BANNERS.side_banner.image}}">
+			{{/if}}
+		{{/if}}	
+	</div>
+	<div class="col1_z wrapt wrapm">
+		<div class="sp44-35-35"></div>
+		<h1>{{$coupon.title|clear}}</h1>
+		{{if $coupon.date_to}}
+			<div class="opendoc_date">{{'coupon_enabled_to'|gL:'Akcija spēkā'}} {{'coupon_to'|gL:'līdz'}} {{$coupon.date_to|date_format:"%d.%m.%Y."}}</div>
+		{{/if}}
+		<div class="opendoc">
+			{{if $coupon.text_image}}
+			<img src="{{$AD_UPLOAD_FOLDER}}{{$couponConfig.uploadFolder}}big/{{$coupon.text_image}}" alt="{{$coupon.title|clear}}" />
+			{{/if}}
+			<div class="opendoc_terms">
+				<div class="item discount">
+					<div class="percent">{{$coupon.discount}}% {{'coupon_discount'|gL:'atlaide'}}</div>
+				</div>
+				<div class="item price">
+					<div class="old">€{{$coupon.price}}</div>
+					<div class="new">€{{$coupon.discount_price}}</div>
+				</div>
+				<div class="item author">{{$coupon.company|clear}}</div>
+			</div>
+			<p>{{$coupon.lead}}</p>
+	    	{{$coupon.text}}
+		</div>
+		<div class="opendoc_options">
+			{{if $coupon.links && $coupon.links|@count > 0}}
+			<div class="block">
+				<h2>{{'newsLinksBlockTitle'|gL:'Pievienotās saites'}}</h2>
+				<ul>
+					{{section name=item loop=$coupon.links}}
+						<li>
+							<a href="{{if $coupon.links[item].linkDocId}}{{$coupon.links[item].linkUrlId|getLink}}{{$coupon.links[item].linkDocId|getDocUrl}}.html{{elseif $coupon.links[item].linkUrlId}}{{$coupon.links[item].linkUrlId|getLink}}{{else}}{{$coupon.links[item].linkUrl}}{{/if}}" target="{{$coupon.links[item].linkTarget}}" title="{{if $coupon.links[item].linkTitle}}{{$coupon.links[item].linkTitle}}{{else}}{{if $coupon.links[item].linkUrlId}}{{$coupon.links[item].linkUrlId|getLink}}{{else}}{{$coupon.links[item].linkUrl}}{{/if}}{{/if}}">
+								<i class="fa fa-minus"></i><span class="u">{{if $coupon.links[item].linkTitle}}{{$coupon.links[item].linkTitle}}{{else}}{{if $coupon.links[item].linkUrlId}}{{$coupon.links[item].linkUrlId|getLink}}{{else}}{{$coupon.links[item].linkUrl}}{{/if}}{{/if}}</span>
+							</a>
+						</li>
+					{{/section}}
+				</ul>
+			</div>
+			{{/if}}
+			{{if $coupon.files && $coupon.files|@count > 0}}
+			<div class="block">
+				<h2>{{'newsFilesBlockTitle'|gL:'Pievienotie faili'}}</h2>
+				<ul>
+					{{section name=item loop=$coupon.files}}
+					<li><a href="/download.php?file={{$coupon.files[item].path}}{{$coupon.files[item].fileName}}"><i class="fa fa-file"></i><span class="u">{{$coupon.files[item].fileTitle}}</span>&nbsp;&nbsp;<span class="xu">*.{{$coupon.files[item].ext}}, {{$coupon.files[item].size}}</span></a></li>
+					{{/section}}
+				</ul>
+			</div>
+			{{/if}}
+		</div>
+		<div class="backlink"><a href="{{$backLink}}"><i class="fa fa-angle-left"></i>{{'backTitle'|gL:'Back'}}</a></div>
+		<div class="sp100-100-40"></div>
+	</div>
+</div></div>	

@@ -1,0 +1,122 @@
+<div class="content">
+	<div id="modulePath">
+	<div class="error-msg" id="errorBlock" style="display:none;"></div>
+	<input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+	<table class="holder-table">
+		<tr>
+			<td class="left-td">
+				<table class="inner-table">
+			        <tr>
+			            <td>{{'m_title'|gLA:'Title'}}:</td>
+			            <td>
+							<div class="error-msg" style="display:none;">{{'m_title_error'|gLA:'Title in all languages required!'}}</div>
+			            	<div class="block-holder open">
+								<div class="inner-block">
+									<ul class="lang-tabs">
+										{{foreach name=langauges key=lk item=lng from=$langauges}}
+										<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+										{{/foreach}}
+									</ul>
+                                
+									<div class="areaBlock">
+										{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+										<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+											<input rel="{{$lng.lang}}" type="text" class="long simple required" name="title" id="title_{{$lng.lang}}" value="{{$edit.title[$lng.lang]|clear}}" />
+											<div class="clr"><!-- clear --></div>
+										</div>
+										{{/foreach}}
+									</div>             
+								</div>
+							</div>							
+			           </td> 
+			        </tr>
+			        <tr>
+						<td>{{'enabled'|gLA:'Enabled'}}</td>
+                        <td><input type="checkbox" value="1" id="enable" class="active simple" {{if $edit.enable}} checked="checked" {{/if}} /></td>
+					</tr>
+			        <tr>
+			            <td>{{'m_logo'|gLA:'Logo image'}}*:</td>
+			            <td>
+							<div class="error-msg" style="display:none;">{{'m_image_error'|gLA:'Logo required!'}}</div>
+			            	<div id="logoDiv">
+			            	{{if $edit.logo}}
+			            	<img alt="" src="{{$AD_UPLOAD_FOLDER}}{{$edit.uploadFolder}}{{$edit.logo}}"><a href="#" onclick="emptyUploadFile('logo'); return false;">{{'m_delete'|gLA:'Delete'}}</a><input type="hidden" class="simple" name="logo" id="logo" value="{{$edit.logo}}">
+			            	{{/if}}
+			            	</div>
+			            	<a href="#" id="logoButton" class="select-btn">{{'upload'|gLA:'Upload'}}</a>
+			            </td>
+			        </tr>
+					<tr>
+			            <td>{{'m_page_url'|gLA:'Page url'}}:</td>
+			            <td>
+							<div class="block-holder open">
+								<div class="inner-block">
+									<ul class="lang-tabs">
+										{{foreach name=langauges key=lk item=lng from=$langauges}}
+										<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+										{{/foreach}}
+									</ul>
+									<div class="areaBlock">
+										{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+										<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+											<input rel="{{$lng.lang}}" type="text" class="long simple" name="page_url" id="page_url_{{$lng.lang}}" value="{{$edit.page_url[$lng.lang]|clear}}" />
+											<div class="clr"><!-- clear --></div>
+										</div>
+										{{/foreach}}
+									</div>             
+								</div>
+							</div>							
+			           </td>
+			        </tr>
+					<tr>
+			            <td>{{'m_url_target'|gLA:'Target'}}:</td>
+			            <td>
+			            	<select class="long simple" name="url_target" id="url_target">
+								<option value="{{'blank'|gLA:'_blank'}}" {{if $edit.url_target == $_blank}}selected="selected"{{/if}}>{{'m_url_target_blank'|gLA:'New Windows'}}</option>
+								<option value="{{'self'|gLA:'_self'}}" {{if $edit.url_target == $_self}}selected="selected"{{/if}}>{{'m_url_target_self'|gLA:'Same frame'}}</option>
+							</select>
+						</td>
+			        </tr>
+    			</table>
+    		</td>
+		</tr>
+	</table>
+    <table class="bttns-table">
+        <tr>
+            <td>
+            	{{if $edit.id}}
+                <div class="btn orange"><a href="javascript:;" onclick="checkFields('apply');"><span>{{'apply'|gLA:'Apply'}}</span></a></div>
+                {{/if}}
+                <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save'|gLA:'Save'}}</span></a></div>
+                <div class="btn cancel"><a href="javascript:;" onclick="window.location.href = moduleTable.getRequestUrl();"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+            </td>
+        </tr>
+    </table>
+    </form>
+
+    <script type="text/javascript">
+	    moduleTable.mainUrl = '{{$MAIN_URL}}';
+		moduleTable.moduleName = '{{$MODULE_NAME}}';
+
+		$(document).ready(function() {
+			
+			var tabindex = 1;
+			$('#editForma :input,select').each(function() {
+				if (this.type != "hidden") {
+					var $input = $(this);
+					$input.attr("tabindex", tabindex);
+					tabindex++;
+				}
+			});
+			
+			loadCmsTabs();
+
+			
+			var config = {};
+			config['allowed_types'] = 'jpg|jpeg|png';
+			loadUploadImgButton('{{$edit.uploadFolder}}', 'logo', config);
+		});
+			
+	</script>
+	</div>
+</div>

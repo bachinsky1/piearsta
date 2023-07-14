@@ -1,0 +1,56 @@
+<div id="content">
+	<div class="contacts_block">
+		<div class="wrap">
+			<h1>{{$web.title}}</h1>
+			<h3>{{'contacts_lead_text'|gL:'Please reach out and a business representative will get back to you swiftly.'}}</h3>
+			<div class="cont_form">
+				{{if $contacts.ok}}
+				<div class="success_msg">
+					<i class="fa fa-check-circle"></i>{{'contacts_ok_msg'|gL:'Donec nibh ipsum, volutpat vitae  id, lobortis ac risus'}}
+				</div>
+				{{/if}}
+				<form id="contactsForm" action="" method="post">
+				<input type="hidden" name="action" value="sendForm"  />
+				<div class="col1">
+					<div class="field">
+						<div class="label"><label for="theme_select">{{'contacts_form_select_theme'|gL:'Please select the theme of your question'}}</label></div>
+						<select id="theme_select" name="theme_select">
+							{{ if $themes|@count > 1 }}
+							<option value="" selected class="select-placeholder">{{'please_select_theme'|gL:'- select theme -'}}</option>
+							{{ /if }}
+							{{foreach from=$themes item=i}}
+							<option value="{{$i.id|clear}}"
+								{{if $item.services|@count == 1}} selected="selected"{{/if}}>
+								{{$i.title|clear}}
+							</option>
+							{{/foreach}}
+						</select>
+					</div>
+					<div class="field">
+						<div class="label"><label>{{'contacts_form_message'|gL:'Kā varam Jums palīdzēt?'}}</label></div>
+						<div class="cinput disabled no-clear {{if $contacts.errorFields.message}} wrong {{/if}}"><textarea disabled="disabled" id="message" name="message">{{$contacts.fields.message|clear}}</textarea></div>
+						{{if $contacts.errorFields.message}}
+						<div class="error_msg">{{$contacts.errorFields.message}}</div>
+						{{/if}}
+					</div>
+
+					<div class="btn_cont"><a class="btng" href="#">{{'contacts_form_send'|gL:'Nosūtīt'}}</a></div>
+				</div>
+				<div class="col2 ver1">
+					<div class="helpline">
+						<div class="i">i</div>
+						<div class="text">{{'profile_need_help?'|gL:'Vajadzīga palīdzība?'}}</div>
+						<hr>
+						<div class="phone">{{'profile_need_help_phone'|gL:'+371 263 459 07'}}</div>
+						<div class="mail"><a href="mailto:{{'profile_need_help_email'|gL:'Pieraksti_at_piearsta.lv'}}">{{'profile_need_help_email'|gL:'Pieraksti_at_piearsta.lv'}}</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<script nonce="{{$web.cspNonce}}">
+	profile.contactThemes = JSON.parse('{{$themesJson}}');
+</script>

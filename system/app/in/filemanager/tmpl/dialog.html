@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{AD_CMS_LANGUAGE}" lang="{AD_CMS_LANGUAGE}"> 
+<head>
+<title>.:: AD Web ::. Popup Window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/{AD_CMS_CSS_FOLDER}main.css" />
+<link rel="stylesheet" type="text/css" href="/{AD_CMS_CSS_FOLDER}inline.css" />
+
+<script type="text/javascript" src="/{AD_JS_FOLDER}prototype.js"></script>
+<script type="text/javascript" src="/{AD_CMS_JS_FOLDER}functions.js"></script>
+<script type="text/javascript" src="/{AD_JS_FOLDER}functions.js"></script>
+<script type="text/javascript" src="/{AD_CMS_JS_FOLDER}json.js"></script>
+<script type="text/javascript" src="/{AD_CMS_JS_FOLDER}moduleTable.js"></script>
+<!-- INCLUDE BLOCK : MODULE_HEAD -->
+</head>
+<body class="dialog">
+	<div id="container">
+		<!-- INCLUDE BLOCK : MODULE_MENU -->
+		
+		<div id="modulePath">
+		</div>
+		
+		<!-- START BLOCK : FILEMANAGER_DATA -->
+		
+		<script type="text/javascript" language="Javascript">
+			moduleTable.moduleName = '{MODULE_NAME}';
+			moduleTable.usePaging = false;
+			defaultFolder = '{defaultFolder}';
+			uploadFolder = '{defaultFolder}';
+			dialogMode = true;
+			updateModule();
+			
+		</script>
+		
+		<!-- END BLOCK : FILEMANAGER_DATA -->
+		
+	</div>
+</body>
+</html>

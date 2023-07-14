@@ -1,0 +1,171 @@
+{{if $item.start && $item.start != '9999-12-31 23:59:59'}}
+{{assign var=anyTime value=false}}
+{{else}}
+{{assign var=anyTime value=true}}
+{{/if}}
+
+<div class="popup_bg"></div>
+<div class="popup w700">
+	<div class="close"><i class="fa fa-times"></i></div>
+	<div class="cont">
+
+		{{if $item.service_type == '1'}}
+		<h2 class="reservation_header">{{'profile_econsultation'|gL:'e-Konsultācija'}}</h2>
+		{{else}}
+		<h2 class="reservation_header">{{'profile_visit'|gL:'Klatienes apmeklejums'}}</h2>
+		{{/if}}
+
+		{{if !$anyTime}}
+		<h3>{{'profile_reservation_open_time'|gL:'Pierakstīšanas laiks'}}</h3>
+		<h2 class="reservation_time">{{$item.start|date_format:"%d.%m.%Y %H:%M"}}</h2>
+		{{/if}}
+		
+		{{if $item.status == 0}}
+			{{if $item.warning24}}
+			<div class="info warning">
+				<h4>{{'profile_reservation_status_0_warning24_title'|gL:'Lūdzu ņemt verā!'}}</h4>
+				{{if $item.doctor_phone}}
+				{{assign var="phone_number" value=$item.doctor_phone|gLParam:'{phone_number}'}}
+				{{else}}
+				{{assign var="phone_number" value=$item.clinic_phone|gLParam:'{phone_number}'}}
+				{{/if}}
+				<p>{{'profile_reservation_status_0_warning24_text'|gL:'24 chasa prowlo, zvoni po telefonu: {phone_number}!':'':$phone_number}}</p>
+			</div>
+			{{else}}
+			<div class="info warning">
+				<h4>{{'profile_reservation_status_0_warning_title'|gL:'Lūdzu ņemt verā!'}}</h4>
+				{{if $item.doctor_phone}}
+				{{assign var="phone_number" value=$item.doctor_phone|gLParam:'{phone_number}'}}
+				{{else}}
+				{{assign var="phone_number" value=$item.clinic_phone|gLParam:'{phone_number}'}}
+				{{/if}}
+				<p>{{'profile_reservation_status_0_warning_text'|gL:'24 stundas laikā pēc pieteikuma nosūtīšanas Jūsu pieteikums tiks izskatīts, ja gadījuma tas nav apstirpināts vai noraidīts lūdzu zvaniet: {phone_number}!':'':$phone_number}}</p>
+			</div>
+			{{/if}}
+		{{/if}}
+		
+		<hr>
+		<div class="line w2">
+			<div class="col1">{{'profile_reservation_doctor'|gL:'Ārsts'}}:</div>
+			{{if $item.name or $item.surname}}
+			<div class="col2"><a target="_blank" href="{{$siteData.mirrors_doctors_page|getLM2}}{{$item.doctor_url}}/{{$item.clinic_url}}/">{{$item.name}} {{$item.surname}}</a></div>
+			{{else}}
+			<div class="col2"><div style="display: inline" data-hastip="{{'profile_reservation_other_doctor_tooltip'|gL:'Pieraksts ir nodots citam speciālistam.'}}">{{'profile_reservation_other_doctor'|gL:'Pie citu spciālistu'}}</div></div>
+			{{/if}}
+		</div>
+		<div class="line w2">
+			<div class="col1">{{'profile_reservation_clinic'|gL:'Iestadē'}}:</div>
+			<div class="col2">
+				<div><a target="_blank" href="{{$siteData.mirrors_clinics_page|getLM2}}{{$item.clinic_url}}/">{{$item.clinic_name}}</a></div>
+				<div class="note">{{$item.clinic_address}}</div>
+			</div>
+		</div>
+		<div class="line w2">
+			<div class="col1">{{'profile_reservation_service'|gL:'Pakalpojums'}}:</div>
+			<div class="col2">{{$item.title}} {{if $item.length_minutes}}({{$item.length_minutes}} {{'length_minutes'|gL:'m.'}}){{/if}}</div>
+		</div>
+		<div class="line w2">
+			<div class="col1">{{'profile_reservation_client'|gL:'Pacients'}}:</div>
+			<div class="col2">
+				{{if $item.profile_person_id}}
+				{{$item.ppname}} {{$item.ppsurname}}
+				{{else}}
+				{{$userData.name}} {{$userData.surname}}
+				{{/if}}
+			</div>
+		</div>
+		<div class="line w2">
+			<div class="col1"><span class="ver1i ver2i">{{'profile_reservation_payment_type'|gL:'Maksāšanas veids'}}:</span><span class="ver3i">{{'profile_reservation_payment_type_mobile'|gL:'Maksāšana'}}</span></div>
+			<div class="col2">
+				{{if $item.payment_type == 1}}
+				{{'profile_reservation_payment_type_country'|gL:'Valsts'}}
+				<span class="tip" data-hastip="{{'profile_reservation_payment_type_country_notice'|gL:'Jābūt līdzi nosūtījumam no ģimenes ārsta, personas apliecinošais dokuments. Citādi pacients netiks pieņemts un pakalpojums <b>nebūs apmaksāts no valsts puses</b>.'}}"><i class="fa fa-question-circle"></i></span>
+				{{elseif $item.payment_type == 2}}
+				{{'profile_reservation_payment_type_client'|gL:'Klient'}}
+				<span class="tip" data-hastip="{{'profile_reservation_payment_type_client_notice'|gL:'Jābūt līdzi nosūtījumam no ģimenes ārsta, personas apliecinošais dokuments. Citādi pacients netiks pieņemts un pakalpojums <b>nebūs apmaksāts no valsts puses</b>.'}}"><i class="fa fa-question-circle"></i></span>
+				{{else}}
+				{{'profile_reservation_payment_type_mix'|gL:'Miks'}}
+				<span class="tip" data-hastip="{{'profile_reservation_payment_type_mix_notice'|gL:'Jābūt līdzi nosūtījumam no ģimenes ārsta, personas apliecinošais dokuments. Citādi pacients netiks pieņemts un pakalpojums <b>nebūs apmaksāts no valsts puses</b>.'}}"><i class="fa fa-question-circle"></i></span>
+				{{/if}}
+			</div>	
+		</div>
+		<div class="line w2">
+			<div class="col1">{{'profile_reservation_status'|gL:'Status'}}:</div>
+			<div class="col2">
+				{{if $item.status == 0}}
+				<span class="yellow">{{'profile_reservation_status_0'|gL:'Gaida apstiprinājumu'}}</span>
+				{{elseif $item.status == 1}}
+				<span class="redtext">{{'profile_reservation_status_1'|gL:'Noraidīts'}}</span>
+				{{elseif $item.status == 2}}
+				<span class="green">{{'profile_reservation_status_2'|gL:'Aktīvs'}}</span>
+				{{elseif $item.status == 3}}
+				<span>{{'profile_reservation_status_3'|gL:'Atcelts'}}</span>
+				{{elseif $item.status == 4}}
+					
+					{{if $item.status_before_archive == 0}}
+					<span class="yellow">{{'profile_reservation_status_0'|gL:'Gaida apstiprinājumu'}}</span>
+					{{elseif $item.status_before_archive == 1}}
+					<span class="redtext">{{'profile_reservation_status_1'|gL:'Noraidīts'}}</span>
+					{{elseif $item.status_before_archive == 2}}
+					<span class="green">{{'profile_reservation_status_2'|gL:'Aktīvs'}}</span>
+					{{elseif $item.status_before_archive == 3}}
+					<span>{{'profile_reservation_status_3'|gL:'Atcelts'}}</span>
+					{{/if}}
+				{{/if}}
+			</div>
+		</div>
+		{{if $item.status == 4}}
+		<div class="line w2">
+			<div class="col1">{{'profile_reservation_status_archive'|gL:'Arhīva status'}}:</div>
+			<div class="col2">
+				<span>{{'profile_reservation_status_4'|gL:'Arhīvets'}}</span>
+			</div>
+		</div>
+		{{/if}}
+
+		{{if $item.notice}}
+		<div class="line w2">
+			<div class="col1">{{'profile_reservation_comments'|gL:'Komentārs:'}}</div>
+			<div class="col2">
+				{{$item.notice}}
+			</div>
+		</div>
+		{{/if}}
+
+
+		{{if $item.service_type == '1'}}
+		<div class="line w2">
+			<div class="col1">{{'profile_reservation_actions'|gL:'Darbības:'}}</div>
+			<div class="col2">
+				<ul>
+					<li>
+						<a class="darbibas{{if !$item.consultation_vroom}} disabled{{/if}}"
+						   data-id="{{$item.id}}"
+						   data-action="vroom">
+							Enter v-room
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		{{/if}}
+
+		{{if $item.service_type == '0'}}
+		{{if $item.warning}}
+		<div class="info {{if $item.payment_type == 1}}warning{{/if}}">
+			<h4>{{'profile_reservation_warning'|gL:'Uzmanību!'}}</h4>
+			<p>{{$item.warning}}</p>
+		</div>
+		{{/if}}
+		{{/if}}
+
+		<hr class="ver1 ver2">
+		{{if $item.status != 4}}
+		<div class="btn_cont mob_mt40">
+			<a href="https://www.google.com/calendar/render?action=TEMPLATE&text={{$item.name}}%20{{$item.surname}}&dates={{$item.start_gc}}/{{$item.end_gc}}&ctz=Europe/Riga&details=&location=&sf=true&output=xml" target="_blank" class="btnw w3">{{'profile_reservation_add_to_gc'|gL:'Pievienot kalendārā'}}</a>
+			<a href="#" data-resid="{{$item.id}}" class="pdfReservation btnw w3" >{{'profile_reservation_print'|gL:'Izdrukāt pierakstu'}}</a>
+			<a href="#" data-resid="{{$item.id}}" class="cancelReservationPopup btnw w3 red">{{'profile_reservation_delete'|gL:'Dzēst pierakstu'}}</a>
+		</div>
+		{{/if}}
+	</div>
+</div>

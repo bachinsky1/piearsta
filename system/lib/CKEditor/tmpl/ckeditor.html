@@ -1,0 +1,61 @@
+          
+<div class="ckeditor" id="ckeditor">  
+	 <textarea name="ckeditor-area" id="ckeditor-area"></textarea>
+	 
+     <div class="btn"><a href="javascript:;" onclick="saveEditor(); return false;"><span>{{'save_and_close'|gLA:'Save and close'}}</span></a></div>
+     <div class="btn cancel"><a href="javascript:;" onclick="cancelEditor(); return false;"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+</div>
+
+<div class="clr"><!-- clear --></div>
+<script type="text/javascript">
+
+	var	moduleName = '{{$MODULE_NAME}}';
+	var	mainUrl = '{{$MAIN_URL}}';
+	var	additionalParms = "";
+	var	idField = '{{$idField}}';
+	var	mode = '{{$mode}}';
+
+	$(document).ready(function(){
+
+		if (typeof(CKEDITOR.instances['ckeditor-area']) != 'undefined') {
+			delete CKEDITOR.instances['ckeditor-area'];
+		}	
+
+		if (mode == 'advanced') {
+			var config = {
+	                toolbar: 'AdwebAdvanced',
+	                height: '400px',
+	                format_tags: 'p;h2;h3;h4;h5;h6;pre;address;div'
+		            };
+		} else {
+			var config = {
+	                toolbar: 'AdwebSimple',
+	                height: '400px',
+	                format_tags: 'p;h2;h3;h4;h5;h6;pre;address;div'
+		            };
+		}		
+		
+		$('#ckeditor-area').ckeditor(config);	
+		$('#ckeditor-area').val($('#' + idField).val());
+		
+		
+	});	
+
+	function getRequestParameters() {
+		return additionalParms;
+	}
+
+	function getRequestUrl() {
+		return mainUrl + moduleName + "/";
+	}
+
+	function cancelEditor() {
+		$('#ckeditor').dialog('close');
+	}
+
+	function saveEditor() {
+		$('#' + idField).val($('#ckeditor-area').val());
+		$('#ckeditor').dialog('close');
+	}
+	
+</script>

@@ -1,0 +1,88 @@
+.subscriptionPage.signup_block {
+
+    .col2_y {
+      float: right;
+      width: 700px;
+      border: 1px solid #cbd5da;
+      padding: 20px 25px 34px;
+      background-color: #ffffff;
+      color: #636c70;
+      box-sizing: border-box;
+
+      // when there content block not present padding bottom should be set to 0
+      padding-bottom: 0;
+
+      @media (max-width: 1023px) {
+        display: block;
+        float: none;
+        width: 100%;
+        margin-top: 30px;
+      }
+
+      .header_block {
+        background-color: #e0e6ef;
+        padding: 30px 390px 20px 25px;
+        margin: -20px -25px 30px -25px;
+        border: none;
+        border-bottom: 1px solid #cbd5da;
+        background: url("/img/subscr-pic.jpg") no-repeat center right;
+        background-size: cover;
+
+        // when there content block not present margin bottom should be set to 0
+        margin-bottom: 0;
+
+        @media (max-width: 640px) {
+          padding: 30px 25px 20px 25px;
+          background: url("/img/subscr-pic.jpg") no-repeat 40% center;
+          background-size: auto 100%;
+
+            .expiration-date {
+              span {
+                display: block;
+              }
+            }
+        }
+
+        h2 {
+          color: #1a1b1b;
+          margin-bottom: 26px;
+          font-size: 28px;
+          text-transform: uppercase;
+          line-height: 1.2;
+
+          span {
+            display: block;
+            color: #0c8fdb;
+            font-size: 22px;
+            font-weight: normal;
+            text-transform: none;
+            margin-bottom: 3px;
+          }
+        }
+      }
+
+      .content_block {
+
+        h3 {
+          color: #292727;
+          font-size: 21px;
+          margin-bottom: 22px;
+
+          @media (max-width: 767px) {
+            line-height: 1.4;
+          }
+        }
+
+        ul {
+          margin-left: 5px;
+
+          li {
+            padding: 5px 23px 5px;
+            background: url(/img/design/bullet.png) no-repeat left 9px;
+          }
+        }
+
+      }
+    }
+
+  }

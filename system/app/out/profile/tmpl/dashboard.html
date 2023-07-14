@@ -1,0 +1,341 @@
+<div class="signup_block profils">
+	<div class="wrap">
+
+        <div class="welcomeMessage">
+			<h1>{{'profile_welcome_message'|gL:'Sveiki'}}, {{$userData.name}} {{$userData.surname}}!</h1>
+		</div>
+
+		{{if $justActivated}}
+			<div class="item success-style">
+
+				<h2>{{'profile_activation_success_header'|gL:'Congrats!'}}</h2>
+
+				<div class="cont">
+					{{'profile_activation_success_content'|gL:'Your profile was successfully activated.'}}
+				</div>
+				{{if $dcReturn}}
+				<div class="cont unfinished">
+					<p>{{'profile_unfinished_booking'|gL:'You have initiated but unfinished appointment'}}</p>
+					<div>
+						<a href="{{$dcReturn}}">{{'profile_continue_unfinished_booking'|gL:'Continue booking appointment'}}</a>
+					</div>
+				</div>
+				{{/if}}
+
+			</div>
+		{{/if}}
+
+
+		<div class="dashboardContent">
+
+			<!--	row 1	-->
+			<div class="row row1">
+
+				<!-- Messages -->
+				<div class="dashboardItemWrap msgs">
+					<div class="dashboardItem{{if $userData.unreadMessages > 0}} highlightedGreen{{/if}}">
+						<div class="itemImage">
+							<img src="/img/design/msgs-icon.png">
+							{{if $userData.unreadMessages > 0}}
+							<div class="numberBig">{{$userData.unreadMessages}}</div>
+							{{/if}}
+						</div>
+						<div class="itemContent">
+							<div>
+								<h3>{{'profile_messages'|gL:'Ziņojumi'}}</h3>
+								{{if $userData.unreadMessages > 0}}
+								{{assign var="msgCountParams" value=$userData.unreadMessages|gLParam:'{msgCountParams}'}}
+								<p>{{'profile_messages_count_text'|gL:'Jūms ir <span class="bold">{msgCountParams} neizlasītie ziņojumi.</span>
+									':'':$msgCountParams}}</p>
+								{{else}}
+								<p class="grey-text">{{'profile_messages_empty'|gL:'Jūms nav neviena ziņojuma.'}}</p>
+								{{/if}}
+							</div>
+
+							{{if $userData.unreadMessages > 0}}
+							<a class="more" href="/profils/zinojumi/">Apskatīt</a>
+							{{/if}}
+						</div>
+					</div>
+				</div>
+
+				<!-- Profile verification -->
+				<div class="dashboardItemWrap my-profile">
+					<div class="dashboardItem">
+						<div class="itemImage">
+							<img src="/img/design/profile-icon.png">
+						</div>
+						<div class="itemContent">
+							<div>
+								<h3>{{'profile_my_profile'|gL:'Mans profils'}}</h3>
+								{{if !$userData.verified && !$userData.verificationExpired}}
+									<p class="warning">{{'profile_accreditation_not_verified'|gL:'Your profile not verified'}}</p>
+								{{elseif $userData.verificationExpired}}
+									<p class="warning">{{'profile_accreditation_expired'|gL:'Profile verification expired'}}</p>
+								{{else}}
+									<p class="success">{{'profile_verified'|gL:'Profile verified'}}</p>
+								{{/if}}
+							</div>
+
+							{{if !$userData.verified && !$userData.verificationExpired}}
+								<a href="/dmss-auth" class="dmssLink dmssAuthLink" style="font-size: 14px;">{{'profile_verify_profile'|gL:'Verify'}}</a>
+							{{elseif $userData.verificationExpired}}
+							{{else}}
+								<a class="more" href="/profils/mani-dati/">Apskatīt</a>
+							{{/if}}
+						</div>
+					</div>
+				</div>
+
+				<!-- Insurance -->
+				<div class="dashboardItemWrap">
+					<div class="dashboardItem{{if $userData.insuranceArray.hasInsurance && ($userData.insuranceArray.incomplete || $userData.insuranceArray.expired)}} highlighted{{/if}}">
+						<div class="itemImage">
+							<img src="/img/design/ins-icon.png">
+						</div>
+						<div class="itemContent">
+							<div>
+								<h3>{{'insurance_polise'|gL:'Adrošināšanas polise'}}</h3>
+
+								{{if $userData.insuranceArray.hasInsurance}}
+
+									{{if $userData.insuranceArray.incomlete}}
+										<p class="red-text">{{'profile_insurance_incomplete_data'|gL:'Incomplete insurance data'}}</p>
+									{{elseif $userData.insuranceArray.notStarted}}
+										<p>{{'profile_insurance_not_started'|gL:'Insurance police not started yet'}}</p>
+									{{elseif $userData.insuranceArray.expired}}
+										<p class="red-text">{{'profile_insurance_expired'|gL:'Insurance expired'}}</p>
+									{{else}}
+										<p>{{'profile_has_insurance'|gL:'Ir pievienota'}}</p>
+									{{/if}}
+
+								{{else}}
+									<p class="grey-text">{{'insurance_polise_no'|gL:'Nav pievienota'}}</p>
+								{{/if}}
+							</div>
+
+							{{if $userData.insurance}}
+								<a class="more" href="/profils/mani-dati/#insurance">Apskatīt</a>
+							{{else}}
+								<a class="more" href="/profils/mani-dati/#insurance">Pievienot</a>
+							{{/if}}
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!--	row 2	-->
+			<div class="row row2">
+
+				<!-- No reservations in future -->
+				{{if !$userData.today && !$userData.nearest.0}}
+				<div class="dashboardItemWrap nearest-reservations">
+					<div class="dashboardItem">
+						<div class="itemImage">
+							<img src="/img/design/doc-icon.png">
+						</div>
+						<div class="itemContent">
+							<h3>
+								{{'profile_no_future_reservations'|gL:'Nakotne nav neviena pieraksta'}}
+							</h3>
+
+							<div class="itemLinks">
+								<a class="more" href="{{$siteData.mirrors_doctors_page|getLM}}">
+									{{'profile_reservations_go_link'|gL:'Pierakstīties'}}
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/if}}
+
+				<!-- Today reservation -->
+				{{if $userData.today}}
+				<div class="dashboardItemWrap today-reservations">
+					<div class="dashboardItem highlighted">
+
+						<div class="itemContent doctorItem reservations">
+							{{if $userData.today}}
+								<h3>
+									{{'profile_today'|gL:'Šodien'}}
+									<br>
+									{{assign var="wd" value='wd_'|cat:$userData.today.weekday }}
+									{{$wd|gL:''}}, {{$userData.today.date}}
+									<span class="clockIcon"></span>
+									{{$userData.today.time}}
+								</h3>
+
+								<div class="doctorInfo">
+
+									<div class="doctorImage doc-avatar">
+										<img src="{{if $userData.today.photo}}{{$AD_UPLOAD_FOLDER}}{{$doctorsConfig.uploadFolder}}doctors/list/{{$userData.today.photo}}{{else}}/img/design/doc-avatar.png{{/if}}">
+										<!--							 or use Doctor photo-->
+									</div>
+
+									<div class="doctorName">Dr. {{$userData.today.doctor}}</div>
+								</div>
+
+								<div class="itemLinks">
+									<a class="openRes" href="#" data-resid="{{$userData.today.id}}">{{'profile_show_reservation'|gL:''}}</a>
+									<a href="/profils/mani-pieraksti/">{{'profile_reservations'|gL:''}}</a>
+								</div>
+
+							{{else}}
+
+								<h3>{{'profile_today_no_reservations'|gL:'Šodien nav pierakstu'}}</h3>
+
+
+								<div class="">
+									<a class="more" href="{{$siteData.mirrors_doctors_page|getLM}}">
+										{{'profile_reservations_go_link'|gL:'Pierakstīties'}}
+									</a>
+								</div>
+							{{/if}}
+
+						</div>
+					</div>
+				</div>
+				{{/if}}
+
+				<!-- Nearest reservations 1 -->
+				{{if $userData.nearest.0}}
+				<div class="dashboardItemWrap nearest-reservations">
+					<div class="dashboardItem noImageBlock">
+						<div class="itemContent doctorItem">
+							<h3>
+								{{assign var="wd" value='wd_'|cat:$userData.nearest.0.weekday }}
+								{{$wd|gL:''}}, {{$userData.nearest.0.date}}
+								<span class="clockIcon"></span>
+								{{$userData.nearest.0.time}}
+							</h3>
+
+							<div class="doctorInfo">
+
+								<div class="doctorImage doc-avatar">
+									<img src="{{if $userData.nearest.0.photo}}{{$AD_UPLOAD_FOLDER}}{{$doctorsConfig.uploadFolder}}doctors/list/{{$userData.nearest.0.photo}}{{else}}/img/design/doc-avatar.png{{/if}}">
+								</div>
+
+								<div class="doctorName">Dr. {{$userData.nearest.0.doctor}}</div>
+							</div>
+
+							<div class="itemLinks">
+								<a class="openRes" href="#" data-resid="{{$userData.nearest.0.id}}">{{'profile_show_reservation'|gL:''}}</a>
+								<a href="/profils/mani-pieraksti/">{{'profile_reservations'|gL:''}}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/if}}
+
+				<!-- Nearest reservations 2 -->
+				{{if $userData.nearest.0 && $userData.nearest.1}}
+				<div class="dashboardItemWrap nearest-reservations">
+					<div class="dashboardItem noImageBlock">
+						<div class="itemContent doctorItem">
+							<h3>
+								{{assign var="wd" value='wd_'|cat:$userData.nearest.1.weekday }}
+								{{$wd|gL:''}}, {{$userData.nearest.1.date}}
+								<span class="clockIcon"></span>
+								{{$userData.nearest.1.time}}
+							</h3>
+
+							<div class="doctorInfo">
+
+								<div class="doctorImage doc-avatar">
+									<img src="{{if $userData.nearest.1.photo}}{{$AD_UPLOAD_FOLDER}}{{$doctorsConfig.uploadFolder}}doctors/list/{{$userData.nearest.1.photo}}{{else}}/img/design/doc-avatar.png{{/if}}">
+								</div>
+
+								<div class="doctorName">Dr. {{$userData.nearest.1.doctor}}</div>
+							</div>
+
+							<div class="itemLinks">
+								<a class="openRes" href="#" data-resid="{{$userData.nearest.1.id}}">{{'profile_show_reservation'|gL:''}}</a>
+								<a href="/profils/mani-pieraksti/">{{'profile_reservations'|gL:''}}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/if}}
+
+				<!-- Past reservations -->
+				{{if (($userData.past.0 && $userData.today && $userData.nearest.0 && !$userData.nearest.1) || ($userData.past.0 && !$userData.today && $userData.nearest.0) || ($userData.past.0 && !$userData.today && !$userData.nearest.0) || ($userData.past.0 && $userData.today && !$userData.nearest.0))}}
+				<div class="dashboardItemWrap nearest-reservations">
+					<div class="dashboardItem noImageBlock">
+						<div class="itemContent doctorItem">
+							<h3>
+								{{'profile_past_reservations'|gL:'Nesenie apmēklējumi'}}
+							</h3>
+
+							<div class="doctorInfo">
+
+								<div class="doctorImage doc-avatar">
+									<img src="{{if $userData.past.0.photo}}{{$AD_UPLOAD_FOLDER}}{{$doctorsConfig.uploadFolder}}doctors/list/{{$userData.past.0.photo}}{{else}}/img/design/doc-avatar.png{{/if}}">
+								</div>
+
+								<div class="doctorName">Dr. {{$userData.past.0.doctor}}</div>
+							</div>
+
+							<div class="itemLinks">
+								<a href="/arstu-katalogs/{{$userData.past.0.doctorUrl}}/{{$userData.past.0.clinicUrl}}/">{{'profile_book_again'|gL:'Pierakstīties atkārtoti'}}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/if}}
+
+				<!-- Favorite doctors -->
+				{{if (!$userData.today && !$userData.nearest.1) || (!$userData.today && !$userData.nearest.0) || ($userData.today && !$userData.nearest.0)}}
+
+					{{if $userData.doctors.0}}
+
+						<div class="dashboardItemWrap lastBlock">
+							<div class="dashboardItem noImageBlock">
+								<div class="itemContent doctorItem">
+									<h3>{{'profile_favorite_doctors'|gL:'Mani arsti'}}</h3>
+									<div class="doctorInfo">
+										<div class="doctorImage doc-avatar">
+											<img src="{{if $userData.doctors.0.photo}}{{$AD_UPLOAD_FOLDER}}{{$doctorsConfig.uploadFolder}}doctors/list/{{$userData.doctors.0.photo}}{{else}}/img/design/doc-avatar.png{{/if}}">
+										</div>
+										<div class="doctorName">Dr. {{$userData.doctors.0.name}} {{$userData.doctors.0.surname}}</div>
+									</div>
+									<div class="itemLinks">
+										<a class="more" href="/profils/mani-arsti/">
+											{{'profile_show_all_doctors'|gL:'Apskatīt visus'}}
+										</a>
+										<a href="/arstu-katalogs/{{$userData.doctors.0.url}}/{{$userData.doctors.0.clinic_url}}/">{{'profile_book'|gL:'Pierakstīties'}}</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					{{else}}
+
+						<div class="dashboardItemWrap lastBlock">
+							<div class="dashboardItem">
+								<div class="itemImage">
+									<img src="/img/design/doc-fav-icon.png">
+								</div>
+								<div class="itemContent">
+									<h3>{{'profile_select_favorite_doctors'|gL:'Atzīmē savus ārstus'}}</h3>
+									<p>
+										{{'profile_select_favorite_doctors_text'|gL:'Klikšķini uz zvaigznīti uz ārsta attēla, lai atzīmētu ārstu'}}
+									</p>
+									<div class="dashboardBookLink">
+										<a class="more" href="{{$siteData.mirrors_doctors_page|getLM}}">
+											{{'profile_to_doctors_list'|gL:'Uz ārsta katalogu'}}
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					{{/if}}
+
+				{{/if}}
+
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,36 @@
+<form id="piesakiArstuForm" action="" method="post">
+
+    <div class="field">
+        <div class="label"><label for="doctor_name">Ārsta vārds un uzvārds*:</label></div>
+        <div class="cinput default invalid">
+            <input type="text" class="" id="doctor_name" name="doctor_name">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="label"><label for="specialty">Ārsta specialitāte*:</label></div>
+        <div class="cinput default invalid">
+            <input type="text" class="" id="specialty" name="specialty">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="label"><label for="clinic">Iestāde, kur pieņem ārsts:</label></div>
+        <div class="cinput default invalid">
+            <input type="text" class="" id="clinic" name="clinic">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="label"><label for="note">Piezīme:</label></div>
+        <div class="cinput default invalid">
+            <textarea rows="3" id="note" name="note"></textarea>
+        </div>
+    </div>
+
+    <div class="field">
+        <input type="submit" class="btng" id="submit" value="{{'form_submit'|gL:'Nosūtīt'}}">
+    </div>
+
+    <input type="hidden" name="form" value="piesakiArstuForm">
+</form>

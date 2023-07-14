@@ -1,0 +1,17 @@
+.popup .cont .payment-data table {
+  width: 100%;
+}
+.popup .cont .payment-data table td {
+  padding: 7px 10px;
+  background: #ebebeb;
+  border: 1px solid white;
+}
+.popup .cont .payment-data table td h4 {
+  margin-bottom: 3px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.popup .cont .payment-data table td p {
+  font-size: 14px;
+}

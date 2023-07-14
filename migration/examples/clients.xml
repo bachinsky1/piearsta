@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clients>
+	<client>
+		<piearstaId>{YOUR_SYSTEM_ID}</piearstaId>
+		<email>{EMAIL}</email>
+		<password>{MD5_PASSWORD}</password>
+		<person_code>{PERSON_CODE}(If resident)</person_code>
+		<name>{NAME}</name>
+		<surname>{SURNAME}</surname>
+		<phone>{PHONE}</phone>
+		<resident>{RESIDENT_STATUS(true,false)}</resident>
+		<gender>{GENDER('male', 'female')}</gender>
+		<enabled>{ENABLED_STATUS(true,false)}</enabled>
+		<deleted>{DELETED_STATUS(true,false)}</deleted>
+		<deleted_at>{DELETED_AT}</deleted_at>
+		<created>{CREATED}</created>
+		<insurance_id>{YOUR_SYSTEM_INSURANCE_COMPANY_ID}</insurance_id>
+		<insurance_number>{INSURANCE_NUMBER}</insurance_number>
+		<city_id>{YOUR_SYSTEM_CITY_ID}</city_id>
+		<district_id>{YOUR_SYSTEM_DISTRICT_ID}</district_id>
+		<person_number>{PERSON_NUMBER}(If not resident)</person_number>
+		<date_of_birth>{DATE_OF_BIRTH}(If not resident)</date_of_birth>
+		<email_notifications>{STATUS(true,false)}</email_notifications>
+		<sms_notifications>{STATUS(true,false)}</sms_notifications>
+		<language>{COMUNICATION_LANGUAGE}</language>
+		<messages>
+			<message>
+				<subject>{SUBJECT}</subject>
+				<body>{BODY}</body>
+				<created>{CREATED}</created>
+				<readed>{READED_STATUS(true,false)}</readed>
+			</message>
+			<message>
+				<subject>{SUBJECT}</subject>
+				<body>{BODY}</body>
+				<created>{CREATED}</created>
+				<readed>{READED_STATUS(true,false)}</readed>
+			</message>
+		</messages>
+		<doctors>
+			<doctor>
+				<id>{YOUR_SYSTEM_DOCTOR_ID}</id>
+				<clinic_id>{YOUR_SYSTEM_CLINIC_ID}</clinic_id>
+			</doctor>
+			<doctor>
+				<id>{YOUR_SYSTEM_DOCTOR_ID}</id>
+				<clinic_id>{YOUR_SYSTEM_CLINIC_ID}</clinic_id>
+			</doctor>
+		</doctors>
+	</client>
+</clients>

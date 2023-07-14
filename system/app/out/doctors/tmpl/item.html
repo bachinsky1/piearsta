@@ -1,0 +1,341 @@
+<div class="wrap dclist" data-doctor-id="{{$doctor.id}}" data-clinic-id="{{$doctor.active_company.id}}">
+    {{if $doctor.local}}
+    <div class="doctor_open">
+    {{/if}}
+    <div class="profile">
+	<div class="left">
+
+	    {{if $doctor.photo}}
+	    <div class="image"><img alt="" src="{{$AD_UPLOAD_FOLDER}}{{$doctorsConfig.uploadFolder}}open/{{$doctor.photo}}"></div>
+	    {{else}}
+	    <div class="image"><img alt="" src="{{$AD_IMAGE_FOLDER}}avatar-large.png"></div>
+	    {{/if}}
+
+		{{if $userData.id}}
+	    <div class="fav">
+			<a href="#" data-id="{{$doctor.id}}" data-clinic="{{$doctor.active_company.id}}" class="btnw{{if $doctor.already_faved}} added{{/if}}">
+			    <span class="add"><i class="fa fa-star-o"></i>{{'doctors_open_add_to_favourites'|gL:'Add to favourites'}}</span>
+			    <span class="remove"><i class="fa fa-star"></i>{{'doctors_open_remove_from_favourites'|gL:'Remove from favourites'}}</span>
+			</a>
+	    </div>
+		{{/if}}
+
+		{{if $doctor.consultations_enabled}}
+		<div class="btn-consultation-container pull-right show-mobile">
+			<a class="btng btn-small btn-consultation" {{if $doctor.consultation_price}}data-price="{{$doctor.consultation_price}}"{{/if}}>
+			<span>@</span>{{'profile_consultation_book'|gL:'Pieteikt konsultāciju'}}
+			</a>
+		</div>
+		{{/if}}
+
+	    {{if $doctor.phone || $doctor.active_company.phone || $doctor.email || $doctor.active_company.email}}
+		    <div class="small_contacts title">{{'open_doctor_contacts_title'|gL:'Contacts'}}</div>
+		    {{if $doctor.phone}}
+		    	<div class="small_contacts">{{$doctor.phone|clear}}</div>
+		    {{else}}
+		    	<div class="small_contacts">{{$doctor.active_company.phone|clear}}</div>	
+		    {{/if}}
+		    {{if $doctor.email}}
+		    	<div class="small_contacts"><a href="mailto:{{$doctor.email|clear}}">{{$doctor.email|clear}}</a></div>
+		    {{else}}
+		    	<div class="small_contacts"><a href="mailto:{{$doctor.active_company.email|clear}}">{{$doctor.active_company.email|clear}}</a></div>	
+		    {{/if}}
+		{{/if}}
+
+		{{if $doctor.consultations_enabled}}
+		<div class="btn-consultation-container show-tablet show-desktop">
+			<a class="btng btn-small btn-consultation" {{if $doctor.consultation_price}}data-price="{{$doctor.consultation_price}}"{{/if}}>
+			<span>@</span>{{'profile_consultation_book'|gL:'Pieteikt konsultāciju'}}
+			</a>
+		</div>
+		{{/if}}
+
+	</div>
+
+	<div class="right">
+	    <h1>
+	    	<span class="ver1i ver2i">{{$doctor.name|clear}} {{$doctor.surname|clear}}</span><span class="ver3i">{{$doctor.name|clear}} {{$doctor.surname|clear}}</span>
+
+			{{if $userData.id && $doctor.hasSubscription}}
+				<span class="specialLabel hasSubscription">
+					<strong>A</strong>
+				</span>
+			{{/if}}
+
+			{{if $doctor.isDcDoctor}}
+				<span class="specialLabel dcDoctor">
+					<strong>DC</strong>
+				</span>
+			{{/if}}
+	    </h1>
+
+		{{if $doctor.city && $doctor.address}}
+			<!-- if doctor has an address (fields 'city' and 'address' not empty) we show it here -->
+			<p>
+				<strong>{{$doctor.city}}, {{$doctor.address}}</strong>
+			</p>
+		{{/if}}
+
+	    <p>
+	    	{{'doctors_open_working'|gL:'Strada'}} 
+	    	<a href="{{$siteData.mirrors_clinics_page|getLM}}{{$doctor.active_company.url}}/">{{$doctor.active_company.name|clear}}</a>
+	    	{{if $doctor.companies_count > 1}}
+	    		 {{'doctors_open_goto_clinic'|gL:'un vēl <a href="#other_companies">šajās klīnikās</a>'}}
+	    	{{/if}}</p>
+	    <div class="small_contacts">{{$doctor.phone|clear}}</div>
+	    <div class="small_contacts"><a href="mailto:{{$doctor.email|clear}}">{{$doctor.email|clear}}</a></div>
+	    <div class="fav">
+			<a href="#" data-id="{{$doctor.id}}" data-clinic="{{$doctor.active_company.id}}" class="btnw{{if $doctor.already_faved}} added{{/if}}">
+			    <span class="add"><i class="fa fa-star-o"></i>{{'doctors_open_add_to_favourites'|gL:'Add to favourites'}}</span>
+			    <span class="remove"><i class="fa fa-star"></i>{{'doctors_open_remove_from_favourites'|gL:'Remove from favourites'}}</span>
+			</a>
+	    </div>
+	    <hr>
+	    <p>{{$doctor.description|htmlspecialchars_decode}}</p>
+	    <div class="lists">
+		{{if $doctor.specialties}}
+		<div class="half">
+		    <h3>{{'doctors_open_specialties'|gL:'Specialitātes'}}</h3>
+		    <ul class="list">
+			{{foreach from=$doctor.specialties item=item}}
+			<li><a href="{{$siteData.mirrors_doctors_page|getLM}}?doctors_page=0&doctors_filter_specialty={{$item.localized_title|clear}}">{{$item.localized_title|clear}}</a></li>
+			{{/foreach}}
+		    </ul>
+		</div>
+		{{else}}
+		<div class="half">
+		    <p>{{'doctors_without_specialties'|gL:'Specialitāte nav norādīta'}}</p>
+		</div>
+		{{/if}}
+		{{if $doctor.services}}
+		<div class="half">
+		    <h3>{{'doctors_open_services'|gL:'Pakalpojumi'}}</h3>
+		    <ul class="list">
+			{{foreach from=$doctor.services item=item}}
+				<li><a href="{{$siteData.mirrors_doctors_page|getLM}}?doctors_page=0&doctors_filter_services={{$item.localized_title|clear}}">{{$item.localized_title|clear}}{{if $userData.id && $userData.dcSubscription && $item.subscription}} <span class="specialLabel hasSubscription"><strong>A</strong></span>{{/if}}</a></li>
+			{{/foreach}}
+		    </ul>
+		</div>
+		{{/if}}
+	    </div>
+	    {{if $doctor.local}}
+	    <div class="contact">
+		<h3>{{'doctors_open_local_schedule_title'|gL:'Sazināties ar ārstu'}}</h3>
+		<p>{{$localDoctorScheduleText}}</p>
+	    </div>
+	    {{/if}}
+	</div>
+    </div>
+    {{if !$doctor.local}}
+    <div class="header">
+	<h2>{{'doctor_available_time'|gL:'Pieņēmšanas laiki'}}</h2>
+	<div class="controls">
+
+	    <div class="left">
+
+			<span class="text">{{'profile_reservation_payment_type'|gL:'Maksāšanas veids'}}:</span>
+			
+			<label class="item green checked">
+				<input type="checkbox" checked="checked" rel="1" name="payment_type" class="calendar_filter">
+				<span class="box"><i class="fa fa-check"></i></span>
+				{{'profile_reservation_payment_type_country'|gL:'Valsts'}}
+			</label>
+			<span class="tip" data-hastip="{{'profile_reservation_payment_type_country_hint'|gL}}"><i class="fa fa-question-circle"></i></span>
+			
+			<label class="item blue checked">
+				<input type="checkbox" checked="checked" rel="2" name="payment_type" class="calendar_filter">
+				<span class="box"><i class="fa fa-check"></i></span>
+				{{'profile_reservation_payment_type_pay'|gL:'Maksas'}}
+			</label>
+			<span class="tip" data-hastip="{{'profile_reservation_payment_type_client_hint'|gL}}"><i class="fa fa-question-circle"></i></span>
+
+<!--			<label class="item white">-->
+<!--				<input type="checkbox" rel="3" name="remote_services" class="calendar_filter">-->
+<!--				<span class="box"><i class="fa fa-check"></i></span>-->
+<!--				{{'profile_remote_services_filter'|gL:'Attālinātās konsultācijas'}}-->
+<!--			</label>-->
+<!--			<span class="tip" data-hastip="{{'profile_reservation_remote_hint'|gL}}"><i class="fa fa-question-circle"></i></span>-->
+			
+			<!-- 
+			<label class="item checked">
+				<input type="checkbox" checked="checked" rel="0" name="payment_type" class="calendar_filter">
+				<span class="box"><i class="fa fa-check"></i></span>
+				{{'profile_reservation_payment_type_mix'|gL:'Miks'}}
+			</label>
+			<span class="tip" data-hastip="{{'profile_reservation_payment_type_mix_hint'|gL}}"><i class="fa fa-question-circle"></i></span>
+			 -->
+	    </div>
+
+	    <div class="right">
+			<a href="#" class="btnw calendar-trigger"><i class="fa fa-calendar"></i><span class="text">{{'reservation_calendar'|gL:'Kalendārs'}}</span></a>
+			<input type="text" id="jqui-calendar" readonly>
+	    </div>
+
+	</div>
+    </div>
+
+    <div class="table_body">
+	<div id="reservation_calendar">
+	{{include file="calendar.html"}}
+	</div>
+	
+	
+		<div class="table_footer">
+			<i class="fa fa-info-circle"></i>
+			{{if $doctor.phone}}
+			{{assign var="phone_number" value=$doctor.phone|gLParam:'{phone_number}'}}
+			{{else}}
+			{{assign var="phone_number" value=$doctor.active_company.phone|gLParam:'{phone_number}'}}
+			{{/if}}
+			{{'open_doctor_footer_notice'|gL:'Pēc pieraksta apstiprinājumu saņemsiet 24h laikā, ja pēc 24h laikā neesat to saņēmuši, zvaniet: {phone_number}!':'':$phone_number}}	
+		</div>
+    </div>
+    <!-- end table body -->
+    {{/if}}
+
+    <div class="more_info">
+	<div class="left">
+	    <h2>{{'doctors_open_work_at'|gL:'Kur strādā'}}</h2>
+	    <div class="contacts_cont">
+		<div class="contacts">
+		    <h3><a href="{{$siteData.mirrors_clinics_page|getLM}}{{$doctor.active_company.url}}/">{{$doctor.active_company.name|clear}}</a></h3>
+		   
+		    <div class="line">
+				<div class="col1">{{'doctors_open_work_at_address'|gL:'Adrese'}}:</div>
+				<div class="col2"><div>
+					{{if $doctor.active_company.citytitle}}
+		    		{{$doctor.active_company.citytitle}},
+		    		{{/if}}
+		    		
+		    		{{if $doctor.active_company.districttitle}}
+		    		{{$doctor.active_company.districttitle}},
+		    		{{/if}}
+		    		
+		    		{{if $doctor.active_company.zip}}
+		    		{{$doctor.active_company.address}}, {{$doctor.active_company.zip}}
+		    		{{else}}
+		    		{{$doctor.active_company.address}}
+		    		{{/if}}
+				</div>
+				<div class="f-14">
+					{{if $doctor.active_company.lat == 'wrong' || $doctor.active_company.lng == 'wrong'}}
+						<a class="disabled-link">{{'clinics_show_map'|gL:'Skatīt kartē'}}</a>
+					{{else}}
+						<a target="_blank" href="https://maps.google.com/?q={{$doctor.active_company.lat}},{{$doctor.active_company.lng}}&z=15&key={{$API_KEY}}">{{'clinics_show_map'|gL:'Skatīt kartē'}}</a>
+					{{/if}}
+		    	</div></div>
+			</div>
+		    
+		    {{if $doctor.active_company.phone}}
+		    <div class="line mt2">
+				<div class="col1">{{'doctors_open_work_at_phone'|gL:'Telefons'}}:</div>
+				<div class="col2">{{$doctor.active_company.phone|clear}}</div>
+		    </div>
+		    {{/if}}
+		    {{if $doctor.active_company.email}}
+		    <div class="line">
+				<div class="col1">{{'doctors_open_work_at_email'|gL:'E-pasts'}}:</div>
+				<div class="col2"><a href="mailto:{{$doctor.active_company.email|clear}}">{{$doctor.active_company.email|clear}}</a></div>
+		    </div>
+		    {{/if}}
+		</div>
+
+	    </div>
+	    {{if $doctor.companies|@count > 1}}
+	    <h3 id="other_companies">{{'doctors_open_other_companies'|gL:'Ārsts vēl pieņiem šeit'}}:</h3>
+	    <ul class="list">
+		{{foreach from=$doctor.companies item=item}}
+			{{if $item.id != $doctor.active_company.id}}
+			<li><a href="{{$siteData.mirrors_doctors_page|getLM}}{{$doctor.url}}/{{$item.url}}/">{{$item.name|clear}}</a></li>
+			{{/if}}
+		{{/foreach}}
+	    </ul>
+	    {{/if}}
+	</div>
+<!--	<div class="right">
+	    <div class="top">
+		<div class="select">
+		    <div class="item active" data-tab="fb"><div class="text">Facebook</div></div>
+		    <div class="item" data-tab="dr"><div class="text">Draugiem.lv</div></div>
+		</div>
+		<a name="comments"></a>
+		<h2>{{'doctors_open_reviews'|gL:'Atsauksmes'}}</h2>
+	    </div>
+	    <div class="cont">
+		<div class="item fb active">
+
+		    <div id="fb-root"></div>
+		    <script>(function (d, s, id) {
+			    var js, fjs = d.getElementsByTagName(s)[0];
+			    if (d.getElementById(id))
+				return;
+			    js = d.createElement(s);
+			    js.id = id;
+			    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId={{$siteData.fbAPI}}";
+			    fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>
+
+			<div style="display:none;" class="fb-comments-count" data-href="{{if $doctor.fb_link != ''}}{{$doctor.fb_link|clear}}{{else}}{{$curPageUrl2}}{{/if}}"></div>
+		    <div class="fb-comments" data-href="{{if $doctor.fb_link != ''}}{{$doctor.fb_link|clear}}{{else}}{{$curPageUrl2}}{{/if}}" data-width="400" data-numposts="5" data-colorscheme="light"></div>
+		</div>
+		<div class="item dr"></div>
+	    </div>
+	</div>
+    </div>-->
+    {{if $doctor.local}}
+    </div>
+    {{/if}}
+</div>
+<script type="text/javascript" nonce="{{$web.cspNonce}}">
+
+	var signInPage = '{{$siteData.mirros_signin_page|getLM}}';
+	var signedIn = {{if $userData.id}}true{{else}}false{{/if}};
+
+	$(document).ready(function(){
+
+		{{if $consData}}
+			var consData = {
+				'doctorId': {{$consData.doctorId}},
+				'clinicId': {{$consData.clinicId}}
+			};
+
+			profile.initConsultationLink(consData);
+		{{/if}}
+                        
+		profile.doctorId = {{$doctor.id}};
+		profile.clinicId = {{$doctor.active_company.id}};
+
+		$('.calendar_filter').change(function() {
+
+			if($(this).attr('name') === 'remote_services' || $(this).attr('name') === 'subscription' || $(this).attr('name') === 'dcDoctors') {
+				$('.header .field').find('input:visible').eq(0).trigger('change');
+			} else {
+				profile.filterReservationCalendar();
+			}
+		});
+
+		$('.arrow_right').click(function(){
+		    profile.filterReservationCalendar('next');
+		});
+
+		$('.arrow_left').click(function(){
+		    profile.filterReservationCalendar('prev');
+		});
+
+		{{if $finishReservation}}
+			profile.finishReservationPopup({{$finishReservation}});
+		{{/if}}
+		
+		// $.ajax({
+	    //     url: 'graph.facebook.com/{{if $doctor.fb_link != ''}}{{$doctor.fb_link|clear}}{{else}}{{$curPageUrl2}}{{/if}}',
+	    //     dataType: 'jsonp',
+	    //     success: function(data) {
+	    //     	if (data.comments != 'undefined') {
+	    //     		ajaxRequest('/doctors/updateReviewsCount/', {doctor: {{$doctor.id}}, count: data.comments}, function(data) {
+	    //
+	    //     		});
+	    //     	}
+	    //    }
+	    // });
+    });	
+</script>

@@ -1,0 +1,225 @@
+.signup_block.messages {
+  > .wrap {
+    padding-bottom: 100px;
+  }
+
+  .col2_y {
+    .cont {
+      border: 1px solid #cbd5da;
+      padding: 10px 25px 40px;
+      ._bgc(#ffffff);
+      color: #636c70;
+      margin-bottom: 20px;
+      ._clear;
+      min-height: 500px;
+    }
+
+    .btn_cont {
+      margin-bottom: 20px;
+
+      .btnw {
+        ._all;
+        padding: 8px 20px 9px 12px;
+        width: auto;
+
+        .text {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    .table1 {
+      ._text(14px, 17px);
+      width: 100%;
+
+      th:first-child, td:first-child {
+        width: 5%;
+        padding-left: 10px;
+      }
+
+      th:nth-child(2), td:nth-child(2) {
+        width: 85%;
+        padding-right: 30px;
+        padding-left: 3px;
+      }
+
+      th:nth-child(3), td:nth-child(3) {
+        width: 10%;
+      }
+
+      th {
+        ._all;
+        color: #404446;
+        border-bottom: 2px solid #009fe5;
+        padding-bottom: 9px;
+      }
+
+      .item {
+        padding-left: 24px;
+        ._rel;
+        ._clear;
+        color: #404446;
+        ._text(14px, 20px);
+
+        input[type=checkbox] {
+          opacity: 0;
+          ._abs;
+          top: 5px;
+          left: -4px;
+          ._wh(18px, 17px);
+        }
+
+        .box {
+          ._abs;
+          top: 0px;
+          left: 0;
+          ._wh(14px, 14px);
+          ._rad(3px, 3px, 3px, 3px);
+          ._bgc(#fff);
+          ._text(12px, 14px);
+          ._alc;
+          border: 1px solid #cbd5da;
+
+          .fa-check {
+            color: #ffffff;
+            ._none;
+          }
+
+			.fa-minus {
+				color: #ffffff;
+				._none;
+			}
+
+        }
+
+        &.checked {
+          &:hover {
+            .box {
+              ._bgc(#0085bf);
+            }
+          }
+
+          .box {
+            font-size: 11px;
+            ._wh(16px, 16px);
+            ._bgc(#009fe5);
+            border: none;
+
+            .fa-check {
+              ._blo;
+              margin-top: 3px;
+            }
+
+			  .fa-minus {
+				  ._none;
+			  }
+          }
+        }
+
+		  &.indetermined {
+			  &:hover {
+				  .box {
+					  ._bgc(#0085bf);
+				  }
+			  }
+
+			  .box {
+				  font-size: 11px;
+				  ._wh(16px, 16px);
+				  ._bgc(#009fe5);
+				  border: none;
+
+				  .fa-check {
+					  ._none;
+				  }
+
+				  .fa-minus {
+					  ._blo;
+					  margin-top: 3px;
+				  }
+			  }
+		  }
+      }
+    }
+
+    .table_header {
+      thead, tr, th, th > div {
+        height: 17px;
+      }
+    }
+
+    .table_line {
+      ._blo;
+      color: #404446;
+      padding: 4px 0 5px;
+      border-bottom: 1px solid #e0e6e9;
+      ._cur;
+
+      .date {
+        padding: 11px 0 10px 0;
+        cursor: default;
+      }
+
+      .subject {
+        a {
+          color: #404446;
+          ._blo;
+          padding: 11px 0 10px;
+        }
+      }
+
+      .box {
+        margin-top: 9px;
+      }
+
+      &:hover {
+        color: #009fe5;
+        ._bgc(#f9f9f9);
+
+        .subject {
+          a {
+            color: #009fe5
+          }
+        }
+      }
+
+      &.selected {
+        ._bgc(#f9f9f9);
+      }
+
+      &.new_msg {
+        ._b;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .signup_block.messages {
+  }
+}
+
+@media (max-width: 767px) {
+  .signup_block.messages {
+    > .wrap {
+      padding-bottom: 20px;
+    }
+
+    .col2_y {
+      .cont {
+        min-height: auto;
+      }
+
+      .btn_cont {
+        margin-bottom: 30px;
+
+        .btnw {
+          ._alc;
+          padding: 8px 0 9px 0;
+          width: 138px;
+        }
+      }
+    }
+
+  }
+}

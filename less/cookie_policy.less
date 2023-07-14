@@ -1,0 +1,239 @@
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,.6);
+  z-index: 999;
+}
+
+.cookiePolicyPopup {
+  box-sizing: border-box;
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 80vh;
+  padding: 45px 0 25px 0;
+  z-index: 1100;
+  box-shadow: 0 -10px 20px #0808083b;
+  background-color: #fff;
+
+  @media (max-width: 800px) {
+    height: 100%;
+  }
+
+  .cookiePolicyPopupCloseCross {
+    right: 25px;
+    top: -12px;
+  }
+
+  .cookiePolicyPopupInner {
+    box-sizing: border-box;
+    position: relative;
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+    //background-color: lightgray;
+
+    @media (max-width: 1023px) {
+      width: calc(100% - 60px);
+    }
+
+    .cookiePolicyPopupContent {
+      box-sizing: border-box;
+      position: relative;
+      width: 100%;
+      height: calc(100% - 75px);
+      padding: 0 65px 0 0;
+      margin-bottom: 25px;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width:5px;
+        height:0;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #e0e3e5;
+        border-radius: 5px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &.opendoc {
+        margin-top: 0;
+
+        p strong {
+          color: #000;
+        }
+      }
+    }
+  }
+}
+
+.acceptCookiesBlock {
+  box-sizing: border-box;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding-bottom: 25px;
+  //border-top: 2px solid #009fe5;
+  box-shadow: 0 -10px 20px #0808083b;
+  background: #fff;
+  z-index: 1000;
+
+  // lang menu
+  .header__tabs-column {
+    position: absolute;
+    top: 7px;
+    right: 0;
+    z-index: 50;
+
+    .level_overlay {
+      position: absolute;
+      border: 1px solid #d4dcde8c;
+      border-radius: 4px 4px 4px 4px;
+      box-shadow: 0 3px 25px rgb(0 0 0 / 15%);
+      background: #fff;
+      top: 35px;
+      left: -38px;
+      z-index: 10010;
+      padding: 11px 1px;
+
+      .menuList a {
+        font-size: 13px;
+        display: block;
+        padding: 9px 36px 8px 36px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #f4f7f8;
+        }
+      }
+    }
+
+    .lang-active {
+      padding-right: 20px;
+      position: relative;
+      cursor: pointer;
+      color: #009fe5;
+      font-size: 13px;
+
+      .arrow {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #65c300;
+
+        .fa {
+          font-size: 16px;
+
+          &:before {
+            content: "\f107";
+          }
+        }
+      }
+    }
+  }
+
+  .acceptCookiesInner {
+    position: relative;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0 30px;
+    //font-size: 0;
+
+    @media (max-width: 1023px) {
+      width: calc(100% - 60px);
+    }
+  }
+
+  .acbHeader {
+    position: relative;
+    width: 65%;
+
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+  }
+
+  h3 {
+    margin: 20px 0;
+    font-size: 25px;
+    font-weight: bold;
+    color: #009fe5;
+  }
+
+  input[type="submit"].disabled {
+    cursor: auto;
+  }
+
+  .sikdatnu-politika .opendoc {
+    padding-bottom: 200px !important;
+  }
+
+  .acbContent {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 800px) {
+      justify-content: unset;
+      flex-direction: column;
+    }
+
+    .info-text {
+      width: 65%;
+
+      @media (max-width: 800px) {
+        width: 100%;
+      }
+
+      a {
+        display: block;
+        margin-top: 6px;
+      }
+    }
+
+    .btn-bar {
+      width: 25%;
+
+      @media (max-width: 800px) {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      .checkbox_field {
+        margin-bottom: 6px;
+      }
+    }
+
+    input[type="submit"] {
+      color: #fff;
+      font-weight: 500;
+      text-align: center;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      margin-top: 14px;
+      background-color: #049ce1;
+      transition: background-color 0.2s;
+
+      &[disabled] {
+        opacity: 0.5;
+      }
+
+      &:hover {
+        background-color: #1584d4;
+      }
+
+      &[disabled]:hover {
+        background-color: #049ce1;
+      }
+    }
+  }
+}
+

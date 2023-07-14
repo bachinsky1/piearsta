@@ -1,0 +1,92 @@
+<div id="content">
+    <div class="payment payment_success_block">
+        <div class="popup_bg"></div>
+        <div class="popup w700">
+                <div class="close"><i class="fa fa-times"></i></div>
+                <div class="cont">
+
+                    {{if $web.env == 'prod'}}
+
+<!--                    <script nonce="{{$web.cspNonce}}">-->
+<!--                        window.dataLayer.push({-->
+<!--                         'event': 'piearsta_schedule_success'-->
+<!--                         });-->
+<!--                    </script>-->
+
+                    {{/if}}
+
+                    {{if $info.serviceType == 1}}
+                    <h2 class="with_icon"><i class="fa fa-paper-plane"></i>{{'profile_consultation_ok_title'|gL:'E-konsultācijas pieteikums ir nosūtīts'}}</h2>
+                    {{else}}
+                    <h2 class="with_icon"><i class="fa fa-paper-plane"></i>{{'profile_reservation_ok_title'|gL:'Pieraksta pieteikums ir nosūtīts'}}</h2>
+                    {{/if}}
+                    <hr>
+                    <p>
+                        {{if $item.doctor_phone}}
+                        {{assign var="phone_number" value=$item.doctor_phone|gLParam:'{phone_number}'}}
+                        {{else}}
+                        {{assign var="phone_number" value=$item.clinic_phone|gLParam:'{phone_number}'}}
+                        {{/if}}
+
+                        {{if $info.serviceType == 1}}
+                        {{'profile_consultation_ok_lead'|gL:'Jums tika nosūīts epasts ar e-kosultācijas informāciju. Pieteikuma apstiprinājumu saņemsiet 24h laikā, ja pēc 24h laikā neesast to saņemuši, zvaniet {phone_number}.':'':$phone_number}}
+                        {{else}}
+                        {{'profile_reservation_ok_lead'|gL:'Jums tika nosūīts epasts ar pieraksta informāciju. Pieraksta apstiprinājumu saņemsiet 24h laikā, ja pēc 24h laikā neesast to saņemuši, zvaniet {phone_number}.':'':$phone_number}}
+                        {{/if}}
+
+                    </p>
+                    <div class="btn_cont">
+                        {{if $info.serviceType == 1}}
+                        <a href="{{$siteData.mirros_profile_consultations_page|getLM2}}" class="btnw w3">{{'profile_consultation_ok_my_consultations'|gL:'Manas e-konsultācijas'}}</a>
+                        {{else}}
+                        <a href="{{$siteData.mirros_profile_reservations_page|getLM2}}" class="btnw w3">{{'profile_reservation_ok_my_reservations'|gL:'Mani pieraksti'}}</a>
+                        {{/if}}
+                        {{if $dcAppointment}}
+                        <div class="btn-link">
+                            <a href="{{$dcUrl}}">{{'profile_back_to_digital_clinic'|gL:'Atpakaļ uz digitālo klīniku'}}</a>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+        </div>
+        <div class="wrap">
+
+            <div class="dt_tab_wrap">
+                <h1>{{$web.title}}</h1>
+
+                <div class="block_content">
+                    <p>{{'profile_reservation_payment_completed_successfully'|gL:'Payment completed successfully'}}.</p>
+                </div>
+
+                <div class="transaction">
+                    <div class="transaction-incomlete">
+                        <h2>{{'profile_reservation_you_can_view_your_orders'|gL:'You can view your payment result and invoice later in "Profile menu / My orders"'}}</h2>
+                        <br>
+                        <a href="#" class="btnw view-invoice openInvoice" data-ordid="{{$info.orderId}}">{{'profile_reservation_open_invoice'|gL:'Open invoice'}}</a>
+                    </div>
+                    <div class="transaction-comlete">
+                        <h2>{{'profile_reservation_you_can_view_your_orders'|gL:'You can view your payment result and invoice later in "Profile menu / My orders"'}}</h2>
+                        <div class="cont"></div>
+                        <br>
+                        <a href="#" class="btnw view-invoice openInvoice" data-ordid="{{$info.orderId}}">{{'profile_reservation_open_invoice'|gL:'Open invoice'}}</a>
+                    </div>
+                </div>
+
+                <div class="block_content">
+                    <p>{{$content.content}}</p>
+                </div>
+
+                <input id="orderId" type="hidden" value="{{$info.orderId}}">
+
+                <div class="button_block">
+                    <a href="{{$info.backUrl}}" class="btng" id="continue-btn">{{'profile_reservation_back'|gL:'Go back.'}}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<script nonce="{{$web.cspNonce}}">
+    history.pushState(null, document.title, location.href);
+</script>

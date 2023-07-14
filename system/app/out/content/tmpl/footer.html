@@ -1,0 +1,48 @@
+<footer>
+	<div class="infoline">
+		<div class="wrap">
+			<div class="company_block">
+				<h2>{{'footer_company'|gL:'Company'}}</h2>
+				{{if $menu.BOTTOM|@count > 0}}
+				<ul class="links">
+					{{foreach from=$menu.BOTTOM item=mt name=topmenu}}
+						<li class="item {{if $mt.active}}active{{/if}}"><a href="{{$mt.url}}">{{$mt.title}}</a></li>
+					{{/foreach}}
+				</ul>
+				{{/if}}
+			</div>
+			<div class="newsletter_block">
+
+				<div class="bb-info-block">
+					<p class="bb-name">SIA "Blue Bridge Technologies"</p>
+					<div class="first-column"><p class="bb-regnr">Reģ.nr.: 40003932716</p>
+					<p class="bb-address">Raunas iela 41C, Rīgā</p></div>
+					<div class="second-column"><p class="bb-phone"><i class="fa fa-phone-square"></i> <a href="tel:+37127880015">Tehniskais Atbalsta dienests<br>+371 27880015</a></p>
+						<p class="bb-email"><i class="fa fa-envelope"></i> <a href="mailto:palidziba@piearsta.lv">palidziba@piearsta.lv</a></p></div>
+				</div>
+			</div>
+			<div class="author_block">
+				{{'footer_smartmedical_block'|gL:'<div class="text2 ver3">Sistēma ir savietojama ar <span class="orangetext">SmartMedical</span></div>
+				<a href="#" class="img1 ver1 ver2"><img alt="" src="/img/blue_bridge.png"></a>
+				<div class="bluetext ver3">Blue Bridge Technologies</div>
+				<div class="text1">Piearsta.lv ir SIA Blue Bridge Technologies iniciatīva ar mērķi modernizēt medicīnas iestāžu procesus veicināt veselības aprūpes pieejamību.</div>
+				<div class="text2 ver1 ver2">Sistēma ir savietojama ar</div>
+				<a href="#" class="img2 ver1 ver2"><img alt="" src="/img/smart_medical.png"></a>'}}
+			</div>
+		</div>
+	</div>
+	<div class="copyline"><div class="wrap">
+		<div class="cont">
+			<div class="copy ver1 ver2">{{'footer_copyright'|gL:'&copy; 2014  Visas autortiesības aizsargātas'}}</div>
+			{{if $menu.FOOTER|@count > 0}}
+			<div class="links">
+				{{foreach from=$menu.FOOTER item=mt name=topmenu}}
+					<div class="item"><a href="{{$mt.url}}">{{$mt.title}}</a></div>
+				{{/foreach}}
+			</div>
+			{{/if}}
+			<div class="copy ver3">{{'footer_copyright'|gL:'&copy; 2014  Visas autortiesības aizsargātas'}}</div>
+		</div>
+		<div class="to_the_top" data-goto="page"><i class="fa fa-angle-up"></i></div>
+	</div></div>	
+</footer>

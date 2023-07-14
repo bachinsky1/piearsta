@@ -1,0 +1,188 @@
+<div class="popup_bg"></div>
+
+<div class="popup-service-info">
+    <!-- Service info window in popup -->
+    <div class="popup-service-info-cont">
+        <div class="popup-service-info-heding">
+            <div class="close"><i class="fa fa-times"></i></div>
+            <h2 class="popup-service-info-title"></h2>
+        </div>
+        <div class="popup-service-info-content">
+            <div class="spinner-container">
+                <div class="spinner-content">
+                    <div class="spinner-msg"></div>
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <div class="content-loaded"></div>
+        </div>
+    </div>
+</div>
+
+<div class="popup popup-add-consultation w700">
+    <div class="close"><i class="fa fa-times"></i></div>
+    <div class="cont consultation-popup-content">
+
+        <h2>{{'profile_consultation_popup_header'|gL:'Konsultācijas pieteikums'}}</h2>
+
+        <hr>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_doctor'|gL:'Ārsts'}}:</div>
+            <div class="col2"><a target="_blank" href="{{$siteData.mirrors_doctors_page|getLM2}}{{$doctor.url}}/{{$clinic.url}}/">{{$doctor.name}} {{$doctor.surname}}</a></div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_clinic'|gL:'Iestadē'}}:</div>
+            <div class="col2">
+                <div><a target="_blank" href="{{$siteData.mirrors_clinics_page|getLM2}}{{$clinic.url}}/">{{$clinic.name}}</a></div>
+                <div class="note">{{$item.clinic_address}}</div>
+            </div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_service'|gL:'Pakalpojums'}}:</div>
+            <div class="col2">
+
+                <div class="item form_existing">
+                    <div class="service-select">
+                        <select id="service_id">
+                            {{ if $doctor.services|@count > 1 }}
+                            <option value="" selected class="select-placeholder">{{'select_option'|gL:'- select an option -'}}</option>
+                            {{ /if }}
+                            {{foreach from=$doctor.services item=i}}
+                            <option value="{{$i.c_id|clear}}"
+                                    {{if $doctor.services|@count == 1}} selected="selected"{{/if}}
+                            {{if $i.price > 0}} class="paid" data-price="{{$i.price}}"{{/if}}
+                            {{if $i.service_description }} data-description="{{$i.service_details_id}}"{{/if}}>
+                            {{$i.title|clear}}{{if $i.length_minutes}}({{$i.length_minutes}} {{'length_minutes'|gL:'m.'}}){{/if}}
+                            </option>
+                            {{/foreach}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="line w2 service-info-link" style="display: none;">
+            <div class="col1a"></div>
+            <div class="col2">
+                <a>
+                    <i class="fa fa-info-circle"></i> <span class="service-info-link-text">{{'order_service_info_text'|gL:'Click to read additional info about selected service'}}</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Calendar -->
+
+        <div class="line w2">
+            <div class="doctors_list" id="doctors_list">
+                <div class="table_head">
+                    <div class="moving_part">
+                        <div class="wrap">
+                            <div class="calendar">
+                                <div id="calendar_list_header">
+                                    {{include file="../../doctors/tmpl/calendar_list_header.html"}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table_body">
+                    <div class="wrap">
+                        <div class="list">
+                            <div class="item">
+                                <div class="slide">
+                                    {{*$TEMPLATE_DOCTORS_MODULE_DATA*}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End of calendar -->
+
+        <div class="line w2">
+
+            <div class="field3">
+                <div class="col1a"><label for="sudzibas">{{'profile_consultation_sudzibas'|gL:'Sūdzības'}}</label></div>
+                <div class="col2a">
+                    <div class="cinput default invalid">
+                        <textarea rows="4" id="sudzibas" name="sudzibas">{{$sudzibas}}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            {{if $price}}
+            <div class="service-warnings-container consultation-price-block">
+                <div class="service-info-warning pre-paid-service">
+                    <div class="info warning">
+                        <h4>Uzmanību!</h4>
+                        <p>
+                            {{'profile_consultation_price'|gL:'Lai pieteikt uz e-konsultāciju ir jāveic priekšapmaksa'}} <span class="service-price">{{$price}}</span> €.
+                            <br>
+                            <br>
+
+                            {{if $clinic.phone}}
+                                Tālrunis: {{$clinic.phone}},
+                            {{/if}}
+
+                            {{if $clinic.email}}
+                                e-pasts: <a href="mailto:{{$clinic.email}}">{{$clinic.email}}</a>,
+                            {{/if}}
+
+                            {{if $clinic.url}}
+                                <a target="_blank" href="/iestazu-katalogs/{{$clinic.url}}/">Iestādes profils</a>
+                            {{/if}}
+                        </p>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            {{/if}}
+
+            {{if $doctor.gimenesArsts && $price}}
+            <div class="checkbox_field{{if $isMyDoctor}} checked{{/if}}">
+                <label class="item blue">
+                    <input class="my-doctor-confirm" id="my-doctor-confirm" type="checkbox"{{if $isMyDoctor}} checked="checked"{{/if}}>
+                    <span class="box"><i class="fa fa-check"></i></span>{{'profile_consultation_my_doctor'|gL:'Apstiprinu, ka tas ir mans ģimenes ārsts'}}
+                </label>
+            </div>
+            {{/if}}
+
+            <input id="consultation_id" type="hidden" value="{{ $consultationId }}">
+            <input id="doctor_id" type="hidden" value="{{ $doctor.id }}">
+            <input id="clinic_id" type="hidden" value="{{ $clinic.id }}">
+            <input id="is_gimenes_arsts" type="hidden" value="{{ $doctor.gimenesArsts }}">
+            <input id="price" type="hidden" value="{{ $price }}">
+
+            <div class="btn_cont">
+                {{if $price}}
+                <a href="" class="btng w1 consultation_continue">{{"profile_reservation_add_continue"|gL:"Continue"}}</a>
+                {{else}}
+                <a href="" class="btng w1 add_consultation">{{"profile_consultation_book"|gL:"Pieteikt konsultāciju"}}</a>
+                {{/if}}
+                <div class="cancel"><a href="">{{"profile_reservation_cancel_cancel"|gL:"Neatcelt, es pardomāju"}}</a></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="spinner-container">
+        <div class="spinner-content">
+            <div class="spinner-msg"></div>
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <script nonce="{{$web.cspNonce}}">
+        profile.consultationAddButtons = {
+            free: '<a href="" class="btng w1 add_consultation">{{"profile_consultation_book"|gL:"Pieteikt konsultāciju"}}</a><div class="cancel"><a href="">{{"profile_reservation_cancel_cancel"|gL:"Neatcelt, es pardomāju"}}</a></div>',
+            paid: '<a href="" class="btng w1 consultation_continue">{{"profile_reservation_add_continue"|gL:"Continue"}}</a><div class="cancel"><a href="">{{"profile_reservation_cancel_cancel"|gL:"Neatcelt, es pardomāju"}}</a></div>'
+        };
+    </script>
+
+</div>
+

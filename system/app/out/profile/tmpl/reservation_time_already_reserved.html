@@ -1,0 +1,14 @@
+<div>
+    {{if $resData.profilePerson}}
+    <h2>{{'profile_reservation_exists_for_person'|gL:'Your profile person already has reservation on this time'}}</h2>
+    {{else}}
+    <h2>{{'profile_reservation_exists_for_profile'|gL:'You already have reservation on this time'}}</h2>
+    {{/if}}
+
+    <input id="lock_id" type="hidden" value="{{ $resData.lockId }}">
+    <input id="slots" type="hidden" value="{{ $resData.slots }}">
+
+    <div class="btn_cont">
+        <a class="btng w1 openRes" href="#" data-resid="{{$resData.resId}}">{{'profile_reservation_open_reservation'|gL:'Open reservation'}}</a>
+    </div>
+</div>

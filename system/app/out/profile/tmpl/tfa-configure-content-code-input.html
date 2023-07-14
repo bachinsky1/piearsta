@@ -1,0 +1,40 @@
+<div class="internal popupTFAConfigure">
+
+    <div class="popupTFAConfigureHeader">
+        <h2 class="tfa_header">{{'profile_tfa_configure_popup_header'|gL:'Конфигурировать двухфакторную аутентификацию'}}</h2>
+        <hr>
+    </div>
+
+    {{if $item.wrongCode}}
+        <div class="info-block error-block">
+            <h3>{{'profile_tfa_configure_code_wrong'|gL:'Введен неверный код!'}}</h3>
+            <div>
+                {{'profile_tfa_configure_try_again'|gL:'Попробуйте еще раз.'}}
+            </div>
+        </div>
+    {{/if}}
+
+    <div class="info-block">
+        <div class="imageContainer">
+            <img src="/img/password.png">
+        </div>
+        <div class="codeContainer">
+            <div class="a-center">
+                <h4 for="code">{{'profile_tfa_configure_code_input_label'|gL:'Введите код:'}}</h4>
+            </div>
+            <div>
+                <div class="cinput">
+                    <input id="code" type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn_cont">
+        <a class="btn btnw w3 back-btn">{{'profile_back'|gL:'Go back.'}}</a>
+        <a href="" class="btng w1 continue-btn">{{"profile_continue"|gL:"Continue"}}</a>
+    </div>
+
+    <div class="hiddens"></div>
+
+</div>

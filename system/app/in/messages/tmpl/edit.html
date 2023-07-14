@@ -1,0 +1,169 @@
+<td id="editForma" colspan="9" class="open">
+	<div class="error-msg" id="errorBlock" style="display:none;"></div>
+	<input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+	<table class="holder-table">
+		<tr>
+			<td class="left-td">
+				<table class="inner-table">
+					<tr>
+						<td colspan="2"><strong>{{'general_data'|gLA:'General data'}}</strong></td>
+			        </tr>
+			        <tr>
+			            <td>{{'name'|gLA:'Name'}}:</td>
+			            <td><input type="text" class="long" name="name" id="name" value="{{$edit.name|clear}}" /></td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_module'|gLA:'Module'}}:</td>
+			            <td>
+			            	<select class="long" name="module_id" id="module_id">
+								{{$edit.module_id}}
+							</select>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>{{'m_enable'|gLA:'Enable'}}:</td>
+			            <td><input type="checkbox" name="enable" id="enable" value="1" {{if $edit.enable}} checked="checked" {{/if}} /></td>
+			        </tr>
+			        {{if count($countries) > 1}}
+			        <tr>
+			            <td>{{'type'|gLA:'Type'}}:</td>
+			            <td>
+			            	<select onchange="showHideCountryBlock();" class="long" name="type" id="type">
+								{{$edit.typeOptions}}
+							</select>
+			            </td>
+			        </tr>
+			        {{/if}}
+			        <tr>
+			            <td>{{'m_description'|gLA:'Description'}}:</td>
+			            <td><textarea name="description" id="description" cols="20" rows="6" class="t-desc">{{$edit.description|clear}}</textarea></td>
+			        </tr>
+    			</table>
+    		</td>
+			<td>
+    			<table class="inner-table">
+			        <tr>
+			            <td colspan="4"><strong>{{'translations'|gLA:'Translations'}}</strong></td>
+			        </tr>
+			        <tr>
+                        <td>
+                        	<div id="typeC" {{if $edit.type == 'l'}} style="display:none;"{{/if}}>
+	                        	{{foreach key=k item=ctr from=$countries}}
+								<div class="block-holder{{if ($k == 0) && ($edit.type == 'c')}} open{{/if}}">
+	                                <h4><a href="#">{{$ctr.title}}</a></h4>
+	                                <div class="inner-block">
+	                                    <ul class="lang-tabs">
+	                                    	{{foreach key=lk item=lng from=$ctr.langs}}
+	                                    	<li{{if $lng.default}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+								            {{/foreach}}
+	                                    </ul>
+	                                   
+	                                    <div class="areaBlock">
+		                                    {{foreach key=lk item=lng from=$ctr.langs}}
+		                                   	<div class="text-block{{if $lng.default}} open{{/if}}">
+		                                        <textarea name="value_{{$v2.id}}_{{$v.lang}}" id="value_{{$ctr.id}}_{{$lng.lang}}" cols="20" rows="5">{{$edit.values[$ctr.id][$lng.lang]|clear}}</textarea>
+		                                        <p class="wys"><a href="#" onclick="openCkEditor('value_{{$ctr.id}}_{{$lng.lang}}', 'advanced'); return false;">{{'wysiwyg'|gLA:'WYSIWYG'}}</a></p>
+		                                        <p class="count">{{$edit.values[$ctr.id][$lng.lang]|count_characters:true}} / 1000</p>
+		                                        <div class="clr"><!-- clear --></div>
+		                                    </div>
+								            {{/foreach}}
+							            </div>             
+	                                </div>
+	                            </div>
+								{{/foreach}}
+							</div>
+							<div id="typeL" {{if $edit.type == 'c'}} style="display:none;"{{/if}}>
+								<div class="block-holder open">
+	                                <div class="inner-block">
+	                                    <ul class="lang-tabs">
+	                                    	{{foreach name=langauges key=lk item=lng from=$langauges}}
+	                                    	<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+								            {{/foreach}}
+	                                    </ul>
+	                                   
+	                                    <div class="areaBlock">
+		                                    {{foreach name=langauges2 key=lk item=lng from=$langauges}}
+		                                   	<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+		                                        <textarea name="value_0_{{$lng.lang}}" id="value_0_{{$lng.lang}}" cols="20" rows="5">{{$edit.values[0][$lng.lang]|clear}}</textarea>
+		                                        <p class="wys"><a href="#" onclick="openCkEditor('value_0_{{$lng.lang}}', 'advanced'); return false;">{{'wysiwyg'|gLA:'WYSIWYG'}}</a></p>
+		                                        <p class="count">{{$edit.values[0][$lng.lang]|count_characters:true}} / 1000</p>
+		                                        <div class="clr"><!-- clear --></div>
+		                                    </div>
+								            {{/foreach}}
+							            </div>             
+	                                </div>
+	                            </div>
+                            </div>
+                        </td>
+                    </tr>	        
+				</table>
+			</td>
+		</tr>
+	</table>
+    <table class="bttns-table">
+        <tr>
+            <td>
+            	{{if $edit.id}}
+                <div class="btn orange"><a href="javascript:;" onclick="checkFields('apply');"><span>{{'apply'|gLA:'Apply'}}</span></a></div>
+                {{/if}}
+                <div class="btn"><a href="javascript:;" onclick="checkFields('next');"><span>{{'save_and_next'|gLA:'Save and next'}}</span></a></div>
+                <div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save_and_close'|gLA:'Save and close'}}</span></a></div>
+                <div class="btn cancel"><a href="javascript:;" onclick="$('#edit_{{$edit.id}}').html('');"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+            </td>
+        </tr>
+    </table>
+    </form>
+    
+    <script type="text/javascript">
+    $(function () {
+		$('ul.lang-tabs a').click(function() {
+			var curChildIndex = $(this).parent().prevAll().length + 1;
+			$(this).parent().parent().children('.active').removeClass('active');
+			$(this).parent().addClass('active');
+			$(this).parent().parent().next('.areaBlock').children('.open').fadeOut('fast',function() {
+				$(this).removeClass('open');
+				$(this).parent().children('div:nth-child('+curChildIndex+')').fadeIn('normal',function() {
+					$(this).addClass('open');
+				});
+			});
+			return false;
+		});
+		$('div.block-holder h4').click(function() {
+			$(this).parent().parent().children('.open').removeClass('open');
+			$(this).parent().addClass('open');
+			
+			return false;
+		});
+
+		$('.areaBlock textarea').keydown(function(){
+			symbolcount(this);
+		}).keyup(function(){
+			symbolcount(this);
+		}).focus(function(){
+			symbolcount(this);
+		});
+
+		$symbolmax = 1000;
+
+		symbolcount = function(e){
+			$text = $(e).val();
+			if ($text.length > $symbolmax - 1) {
+				$(e).val($text.substr(0, $symbolmax));
+				symbolcount(this);
+			} else {
+				$(e).parent().children('.count').html($(e).val().length + ' / ' + $symbolmax);
+			}				
+		}
+
+		var tabindex = 1;
+		$('#editForma :input,select').each(function() {
+			if (this.type != "hidden" && this.id != "cmsLang") {
+				var $input = $(this);
+				$input.attr("tabindex", tabindex);
+				tabindex++;
+			}
+		});
+
+    });		
+	</script>
+</td>

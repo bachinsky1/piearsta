@@ -1,0 +1,42 @@
+<div class="internal popupTFAAuth">
+
+
+
+    <div class="info-block">
+        <div class="imageContainer">
+            <img src="/img/2-f-a.png">
+        </div>
+        <div class="codeContainer">
+            <div>
+                <label for="code">{{'profile_tfa_configure_code_input_label'|gL:'Lūdzu, ievadiet drošības kodu.'}}</label>
+            </div>
+
+            {{if $item.wrongCode}}
+            <div class="info-block error-block">
+                <h3>{{'profile_tfa_configure_code_wrong'|gL:'Ievadītais kods ir nepareizs! '}}</h3>
+                <div>
+                    {{'profile_tfa_configure_try_again'|gL:'Mēģiniet vēlreiz.'}}
+                </div>
+                <div class="attempts-left">
+                    {{'profile_tfa_configure_attempts_left'|gL:'Осталось попыток:'}} {{$item.attemptsLeft}}
+                </div>
+            </div>
+            {{/if}}
+
+
+            <div>
+                <div class="cinput">
+                    <input id="code" type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn_cont">
+        <a class="btn btnw w3 cancel-btn">{{"profile_reservation_cancel_cancel"|gL:"Atcelt"}}</a>
+        <a href="" class="btng w1 continue-btn">{{'profile_continue'|gL:"Continue"}}</a>
+    </div>
+
+    <div class="hiddens"></div>
+
+</div>

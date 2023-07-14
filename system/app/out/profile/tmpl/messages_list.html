@@ -1,0 +1,13 @@
+{{foreach from=$messages item=item name=pm}}
+<div  id="r_{{$item.id}}" class="table_line {{if !$item.readed}}new_msg{{/if}}">
+    <table class="table1">
+        <tbody>
+        <tr>
+            <td><label class="item blue"><input type="checkbox" class="messages" value="{{$item.id}}"><span class="box"><i class="fa fa-check"></i></span></label></td>
+            <td><div class="subject"><a href="#" data-mesid="{{$item.id}}" class="openMessage">{{$item.subject|clear}}</a></div></td>
+            <td><div class="date">{{$item.created|date_format:'%d.%m.%y.'}}</div></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{{/foreach}}

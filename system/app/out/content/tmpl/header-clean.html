@@ -1,0 +1,109 @@
+<header{{if $langMenu.langs|@count == 1}} class="nolang"{{/if}}>
+	<section class="line1"><div class="wrapd wrapt">
+		<div class="header_menu_mob">
+			<div class="trigger">
+				<div class="open">
+					<div class="icon"><i class="fa fa-times"></i></div>
+					<div class="text">{{'header_close'|gL:'Aizvērt'}}</div>
+				</div>
+				<div class="closed">
+					<div class="icon"><i class="fa fa-bars"></i></div>
+					<div class="text">{{'header_menu'|gL:'Menu'}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="controls">
+<!--				<div class="block"><a href="{{$siteData.mirros_help_page|getLM}}">{{'header_help'|gL:'Palidzība'}}</a></div>-->
+				{{if $langMenu.langs|@count > 1}}
+				<div class="block languages">
+					{{section name=item loop=$langMenu.langs}}
+					{{if $langMenu.langs[item].active}}
+					<div class="trigger">{{$langMenu.langs[item].title}}<i class="fa fa-angle-down"></i></div>
+					{{/if}}
+					{{/section}}
+
+					{{if $langMenu.langs|@count > 1}}
+					<div class="dropdown">
+						<div class="list">
+						{{section name=item loop=$langMenu.langs}}
+						{{if !$langMenu.langs[item].active}}
+						<a class="item" href="{{$langMenu.langs[item].link}}">{{$langMenu.langs[item].title}}</a>
+						{{/if}}
+						{{/section}}
+						</div>
+					</div>
+					{{/if}}
+
+				</div>
+				{{/if}}
+			</div>
+		</div>
+		<a href="{{$mainpageId|getLM}}" class="logo">
+			{{if $content.id == $mainpageId}}{{else}}<h2>{{/if}}
+				<img alt="{{'logoTitle'|gL:'Logo Title'}}" src="{{$AD_IMAGE_FOLDER}}piearsta-logo-mobile.png" class="ver3ib">
+				<img alt="{{'logoTitle'|gL:'Logo Title'}}" src="{{$AD_IMAGE_FOLDER}}piearsta-logo.png" class="ver1ib ver2ib">
+			{{if $content.id == $mainpageId}}{{else}}</h2>{{/if}}
+		</a>
+
+
+		{{if $web.url == '/registracija/'}}
+		<div class="header__tabs-column authorized">
+			<ul class="tabs">
+				<li class="tabs__tab">
+					<a class="tabs__tab-link lang">
+						<div class="item-arrow"></div>
+						{{assign var="switcherLanguage" value=$switcherLanguage}}</a>
+					<div class="lang-active registration" id="langArrow"> {{'languages_panel_profile'|gL:'Lat'}}
+						<div class="arrow registrationArrow"><i class="fa fa-angle-down"></i></div>
+					</div>
+					<div class="level_overlay" id="langShow" style="display: none">
+						{{foreach from=$allWebLanguages item=item name=allWebLanguages}}
+						{{if $switcherLanguage == $item.lang}}
+						{{assign var="switcherLanguage" value=$item.title}}
+						{{/if}}
+						<div class="menuList">
+							<a class="registration setLang" data-value="{{$item.lang}}" id="lang">{{$item.title}}</a>
+						</div>
+						{{/foreach}}
+					</div>
+				</li>
+			</ul>
+		</div>
+		{{/if}}
+
+	</div></section>
+	<span class="expand">
+		{{include file='top-menu-expand.html'}}
+		<div class="box">
+			<div class="authorization"><div class="cont">
+				<div><a href="{{$siteData.mirros_signin_page|getLM}}">{{'header_login'|gL:'Ienākt'}}</a></div>
+				<div><a href="{{$siteData.mirros_signup_page|getLM}}">{{'header_registration'|gL:'Reģistrēties'}}</a></div>
+				<div><a href="{{$siteData.mirros_help_page|getLM}}">{{'header_help'|gL:'Palidzība'}}</a></div>
+			</div></div>
+			{{if $langMenu.langs|@count > 1}}
+			<div class="languages"><div class="cont">
+				{{section name=item loop=$langMenu.langs}}
+				{{if $langMenu.langs[item].active}}
+				<div>{{$langMenu.langs[item].title}}</div>
+				{{/if}}
+				{{/section}}
+				{{section name=item loop=$langMenu.langs}}
+				{{if !$langMenu.langs[item].active}}
+				<div><a href="{{$langMenu.langs[item].link}}">{{$langMenu.langs[item].title}}</a></div>
+				{{/if}}
+				{{/section}}
+			</div></div>
+			{{/if}}
+		</div>
+	</span>
+
+<script type="text/javascript" nonce="{{$web.cspNonce}}">
+
+	function setLang(el) {
+		var lang = el.getAttribute('data-value');
+		profile.changeLang(this, lang)
+	}
+</script>
+
+</header>

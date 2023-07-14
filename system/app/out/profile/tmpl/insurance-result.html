@@ -1,0 +1,194 @@
+<h2>{{'profile_insurance_check_result_title'|gL:'Результаты проверки страхового полиса'}}</h2>
+<hr>
+
+{{if $item.insCheck && $item.insCheck.insCheckStatus && $item.insCheck.insCheckStatus == 'connection_error'}}
+
+<!-- Connection error during insurance check -->
+
+<div class="info-block">
+    <div class="msg_red">
+        {{'profile_insurance_check_connection_error'|gL:'Neizdevas veikt parbaudi tehnisko iemeslu del.'}}
+    </div>
+</div>
+
+<div class="btn_cont">
+    <!-- User can cancel current reservation process -->
+    <a href="" class="btng w1 continue-btn-pay">{{"profile_reservation_add_continue_payment"|gL:"Продолжить с оплатой"}}</a>
+    <a class="btn btnw w3 back-to-ins-first-btn">{{'profile_reservation_back'|gL:'Go back.'}}</a>
+</div>
+
+<input class="ins_hidden_inp" id="insuranceAllowed" type="hidden" value="0" />
+
+{{elseif $item.insCheck && $item.insCheck.insCheckStatus && $item.insCheck.insCheckStatus == 'insurance_police_error'}}
+
+<!-- Insurance police is wrong -- not exists or belongs to another person -->
+
+<div class="info-block">
+    <div>
+        {{'profile_insurance_checked_msg_1'|gL:'Срок действия страхового полиса и его покрытие проверены.'}}
+    </div>
+</div>
+
+<div class="info-block">
+    <div class="msg_red">
+        {{'profile_insurance_check_unrecognized_police'|gL:'Страховая компания не может распознать указанный полис.'}}
+    </div>
+</div>
+
+<div class="info-block">
+    <div>
+        {{'profile_insurance_please_check_police_data'|gL:'Пожалуйста проверьте данные вашего полиса и/или его срок дейтсвия '}}
+        <a class="insurance_edit_form" href="#">{{'profile_here'|gL:'здесь'}}</a>
+    </div>
+</div>
+
+<div class="btn_cont">
+    <!-- User can cancel current reservation process -->
+    <a class="btn btnw w3 back-to-ins-first-btn">{{'profile_reservation_back'|gL:'Go back.'}}</a>
+    <a class="btn btnw w3 cancel-btn">{{'profile_reservation_cancel_cancel'|gL:'Отменить'}}</a>
+</div>
+
+<input class="ins_hidden_inp" id="insuranceAllowed" type="hidden" value="0" />
+
+{{elseif $item.insCheck && $item.insCheck.insCheckStatus && $item.insCheck.insCheckStatus == 'insurance_police_expired'}}
+
+<!-- Insurance police is wrong -- EXPIRED -->
+
+<div class="info-block">
+    <div>
+        {{'profile_insurance_checked_msg_1'|gL:'Срок действия страхового полиса и его покрытие проверены.'}}
+    </div>
+</div>
+
+<div class="info-block">
+    <div class="msg_red">
+        {{'profile_insurance_check_expired_police'|gL:'Срок действия указанного полиса истек.'}}
+    </div>
+</div>
+
+<div class="info-block">
+    <div>
+        {{'profile_insurance_please_check_police_data'|gL:'Пожалуйста проверьте данные вашего полиса и/или его срок дейтсвия '}}
+        <a class="insurance_edit_form" href="#">{{'profile_here'|gL:'здесь'}}</a>
+    </div>
+</div>
+
+<div class="btn_cont">
+    <!-- User can cancel current reservation process -->
+    <a class="btn btnw w3 back-to-ins-first-btn">{{'profile_reservation_back'|gL:'Go back.'}}</a>
+    <a class="btn btnw w3 cancel-btn">{{'profile_reservation_cancel_cancel'|gL:'Отменить'}}</a>
+</div>
+
+<input class="ins_hidden_inp" id="insuranceAllowed" type="hidden" value="0" />
+
+{{elseif $item.insCheck && $item.insCheck.insCheckStatus && $item.insCheck.insCheckStatus == 'insurance_checked'}}
+
+<!-- Check is ok, the result obtained  -->
+
+    <div class="info-block">
+        <div>
+            {{'profile_insurance_checked_msg_1'|gL:'Срок действия страхового полиса и его покрытие проверены.'}}*
+        </div>
+    </div>
+
+    {{if $item.insCheck.covers}}
+    <!-- Police covers selected service, so allow to pay with insurance -->
+
+    <div class="info-block">
+        <div class="msg_green">
+            {{'profile_insurance_checked_copay'|gL:'При получении услуги вам надо будет произвести доплату '}}{{$item.insCheck.addPay}}€
+        </div>
+    </div>
+
+    <div class="info-block">
+        <div style="font-size: smaller;">
+            * {{'profile_insurance_checked_msg_2'|gL:'Проверка произведена '}} {{$item.insCheck.insCheckDate}} {{ 'profile_at'|gL:' в ' }} {{$item.insCheck.insCheckTime}}. <br />
+            {{'profile_insurance_checked_msg_3'|gL:'Размер доплаты носит информативный характер. Он будет уточнен поставщиком услуги в день ее оказания.'}}
+        </div>
+    </div>
+
+    <div class="info-block ins-agree">
+        <div class="order-agree">
+            <div class="checkbox_field">
+                <label class="item blue">
+                    <input class="order-agree" id="ins-agree" type="checkbox">
+                    <span class="box"><i class="fa fa-check"></i></span>{{'profile_have_read_and_accept_terms'|gL:'Apliecinu, ka iepazinos un piekritu <a href="/lietosanas-noteikumi/" target="_blank">apmaksas noteikumiem</a>'}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn_cont">
+        <a href="" class="btng w1 continue-btn disabled">{{"profile_reservation_add_continue"|gL:"Continue"}}</a>
+        <a class="btn btnw w3 cancel-btn">{{'profile_reservation_cancel_cancel'|gL:'Отменить'}}</a>
+    </div>
+
+    {{else}}
+    <!-- Coverage not enough, do not allow to pay with insurance -->
+
+    <div class="msg_red">
+        {{'profile_insurance_checked_copay_limit_exceed'|gL:'Доплата превышает разрешенную данным учреждением при записи онлайн.'}}
+        {{'profile_insurance_checked_can_pay_other_way'|gL:'Чтобы записаться вам надо будет произвести оплату с помощью интернет-банка или банковской карты.'}}
+    </div>
+
+    <div class="btn_cont">
+        <!-- User can continue with standard payment reservation or can cancel current reservation process -->
+        <a href="" class="btng w1 continue-btn-pay">{{"profile_reservation_add_continue_payment"|gL:"Продолжить с оплатой"}}</a>
+        <a class="btn btnw w3 cancel-btn">{{'profile_reservation_cancel_cancel'|gL:'Отменить'}}</a>
+    </div>
+
+    {{/if}}
+
+    <input class="ins_hidden_inp" id="insuranceAllowed" type="hidden" value="1" />
+
+{{else}}
+
+<!-- Error -- no correct status in response -->
+
+<div class="info-block">
+    <div class="msg_red">
+        {{'profile_insurance_check_connection_error'|gL:'Neizdevas veikt parbaudi tehnisko iemeslu del.'}}
+    </div>
+</div>
+
+<div class="btn_cont">
+    <!-- User can cancel current reservation process -->
+    <a href="" class="btng w1 continue-btn-pay">{{"profile_reservation_add_continue_payment"|gL:"Продолжить с оплатой"}}</a>
+    <a class="btn btnw w3 back-to-ins-first-btn">{{'profile_reservation_back'|gL:'Go back.'}}</a>
+</div>
+
+<input class="ins_hidden_inp" id="insuranceAllowed" type="hidden" value="0" />
+
+{{/if}}
+
+
+<!-- save info for step back -->
+<input class="ins_hidden_inp" id="sheduleId" type="hidden" value="{{$item.id}}" />
+<input class="ins_hidden_inp" id="clinic_id" type="hidden" value="{{$item.clinic_id}}" />
+<input class="ins_hidden_inp" id="doctor_id" type="hidden" value="{{$item.doctor_id}}" />
+<input class="ins_hidden_inp" id="serviceStreetPrice" type="hidden" value="{{$item.streetPrice}}" />
+<input class="ins_hidden_inp" id="serviceInsurancePrice" type="hidden" value="{{$item.insPrice}}" />
+<input class="ins_hidden_inp" id="serviceId" type="hidden" value="{{$item.serviceData.c_id}}" />
+<input class="ins_hidden_inp" id="serviceName" type="hidden" value="{{$item.serviceData.title}}" />
+<input class="ins_hidden_inp" id="slots" type="hidden" value="{{$item.slots}}" />
+<input class="ins_hidden_inp" id="lock_id" type="hidden" value="{{$item.lockId}}" />
+<input class="ins_hidden_inp" id="reservation_id" type="hidden" value="{{$item.reservationId}}" />
+<input class="ins_hidden_inp" id="note" type="hidden" value="{{$item.notice}}" />
+<input class="ins_hidden_inp" id="notice" type="hidden" value="{{$item.notice}}" />
+<input class="ins_hidden_inp" id="isConsultation" type="hidden" value="{{$item.isConsultation}}" />
+<input class="ins_hidden_inp" id="anyTime" type="hidden" value="{{$item.anyTime}}" />
+<input class="ins_hidden_inp" id="selectedTime" type="hidden" value="{{$item.selectedTime}}" />
+<input class="ins_hidden_inp" id="personId" type="hidden" value="{{$item.profile_person_id}}" />
+<input class="ins_hidden_inp" id="fromTSWidget" type="hidden" value="{{$item.fromTSWidget}}" />
+<input class="ins_hidden_inp" id="needLocalInsuranceCheck" type="hidden" value="{{if $item.needLocalInsuranceCheck}}1{{else}}0{{/if}}" />
+<input class="ins_hidden_inp" id="insuranceCompDontWorkWithClinic" type="hidden" value="{{if $item.insuranceCompDontWorkWithClinic}}1{{else}}0{{/if}}" />
+
+{{if $dcAppointment}}
+<input class="ins_hidden_inp" id="dc" type="hidden" value="{{$dcAppointment}}" />
+{{/if}}
+
+{{if $resOptions}}
+{{foreach from=$resOptions key=k item=option}}
+<input id="{{$k}}" class="resOptionsHiddenInput ins_hidden_inp" type="hidden" value="{{$option}}" />
+{{/foreach}}
+{{/if}}

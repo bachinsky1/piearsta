@@ -1,0 +1,112 @@
+<div class="signup_block orders">
+    <div class="wrap">
+        <div class="col2_y">
+            <div class="header_block">
+                <h2>{{$web.title}}</h2>
+            </div>
+            <div class="cont">
+                <div class="page-descr">
+                    {{$content.content}}
+                </div>
+                <div class="data-table table_cont">
+
+                    <form id="orderFilterForm" action="" method="GET">
+                        <div class="selectfields">
+                            <div class="cont">
+                                <div class="cselect">
+                                    <div class="textcont">
+                                        <div class="textouter"><div class="text">
+                                            {{'form_select_all'|gL:'Visi'}}
+                                        </div></div>
+                                        <div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+                                    </div>
+                                    <select id="status" class="orderFilterFormSubmit" name="status">
+                                        <option value="all" {{if $smarty.get.status == "all" || !$smarty.get.status}} selected="selected"{{/if}}>{{'form_select_all'|gL:'Visi'}}</option>
+                                        {{foreach from=$profileConfig.order_states item=i key=k}}
+                                        <option value="{{$k}}" {{if $smarty.get.status != 'all' && $smarty.get.status == $k}} selected="selected"{{/if}}>{{$i|gL}}</option>
+                                        {{/foreach}}
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    {{if $userData.orders|@count > 0}}
+
+                    <div class="table_header">
+                        <table class="table2">
+                            <thead>
+                            <tr>
+                                <th>{{'profile_reservation_order_nr'|gL:'Order Nr.'}}</th>
+                                <th>Pakalpojums</th>
+                                <th>Datums</th>
+                                <th>Cena</th>
+                                <th>Statuss</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    {{foreach from=$userData.orders item=item}}
+
+                    {{if $item.status == 0}}
+                    {{assign var=status_color value=""}}
+                    {{elseif $item.status == 1}}
+                    {{assign var=status_color value="yellow"}}
+                    {{elseif $item.status == 2}}
+                    {{assign var=status_color value="red"}}
+                    {{elseif $item.status == 3}}
+                    {{assign var=status_color value="blue"}}
+                    {{elseif $item.status == 4}}
+                    {{assign var=status_color value="green"}}
+                    {{elseif $item.status == 5}}
+                    {{assign var=status_color value="red"}}
+                    {{elseif $item.status == 6}}
+                    {{assign var=status_color value="green"}}
+                    {{/if}}
+
+                    <a href="#" class="table_line openOrder" data-ordid="{{$item.id}}">
+                        <table class="table2">
+                            <tbody>
+                            <tr>
+                                <td>{{$item.id}}</td>
+                                <td>{{$item.service_name}}</td>
+                                <td>{{$item.date|date_format:"%d.%m.%Y"}}</td>
+                                <td>{{$item.item_total}}</td>
+                                <td class="status green">
+                                    {{if $item.status == 0}}
+                                    <div class="status">{{'profile_order_status_0'|gL}}</div>
+                                    {{elseif $item.status == 1}}
+                                    <div class="status yellow">{{'profile_order_status_1'|gL}}</div>
+                                    {{elseif $item.status == 2}}
+                                    <div class="status red">{{'profile_order_status_2'|gL}}</div>
+                                    {{elseif $item.status == 3}}
+                                    <div class="status green">{{'profile_order_status_3'|gL}}</div>
+                                    {{elseif $item.status == 4}}
+                                    <div class="status green">{{'profile_order_status_4'|gL}}</div>
+                                    {{elseif $item.status == 5}}
+                                    <div class="status red">{{'profile_order_status_5'|gL}}</div>
+                                    {{elseif $item.status == 6}}
+                                    <div class="status green">{{'profile_order_status_6'|gL}}</div>
+                                    {{/if}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </a>
+
+                    {{/foreach}}
+
+                    {{else}}
+
+                    <div class="page-descr">{{'profile_reservation_no_orders_found'|gL:'No orders found.'}}</div>
+
+                    {{/if}}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

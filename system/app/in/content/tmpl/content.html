@@ -1,0 +1,55 @@
+<div id="sidebar">
+	<div id="close"><a href="javascript:;" onclick="$('#sidebar').toggleClass('closed'); $('.sb-forma').toggle(); ($('.sb-forma').is(':visible')) ? $('.contentTree').show() : $('.contentTree').hide();"><span>{{'close_sidebar'|gLA:'Close sidebar'}}</span></a></div>
+	
+	<form class="sb-forma" method="post" action="">
+	    <fieldset>
+	        <legend>Add form</legend>
+	        <ul class="add-list">
+	        	{{if count($countries) > 1}}
+				<li>
+	                <label for="countryF">{{'country'|gLA:'Country'}}:</label>
+	                <select id="countryF" name="countryF" onchange="changeCountry(); return false;">
+	                	{{section name=item loop=$countries.data}}
+	                		<option {{if $countries.data[item].id == $countries.sel}} selected="selected" {{/if}} value="{{$countries.data[item].id}}">{{$countries.data[item].title}}</option>
+	                	{{/section}} 
+	                </select>
+	            </li>                  
+				{{/if}}
+	            <li>
+	                <label for="language">{{'lang'|gLA:'Language'}}:</label>
+	                <select id="language" name="language" onchange="changeLang(); return false;">
+	                    {{section name=item loop=$languages.data}}
+	                		<option {{if $languages.data[item].lang == $languages.sel}} selected="selected" {{/if}} value="{{$languages.data[item].lang}}">{{$languages.data[item].title}}</option>
+	                	{{/section}}
+	                </select>
+	            </li>
+	            <li>
+	                <div class="btn"><a href="#" onclick="moduleEdit('', ''); return false;"><span>{{'content_add'|gLA:'Add New Content'}}</span></a></div>
+	            </li>
+	        </ul>
+	    </fieldset>
+	</form>
+            
+	<div class="contentTree" id="modulePath">           
+	</div>
+</div>
+
+<div class="content" id="contentData">
+</div>  
+
+<div class="clr"><!-- clear --></div>
+<script type="text/javascript">
+
+	moduleTable.mainUrl = '{{$MAIN_URL}}';
+	moduleTable.moduleName = '{{$MODULE_NAME}}';
+	moduleTable.usePaging = false;
+
+	$(function () { 
+		$("#dialog").dialog("destroy");
+
+		updateModule();
+
+		setTimeout('checkForSelectedId()', 500);
+	});	
+	
+</script>

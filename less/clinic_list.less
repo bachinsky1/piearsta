@@ -1,0 +1,93 @@
+.clinic_list{._rel;color:#404446;
+	>.wrap{padding:0px 0 0px;}
+	.header{._clear;padding:50px 0 20px;
+		h2{._text(30px,36px);}
+	}
+	.cont{padding-bottom:84px;
+		.list{
+			.item{._clear;._rel;border-bottom:1px solid #e0e6e9;border-top:1px solid #e0e6e9;padding-bottom: 30px;
+				.image{
+					._left;
+					._wh(120px,120px);
+					padding-top:30px;
+
+					a {
+						width: 100px;
+						height: auto;
+						max-height: 120px;
+						overflow:hidden;
+
+						img {
+							display: block;
+							width: 100px;
+							height: auto;
+							max-height: 115px;
+							min-height: 80px;
+							object-fit: cover;
+							border-radius: 4px;
+						}
+					}
+				}
+				.text{margin-left:140px;padding-top:25px;
+					.name{._text(24px,29px);
+						a{color:#009fe5;
+							&:hover{._xu;color:#006fa0;}
+						}
+					}
+					.reviews{color:#65c300;._text(14px,17px);
+						a{color:#65c300;
+							&:hover{._u;}
+						}
+					}
+					.contacts{._text(14px,17px);color:#aab1b5;margin-top:15px;
+						div+div{margin-top:3px;}
+					}
+				}
+				&+.item{border-top:0;}
+			}
+		}
+	}
+
+	.quickFilters {
+		display: flex;
+		margin: 0;
+
+		&.open {
+
+		}
+	}
+
+	.header{
+		padding:45px 0 21px;
+
+		.controls,
+		.controls2 {
+			&.quickFilters.open {
+
+				.left {
+					margin-top: 11px;
+
+					@media (max-width: 767px) {
+						margin-top: 28px;
+						flex-wrap: wrap;
+					}
+
+					.quickFilter-item {
+						@media (max-width: 767px) {
+							margin-bottom: 14px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+@media (max-width: 767px) {
+	.clinic_list{
+		.header{padding:33px 0 19px;}
+		.cont{padding-bottom:40px;
+		}
+	}
+}

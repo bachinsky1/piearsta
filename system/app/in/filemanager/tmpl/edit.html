@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{AD_CMS_LANGUAGE}" lang="{AD_CMS_LANGUAGE}"> 
+<head>
+<title>.:: AD Web ::. Popup Window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/{AD_CMS_CSS_FOLDER}inline.css" />
+<link rel="stylesheet" type="text/css" href="/{AD_CMS_MODULE_WEB_FOLDER}{MODULE_NAME}/css/{MODULE_NAME}.css" />
+<script type="text/javascript" src="/{AD_JS_FOLDER}prototype.js"></script>
+<script type="text/javascript" src="/{AD_CMS_JS_FOLDER}functions.js"></script>
+<script type="text/javascript" src="/{AD_JS_FOLDER}functions.js"></script>
+<script type="text/javascript" src="/{AD_CMS_JS_FOLDER}json.js"></script>
+<script type="text/javascript" src="/{AD_CMS_MODULE_WEB_FOLDER}{MODULE_NAME}/js/{MODULE_NAME}.js"></script>
+<script type="text/javascript" src="/{AD_CMS_JS_FOLDER}langMsg.php?module={MODULE_NAME}"></script>
+
+</head>
+<body>
+	<div id="container">
+		<!-- START BLOCK : EDIT_FOLDER_OR_FILE -->
+		<form name="editForma" id="editForma" method="post" action="#" onsubmit="checkFields(); return false;">
+		<input type="hidden" name="fItem" id="fItem" value="{fItem}" />
+			<table>
+				<tr>  
+					<td class="labelcell"><label for="fName">{cms_lang_name}:</label></td>
+					<td colspan="2" class="fieldcell"><input type="text" name="fName" id="fName" tabindex="1" value="{fName}" /></td>
+				</tr>
+				<tr>  
+					<td colspan="3" align="center"><input type="submit" class="button" name="Submit" value="{cms_lang_save}" tabindex="2" /></td>
+				</tr>
+			</table>
+		</form>
+		<!-- END BLOCK : EDIT_FOLDER_OR_FILE -->
+		
+		<!-- START BLOCK : ADD_FOLDER -->
+		<form name="editForma" id="editForma" method="post" action="#" onsubmit="checkFolderName(); return false;">
+		<input type="hidden" name="fItem" id="fItem" value="{fItem}" />
+			<table>
+				<tr>  
+					<td class="labelcell"><label for="fName">{cms_lang_folder_name}:</label></td>
+					<td colspan="2" class="fieldcell"><input type="text" name="fName" id="fName" tabindex="1" value="{fName}" /></td>
+				</tr>
+				<tr>  
+					<td colspan="3" align="center"><input type="submit" class="button" name="Submit" value="{cms_lang_save}" tabindex="2" /></td>
+				</tr>
+			</table>
+		</form>
+		<!-- END BLOCK : ADD_FOLDER -->
+		
+	</div>
+</body>
+</html>

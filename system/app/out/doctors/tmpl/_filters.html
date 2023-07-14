@@ -1,0 +1,266 @@
+<div class="hero_block internal_filter v2">
+    <div class="wrap">
+        <div class="titles">
+            <h1>{{'doctors_list_title'|gL:'Atrodi savu ārstu'}}</h1>
+        </div>
+        <form class="search">
+            <div class="field">
+
+                {{if $filters.doctors_filter_search && $smarty.get.spec}}
+                {{assign var="s_value" value=""}}
+                {{else}}
+                {{assign var="s_value" value=$filters.doctors_filter_search|clear}}
+                {{/if}}
+
+                <div class="cinput mainSearch">
+                    <input type="text" value="{{$s_value}}"
+                           id="doctors_filter_search"
+                           data-default="{{'doctors_only_search_default_text'|gL:'Ievādiet ārsta uzvārdu vai speicālitātī'}}"
+                           placeholder="{{'doctors_only_search_default_text'|gL:'Ievādiet ārsta uzvārdu vai speicālitātī'}}"
+                           class="autocomplete">
+                </div>
+            </div>
+            <div class="right ver1 ver2">
+                <div class="btn_cont"><input type="submit" class="btng search-btn"
+                                             value="{{'doctors_find_doctor'|gL:'Meklēt ārstu'}}"></div>
+                <div class="advanced{{if $showAdvanced}} on{{/if}}">
+                    <a href="#">
+                        <span class="off"><span class="ver1i ver2i">{{'doctors_advanced_search'|gL:'Detalizēta meklēšana'}}</span></span>
+                        <span class="on l1"><span
+                                class="ver1i ver2i">{{'doctors_close_advanced_search'|gL:'Aizvērt'}}</span></span>
+                    </a>
+                </div>
+            </div>
+            <div class="collapsible" {{if $showAdvanced}} style="display: block;" {{/if}}>
+            <div class="field2">
+                <div class="label"><label>{{'doctors_filter_city_title'|gL:'Pilsēta'}}</label></div>
+                <div class="cselect default">
+                    <div class="textcont">
+                        <div class="textouter">
+                            <div class="text">{{if $filters.doctors_filter_city && $filters.doctors_filter_city !=
+                                'false'}}{{$cityList[$filters.doctors_filter_city].title|clear}}{{else}}{{'doctors_filter_city_default_text'|gL:'Izvēlies
+                                pilsētu'}}{{/if}}
+                            </div>
+                        </div>
+                        <div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+                    </div>
+                    <select id="doctors_filter_city"
+                            data-default="{{'doctors_filter_city_default_text'|gL:'Izvēlies pilsētu'}}">
+                        <option
+                        {{if !$filters.doctors_filter_city || $filters.doctors_filter_city == 'false'}}
+                        selected="selected"{{/if}} value="">{{'doctors_filter_city_default_text'|gL:'Izvēlies
+                        pilsētu'}}</option>
+                        {{foreach from=$cityList item=city}}
+                        <option
+                        {{if $filters.doctors_filter_city && $filters.doctors_filter_city == $city.id}}
+                        selected="selected"{{/if}} value="{{$city.id}}">{{$city.title|clear}}</option>
+                        {{/foreach}}
+                    </select>
+                </div>
+                <div class="label"><label>{{'doctors_filter_company_title'|gL:'Iestāde'}}</label></div>
+                <div class="cselect default">
+                    <div class="textcont">
+                        <div class="textouter">
+                            <div class="text">{{if $filters.doctors_filter_clinic && $filters.doctors_filter_clinic !=
+                                'false'}}{{$clinicList[$filters.doctors_filter_clinic].name|clear}}{{else}}{{'doctors_filter_company_default_text'|gL:'Izvēlies
+                                iestādi'}}{{/if}}
+                            </div>
+                        </div>
+                        <div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+                    </div>
+                    <select id="doctors_filter_clinic"
+                            data-default="{{'doctors_filter_company_default_text'|gL:'Izvēlies iestādi'}}">
+                        <option
+                        {{if !$filters.doctors_filter_clinic || $filters.doctors_filter_clinic == 'false'}}
+                        selected="selected"{{/if}} value="">{{'doctors_filter_company_default_text'|gL:'Izvēlies
+                        iestādi'}}</option>
+                        {{foreach from=$clinicList item=clinic}}
+                        <option
+                        {{if $filters.doctors_filter_clinic && $filters.doctors_filter_clinic == $clinic.id}}
+                        selected="selected"{{/if}} value="{{$clinic.id}}">{{$clinic.name|clear}}</option>
+                        {{/foreach}}
+                    </select>
+                </div>
+            </div>
+            <div class="field2 service-ac-field">
+
+                {{if $filters.doctors_filter_specialty}}
+                {{assign var="spec_value" value=$filters.doctors_filter_specialty|clear}}
+                {{else}}
+                {{assign var="spec_value" value=''}}
+                {{/if}}
+
+                <div class="label"><label>{{'doctors_filter_specialty_title'|gL:'Specialitāte'}}</label></div>
+				<div class="cinput default"><input type="text"
+												   value="{{$spec_value}}"
+												   id="doctors_filter_specialty"
+                                                   data-current="{{$spec_value}}"
+                                                   data-default="{{'doctors_filter_specialty_only_default_text'|gL:'Izvēlies specialitāti'}}"
+                                                   data-acfilled="{{if $filters.doctors_filter_specialty}}1{{else}}0{{/if}}"
+                                                   placeholder="{{'doctors_filter_specialty_only_default_text'|gL:'Izvēlies specialitāti'}}"
+												   class="specialty-autocomplete"></div>
+
+                {{if $filters.doctors_filter_services}}
+                {{assign var="serv_value" value=$filters.doctors_filter_services|clear}}
+                {{else}}
+                {{assign var="serv_value" value=''}}
+                {{/if}}
+
+                <div class="label"><label>{{'doctors_filter_services_title'|gL:'Pakalpojums'}}</label></div>
+                <div class="cinput default"><input type="text"
+                                                   value="{{$serv_value}}"
+                                                   id="doctors_filter_services"
+                                                   data-current="{{$serv_value}}"
+                                                   data-default="{{'doctors_filter_services_default_text'|gL:'Izvēlies pakalpojumu'}}"
+                                                   data-acfilled="{{if $filters.doctors_filter_services}}1{{else}}0{{/if}}"
+                                                   placeholder="{{'doctors_filter_services_default_text'|gL:'Izvēlies pakalpojumu'}}"
+                                                   class="service-autocomplete"></div>
+            </div>
+            <div class="field2">
+                <div class="label"><label>{{'doctors_filter_ic_title'|gL:'Apdrošinātājs'}}</label></div>
+                <div class="cselect default">
+                    <div class="textcont">
+                        <div class="textouter">
+                            <div class="text">{{if $filters.doctors_filter_ic && $filters.doctors_filter_ic !=
+                                'false'}}{{$icList[$filters.doctors_filter_ic].title|clear}}{{else}}{{'doctors_filter_ic_default_text'|gL:'Izvēlies
+                                apdrošinātāju'}}{{/if}}
+                            </div>
+                        </div>
+                        <div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+                    </div>
+                    <select id="doctors_filter_ic"
+                            data-default="{{'doctors_filter_ic_default_text'|gL:'Izvēlies apdrošinātāju'}}">
+                        <option
+                        {{if !$filters.doctors_filter_ic || $filters.doctors_filter_ic == 'false'}}
+                        selected="selected"{{/if}} value="">{{'doctors_filter_ic_default_text'|gL:'Izvēlies
+                        apdrošinātāju'}}</option>
+                        {{foreach from=$icList item=ic}}
+                        <option
+                        {{if $filters.doctors_filter_ic && $filters.doctors_filter_ic == $ic.id}}
+                        selected="selected"{{/if}} value="{{$ic.id}}">{{$ic.title|clear}}</option>
+                        {{/foreach}}
+                    </select>
+                </div>
+                <div class="checkbox_label">
+                    <label>
+                        <div class="outer">
+                            <div class="inner"><input{{if $filters.doctors_filter_only_with_work == 'true'}}
+                                checked="checked"{{/if}} data-default="false" id="doctors_filter_only_with_work"
+                                type="checkbox">{{'doctors_filter_only_with_work_title'|gL:'Rādīt tikai ārstus ar darba
+                                grafiku'}}
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="reset"><a href="#">{{'doctors_clear_filters'|gL:'Noņemt filtrus'}}</a></div>
+    </div>
+
+    <div class="right ver3">
+        <div class="btn_cont"><input class="btng search-btn" type="submit"
+                                     value="{{'doctors_find_doctor'|gL:'Meklēt ārstu'}}"></div>
+
+        <div class="advanced{{if $showAdvanced}} on{{/if}}">
+            <a href="#">
+                <span class="off"><span
+                        class="ver3i">{{'doctors_advanced_search'|gL:'Detalizēta meklēšana'}}</span></span>
+                <span class="on l1"><span class="ver3i">{{'doctors_close_advanced_search'|gL:'Aizvērt'}}</span></span>
+            </a>
+        </div>
+    </div>
+
+    </form>
+</div>
+</div>
+<script nonce="{{$web.cspNonce}}">
+
+    $(function () {
+
+        monkeyPatchAutocomplete();
+
+		$(".specialty-autocomplete").autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					url: "/doctors/specialtyAutocomplete/",
+					dataType: "json",
+					data: {
+						q: request.term
+					},
+
+					success: function (data) {
+                        window.acresults.specialty = data.map(function (val) {
+                            return val.toLowerCase();
+                        });
+                        $(window).trigger('acresults_change');
+						response(data);
+					}
+				});
+			},
+            select: function(e, ui) {
+			    var $this = $(this);
+			    $this.data('current', ui.item.value);
+			    $this.data('acfilled', '1');
+            },
+            autoFocus: true,
+			minLength: 3,
+			position: {my: "left-12 top+20"},
+			appendTo: ".cinput.focused input"
+		});
+
+        $(".service-autocomplete").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/doctors/serviceAutocomplete/",
+                    dataType: "json",
+                    data: {
+                        q: request.term
+                    },
+
+                    success: function (data) {
+                        window.acresults.service = data.map(function (val) {
+                            return val.toLowerCase();
+                        });
+                        $(window).trigger('acresults_change');
+                        response(data);
+                    }
+                });
+            },
+            select: function(e, ui) {
+                var $this = $(this);
+                $this.data('current', ui.item.value);
+                $this.data('acfilled', '1');
+            },
+            autoFocus: true,
+            minLength: 3,
+            position: {my: "left-12 top+20"},
+            appendTo: ".cinput.focused input"
+        });
+
+        $("#doctors_filter_search").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/doctors/doctorAutocomplete/",
+                    dataType: "json",
+                    data: {
+                        q: request.term
+                    },
+
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            },
+            autoFocus: false,
+            minLength: 3,
+            position: {my: "left-12 top+20"},
+            appendTo: ".cinput.focused input"
+        });
+
+        jQuery.ui.autocomplete.prototype._resizeMenu = function () {
+            var ul = this.menu.element;
+            ul.outerWidth(this.element.outerWidth() + 24);
+        }
+    });
+
+
+</script>

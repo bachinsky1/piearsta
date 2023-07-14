@@ -1,0 +1,266 @@
+.contacts_block {
+  ._bgc(#e9eff1);
+  ._rel;
+  color: #404446;
+  ._clear;
+
+  > .wrap {
+    padding: 44px 0 39px;
+  }
+
+  h1 {
+    ._text(40px, 44px);
+  }
+
+  h3 {
+    ._text(24px, 28px);
+    padding: 10px 0;
+  }
+
+  .cont_form {
+    margin: 30px 0 33px;
+    ._clear;
+
+    .success_msg {
+      ._text(14px, 20px);
+      color: #65c300;
+      margin-bottom: 18px;
+
+      .fa {
+        ._text(18px, 17px);
+        vertical-align: -1px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .col1 {
+    ._left;
+    width: 580px;
+    border-right: 1px solid #d4dcde;
+    padding-right: 40px;
+    ._text(14px, 17px);
+
+    .twocol {
+      ._clear;
+      margin-left: 20px;
+      margin-bottom: 10px;
+
+      .field {
+        ._left;
+        width: 50%;
+        margin-left: -20px;
+
+        & + .field {
+          margin-left: 20px;
+        }
+
+        .label {
+          padding: 5px 0 7px;
+        }
+      }
+    }
+
+    .label {
+      padding: 5px 0 7px;
+    }
+
+    .cinput {
+      padding: 14px 11px 12px;
+
+      input {
+        ._text(16px, 18px);
+      }
+
+      textarea {
+        ._text(16px, 18px);
+        color: #636c70;
+      }
+
+      textarea {
+        height: 135px;
+      }
+    }
+
+    .btn_cont {
+      margin-top: 20px;
+
+      .btng {
+        width: 160px;
+      }
+    }
+  }
+
+  .col2 {
+    margin-left: 625px;
+    padding-left: 30px;
+    padding-top: 30px;
+    width: 220px;
+  }
+}
+
+.sazinaties {
+
+  .helpline {
+    ._text(18px, 22px);
+
+    .i {
+      ._text(24px, 24px);
+      ._alc;
+      ._i;
+      ._wh(36px, 24px);
+      ._b;
+      padding: 6px 0;
+      border: 2px solid #009fe5;
+      ._rad(50%, 50%, 50%, 50%);
+      ._times;
+      color: #009fe5;
+    }
+
+    .text {
+      padding: 2px 0 0;
+    }
+
+    hr {
+      border-color: #d4dcde;
+    }
+
+    .phone {
+      padding: 0;
+    }
+
+    .mail {
+      padding: 9px 0;
+    }
+  }
+}
+
+.info_block {
+  padding: 50px 0 110px;
+
+  h2 {
+    ._text(30px, 24px);
+    color: #404446;
+    margin-bottom: 30px;
+  }
+
+  .line {
+    ._clear;
+    color: #636c70;
+    ._text(16px, 20px);
+    padding: 5px 0;
+  }
+
+  .col1 {
+    width: 160px;
+    ._left;
+  }
+
+  .col2 {
+    margin-left: 180px;
+  }
+}
+
+.contacts_block .col1 .field {
+  margin-bottom: 10px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .cinput {
+
+    &.disabled {
+      cursor: default;
+      background: #ebebeb;
+      border: 1px solid lightgrey;
+      color: lightgrey;
+
+      textarea {
+        background: #ebebeb;
+        color: grey;
+      }
+    }
+  }
+}
+
+// selectric styles
+.selectric {
+
+  .label {
+    padding: 0 !important;
+    font-size: 16px;
+  }
+}
+
+.selectric-items {
+
+  li {
+    font-size: 16px;
+
+    &.highlighted {
+      background: silver;
+    }
+
+    &:hover {
+      background: #009fe5;
+      color: #fff;
+    }
+  }
+}
+
+// // //
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .contacts_block {
+    > .wrap {
+      padding: 44px 0 19px;
+    }
+
+    .col1 {
+      ._left;
+      width: 100%;
+      border-right: none;
+
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .contacts_block {
+    > .wrap {
+      padding: 44px 0 19px;
+    }
+
+    .cont_form {
+      margin: 14px 0 30px;
+      ._clear;
+    }
+
+    .col1 {
+      ._left;
+      width: 100%;
+      border-right: none;
+
+      .twocol {
+        margin-left: 0;
+        margin-top: 0px;
+
+        .field {
+          float: none;
+          width: auto;
+          margin-left: 0;
+
+          & + .field {
+            margin-left: 0;
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .info_block {
+    padding: 50px 0 100px;
+  }
+}

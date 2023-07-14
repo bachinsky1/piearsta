@@ -1,0 +1,237 @@
+<div class="announce-cont">
+
+  <div class="announce-inner">
+        
+    <h2>
+      {{'announce_mental-health_maintext'|gL:'Mentālās veselības mēnesis<br><span class="ann-smaller-text">Atrodi sevi vēlamo speciālistu:</span>'}}
+    </h2>
+
+
+
+    <div class="announce-link">
+
+      <div class="announce-link-label">
+        <ul>
+          <li>
+            <a href="https://www.piearsta.lv/{{$web.lang}}/arstu-katalogs/?doctors_filter_specialty=Psihologs" target="_blank">{{'announce_mental-health_psihologs'|gL:'Psihologs'}}</a>
+          </li>
+          <li>
+            <a href="https://www.piearsta.lv/{{$web.lang}}/arstu-katalogs/?doctors_filter_specialty=Psihiatrs" target="_blank">{{'announce_mental-health_psihiatrs'|gL:'Psihiatrs'}}</a>
+          </li>
+          <li>
+            <a href="https://www.piearsta.lv/{{$web.lang}}/arstu-katalogs/?doctors_filter_specialty=Psihoterapeits" target="_blank">{{'announce_mental-health_psihoterapeits'|gL:'Psihoterapeits'}}</a>
+          </li>
+          <li>
+            <a href="https://www.piearsta.lv/{{$web.lang}}/arstu-katalogs/?doctors_filter_specialty=B%C4%93rnu%20psihiatrs" target="_blank">{{'announce_mental-health_bernu_psihiatrs'|gL:'Bērnu psihiatrs'}}</a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+<style>
+
+
+    .announce-inner h2 {
+        position: absolute;
+        font-weight:400;
+        font-size: 33px;
+        right: 0;
+    }
+
+    .hero_block .image_cont .image {
+      background-image: url(/img/announcements/an-mental.jpg);
+      background-position: center bottom;
+      background-size: cover;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner .announce-link {
+      padding: 10px;
+      position: unset;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner .announce-link a {
+      padding: 16px 4px 10px 10px;
+      font-weight: bold;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner .announce-link .announce-link-label ul {
+      column-count: 2;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner .announce-link .announce-link-label ul li {
+      padding: 5px 5px 5px 7px;
+      background: url(/img/announcements/bullets4.png) no-repeat left center;
+    }
+
+  .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner h2 {
+      color: #4CAF50 !important;
+      right: auto !important;
+      left: 12px;
+      position: unset;
+  }
+
+  .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner h2 span {
+      color: #404446;
+      font-size: 24px;
+      display: block;
+  }
+
+  .hero_block.announcement .wrap .hero-right .announce-cont {
+      left: 17% !important;
+      width: 83% !important;
+  }
+
+  h2
+  .announce-inner .announce-link {
+    color: #009be5;
+  }
+
+    @media  (max-width: 1023px) {
+
+      .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner h2 {
+        font-size: 45px;
+        line-height: 1.1;
+      }
+
+      .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner h2 span {
+        /*font-size: 32px;*/
+        margin: 15px 0 18px;
+      }
+
+      .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner .announce-link .announce-link-label ul li {
+        background: url(/img/announcements/bullets4.png) no-repeat left 10px;
+        white-space: nowrap;
+        padding: 5px 0 5px 7px;
+        display: flex;
+        flex: 1 1 0;
+      }
+
+      .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner .announce-link a {
+        padding: 0 4px 0 10px;
+      }
+
+    }
+
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+
+    .hero_block .image_cont .image {
+      background-position: 54% bottom;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont {
+      left: 0 !important;
+      width: 100% !important;
+    }
+
+    .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner h2 {
+      font-size: 28px;
+      margin-left: 0;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner h2 .announce-highlighted {
+      white-space: nowrap;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero_block.announcement > .wrap .hero-right,
+    .hero_block.announcement .image_cont,
+    .hero_block.announcement .image_cont .image {
+      height: 76vh;
+    }
+
+    .hero_block.announcement .image_cont .image {
+      background: url(/img/announcements/an-mental-mob.jpg) center bottom no-repeat #fcfdfd;
+      background-size: 100% auto;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont {
+      left: 0 !important;
+      width: 100% !important;
+    }
+
+    .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner h2 .announce-highlighted {
+      color: #000;
+    }
+
+    header .line1 > div .logo h2 {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 540px) {
+
+    .hero_block.announcement .image_cont .image {
+      background-position: center bottom;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner h2 .announce-highlighted {
+      white-space: normal;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner .announce-link {
+      bottom: auto;
+      top: 125px;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner h2 {
+      font-size: 36px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .hero_block.announcement > .wrap .hero-right,
+    .hero_block.announcement .image_cont,
+    .hero_block.announcement .image_cont .image {
+      height: 70vh;
+    }
+
+    .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner h2 {
+      /*font-size: 28px;*/
+      font-size: 2.1rem;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner h2 span {
+      font-size: 20px;
+      /*margin: 12px 0 2px;*/
+      margin: 2vh 0 2vh;
+    }
+
+    .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner .announce-link a {
+      padding:0 4px 0 10px;
+      font-weight: normal;
+      font-size: 18px;
+    }
+  }
+
+    @media (max-width: 320px) {
+
+      .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner h2 {
+        font-size: 24px;
+        line-height: 30px;
+      }
+
+      .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner h2 span {
+        font-size: 18px;
+        margin: 9px 0 -8px;
+      }
+
+      .hero_block.announcement .wrap .hero-right .announce-cont .announce-inner .announce-link .announce-link-label ul li {
+        background: none;
+        white-space: nowrap;
+        padding: 5px 0 0 0;
+        margin-left: -19px;
+      }
+    }
+
+
+
+</style>

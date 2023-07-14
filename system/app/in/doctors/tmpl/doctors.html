@@ -1,0 +1,64 @@
+<div class="content">
+    <table class="search-table" style="margin-bottom: 4px;">
+        <tr>
+            <td>
+		<label for="filterName">{{'m_name'|gLA:'Name'}}:</label>
+		<input class="long" type="text" id="filterName" name="filterName" />
+	    </td>
+	    <td>
+		<label for="filterSurname">{{'m_surnname'|gLA:'Surname'}}:</label>
+		<input class="long" type="text" id="filterSurname" name="filterSurname" />
+	    </td>
+	    <td>
+		<label for="filterPhone">{{'m_phone'|gLA:'Phone'}}:</label>
+		<input class="long" type="text" id="filterPhone" name="filterPhone" />
+	    </td>
+	    <td>
+		<label for="filterEmail">{{'m_email'|gLA:'E-mail'}}:</label>
+		<input class="long" type="text" id="filterEmail" name="filterEmail" />
+	    </td>
+
+	    <td class="bttns" rowspan="2">
+                <div class="btn">
+                    <a href="javascript: void(0);" onclick="changeFilter(); return false;">
+                        <span>{{'m_search'|gLA:'Search'}}</span>
+                    </a>
+                </div>
+                <div class="btn" style="margin-left: 4px;">
+                    <a href="javascript: void(0);" onclick="clearFilter(); return false;">
+                        <span>{{'clear'|gLA:'Clear'}}</span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+	<tr>
+            <td>
+		<label for="filterClinics">{{'m_clinics_name'|gLA:'Clinic'}}:</label>
+		<input class="long" type="text" id="filterClinics" name="filterClinics" />
+	    </td>
+	    <td>
+		<label for="filterType">{{'m_type'|gLA:'Type'}}:</label>
+		<select id="filterType" name="filterType">
+		    <option value="">{{'m_select_option'|gLA:'-- Select --'}}</option>
+		    <option value="1">{{'m_type_local'|gLA:'Manual'}}</option>
+		    <option value="0">{{'m_type_imported'|gLA:'Imported'}}</option>
+		</select>
+	    </td>
+	</tr>
+    </table>
+    {{$tTable}}
+    <div id="modulePath"></div>
+    {{$bTable}}
+</div>
+<script type="text/javascript">
+    moduleTable.mainUrl = '{{$MAIN_URL}}';
+    moduleTable.moduleName = '{{$MODULE_NAME}}';
+    moduleTable.usePaging = true;
+    {{if $MODULE_FROM}}
+    moduleTable.from = {{$MODULE_FROM}};
+    {{/if}}
+
+    $(function() {
+	updateModule();
+    });
+</script>

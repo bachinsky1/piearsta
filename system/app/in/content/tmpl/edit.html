@@ -1,0 +1,258 @@
+<form class="forma" id="editForma" method="post" action="" onsubmit="return false;">
+	<input type="hidden" class="notInsert" name="id" id="id" value="{{$edit.id}}" />
+	<div class="error-msg" id="errorBlock" style="display:none;"></div>
+	<ul class="tabs">
+		<li><a href="#">{{'content'|gLA:'Content'}}</a></li>
+		<li class="active"><a href="#">{{'settings'|gLA:'Settings'}}</a></li>
+		<li><a href="#">{{'settings_advanced'|gLA:'Advanced settings'}}</a></li>
+	</ul>
+	
+	<div class="areaBlock">
+		<div class="tabs-block">
+			<div class="btn"><a href="#" onclick="checkFields(); return false;"><span>{{'save'|gLA:'Save'}}</span></a></div>
+			<div class="btn cancel"><a href="#" onclick="$('#contentData').html(''); return false;"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+			<div class="clr"><!-- clear --></div>
+			<div class="fieldset">
+				<ul>
+					<li>
+						<label for="content">{{'content'|gLA:'Content'}}</label>
+						 <textarea name="content" class="inherit" id="content" cols="20" rows="7" {{if $edit.template > 1}} disabled{{/if}}>{{$edit.content|clear}}</textarea>
+                         <p class="wys"><a href="#" onclick="openCkEditor('content', 'advanced'); return false;">{{'wysiwyg'|gLA:'WYSIWYG'}}</a></p>
+                         <div class="clr"><!-- clear --></div>
+					</li>
+					<li>
+			            <label for="image">{{'m_image'|gLA:'Image'}}</label>
+			            <div>
+			            	<div id="imageDiv">
+			            	{{if $edit.image}}
+			            	<img width="100" alt="" src="{{$AD_UPLOAD_FOLDER}}{{$edit.uploadFolder}}{{$edit.image}}"><a href="#" onclick="emptyUploadFile('image'); return false;">{{'m_delete'|gLA:'Delete'}}</a><input type="hidden" class="simple inherit" name="image" id="image" value="{{$edit.image|clear}}">
+			            	{{/if}}
+			            	</div>
+			            	<a href="#" id="imageButton" class="select-btn">{{'upload'|gLA:'Upload'}}</a>
+		            	</div>
+			        </li>
+			        <li>
+						<label for="page_title">{{'m_image_alt'|gLA:'Image Alt text'}}</label>
+						<input type="text" class="inherit" value="{{$edit.image_alt|clear}}" id="image_alt" name="image_alt" />
+					</li>
+					<li>
+						<label for="page_title">{{'page_title'|gLA:'Page title'}}</label>
+						<input type="text" class="inherit" value="{{$edit.page_title|clear}}" id="page_title" name="page_title" />
+					</li>
+					<li>
+						<label for="description">{{'m_description'|gLA:'Description'}}</label>
+						 <textarea class="inherit" name="description" id="description" cols="20" rows="5">{{$edit.description|clear}}</textarea>
+                         <p class="wys"><!-- <a href="#">{{'wysiwyg'|gLA:'WYSIWYG'}}</a>  --></p>
+                         <div class="clr"><!-- clear --></div>
+					</li>
+					<li>
+						<label for="keywords">{{'m_keywords'|gLA:'Keywords'}}</label>
+						<input class="inherit" type="text" value="{{$edit.keywords|clear}}" id="keywords" name="keywords" />
+					</li>
+				</ul>
+			</div>
+			<div class="btn"><a href="#" onclick="checkFields(); return false;"><span>{{'save'|gLA:'Save'}}</span></a></div>
+			<div class="btn cancel"><a href="#" onclick="$('#contentData').html(''); return false;"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+			<div class="clr"><!-- clear --></div>    
+		</div>
+		<div class="tabs-block open">
+			<div class="btn"><a href="#" onclick="checkFields(); return false;"><span>{{'save'|gLA:'Save'}}</span></a></div>
+			<div class="btn cancel"><a href="#" onclick="$('#contentData').html(''); return false;"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+			<div class="clr"><!-- clear --></div>
+			<div class="fieldset">
+				<h3>{{'public_info'|gLA:'Public info'}}</h3>
+				<ul>
+					{{if $edit.id}}
+					<li>
+						<label for="title">ID:</label>
+						<span id="currentPageId">{{$edit.id|clear}}</span>
+					</li>
+					{{/if}}
+					<li>
+						<label for="title">{{'m_title'|gLA:'Title'}}</label>
+						<input type="text" value="{{$edit.title|clear}}" id="title" name="title" onblur="createUrl(); return false;" />
+					</li>
+                    <li>
+						<label for="url">{{'url'|gLA:'URL'}}</label>
+						<input type="text" value="{{$edit.url|clear}}" id="url" name="url" />
+					</li>
+				</ul>
+			</div>
+			<div class="fieldset">
+				<h3>{{'place_and_type'|gLA:'Place and type'}}</h3>
+				<ul>
+					<li>
+						<label for="country">{{'country'|gLA:'Country'}}:</label>
+		                <select id="country" name="country" onchange="return false;">
+		                	{{section name=item loop=$edit.countries.data}}
+		                		<option {{if $edit.countries.data[item].id == $edit.countries.sel}} selected="selected" {{/if}} value="{{$edit.countries.data[item].id}}">{{$edit.countries.data[item].title}}</option>
+		                	{{/section}} 
+		                </select>
+					</li>
+					<li>
+						<label for="lang">{{'lang'|gLA:'Language'}}</label>
+						<select id="lang" name="lang">
+							{{section name=item loop=$edit.languages.data}}
+	                			<option {{if $edit.languages.data[item].lang == $edit.languages.sel}} selected="selected" {{/if}} value="{{$edit.languages.data[item].lang}}">{{$edit.languages.data[item].title}}</option>
+	                		{{/section}}
+						</select>
+					</li>
+					{{if !$edit.url || ($edit.url != $edit.lang)}}
+					<li>
+						<label for="parent_idTitle">{{'parent_page'|gLA:'Parent page'}}</label>
+						<input type="hidden" name="parent_id" id="parent_id" value="{{$edit.parent_id|clear}}" />
+						<input type="text" class="notInsert" value="{{$edit.parent_idTitle|clear}}" id="parent_idTitle" name="parent_idTitle" readonly="readonly" />
+						<a href="#" onclick="openSiteMapDialog('parent_id', 'parent_idTitle', '','{{$edit.languages.sel}}'); return false;" class="select-btn">{{'select'|gLA:'Select'}}</a>
+						<a href="#" onclick="$('#parent_id').val(''); $('#parent_idTitle').val(''); return false;">{{'clear'|gLA:'Clear'}}</a>
+					</li>
+					{{/if}}
+					<li>
+						<label for="template">{{'template'|gLA:'Template'}}</label>
+						<select id="template" name="template">
+							<option value="">{{'select_option'|gLA:'-- Select --'}}</option>
+							{{$edit.templateList}}
+						</select>
+					</li>
+					<li>
+						<label for="menu_id">{{'menu'|gLA:'Menu'}}</label>
+						<select multiple="multiple" id="menu_id" name="menu_id">
+							{{section name=item loop=$edit.menuList}}
+		               			<option value="{{$edit.menuList[item].id}}" {{if $edit.menuList[item].sel}}selected="selected"{{/if}}>{{$edit.menuList[item].name}}</option>
+		               		{{/section}}
+							{{$edit.menuList}}
+						</select>
+					</li>
+				</ul>
+			</div>
+			<div class="fieldset last">
+				<h3>{{'status'|gLA:'Status'}}</h3>
+				<ul>
+					<li>
+						<label for="active">{{'enabled'|gLA:'Enabled'}}</label>
+						<input type="checkbox" value="1" id="active" class="active" {{if $edit.active}} checked="checked" {{/if}} />
+					</li>
+					<li>
+						<label for="enable">{{'visible'|gLA:'Visible'}}</label>
+						<input type="checkbox" value="1" id="enable" class="enable" {{if $edit.enable}} checked="checked" {{/if}} />
+					</li>
+					<li>
+						<label for="ssl">{{'ssl'|gLA:'SSL'}}</label>
+						<input type="checkbox" value="1" id="ssl" class="ssl" {{if $edit.ssl}} checked="checked" {{/if}} />
+					</li>
+				</ul>
+			</div>
+			<div class="btn"><a href="#" onclick="checkFields(); return false;"><span>{{'save'|gLA:'Save'}}</span></a></div>
+			<div class="btn cancel"><a href="#" onclick="$('#contentData').html(''); return false;"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+			<div class="clr"><!-- clear --></div>   
+		</div>
+		<div class="tabs-block">
+			<div class="btn"><a href="#" onclick="checkFields(); return false;"><span>{{'save'|gLA:'Save'}}</span></a></div>
+			<div class="btn cancel"><a href="#" onclick="$('#contentData').html(''); return false;"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+			<div class="clr"><!-- clear --></div>
+			<div class="fieldset">
+				<h3>{{'dependend_content'|gLA:'Dependend content'}}</h3>
+				<ul>
+					<li>
+						<label for="type">{{'type'|gLA:'Content type'}}</label>
+						<div class="check">
+							<div><input class="check" type="radio" value="s" name="type" onchange="inheritChecker();" {{if $edit.type == 's' || !$edit.type}} checked="checked" {{/if}} /> {{'independend_page'|gLA:'Independend page'}}</div>
+							<div><input class="check" type="radio" value="r" name="type" onchange="inheritChecker();" {{if $edit.type == 'r'}} checked="checked" {{/if}} /> {{'redirect_page'|gLA:'Redirect page'}}</div>
+							<div><input class="check" type="radio" value="i" name="type" id="inherit" onchange="inheritChecker();" {{if $edit.type == 'i'}} checked="checked" {{/if}} /> {{'inherit_page'|gLA:'Inherit content from another page'}}</div>
+						</div>	
+					</li>
+					<li>
+						<label for="target">{{'target'|gLA:'Target'}}</label>
+						<input type="hidden" name="target" id="target" value="{{$edit.target|clear}}" />	
+						<input type="text" value="{{$edit.targetTitle|clear}}" id="targetTitle" name="targetTitle" {{if $edit.targetReadOnly}} readonly="readonly" {{/if}} />
+						<a href="#" onclick="openSiteMapDialog('target', 'targetTitle', ''); return false;" class="select-btn">{{'select'|gLA:'Select'}}</a>
+						<a href="#" onclick="$('#target').val(''); $('#targetTitle').val(''); return false;">{{'clear'|gLA:'Clear'}}</a>
+					</li>
+				</ul>
+			</div>
+			<div class="fieldset">
+				<h3>{{'other_settings'|gLA:'Other settings'}}</h3>
+				<ul>
+					<li>
+						<label for="active">{{'content_sitemap'|gLA:'Show in sitemap'}}</label>
+						<input type="checkbox" value="1" id="sitemap" class="sitemap" {{if $edit.sitemap}} checked="checked" {{/if}} />
+						<select name="changefreq" id="changefreq">
+							{{$edit.changefreq}}
+						</select>
+					</li>
+					<li>
+						<label for="active">{{'cache'|gLA:'Cache'}}</label>
+						<input type="checkbox" value="1" id="cache" class="cache" {{if $edit.cache}} checked="checked" {{/if}} />
+					</li>
+                    <li>
+						<label for="mirror_id">{{'mirrors'|gLA:'Mirrors'}}</label>
+						<input type="hidden" name="mirror_id" id="mirror_id" value="{{$edit.mirror_id|clear}}" />	
+						<input type="text" class="notInsert" value="{{$edit.mirror_idTitle|clear}}" id="mirror_idTitle" name="mirror_idTitle" readonly="readonly" />
+						<a href="#" onclick="openSiteMapDialog('mirror_id', 'mirror_idTitle', ''); return false;" class="select-btn">{{'select'|gLA:'Select'}}</a>
+						<a href="#" onclick="$('#mirror_id').val(''); $('#mirror_idTitle').val(''); return false;">{{'clear'|gLA:'Clear'}}</a>
+					</li>
+				</ul>
+			</div>
+			<div class="fieldset last">
+				<h3>{{'modules'|gLA:'Show modules on page'}}</h3>
+				{{if $edit.modules|@count > 0}}
+				<ul>
+					{{section name=item loop=$edit.modules}}
+               			<li>
+							<label for="module_{{$edit.modules[item].id}}">
+								<a href="{{$AD_CMS_WEB_FOLDER}}modules/{{$edit.modules[item].name}}/#content_id:{{$edit.id}}/" title="{{$edit.modules[item].title}}">{{$edit.modules[item].title}}</a>
+							</label>
+							<input type="checkbox" value="1" id="module_{{$edit.modules[item].id}}" name="module_{{$edit.modules[item].id}}" class="active" {{if $edit.modules[item].sel}} checked="checked" {{/if}} />
+						</li>
+               		{{/section}}
+				</ul>
+				{{/if}}
+			</div>
+			<div class="btn"><a href="#" onclick="checkFields(); return false;"><span>{{'save'|gLA:'Save'}}</span></a></div>
+			<div class="btn cancel"><a href="#" onclick="$('#contentData').html(''); return false;"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+			<div class="clr"><!-- clear --></div> 
+		</div>
+	</div>                 
+</form>
+<h3>{{'log_info'|gLA:'Log information'}}</h3>
+<table class="log-info">
+	<tr>
+		<td style="width:110px;">{{'created'|gLA:'Created date'}}:</td>
+		<td>{{$edit.createdInfo}}</td>
+	</tr>
+	<tr>
+		<td>{{'edited'|gLA:'Edit date'}}:</td>
+		<td>{{$edit.editedInfo}}</td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$('ul.tabs a').click(function() {
+		var curChildIndex = $(this).parent().prevAll().length + 1;
+		$(this).parent().parent().children('.active').removeClass('active');
+		$(this).parent().addClass('active');
+		$(this).parent().parent().next('.areaBlock').children('.open').fadeOut('fast',function() {
+			$(this).removeClass('open');
+			$(this).parent().children('div:nth-child('+curChildIndex+')').fadeIn('normal',function() {
+				$(this).addClass('open');
+			});
+		});
+		return false;
+	});
+
+	var tabindex = 1;
+	$('#edit :input').each(function() {
+		if (this.type != "hidden") {
+			var $input = $(this);
+			$input.attr("tabindex", tabindex);
+			tabindex++;
+		}
+	});
+
+	loadUploadImgButton('{{$edit.uploadFolder}}', 'image');
+
+});
+
+	
+</script>

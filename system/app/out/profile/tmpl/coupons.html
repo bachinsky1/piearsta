@@ -1,0 +1,46 @@
+<div class="signup_block coupons">
+	<div class="wrap">
+		<div class="col2_y">
+			<div class="header_block">
+				<h2>{{$web.title}}</h2>
+			</div>
+			<div class="list">
+				{{if $userData.coupons|@count > 0}}
+				{{foreach from=$userData.coupons item=item name=pd}}
+
+				<div class="item">
+					{{if $item.lead_image}}
+					<a href="{{$siteData.mirros_coupon_page|getLM}}{{$item.page_url|clear}}.html" class="image"><img alt="{{$item.title|clear}}" src="{{$AD_UPLOAD_FOLDER}}coupons/small/{{$item.lead_image}}"></a>
+					{{/if}}
+					<div class="terms">
+						<div class="percent">{{$item.discount}}%</div>
+						<div class="date">
+								<span class="ver1i ver2i">
+									{{'coupon_enabled_to'|gL:'Akcija spēkā'}}
+								</span>
+							<span class="ver3i">{{'enabled_to'|gL:'Spēkā'}}</span> {{'coupon_to'|gL:'līdz'}} {{$item.date_to|date_format:"%d.%m.%y."}}
+						</div>
+					</div>
+					<a href="{{$siteData.mirros_coupon_page|getLM}}{{$item.page_url|clear}}.html" class="title"><h3>{{$item.title|clear}}</h3></a>
+					<div class="author">{{$item.company|clear}}</div>
+					<div class="btn_block">
+						<div class="btn_cont"><a href="{{$AD_UPLOAD_FOLDER}}profile/coupons/{{$item.filename}}" target="_blank" class="btng">{{'view_more'|gL:'Apskatīt'}}</a></div>
+						<div class="price">
+							<div class="old">€{{$item.price}}</div>
+							<div class="new">€{{$item.discount_price}}</div>
+						</div>
+					</div>
+				</div>
+
+				{{/foreach}}
+				<div class="all">
+					<a href="{{$siteData.mirros_coupon_page|getLM}}">{{'profile_coupons_all'|gL:'Visi kuponi'}}</a>
+				</div>
+				{{else}}
+				{{'profile_my_coupons_empty'|gL:'Jūms nav neviena aktīva kupona.Mani kuponi'}}
+				<a href="{{$siteData.mirros_coupon_page|getLM}}">{{'profile_go_to_coupons'|gL:'Kuponu saraksts'}}</a>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</div>

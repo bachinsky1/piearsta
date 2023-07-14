@@ -1,0 +1,21 @@
+<div id="content" class="add-doctor">
+    <div class="wrap">
+        <div class="cont arstiem-block">
+
+            <h1>{{$web.pageTitle|stripslashes|replace:'"':''|strip_tags}}</h1>
+
+            <div>
+                {{$content.content}}
+            </div>
+
+            <div>
+                {{$form}}
+            </div>
+
+        </div>
+
+        <div class="right-side">
+            {{include file="../../content/tmpl/helpline.html"}}
+        </div>
+    </div>
+</div>

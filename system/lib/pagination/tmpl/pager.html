@@ -1,0 +1,18 @@
+{{assign var=startPoints value=false}}
+{{assign var=endPoints value=false}}
+{{if $pager.records > $pager.showMsg || $showOrder}}
+<section class="pagination clearfix">
+{{if $pager.records > $pager.showMsg}}
+	{{if $pager.previous}}<a class="prev" title="{{'pagination_text_next'|gL:'Iepriekšējā'}}" href="{{$url}}{{$pager.addUrl}}page:{{$pager.previous}}/{{$pager.docUrl}}">{{'pagination_text_next'|gL:'Iepriekšējā'}}</a>{{/if}}
+	{{if $pager.next}}<a class="next" title="{{'pagination_text_previous'|gL:'Nākamā'}}" href="{{$url}}{{$pager.addUrl}}page:{{$pager.next}}/{{$pager.docUrl}}">{{'pagination_text_previous'|gL:'Nākamā'}}</a>{{/if}}
+	<span>
+		{{section name=pagination loop=$pager.pages}} 
+		<a title="{{'pagination_text_next'|gL:'Iepriekšējā'}}" href="{{$url}}{{$pager.addUrl}}page:{{$smarty.section.pagination.iteration}}/{{$pager.docUrl}}" class="number{{if $smarty.section.pagination.iteration == $pager.curPage}} sel{{/if}}">{{$smarty.section.pagination.iteration}}</a>
+		{{/section}}
+	</span>
+{{/if}}
+</section>
+{{/if}}
+{{if $showOrder && $orderHTML != ""}}
+    {{$orderHTML}}
+{{/if}}

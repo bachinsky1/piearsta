@@ -1,0 +1,72 @@
+.twocols_z.coupons{
+	.top{._clear;
+	
+		.cont_b_m{display:table;}
+		.text_cont{display:table-cell;._vam;}
+		.btn_cont{display:table-cell;._vam;padding-right:30px;}
+		
+		.btn_cont{
+			.btnw{height:20px;padding:12px 0;width:180px;._text(16px,20px);}
+			.btng{width:140px;}
+		}
+		.text{._text(16px,20px);padding:13px 0px 13px 30px;color:#636c70;
+			&.print{padding:12px 0px;._text(16px,20px);}
+		}
+		
+		.message{._bgc(#fffcf2);._rad(3px,3px,3px,3px);border: 1px solid #f9c400;padding:20px 20px 15px;width: 660px;
+			div{color:#000;._b;._text(16px 15px);padding-bottom:10px;}
+			p{color:#404446;._text(14px,18px);}
+		}
+	}
+	.col2_z{margin-top:200px;}
+	.opendoc_terms{._clear;margin: 20px 0;padding-bottom:20px;border-bottom: 2px solid #009fe5;width: 700px;
+		.item{._left;padding-right: 20px;width:auto;
+			&.discount{._clear;padding-top:5px;padding-bottom: 3px;
+				.percent{color:#65c300;._b;._text(30px,32px);}
+			}
+			&.author{color:#636c70;._text(13px,16px);padding-top:18px;padding-bottom: 9px;}
+			&.price{padding-top:5px;padding-bottom:3px;border-left:1px solid #d4dcde;border-right:1px solid #d4dcde;
+				.old{color:#636c70;._text(22px,32px);text-decoration:line-through;._inb;}
+				.new{color:#000000;._text(30px,32px);._inb;margin-left: 5px;}
+			}
+			&+.item{padding-left: 20px;}
+		}
+	}
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+	.twocols_z.coupons{.col2_z{margin-top:0px;}}
+}
+
+@media (max-width: 767px) {
+	.twocols_z.coupons{
+		.top{._clear;
+		
+			.cont_b_m{._blo;}
+			.text_cont{._blo;margin-bottom:10px;}
+			.btn_cont{._blo;padding-right:0px;}
+			
+			.btn_cont{
+				.btng,.btnw{width:200px;}
+				.btng{width:160px;}
+			}
+			.text{margin-bottom: 4px;}
+			.message{width: auto;}
+		
+		}
+		.col2_z{margin-top:0px;}
+		.opendoc_terms{._clear;margin: 20px 0;width: auto;
+			.item{._inb;width: 49%;padding-right:0;
+				&.discount{
+					._alc;
+				}
+				&.price{
+					._clear;
+					._alc;
+					border-right:none;
+				}
+				&.author{width: 100%;._alc;}
+				&+.item{padding-left:0px;}
+			}
+		}
+	}
+}

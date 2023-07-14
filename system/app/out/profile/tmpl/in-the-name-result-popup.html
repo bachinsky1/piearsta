@@ -1,0 +1,25 @@
+<div class="popup_bg"></div>
+<div class="popup w700 in-the-name-result-popup-parent">
+    <div class="close"><i class="fa fa-times"></i></div>
+    <div class="cont in-the-name-result">
+        {{if $inTheNameAppointmentResult.success}}
+            <h2>{{'profile_unfinished_created'|gL:'Reservation in the name of patient created'}}</h2>
+            <hr>
+            <p>{{'profile_unfinished_created_info_1'|gL:'Email with finish reservation link has been sent to patient.'}}</p>
+            <p>{{'profile_unfinished_created_info_2'|gL:'If patient will not finish the reservation it will be cancelled after '}} {{$inTheNameAppointmentLockTime}} {{'profile_hours'|gL:'h.'}}</p>
+            <div class="btn_cont">
+                <div class="cancel">
+                    <a class="btn cancel-btn">{{'profile_reservation_close'|gL:'Close'}}</a>
+                </div>
+            </div>
+        {{else}}
+            <h2>{{'profile_unfinished_created_failed'|gL:'Reservation failed'}}</h2>
+            <hr>
+            <div class="btn_cont">
+                <div class="cancel">
+                    <a class="btn cancel-btn">{{'profile_reservation_close'|gL:'Close'}}</a>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</div>

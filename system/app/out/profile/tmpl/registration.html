@@ -1,0 +1,206 @@
+<div id="content">
+	<div class="authorization_block"><div class="wrap">
+		<div class="dt_tab_wrap">
+			<div class="have_acc ver1 ver2">{{'registration_have_profile'|gL:'Ja jums ir profils lūdzu'}} <a href="{{$siteData.mirros_signin_page|getLM}}">{{'registration_login'|gL:'autorizējies'}}</a></div>
+			<h1>{{$web.title}}</h1>
+			<div class="have_acc ver3">{{'registration_have_profile'|gL:'Ja jums ir profils lūdzu'}} <a href="{{$siteData.mirros_signin_page|getLM}}">{{'registration_login'|gL:'autorizējies'}}</a></div>
+			<div class="label" style="margin-top: 20px;"><label>{{'profile_reason_for_registering_message'|gL:'Reģistrācija ir nepieciešama saistībā ar ārstniecības iestāžu nepieciešamību identificēt personu, atbilstoši normatīvo aktu prasībām.'}}</label></div>
+			<div class="twocol">
+				<div class="field">
+					<div class="label"><label>{{'form_name'|gL:'Vards'}}</label></div>
+
+					<div class="cinput{{if $dmssReg && $dmssRegData.name}} disabled{{/if}}">
+						{{if $dmssReg && $dmssRegData.name}}
+							<input type="text" class="register" id="name" value="{{$dmssRegData.name}}" disabled="disabled">
+						{{else}}
+							<input type="text" class="register" id="name" value="{{$smarty.session.regData.name}}">
+						{{/if}}
+					</div>
+				</div>
+				<div class="field">
+					<div class="label"><label>{{'form_surname'|gL:'Uzvārds'}}</label></div>
+					{{if $dmssReg && $dmssRegData.surname}}
+						<div class="cinput disabled"><input type="text" class="register" id="surname" value="{{$dmssRegData.surname}}" disabled="disabled"></div>
+					{{else}}
+						<div class="cinput"><input type="text" class="register" id="surname" value="{{$smarty.session.regData.surname}}"></div>
+					{{/if}}
+				</div>
+			</div>
+
+			<div class="twocol">
+				<div class="radio_field field">
+					<div class="label"><label>{{'form_resident'|gL:'Latvijas rezidents'}}<span class="tip" data-hastip="{{'form_resident_hint'|gL:'Jābūt līdzi nosūtījumam no ģimenes ārsta, personas apliecinošais dokuments. Citādi pacients netiks pieņemts un pakalpojums <b>nebūs apmaksāts no valsts puses</b>.'}}"><i class="fa fa-question-circle"></i></span></label></div>
+					<div class="options">
+						{{if $dmssReg && $dmssRegData}}
+							<label><input type="radio" class="register disabled" id="isResident" name="resident" value="1" disabled="disabled"{{if $dmssRegData.country == 'LV'}} checked="checked"{{/if}}><span class="circle"><i class="fa fa-circle"></i></span>{{'form_resident_yes'|gL:'Jā'}}</label>
+							<label><input type="radio" class="register disabled" id="notResident" name="resident" value="0" disabled="disabled"{{if $dmssRegData.country != 'LV'}} checked="checked"{{/if}}><span class="circle"><i class="fa fa-circle"></i></span>{{'form_resident_no'|gL:'Nē'}}</label>
+						{{else}}
+						<label><input type="radio" class="register" id="isResident" name="resident" value="1" {{if !isset($smarty.session.regData.resident) || $smarty.session.regData.resident == 1}}checked="checked"{{/if}}><span class="circle"><i class="fa fa-circle"></i></span>{{'form_resident_yes'|gL:'Jā'}}</label>
+						<label><input type="radio" class="register" id="notResident" name="resident" value="0" {{if $smarty.session.regData.resident  !=1 && isset($smarty.session.regData.resident) }}checked="checked"{{/if}}><span class="circle"><i class="fa fa-circle"></i></span>{{'form_resident_no'|gL:'Nē'}}</label>
+						{{/if}}
+					</div>
+				</div>
+
+				{{if $verificationEnabled}}
+				<div class="field country-field">
+					<div class="label"><label for="country">{{'form_country'|gL:'Pilsonība'}}</label></div>
+
+					{{if $dmssReg && $dmssRegData.country_value}}
+						<div class="cinput disabled"><input type="text" class="register country-autocomplete" id="country" name="country" value="{{$dmssRegData.country_value}}"></div>
+					{{else}}
+						<div class="cinput"><input type="text" class="register country-autocomplete" id="country" name="country" value="{{if $smarty.session.regData.country}}{{$smarty.session.regData.country}}{{else}}Latvija (LV){{/if}}"></div>
+					{{/if}}
+				</div>
+				{{/if}}
+			</div>
+
+			<div class="twocol">
+				<div class="field resident">
+					<div class="label"><label>{{'form_personid'|gL:'Personas kods'}}</label></div>
+
+					{{if $dmssReg && $dmssRegData.pk}}
+						<div class="cinput disabled"><input class="register" id="person_id" type="text" value="{{$dmssRegData.pk}}" disabled="disabled" maxlength="12"></div>
+					{{else}}
+						<div class="separated_inputs">
+							<div class="cont"><div class="cinput"><input class="register twin" id="person_id" type="text" value="{{$smarty.session.regData.personIdFirst}}" maxlength="6"></div></div>
+							<div class="separator">-</div>
+							<div class="cont"><div class="cinput"><input class="register twin" id="person_id" type="text" value="{{$smarty.session.regData.personIdSecond}}"  maxlength="5"></div></div>
+						</div>
+					{{/if}}
+				</div>
+				<div class="field noresident">
+					<div class="label"><label>{{'form_person_indentifier'|gL:'Personas identifikators'}}</label></div>
+					<div class="cinput"><input type="text" id="person_number" class="register" value="{{$smarty.session.regData.person_number}}"></div>
+				</div>
+
+				<div class="field">
+					<div class="label"><label>{{'form_gender'|gL:'Dzimums'}}</label></div>
+					<div class="gender_select {{if $smarty.session.regData.gender == female}} female {{elseif  $smarty.session.regData.gender == male}} male {{else}} {{/if}}" data-male="{{'form_gender_male'|gL:'Vīrietis'}}" data-female="{{'form_gender_female'|gL:'Sieviete'}}">
+						<div class="textcont">
+							{{if $smarty.session.regData.gender == male }}
+							<div class="text">{{'form_gender_male'|gL:'Vīrietis'}}</div>
+							{{elseif $smarty.session.regData.gender == female }}
+							<div class="text">{{'form_gender_female'|gL:'Sieviete'}}</div>
+							{{else}}
+							<div class="text"></div>
+							{{/if}}
+							<div class="gender_icon"><i class="fa fa-male"></i><i class="fa fa-female"></i></div>
+							<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+						</div>
+						<select class="register" id="gender">
+							<option value=""></option>
+							<option value="male" {{if $smarty.session.regData.gender == male }}selected="selected"{{/if}}>{{'form_gender_male'|gL:'Vīrietis'}}</option>
+							<option value="female" {{if $smarty.session.regData.gender == female }}selected="selected"{{/if}}>{{'form_gender_female'|gL:'Sieviete'}}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="twocol birthday">
+				<div class="field">
+					<div class="label"><label>{{'form_bd'|gL:'Dzimšanas datums'}}</label></div>
+					<div class="cselect day">
+						<div class="textcont">
+							<div class="textouter"><div class="text"></div></div>
+							<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+						</div>
+						<select id="bd_date" class="register">
+							<option></option>
+							{{section name=foo start=1 loop=32 step=1}}
+							<option value="{{$smarty.section.foo.index}}" {{if $smarty.session.regData.bd_date == $smarty.section.foo.index }}selected="selected"{{/if}}>{{$smarty.section.foo.index}}</option>
+							{{/section}}
+						</select>
+					</div>
+					<div class="cselect month">
+						<div class="textcont">
+							<div class="textouter"><div class="text"></div></div>
+							<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+						</div>
+						<select id="bd_month" class="register">
+							<option></option>
+							{{foreach from=$profileConfig.months item=m key=k}}
+							<option value="{{$k}}" {{if $smarty.session.regData.bd_month == $k }}selected="selected"{{/if}}>{{$m|gL}}</option>
+							{{/foreach}}
+						</select>
+					</div>
+					<div class="cselect year">
+						<div class="textcont">
+							<div class="textouter"><div class="text"></div></div>
+							<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+						</div>
+						<select id="bd_year" class="register">
+						<option></option>
+						{{section name=foo loop=$fromthisyear max=115 step=-1}}
+						<option value="{{$smarty.section.foo.index}}" {{if $smarty.session.regData.bd_year == $smarty.section.foo.index }}selected="selected"{{/if}}>{{$smarty.section.foo.index}}</option>
+						{{/section}}
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="twocol">
+				<div class="field">
+					<div class="label"><label>{{'form_login_default'|gL:'E-pasts'}}</label></div>
+					<div class="cinput"><input type="text" class="register" id="email" value="{{$smarty.session.regData.email}}"></div>
+				</div>
+				<div class="field">
+					<div class="label"><label>{{'form_phone'|gL:'Telefons'}}</label></div>
+					<div class="cinput"><input class="register" id="phone" type="text" autocomplete="new-password" value="{{$smarty.session.regData.phone}}"></div>
+				</div>
+			</div>
+			<div class="twocol">
+				<div class="field">
+					<div class="label"><label>{{'form_password'|gL:'Parole'}}</label></div>
+					<div class="cinput"><input class="register" id="password" type="password" autocomplete="new-password" value="{{$smarty.session.regData.password}}"></div>
+				</div>
+				<div class="field">
+					<div class="label"><label>{{'form_password_confirm'|gL:'Atkārtota parole'}}</label></div>
+					<div class="cinput"><input class="register" id="password2" type="password" autocomplete="new-password" value="{{$smarty.session.regData.password2}}"></div>
+				</div>
+			</div>
+
+			<div class="twocol">
+				<div class="radio_field field">
+					<div class="label">
+						<label>{{'form_language'|gL:'Valoda'}}
+							<span class="tip" data-hastip="{{'form_language_hint'|gL:'Izvēlētajā profila valodā saņemsiet e-pastus. Valodu iespējams nomainīt arī vēlāk uz vēlamo profila sadaļā.'}}">
+								<i class="fa fa-question-circle"></i>
+							</span>
+						</label>
+					</div>
+					<div class="cselect">
+						<div class="textcont">
+							{{assign var="switcherLanguage" value=$switcherLanguage}}
+							<div class="textouter"><div class="text">
+								{{$switcherLanguage}}
+							</div></div>
+							<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+						</div>
+						<select id="userSelectedLang" name="userSelectedLang" class="register">
+							{{foreach from=$allowedLanguages item=item name=allowedLanguages}}
+							<option value="{{$item.lang}}" {{if $switcherLanguage == $item.lang}}selected="selected"{{/if}}>{{$item.title}}</option>
+							{{/foreach}}
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="radio_field field" style="margin-top: 30px;">
+				<div class="label"><label>{{'form_newsletter_checkbox'|gL:'Gribu saņemt portāla jaunumus un speciālus piedavājumus.'}}</label></div>
+				<div class="options radio-group">
+					<label><input type="radio" class="register" id="newslettersYes" name="newsletter" value="Y" {{if $smarty.session.regData.newsletter == Y }}checked="checked"{{/if}}><span class="circle"><i class="fa fa-circle"></i></span>{{'form_resident_yes'|gL:'Jā'}}</label>
+					<label><input type="radio" class="register" id="newslettersNo" name="newsletter" value="N" {{if $smarty.session.regData.newsletter == N }}checked="checked"{{/if}}><span class="circle"><i class="fa fa-circle"></i></span>{{'form_resident_no'|gL:'Nē'}}</label>
+				</div>
+			</div>
+			<div class="checkbox_field">
+				<label class="item blue">
+					<input class="register" id="agreement" type="checkbox">
+					<span class="box"><i class="fa fa-check"></i></span>{{'form_terms_checkbox'|gL:'Iepazinos un piekrītu tīmekļa <a href="#">portālā lietošanas noteikumiem.'}}
+				</label>
+			</div>
+
+			<input class="register" id="isDmssReg" type="hidden" value="{{if $dmssReg && $dmssRegData && $dmssRegData.pk}}1{{else}}0{{/if}}">
+			<input class="register" id="dmssRegMethod" type="hidden" value="{{if $dmssReg && $dmssRegData && $dmssRegData.method}}{{$dmssRegData.method}}{{else}}0{{/if}}">
+			
+			<div class="btn_cont"><a href="#" class="btng profileRegister">{{'header_registration'|gL:'Reģistrēties'}}</a></div>
+		</div>
+	</div></div>
+</div>

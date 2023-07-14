@@ -1,0 +1,23 @@
+{{if $news|@count > 0}}
+<div class="news_block bt"><div class="wrap">
+	<h2>{{'startpage_news_title'|gL:'Jaunumi'}}</h2>
+	<div class="list">
+		{{foreach from=$news name=news key=k item=item}}
+		<div class="item">
+			{{if $item.date_to}}
+			<div class="date">{{$item.date_to_formated}}</div>
+			{{/if}}
+			<a href="{{$item.content_id|getLink}}{{$item.page_url|clear}}.html" class="link">
+				{{if $item.lead_image}}
+				<div class="image"><img alt="{{if $item.lead_image_alt}}{{$item.lead_image_alt|clear}}{{else}}{{$item.title|clear}}{{/if}}" src="{{$AD_UPLOAD_FOLDER}}{{$newsConfig.uploadFolder}}small/{{$item.lead_image}}"></div>
+				{{/if}}
+				<div class="title">
+					<h3 class="m_lineText">{{$item.title|clear}}</h3>
+				</div>
+			</a>
+		</div>
+		{{/foreach}}
+	</div>
+	<div class="all"><a href="{{$siteData.newsCat|getLM}}">{{'startpage_all_news'|gL:'Visi jaunumi'}}</a></div>
+</div></div>
+{{/if}}

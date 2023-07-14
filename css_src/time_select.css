@@ -1,0 +1,363 @@
+/**
+  @
+  TimeSelect Widget Styles
+  @
+  @
+ */
+.ts-container {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.ts-container * {
+  box-sizing: border-box;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* Likely future */
+}
+.ts-container .ts-top-block {
+  position: relative;
+  text-align: left;
+  height: 30px;
+  margin-bottom: 15px;
+}
+.ts-container .ts-top-block .ts-title {
+  position: relative;
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 1.5em;
+}
+.ts-container .ts-top-block .ts-jqui-calendar {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  opacity: 0.0001;
+}
+.ts-container .ts-top-block .ts-calendar-trigger {
+  float: right;
+  padding: 5px 15px;
+  height: auto;
+}
+.ts-container .ts-top-block .ts-calendar-trigger i,
+.ts-container .ts-top-block .ts-calendar-trigger span {
+  display: inline-block;
+  float: none;
+}
+.ts-container .ts-top-block .ts-calendar-trigger span {
+  margin-left: 5px;
+}
+.ts-container .ts-prev,
+.ts-container .ts-next {
+  position: relative;
+  width: 4%;
+  height: 15%;
+  float: left;
+  cursor: pointer;
+  color: whitesmoke;
+  text-align: center;
+  background-color: #009fe5;
+  transition-property: background-color;
+  transition-duration: 300ms;
+}
+.ts-container .ts-prev .fa,
+.ts-container .ts-next .fa {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+}
+.ts-container .ts-prev:hover,
+.ts-container .ts-next:hover {
+  opacity: 0.7;
+}
+.ts-container .ts-prev.disabled,
+.ts-container .ts-next.disabled {
+  background-color: whitesmoke;
+  color: white;
+  cursor: default;
+}
+.ts-container .ts-prev {
+  margin-right: 1%;
+  border-radius: 10px 0 0 10px;
+}
+.ts-container .ts-next {
+  margin-left: 1%;
+  border-radius: 0 10px 10px 0;
+}
+.ts-container .ts-inner {
+  overflow: hidden;
+  position: relative;
+  width: 90%;
+  float: left;
+  border-top: 1px solid silver;
+  border-right: 1px solid silver;
+  border-bottom: 1px solid silver;
+  border-left: 1px solid silver;
+}
+.ts-container .ts-inner .ts-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  min-height: 30px;
+  padding: 7px;
+  border: 1px solid silver;
+  background-color: white;
+  box-shadow: lightgrey;
+  transform: translate(-50%, -50%);
+}
+.ts-container .ts-inner .ts-info .ts-info-inner {
+  width: 100%;
+}
+.ts-container .ts-inner .ts-info .ts-info-inner .ts-inner-timetable {
+  width: 100%;
+  height: 100%;
+}
+.ts-container .ts-inner .ts-info .ts-nearest-link {
+  cursor: pointer;
+}
+.ts-container .ts-inner .ts-day {
+  float: left;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid silver;
+}
+.ts-container .ts-inner .ts-day:first-of-type {
+  border-left: none;
+}
+.ts-container .ts-inner .ts-day.ts-month-start {
+  border-left: 1px solid #009fe5;
+}
+.ts-container .ts-inner .ts-day.ts-month-start:first-of-type {
+  border-left: none;
+}
+.ts-container .ts-inner .ts-day .ts-month-cell {
+  height: 25px;
+  border-bottom: 1px solid silver;
+  font-weight: bold;
+  font-size: 90%;
+  text-transform: uppercase;
+  color: grey;
+}
+.ts-container .ts-inner .ts-day .ts-month-cell span {
+  position: relative;
+  display: inline-block;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ts-container .ts-inner .ts-day .ts-day-cell {
+  padding: 5px 0;
+  background-color: whitesmoke;
+  color: grey;
+}
+.ts-container .ts-inner .ts-day .ts-day-cell .ts-day-date {
+  display: block;
+  font-size: 16px;
+}
+.ts-container .ts-inner .ts-day .ts-day-cell .ts-day-date span {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.ts-container .ts-inner .ts-day .ts-day-cell .ts-day-weekday {
+  display: block;
+  font-size: 10px;
+  font-weight: bold;
+}
+.ts-container .ts-inner .ts-day.weekend {
+  background-color: whitesmoke;
+}
+.ts-container .ts-inner .ts-day.weekend .ts-day-cell .ts-day-date,
+.ts-container .ts-inner .ts-day.weekend .ts-day-cell .ts-day-weekday {
+  color: red;
+}
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-down,
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-up {
+  margin: 3px;
+  padding: 3px;
+  cursor: pointer;
+}
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-down .fa,
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-up .fa {
+  color: grey;
+  font-size: 24px;
+}
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-down:hover .fa,
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-up:hover .fa {
+  color: #009fe5;
+}
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-down.disabled,
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-up.disabled,
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-down.disabled:hover,
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-up.disabled:hover {
+  cursor: default;
+}
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-down.disabled .fa,
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-up.disabled .fa,
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-down.disabled:hover .fa,
+.ts-container .ts-inner .ts-day .ts-time-container .ts-arrow-up.disabled:hover .fa {
+  color: silver;
+}
+.ts-container .ts-inner .ts-day .ts-time-container .ts-times {
+  overflow: hidden;
+  min-height: 100px;
+}
+.ts-container .ts-inner .ts-day .ts-time-container .ts-times .ts-timeslot {
+  margin: 0 5px;
+  padding: 7px 0;
+  color: #009fe5;
+}
+.ts-container .ts-inner .ts-day .ts-time-container .ts-times .ts-timeslot:hover:not(.ts-invisible) {
+  background-color: #009fe5;
+  color: white;
+  cursor: pointer;
+}
+.ts-container .ts-inner .ts-day .ts-time-container .ts-times .ts-timeslot.ts-selected {
+  background-color: #80ca00;
+  font-weight: bold;
+  color: white;
+}
+.ts-container .ts-inner .ts-day .ts-time-container .ts-times .ts-timeslot.ts-selected:hover {
+  background-color: #80ca00;
+}
+.ts-spinner-container-calendar {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.ts-spinner-container-calendar.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ts-spinner-msg {
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.ts-loader {
+  color: #00AEEF;
+  font-size: 60px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: ts-load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: ts-load6 1.7s infinite ease, round 1.7s infinite ease;
+}
+.ts-spinner-container-calendar {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+}
+.ts-spinner-container-calendar .ts-spinner-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: whitesmoke;
+}
+.ts-spinner-container-calendar .ts-spinner-content .ts-spinner-content-inner {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ts-spinner-container-calendar .ts-spinner-msg {
+  margin-bottom: 12px;
+  font-size: 0.8em;
+  color: #7f7f7f;
+  text-align: center;
+}
+.ts-spinner-container-calendar .ts-loader {
+  font-size: 30px;
+  margin: 24px auto;
+}
+@-webkit-keyframes ts-load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes ts-load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-webkit-keyframes ts-round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes ts-round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

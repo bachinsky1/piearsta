@@ -1,0 +1,46 @@
+<div class="content">
+	<form class="forma" method="post" action="" onsubmit="return false;">
+		<fieldset>
+			<table class="search-table" cellpadding="0" cellspacing="0">
+			    <tr>
+			        <td>
+			            <label for="contentTitle">{{'content'|gLA:'Content'}}:</label>
+			            <input type="hidden" name="content_id" id="content_id" readonly="readonly" />
+			            <input class="long" type="text" id="contentTitle" name="contentTitle" readonly="readonly" />
+			            <a href="#" onclick="openSiteMapDialog('content_id', 'contentTitle', 'siteMapReturn'); return false;" class="select-btn">{{'select'|gLA:'Select'}}</a>
+			        </td>
+			    </tr>
+			</table>
+	
+			{{$tTable}}
+			
+			<div id="modulePath">
+			</div>
+			
+			{{$bTable}}
+	
+		</fieldset>
+	</form>
+	
+	<script type="text/javascript">
+		moduleTable.mainUrl = '{{$MAIN_URL}}';
+		moduleTable.moduleName = '{{$MODULE_NAME}}';
+		moduleTable.usePaging = true;
+		{{if $MODULE_FROM}}
+	    moduleTable.from = {{$MODULE_FROM}};
+	    {{/if}}
+
+		$(document).ready(function() {
+			
+			if (typeof(anchors['content_id']) != 'undefined') {
+				$('#content_id').val(anchors['content_id']);
+				updateModule();
+			}
+
+			if ($('#content_id').val() == '') {
+				$('.table-nav').hide();
+			}	
+			
+		});
+	</script>
+</div>	

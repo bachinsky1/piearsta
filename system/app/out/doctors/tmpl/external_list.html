@@ -1,0 +1,257 @@
+<div class="header">
+    <h2>
+    	{{assign var="found_doctors" value=$found_doctors|gLParam:'{found_doctors}'}}
+		{{'clinics_open_doctors_title'|gL:'Šajā klinikā strādā <span class="doctors-result-count">{found_doctors}</span> ārsti':'':$found_doctors}}
+    </h2>
+
+	{{if $piesakiArstu && $piesakiArstu.active}}
+	<p class="piesaki-arstu-link">
+		Pieraksts pie meklētā ārsta nav pieejams tiešsaistē? <a href="/profils/piesaki-arstu/">Piesaki ārstu!</a>
+	</p>
+	{{/if}}
+
+    <div class="controls2">
+
+	    <div class="right">
+			<a href="#" class="btnw calendar-trigger"><i class="fa fa-calendar"></i><span class="text">{{'reservation_calendar'|gL:'Kalendārs'}}</span></a>
+			<input type="text" id="jqui-calendar" readonly>
+			<a href="#" class="filterBtn"></a>
+	    </div>
+
+    </div>
+
+	<div class="controls2 quickFilters">
+		<div class="left">
+
+			<div class="field">
+
+				<div class="label"><label>{{'doctors_filter_services_title'|gL:'Pakalpojums'}}</label></div>
+
+				{{if $smarty.get.doctors_filter_services && $smarty.get.doctors_filter_services != 'false'}}
+				{{assign var="services_init_val" value=$smarty.get.doctors_filter_services}}
+				{{else}}
+				{{assign var="services_init_val" value='doctors_filter_services_default_text'|gL:'Izvēlies pakalpojumu'}}
+				{{/if}}
+
+				{{if $smarty.get.doctors_filter_specialty && $smarty.get.doctors_filter_specialty != 'false'}}
+				{{assign var="specialty_init_val" value=$smarty.get.doctors_filter_specialty}}
+				{{else}}
+				{{assign var="specialty_init_val" value='doctors_filter_specialty_default_text'|gL:'Izvēlies specialitāti'}}
+				{{/if}}
+
+				<div class="cinput default"><input type="text"
+												   value="{{$services_init_val}}"
+												   id="doctors_filter_services"
+												   data-current="{{$services_init_val}}"
+												   data-default="{{'doctors_filter_services_default_text'|gL:'Izvēlies pakalpojumu'}}"
+												   class="service-autocomplete"></div>
+
+				<input id="doctors_filter_constant_clinic" value="{{$clinic_id}}" type="hidden" />
+
+			</div>
+
+			<div class="field">
+				<div class="label"><label>{{'doctors_filter_specialty_title'|gL:'Specialitāte'}}</label></div>
+				<div class="cinput default"><input type="text"
+												   value="{{$specialty_init_val}}"
+												   id="doctors_filter_specialty"
+												   data-current="{{$specialty_init_val}}"
+												   data-default="{{'doctors_filter_specialty_default_text'|gL:'Izvēlies specialitāti'}}"
+												   class="specialty-autocomplete"></div>
+			</div>
+
+			<div class="field checkBoxFilterWrapper">
+
+				<div class="label"><label>{{'doctors_filter_services_title'|gL:'Pakalpojums'}}</label></div>
+				<div class="FilterWrapper">
+					<div class="quickFilter-item">
+					<label class="item green checked"><input type="checkbox" checked="checked" rel="1" name="payment_type" class="calendar_filter">
+					<span class="box"><i class="fa fa-check"></i></span>
+					{{'profile_reservation_payment_type_country'|gL:'Valsts'}}
+					</label>
+					<span class="tip" data-hastip="{{'profile_reservation_payment_type_country_hint'|gL}}"><i class="fa fa-question-circle"></i></span>
+					</div>
+
+					<div class="quickFilter-item">
+
+					<label class="item blue checked"><input type="checkbox" checked="checked" rel="2" name="payment_type" class="calendar_filter">
+					<span class="box"><i class="fa profile_reservation_payment_type_pay fa-check"></i></span>
+					{{'profile_reservation_payment_type_pay'|gL:'Maksas'}}
+					</label>
+					<span class="tip" data-hastip="{{'profile_reservation_payment_type_client_hint'|gL}}"><i class="fa fa-question-circle"></i></span>
+
+					</div>
+
+<!--				<label class="item white">-->
+<!--					<input type="checkbox" rel="3" name="remote_services" class="calendar_filter">-->
+<!--					<span class="box"><i class="fa fa-check"></i></span>-->
+<!--					{{'profile_remote_services_filter'|gL:'Attālinātās konsultācijas'}}-->
+<!--				</label>-->
+<!--				<span class="tip" data-hastip="{{'profile_reservation_remote_hint'|gL}}"><i class="fa fa-question-circle"></i></span>-->
+
+					<div class="quickFilter-item">
+						<label class="item white">
+						<input type="checkbox" rel="4" name="dcDoctors" class="calendar_filter">
+						<span class="box"><i class="fa fa-check"></i></span>
+
+						<span class="specialLabel dcDoctor">
+							<strong>DC</strong>
+						</span>
+
+						{{'profile_dc_doctors_filter'|gL:'Tikai DC ārsti'}}
+					</label>
+					<span class="tip" data-hastip="{{'profile_reservation_dc_doctors_hint'|gL:'Показывать только тех врачей, которые есть в DigitalClinic'}}"><i class="fa fa-question-circle"></i></span>
+					</div>
+				</div>
+					<!--
+                	<label class="item checked"><input type="checkbox" checked="checked" rel="0" name="payment_type" class="calendar_filter"><span class="box"><i class="fa fa-check"></i></span>{{'profile_reservation_payment_type_mix'|gL:'Miks'}}</label>
+                	<span class="tip" data-hastip="{{'profile_reservation_payment_type_mix_hint'|gL}}"><i class="fa fa-question-circle"></i></span>
+                	 -->
+				</div>
+		</div>
+	</div>
+
+</div>
+<div class="doctors_list" id="doctors_list" rel="{{$doctorPageUrl}}">
+    <div class="table_head">
+		<div class="moving_part">
+		    <div class="wrap">
+		    {{if $doctorsIds|@count > 0}}
+			<div class="calendar">
+			    <div id="calendar_list_header">
+				    {{include file="calendar_list_header.html"}}
+				</div>
+			</div>
+			{{/if}}
+		    </div>
+		</div>
+		<div class="space_taken">
+			{{if $piesakiArstu && $piesakiArstu.active}}
+			<p class="piesaki-arstu-link">
+				Pieraksts pie meklētā ārsta nav pieejams tiešsaistē?
+			<p><a href="/profils/piesaki-arstu/">Piesaki ārstu!</a></p>
+			</p>
+			{{/if}}
+		</div>
+    </div>
+    <div class="table_body">
+	<div class="wrap">
+	    <div class="list">
+
+		{{$TEMPLATE_DOCTORS_MODULE_DATA}}
+
+	    </div>
+	    
+	    <div class="bottom_control">
+		    {{if $show_more}}
+		    <div class="btn_cont"><a href="#" rel="{{$current_page}}" class="btnw doctors-show-more">{{'doctors_show_more'|gL:'Radīt vairāk'}}</a></div>
+		    {{/if}}
+		    <div class="cont_toTop">
+				{{if $piesakiArstu && $piesakiArstu.active}}
+				<p class="piesaki-arstu-link">
+					Pieraksts pie meklētā ārsta nav pieejams tiešsaistē?
+					<a href="/profils/piesaki-arstu/">Piesaki ārstu!</a>
+				</p>
+				{{/if}}
+				<div data-goto="doctors_list" class="toTop">{{'gototop'|gL:'Top'}}</div>
+			</div>
+	    </div>
+	</div>
+    </div>
+</div>
+<script nonce="{{$web.cspNonce}}">
+
+	var doctorPageUrl = '{{$doctorPageUrl}}';
+	var signInPage = '{{$siteData.mirros_signin_page|getLM}}';
+	var signedIn = {{if $userData.id}}true{{else}}false{{/if}};
+
+    $(document).ready(function(){
+
+		monkeyPatchAutocomplete();
+
+		var clinicId = $('#clinicId').val();
+
+    	$(".specialty-autocomplete").autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					url: "/doctors/specialtyAutocomplete/",
+					dataType: "json",
+					data: {
+						q: request.term,
+						clinicId: clinicId
+					},
+
+					success: function (data) {
+						response(data);
+					}
+				});
+			},
+			select: function() {
+				var $this = $(this);
+
+				console.log(this);
+
+				setTimeout(function () {
+					$this.trigger('change');
+					$this.data('current', $this.val());
+				}, 50);
+			},
+			autoFocus: true,
+			minLength: 3,
+			position: {my: "left-12 top+20"},
+			appendTo: ".cinput.focused input"
+		});
+
+		$(".service-autocomplete").autocomplete({
+			source: function (request, response) {
+				$.ajax({
+					url: "/doctors/serviceAutocomplete/",
+					dataType: "json",
+					data: {
+						q: request.term,
+						clinicId: clinicId
+					},
+					success: function (data) {
+						response(data);
+					}
+				});
+			},
+			select: function() {
+				var $this = $(this);
+				setTimeout(function () {
+					$this.trigger('change');
+					$this.data('current', $this.val());
+				}, 50);
+			},
+			autoFocus: true,
+			minLength: 3,
+			position: {my: "left-12 top+20"},
+			appendTo: ".cinput.focused input"
+		});
+
+		jQuery.ui.autocomplete.prototype._resizeMenu = function () {
+			var ul = this.menu.element;
+			ul.outerWidth(this.element.outerWidth() + 24);
+		};
+        
+		$('.calendar_filter').change(function() {
+		    if($(this).attr('name') === 'remote_services' || $(this).attr('name') === 'subscription' || $(this).attr('name') === 'dcDoctors') {
+				$('.header .field').find('input:visible').eq(0).trigger('change');
+		    } else {
+				profile.filterReservationCalendar();
+		    }
+		});
+		
+		// $.ajax({
+	    //     url: '//graph.facebook.com/{{if $clinic.fb_link != ''}}{{$clinic.fb_link|clear}}{{else}}{{$curPageUrl2}}{{/if}}',
+	    //     dataType: 'jsonp',
+	    //     success: function(data) {
+	    //     	if (data.comments != 'undefined') {
+	    //     		ajaxRequest('/clinics/updateReviewsCount/', {clinica: {{$clinic_id}}, count: data.comments}, function(data) {
+	    //
+	    //     		});
+	    //     	}
+	    //    }
+	    // });
+    });
+</script>

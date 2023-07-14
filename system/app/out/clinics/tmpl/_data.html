@@ -1,0 +1,45 @@
+{{foreach from=$clinics key=i item=clinic}}
+<div class="item">
+    <div class="image">
+	<a href="{{$siteData.mirrors_clinics_page|getLM2}}{{$clinic.url}}/">
+		{{if $clinic.logo}}
+	    <img src="{{$AD_UPLOAD_FOLDER}}{{$clinicsConfig.uploadFolder}}list/{{$clinic.logo}}" alt="{{$clinic.name|clear}}">
+	    {{else}}
+	    <img src="{{$AD_IMAGE_FOLDER}}clinic-small.png" alt="{{$clinic.name|clear}}">
+	    {{/if}}
+	</a>
+    </div>
+    <div class="text">
+	<div class="top">
+	    <div class="name"><a href="{{$siteData.mirrors_clinics_page|getLM2}}{{$clinic.url}}/">{{$clinic.name|clear}}</a></div>
+	    {{if $clinic.reviews_count > 0}}
+	    <div class="reviews"><a href="{{$siteData.mirrors_clinics_page|getLM2}}{{$clinic.url}}/#comments"><span class="word"> {{'reviews'|gL:'atsauksmes'}}:</span> {{$clinic.reviews_count}}</a></div>
+		{{/if}}
+	</div>
+	<div class="contacts">
+	    <div>
+	    	{{if $clinic.citytitle}}
+    		{{$clinic.citytitle}},
+    		{{/if}}
+    		
+    		{{if $clinic.districttitle}}
+    		{{$clinic.districttitle}},
+    		{{/if}}
+    		
+    		{{if $clinic.zip}}
+    		{{$clinic.address}}, {{$clinic.zip}}
+    		{{else}}
+    		{{$clinic.address}}
+    		{{/if}}
+	    </div>
+	    <div>{{$clinic.phone|clear}}</div>
+
+		{{if $clinic.hasSubscription}}
+			<span class="specialLabel hasSubscription" data-hastip="{{'profile_subscription_clinic_available_hint'|gL:'При записи к докторам из этой клиники действует абонемент'}}">
+				<strong>A</strong>
+			</span>
+		{{/if}}
+	</div>
+    </div>
+</div>
+{{/foreach}}

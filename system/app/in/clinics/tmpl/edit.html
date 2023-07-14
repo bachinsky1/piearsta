@@ -1,0 +1,366 @@
+<div class="content">
+    <div id="modulePath">
+	<div class="error-msg" id="errorBlock" style="display:none;"></div>
+	<input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+	<table class="holder-table">
+	    <tr>
+		<td class="left-td">
+		    <table class="inner-table">
+			<tr>
+				<td><strong>{{'general_data'|gLA:'General data'}}</strong></td>
+				<td><input type="checkbox" name="local" class="simple" id="local" value="1" {{if $edit.local}} checked="checked" {{/if}} class="radio">manual</input></td>
+			</tr>
+			<tr>
+			    <td>
+				Statistic:
+			    </td>
+			    <td>
+					Edit From Web: {{$edit.web_count}}, Edit From Terminal: {{$edit.terminal_count}}
+			    </td>
+			</tr>
+			<tr>
+			    <td>{{'m_name'|gLA:'Name'}}*:</td>
+			    <td><input type="text" class="long required simple" name="name" id="name" value="{{$edit.name|clear}}" /></td>
+			</tr>
+			<tr>
+	          <td>Description*:</td>
+	          <td>
+			<div class="block-holder open">
+				<div class="inner-block">
+					<ul class="lang-tabs">
+						{{foreach name=langauges key=lk item=lng from=$langauges}}
+						<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+						{{/foreach}}
+					</ul>
+					<div class="areaBlock">
+						{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+						<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+							<textarea class="long simple" id="description_{{$lng.lang}}" rel="{{$lng.lang}}" name="description">{{$edit.description[$lng.lang]|clear}}</textarea>
+							<div class="clr"><!-- clear --></div>
+						</div>
+						{{/foreach}}
+					</div>             
+				</div>
+			</div>							
+	         </td>
+	      </tr>
+	      <tr>
+	          <td>Keywords:</td>
+	          <td>
+			<div class="block-holder open">
+				<div class="inner-block">
+					<ul class="lang-tabs">
+						{{foreach name=langauges key=lk item=lng from=$langauges}}
+						<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+						{{/foreach}}
+					</ul>
+					<div class="areaBlock">
+						{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+						<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+							<textarea class="long simple" id="keywords_{{$lng.lang}}" rel="{{$lng.lang}}" name="keywords">{{$edit.keywords[$lng.lang]|clear}}</textarea>
+							<div class="clr"><!-- clear --></div>
+						</div>
+						{{/foreach}}
+					</div>             
+				</div>
+			</div>							
+	         </td>
+	      </tr>
+			<tr>
+			    <td>{{'m_logo'|gLA:'Logo'}}:</td>
+			    <td>
+				<div id="logoDiv">
+				    {{if $edit.logo}}
+				    <img width="100" alt="" src="{{$AD_UPLOAD_FOLDER}}{{$edit.uploadFolder}}list/{{$edit.logo}}"><a href="#" onclick="emptyUploadFile('logo'); return false;">{{'m_delete'|gLA:'Delete'}}</a>
+				    <input type="hidden" class="simple" name="logo" id="logo" value="{{$edit.logo}}">
+				    {{/if}}
+				</div>
+				<a href="#" id="logoButton" class="select-btn">{{'upload'|gLA:'Upload'}}</a>
+			    </td>
+			</tr>
+			<tr>
+			    <td>{{'m_registration_nr'|gLA:'Registration Nr.'}}*:</td>
+			    <td><input type="text" class="long simple" name="reg_nr" id="reg_nr" value="{{$edit.reg_nr|clear}}" /></td>
+			</tr>
+			<tr>
+			    <td>{{'m_city'|gLA:'City'}}*:</td>
+			    <td>
+				<select name="city" id="city" class="simple">
+				    <option value="">{{'m_select_option'|gLA:'-- Select --'}}</option>
+				    {{foreach from=$edit.external.cities item=city key=key}}
+				    <option {{if $city.c_id == $edit.city}} selected="selected" {{/if}} value="{{$city.c_id}}">{{$city.title}}</option>
+				    {{/foreach}} 
+				</select>
+			    </td>
+			</tr>
+			<tr>
+			    <td>{{'m_district'|gLA:'District'}}*:</td>
+			    <td>
+				<select name="district" id="district" class="simple">
+				    <option value="">{{'m_select_option'|gLA:'-- Select --'}}</option>
+				    {{foreach from=$edit.external.districts item=district key=key}}
+				    <option {{if $district.c_id == $edit.district}} selected="selected" {{/if}} value="{{$district.c_id}}">{{$district.title}}</option>
+				    {{/foreach}} 
+				</select>
+			    </td>
+			</tr>
+			<tr>
+	          <td>{{'m_address'|gLA:'Address'}}*:</td>
+	          <td>
+				<div class="error-msg" style="display:none;">{{'m_title_error'|gLA:'Title in all languages required!'}}</div>
+	          	<div class="block-holder open">
+				<div class="inner-block">
+					<ul class="lang-tabs">
+						{{foreach name=langauges key=lk item=lng from=$langauges}}
+						<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+						{{/foreach}}
+					</ul>
+	                           
+					<div class="areaBlock">
+						{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+						<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+							<input rel="{{$lng.lang}}" type="text" class="long simple" name="address" id="address_{{$lng.lang}}" value="{{$edit.address[$lng.lang]|clear}}" />
+							<div class="clr"><!-- clear --></div>
+						</div>
+						{{/foreach}}
+					</div>             
+				</div>
+			</div>							
+	         </td> 
+	      </tr>
+	      <tr>
+			    <td>Zip Code*:</td>
+			    <td><input type="text" class="long simple" name="zip" id="zip" value="{{$edit.zip|clear}}" /></td>
+			</tr>
+			<tr>
+			    <td>{{'lng'|gLA:'Lng'}}*:</td>
+			    <td><input type="text" class="long simple" name="lng" id="lng" value="{{$edit.lng|clear}}" /></td>
+			</tr>
+			<tr>
+			    <td>{{'lat'|gLA:'Lat'}}*:</td>
+			    <td><input type="text" class="long simple" name="lat" id="lat" value="{{$edit.lat|clear}}" /></td>
+			</tr>
+			<!-- 
+			<tr>
+			    <td>{{'m_work_time'|gLA:'Work time'}}:</td>
+			    <td><input type="text" class="long simple" name="work_time" id="work_time" value="{{$edit.work_time|clear}}" /></td>
+			</tr>
+			 -->
+			<tr>
+			    <td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+			    <td colspan="2"><strong>{{'m_contacts_block'|gLA:'Contacts block'}}</strong></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<table>
+						<tr class='contacts'>
+							<td>
+								{{'m_phone'|gLA:'Phone'}}: &nbsp;&nbsp;&nbsp;
+								<input type="text" class="long" name="phone" value="{{$edit.contacts[0].phone|clear}}" />
+							</td>
+							<td>
+								{{'m_email'|gLA:'E-mail'}}: &nbsp;&nbsp;&nbsp;
+								<input type="text" class="long" name="email" value="{{$edit.contacts[0].email|clear}}" />
+							</td>
+							<td>
+								{{'name'|gLA:'Name'}}: &nbsp;&nbsp;&nbsp;
+					          	<div class="block-holder open">
+								<div class="inner-block">
+									<ul class="lang-tabs">
+										{{foreach name=langauges key=lk item=lng from=$langauges}}
+										<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+										{{/foreach}}
+									</ul>
+					                           
+									<div class="areaBlock">
+										{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+										<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+											<input rel="{{$lng.lang}}" type="text" class="long" name="name" id="name_{{$lng.lang}}" value="{{$edit.contacts[0].lang_data[$lng.lang].name|clear}}" />
+											<div class="clr"><!-- clear --></div>
+										</div>
+										{{/foreach}}
+									</div>             
+								</div>
+							</td>
+						<tr>
+						<tr class='contacts'>
+							<td>
+								{{'m_phone'|gLA:'Phone'}}: &nbsp;&nbsp;&nbsp;
+								<input type="text" class="long" name="phone" value="{{$edit.contacts[1].phone|clear}}" />
+							</td>
+							<td>
+								{{'m_email'|gLA:'E-mail'}}: &nbsp;&nbsp;&nbsp;
+								<input type="text" class="long" name="email" value="{{$edit.contacts[1].email|clear}}" />
+							</td>
+							<td>
+								{{'name'|gLA:'Name'}}: &nbsp;&nbsp;&nbsp;
+					          	<div class="block-holder open">
+								<div class="inner-block">
+									<ul class="lang-tabs">
+										{{foreach name=langauges key=lk item=lng from=$langauges}}
+										<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+										{{/foreach}}
+									</ul>
+					                           
+									<div class="areaBlock">
+										{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+										<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+											<input rel="{{$lng.lang}}" type="text" class="long" name="name" id="name_{{$lng.lang}}" value="{{$edit.contacts[1].lang_data[$lng.lang].name|clear}}" />
+											<div class="clr"><!-- clear --></div>
+										</div>
+										{{/foreach}}
+									</div>             
+								</div>
+							</td>
+						<tr>
+						<tr class='contacts'>
+							<td>
+								{{'m_phone'|gLA:'Phone'}}: &nbsp;&nbsp;&nbsp;
+								<input type="text" class="long" name="phone" value="{{$edit.contacts[2].phone|clear}}" />
+							</td>
+							<td>
+								{{'m_email'|gLA:'E-mail'}}: &nbsp;&nbsp;&nbsp;
+								<input type="text" class="long" name="email" value="{{$edit.contacts[2].email|clear}}" />
+							</td>
+							<td>
+								{{'name'|gLA:'Name'}}: &nbsp;&nbsp;&nbsp;
+					          	<div class="block-holder open">
+								<div class="inner-block">
+									<ul class="lang-tabs">
+										{{foreach name=langauges key=lk item=lng from=$langauges}}
+										<li{{if $smarty.foreach.langauges.first}} class="active" {{/if}}><a href="#">{{$lng.title}}</a></li>
+										{{/foreach}}
+									</ul>
+					                           
+									<div class="areaBlock">
+										{{foreach name=langauges2 key=lk item=lng from=$langauges}}
+										<div class="text-block{{if $smarty.foreach.langauges2.first}} open{{/if}}">
+											<input rel="{{$lng.lang}}" type="text" class="long" name="name" id="name_{{$lng.lang}}" value="{{$edit.contacts[2].lang_data[$lng.lang].name|clear}}" />
+											<div class="clr"><!-- clear --></div>
+										</div>
+										{{/foreach}}
+									</div>             
+								</div>
+							</td>
+						<tr>
+					</table>
+				</td>	
+			</tr>
+			
+			<tr>
+			    <td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+			    <td>
+				{{'m_clinics_doctors'|gLA:'Doctors'}}:
+				<br />
+				<button id="add_doctor" type="button" data-name="doctors[]" data-type="doctors" data-key="id" class="add-select">+</button>
+			    </td>
+			    <td class="doctors-container"></td>
+			</tr>
+			{{if $edit.id && !$edit.local}}
+			<tr>
+			    <td colspan="2"><strong>{{'settings'|gLA:'Settings'}}</strong></td>
+			</tr>
+			<tr>
+			    <td>Minimum hours:</td>
+			    <td><input type="text" class="long simple" name="min_h" id="min_h" value="{{$edit.min_h|clear}}" /></td>
+			</tr>
+			<tr>
+			    <td>Maximum days:</td>
+			    <td><input type="text" class="long simple" name="max_d" id="max_d" value="{{$edit.max_d|clear}}" /></td>
+			</tr>
+			<tr>
+			    <td>Login:</td>
+			    <td><input type="text" class="long simple" name="login" id="login" value="{{$edit.login|clear}}" /></td>
+			</tr>
+			<tr>
+			    <td>Password:</td>
+				<td><input type="password" class="long simple" name="password" id="password" readonly onfocus="this.removeAttribute('readonly');" value="{{$edit.password|clear}}" /></td>
+			</tr>
+			{{/if}}
+		    </table>
+		</td>
+	    </tr>
+	</table>
+	<table class="bttns-table">
+	    <tr>
+		<td>
+			{{if $edit.id}}
+			<div class="btn orange"><a href="javascript:;" onclick="checkFields('apply');"><span>{{'apply'|gLA:'Apply'}}</span></a></div>
+			{{/if}}
+			<div class="btn"><a href="javascript:;" onclick="checkFields('save');"><span>{{'save'|gLA:'Save'}}</span></a></div>
+			{{if $edit.id}}
+			<div class="btn cancel"><a href="javascript:;" onclick="window.location.href = moduleTable.getRequestUrl() + 'view/{{$edit.id}}/';"><span>{{'m_view'|gLA:'View'}}</span></a></div>
+			{{/if}}
+
+		    <div class="btn cancel"><a href="javascript:;" onclick="window.location.href = moduleTable.getRequestUrl();"><span>{{'m_cancel'|gLA:'Cancel'}}</span></a></div>
+		</td>
+	    </tr>
+	</table>
+
+	<script type="text/javascript">
+	    $('#add_doctor').data('value', ['name', 'surname']);
+	    moduleTable.mainUrl = '{{$MAIN_URL}}';
+	    moduleTable.moduleName = '{{$MODULE_NAME}}';
+	    externalContent = {{$edit.external|@json_encode}};
+	    
+	    {{foreach from=$edit.doctors item=doctor key=key}}
+	    buildSelect($('.doctors-container'), 'doctors[]', externalContent['doctors'], 'id', ['name', 'surname'], {{$doctor.id}});
+	    {{/foreach}}
+	    
+	    $(document).ready(function() {
+
+			$('ul.lang-tabs a').click(function() {
+				var curChildIndex = $(this).parent().prevAll().length + 1;
+				$(this).parent().parent().children('.active').removeClass('active');
+				$(this).parent().addClass('active');
+				$(this).parent().parent().next('.areaBlock').children('.open').fadeOut('fast',function() {
+					$(this).removeClass('open');
+					$(this).parent().children('div:nth-child('+curChildIndex+')').fadeIn('normal',function() {
+						$(this).addClass('open');
+					});
+				});
+				return false;
+			});
+
+			$('.add-select').on('click', function(e) {
+			    type = $(this).data('type');
+			    if (externalContent[type]) {
+					target = $(this).parents('td').next();
+					buildSelect(target, $(this).data('name'), externalContent[type], $(this).data('key'), $(this).data('value'));
+			    }
+			});
+			
+			$('.rm-select').live('click', function(e) {
+			    removeSelect($(this));
+			});
+			
+			
+			
+			var tabindex = 1;
+			$('.modulePath :input,select').each(function() {
+			    if (this.type != "hidden") {
+				var $input = $(this);
+				$input.attr("tabindex", tabindex);
+				tabindex++;
+			    }
+			});
+			
+			{{if !$edit.local}}
+			
+			$('#add_doctor').remove();
+			$('.rm-select').remove();
+			//$('.simple').attr('readonly', true).attr('disabled', true);
+			//$('.contacts').find('input').attr('readonly', true).attr('disabled', true);
+			$('.custom_select').find('select').attr('readonly', true).attr('disabled', true);
+			
+			{{/if}}
+
+			loadUploadImgButton('{{$edit.uploadFolder}}', 'logo');
+	    });
+	</script>
+    </div>
+</div>

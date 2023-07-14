@@ -1,0 +1,44 @@
+<nav class="header_menu">
+
+    {{assign var="hasRightPart" value=false}}
+
+    {{if $menu.TOP|@count > 0}}
+
+        <ul>
+            {{foreach from=$menu.TOP item=item name=topmenu}}
+
+                {{if !$item.right }}
+
+                    {{if $item.active}}
+                        <li class="item active {{$item.class}}"><a href="{{$item.url}}">{{$item.title}}</a></li>
+                    {{else}}
+                        <li class="item {{$item.class}}"><a href="{{$item.url}}">{{$item.title}}</a></li>
+                    {{/if}}
+
+                {{else}}
+
+                    {{assign var="hasRightPart" value=true}}
+
+                {{/if}}
+
+            {{/foreach}}
+        </ul>
+
+        {{if $hasRightPart}}
+            <ul class="topmenu-right">
+                {{foreach from=$menu.TOP item=item name=topmenu}}
+
+                    {{if $item.right}}
+                        {{if $item.active}}
+                            <li class="item active {{$item.class}}"><a href="{{$item.url}}">{{$item.title}}</a></li>
+                        {{else}}
+                            <li class="item {{$item.class}}"><a href="{{$item.url}}">{{$item.title}}</a></li>
+                        {{/if}}
+                    {{/if}}
+
+                {{/foreach}}
+            </ul>
+        {{/if}}
+
+    {{/if}}
+</nav>

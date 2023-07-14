@@ -1,0 +1,97 @@
+<div class="insPopupHeaderBlock">
+    <h2 class="ins_header">{{'profile_have_insurance_police'|gL:'У меня есть страховой полис'}}</h2>
+    <h2 class="ins_header_checking">{{'profile_reservation_checking_insurance'|gL:'Проверка годности и покрытия страхового полиса'}}</h2>
+    <hr>
+</div>
+
+{{if $item.insuranceCompDontWorkWithClinic}}
+
+<!-- This clinic does't work with insurance company from user's profile  -->
+
+<div>
+    {{'profile_insurance_dont_work_with_clinic'|gL:'Указанная в вашем профиле страховая компания не работает с этой клиникой.'}}
+</div>
+
+<div class="btn_cont">
+    <!-- User can continue with standard payment reservation or can cancel current reservation process -->
+    <a href="" class="btng w1 continue-btn-pay">{{"profile_reservation_add_continue_payment"|gL:"Продолжить с оплатой"}}</a>
+    <a class="btn btnw w3 cancel-btn">{{'profile_reservation_cancel_cancel'|gL:'Отменить'}}</a>
+</div>
+
+<input class="ins_hidden_inp" id="insurance" type="hidden" value="0" />
+
+{{else}}
+
+<!-- Everithing is fine, we suggest user to agree with terms and proceed -->
+
+<div class="info-block ins-use">
+    <div class="order-agree">
+        <div class="checkbox_field">
+            <label class="item blue">
+                <input class="order-agree" id="ins-use" type="checkbox">
+                <span class="box"><i class="fa fa-check"></i></span>{{'profile_want_use_insurance'|gL:'Хочу использовать страховой полис для оплаты услуги.'}}
+            </label>
+            {{if $item.needLocalInsuranceCheck}}
+            <div class="needLocalInsuranceCheck">
+                <div class="msg_red">
+                    {{'profile_insurance_incomplete_data'|gL:'Указанные в вашем профиле данные страхового полиса неполные либо неверные.'}}
+                </div>
+                <div>
+                    <a class="insurance_edit_form" href="#">{{'profile_here_to_edit_insurance'|gL:'данные полиса можно исправить здесь'}}</a>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+<div class="info-block ins-agree">
+    <div class="order-agree">
+        <div class="checkbox_field">
+            <label class="item blue">
+                <input class="order-agree" id="ins-agree" type="checkbox">
+                <span class="box"><i class="fa fa-check"></i></span>{{'profile_have_read_and_accept_terms'|gL:'Apliecinu, ka iepazinos un piekritu <a href="/lietosanas-noteikumi/" target="_blank">apmaksas noteikumiem</a>'}}
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="btn_cont">
+    <a href="" class="btng w1 continue-btn disabled">{{"profile_reservation_add_continue"|gL:"Continue"}}</a>
+    <a class="btn btnw w3 back-btn">{{'profile_reservation_back'|gL:'Go back.'}}</a>
+</div>
+
+<input class="ins_hidden_inp" id="insurance" type="hidden" value="1" />
+
+{{/if}}
+
+
+<!-- save info for step back -->
+<input class="ins_hidden_inp" id="sheduleId" type="hidden" value="{{$item.id}}" />
+<input class="ins_hidden_inp" id="clinic_id" type="hidden" value="{{$item.clinic_id}}" />
+<input class="ins_hidden_inp" id="doctor_id" type="hidden" value="{{$item.doctor_id}}" />
+<input class="ins_hidden_inp" id="serviceStreetPrice" type="hidden" value="{{$item.streetPrice}}" />
+<input class="ins_hidden_inp" id="serviceInsurancePrice" type="hidden" value="{{$item.insPrice}}" />
+<input class="ins_hidden_inp" id="serviceId" type="hidden" value="{{$item.serviceData.c_id}}" />
+<input class="ins_hidden_inp" id="serviceName" type="hidden" value="{{$item.serviceData.title}}" />
+<input class="ins_hidden_inp" id="slots" type="hidden" value="{{$item.slots}}" />
+<input class="ins_hidden_inp" id="lock_id" type="hidden" value="{{$item.lockId}}" />
+<input class="ins_hidden_inp" id="reservation_id" type="hidden" value="{{$item.reservationId}}" />
+<input class="ins_hidden_inp" id="note" type="hidden" value="{{$item.notice}}" />
+<input class="ins_hidden_inp" id="notice" type="hidden" value="{{$item.notice}}" />
+<input class="ins_hidden_inp" id="isConsultation" type="hidden" value="{{$item.isConsultation}}" />
+<input class="ins_hidden_inp" id="anyTime" type="hidden" value="{{$item.anyTime}}" />
+<input class="ins_hidden_inp" id="selectedTime" type="hidden" value="{{$item.selectedTime}}" />
+<input class="ins_hidden_inp" id="personId" type="hidden" value="{{$item.profile_person_id}}" />
+<input class="ins_hidden_inp" id="fromTSWidget" type="hidden" value="{{$item.fromTSWidget}}" />
+<input class="ins_hidden_inp" id="needLocalInsuranceCheck" type="hidden" value="{{if $item.needLocalInsuranceCheck}}1{{else}}0{{/if}}" />
+<input class="ins_hidden_inp" id="insuranceCompDontWorkWithClinic" type="hidden" value="{{if $item.insuranceCompDontWorkWithClinic}}1{{else}}0{{/if}}" />
+
+{{if $dcAppointment}}
+<input class="ins_hidden_inp" id="dc" type="hidden" value="{{$dcAppointment}}" />
+{{/if}}
+
+{{if $resOptions}}
+{{foreach from=$resOptions key=k item=option}}
+<input id="{{$k}}" class="resOptionsHiddenInput ins_hidden_inp" type="hidden" value="{{$option}}" />
+{{/foreach}}
+{{/if}}

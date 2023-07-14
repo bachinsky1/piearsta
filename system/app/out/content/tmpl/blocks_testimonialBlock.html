@@ -1,0 +1,18 @@
+<div class="testimonial_block">
+    <div class="wrap">
+        <!--		<div class="left">
+                    <div class="nr">{{$profilesCount}}</div>
+                    <div class="text">{{'startpage_clients_text'|gL:'Cilvēki jau izmantojuši mūsu pakalpojumu'}}</div>
+                </div>
+        -->
+        {{if $randomReview}}
+        <div class="right">
+            <div class="text">{{$randomReview.text}}</div>
+            <div class="author">
+                <div class="bolded">{{$randomReview.author}}</div>
+                <div>{{$randomReview.lead}}</div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

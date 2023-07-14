@@ -1,0 +1,77 @@
+<div class="header">
+    <div class="wrap">
+	<h2>
+		<span class="ver1i ver3i">
+			{{assign var="found_clinics" value=$found_clinics|gLParam:'{found_clinics}'}}
+			{{'clinics_found_title'|gL:'Atrastas <span class="clinics-result-count">{found_clinics}</span> iestādes':'':$found_clinics}}
+		</span>
+	</h2>
+
+	<div class="controls quickFilters open">
+		<div class="left">
+
+			{{if $userData.id && $userData.dcSubscription}}
+			<div class="quickFilter-item">
+
+				<label class="item white">
+					<input type="checkbox" rel="4" name="subscription" class="calendar_filter">
+					<span class="box"><i class="fa fa-check"></i></span>
+
+					<span class="specialLabel hasSubscription">
+						<strong>A</strong>
+					</span>
+
+						{{'profile_subscription_filter'|gL:'Подписка'}}
+				</label>
+				<span class="tip" data-hastip="{{'profile_reservation_subscription_hint'|gL:'Показывать только те клиники, в которых действует моя подписка'}}"><i class="fa fa-question-circle"></i></span>
+			</div>
+			{{/if}}
+
+			<div class="quickFilter-item">
+			<label class="item white">
+				<input  {{if $filters.dcDoctors}}checked{{/if}} id="dcDoctors" type="checkbox" rel="4" name="dcDoctors" class="calendar_filter">
+				<span class="box"><i class="fa fa-check"></i></span>
+
+				<span class="specialLabel dcDoctor">
+					<strong>DC</strong>
+				</span>
+				{{'profile_dc_doctors_filter'|gL:'Только врачи DC'}}
+			</label>
+			<span class="tip" data-hastip="{{'profile_reservation_dc_doctors_hint'|gL:'Показывать только тех врачей, которые есть в DigitalClinic'}}"><i class="fa fa-question-circle"></i></span>
+			</div>
+		</div>
+	</div>
+
+    </div>
+</div>
+<div class="cont">
+    <div class="wrap">
+	<div class="list">
+	    {{$TEMPLATE_CLINICS_MODULE_DATA}}
+	</div>
+	
+	<div class="bottom_control">
+		{{if $show_more}}
+		<div class="btn_cont"><a href="#" rel="{{$current_page}}" class="btnw clinics-show-more">{{'clinics_show_more'|gL:'Radīt vairāk'}}</a></div>
+		{{/if}}
+		<div class="cont_toTop"><div data-goto="clinic_list" class="toTop">{{'gototop'|gL:'Top'}}</div></div>
+	</div>
+    </div>
+</div>
+<script nonce="{{$web.cspNonce}}">
+
+	$(function () {
+		let filterElements = {
+			clinics_filter_search: $("#clinics_filter_search"),
+			cilnics_filter_city: $("#cilnics_filter_city"),
+			doctors_filter_services: $("#doctors_filter_services"),
+			dcDoctors: $("#dcDoctors"),
+		};
+
+		let url = "/clinics/setFilters/"
+
+		setFilters(filterElements, url)
+
+	})
+
+</script>

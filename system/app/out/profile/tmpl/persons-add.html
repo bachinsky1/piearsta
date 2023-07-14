@@ -1,0 +1,158 @@
+<div class="signup_block personas_add">
+	<div class="wrap">
+		<div class="col2_y">
+			<div class="header_block">
+				<h2>{{$web.title}}</h2>
+			</div>
+			{{if $item.id}}
+			<input type="hidden" id="id" class="profile" value="{{$person.id}}">
+			{{/if}}
+			<div class="cont">
+
+				<div class="twocol">
+					<div class="label"><label>{{'form_name'|gL:'Vards'}}</label></div>
+					<div class="field">
+						<div class="cinput"><input type="text" id="name" class="profile" value="{{$person.name}}"></div>
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_surname'|gL:'Uzvārds'}}</label></div>
+					<div class="field">
+						<div class="cinput"><input type="text" id="surname" class="profile" value="{{$person.surname}}"></div>
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_gender'|gL:'Dzimums'}}</label></div>
+					<div class="field">
+						<div class="gender_select {{$item.gender|clear}}" data-male="{{'form_gender_male'|gL:'Vīrietis'}}" data-female="{{'form_gender_female'|gL:'Sieviete'}}">
+							<div class="textcont">
+								<div class="text">
+									{{if $person.gender == 'male'}}
+									{{'form_gender_male'|gL:'Vīrietis'}}
+									{{elseif $person.gender == 'female'}}
+									{{'form_gender_female'|gL:'Sieviete'}}
+									{{/if}}
+								</div>
+								<div class="gender_icon"><i class="fa fa-male"></i><i class="fa fa-female"></i></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select class="profile" id="gender">
+								<option value=""></option>
+								<option value="male" {{if $person.gender == 'male'}}selected="selected"{{/if}}>{{'form_gender_male'|gL:'Vīrietis'}}</option>
+								<option value="female" {{if $person.gender == 'female'}}selected="selected"{{/if}}>{{'form_gender_female'|gL:'Sieviete'}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="twocol radio_field">
+					<div class="label"><label>{{'form_resident'|gL:'Latvijas rezidents'}}</label></div>
+					<div class="field">
+						<div class="options">
+							<label><input type="radio" class="profile" name="resident" value="1" {{if $person.resident || !$person.id}}checked="checked"{{/if}}><span class="circle"><i class="fa fa-circle"></i></span>{{'form_resident_yes'|gL:'Jā'}}</label>
+							<label><input type="radio" class="profile" name="resident" value="0" {{if !$person.resident && $person.id}}checked="checked"{{/if}}><span class="circle"><i class="fa fa-circle"></i></span>{{'form_resident_no'|gL:'Nē'}}</label>
+						</div>
+					</div>
+				</div>
+				<div class="twocol resident">
+					<div class="label"><label>{{'form_personid'|gL:'Personas kods'}}</label></div>
+					<div class="field separated_inputs">
+						<div class="inputcont"><div class="cinput"><input type="text" class="profile twin" id="person_id" maxlength="6" value="{{$person.pc[0]|clear}}"></div></div>
+						<div class="separator">-</div>
+						<div class="inputcont w70"><div class="cinput"><input type="text" class="profile twin" id="person_id" maxlength="5" value="{{$person.pc[1]|clear}}"></div></div>
+					</div>
+				</div>
+				<div class="twocol noresident">
+					<div class="label"><label>{{'form_person_indentifier'|gL:'Personas identifikators'}}</label></div>
+					<div class="field">
+						<div class="cinput"><input type="text" id="person_number" class="profile" value="{{$person.person_number}}"></div>
+					</div>
+				</div>
+				<div class="twocol birthday">
+					<div class="label"><label>{{'form_bd'|gL:'Dzimšanas datums'}}</label></div>
+					<div class="field">
+						<div class="cselect day">
+							<div class="textcont">
+								<div class="textouter"><div class="text"></div></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select id="bd_date" class="profile">
+								<option></option>
+								{{section name=foo start=1 loop=32 step=1}}
+								<option value="{{$smarty.section.foo.index}}" {{if $person.date_of_birth_splited[2] == $smarty.section.foo.index}} selected="selected"{{/if}}>{{$smarty.section.foo.index}}</option>
+								{{/section}}
+							</select>
+						</div>
+						<div class="cselect month">
+							<div class="textcont">
+								<div class="textouter"><div class="text"></div></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select id="bd_month" class="profile">
+								<option></option>
+								{{foreach from=$profileConfig.months item=m key=k}}
+								<option value="{{$k}}" {{if $person.date_of_birth_splited[1] == $k}} selected="selected"{{/if}}>{{$m|gL}}</option>
+								{{/foreach}}
+							</select>
+						</div>
+						<div class="cselect year">
+							<div class="textcont">
+								<div class="textouter"><div class="text"></div></div>
+								<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+							</div>
+							<select id="bd_year" class="profile">
+								<option></option>
+								{{section name=foo loop=$fromthisyear max=115 step=-1}}
+								<option value="{{$smarty.section.foo.index}}" {{if $person.date_of_birth_splited[0] == $smarty.section.foo.index}} selected="selected"{{/if}}>{{$smarty.section.foo.index}}</option>
+								{{/section}}
+							</select>
+						</div>
+
+					</div>
+				</div>
+				<div class="twocol">
+					<div class="label"><label>{{'form_phone'|gL:'Telefons'}}</label></div>
+					<div class="field">
+						<div class="cinput"><input type="text" class="profile" id="phone" value="{{$person.phone}}"></div>
+					</div>
+				</div>
+			</div>
+			<div class="btn_cont back">
+				<a href="#" class="btng addPerson">{{'profile_save'|gL:'Saglabāt'}}</a>
+				<div class="forgot"><a href="{{$siteData.mirros_persons_page|getLM}}">{{'profile_add_person_cancel'|gL:'Atcelt'}}</a></div>
+				{{if $person.id}}
+				<div class="delete"><a class="deletePerson" href="#" data-persid="{{$person.id}}">{{'profile_person_delete'|gL:'Dzēst šo personu'}}</a></div>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script nonce="{{$web.cspNonce}}">
+	$(document).ready(function(){
+
+		if($('.radio_field input[name=resident]:checked').val()=='1'){
+			$('.twocol.noresident').hide();
+			$('.twocol.resident').show();
+		} else {
+			$('.twocol.resident').hide();
+			$('.twocol.noresident').show();
+		}
+		$('.radio_field input[name=resident]').change(function(){
+			if($(this).val() == '1') {
+				$('.noresident').hide();
+				$('.resident').show();
+			} else {
+				$('.noresident').show();
+				$('.resident').hide();
+			}
+		});
+
+		$('.profile').keypress(function (e) {
+			if (e.which == 13) {
+				profile.addPerson();
+			}
+		});
+
+
+	});
+</script>

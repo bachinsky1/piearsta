@@ -1,0 +1,77 @@
+<div class="announce-cont">
+
+    <div class="announce-inner">
+
+        <h2>
+            {{'announce_3_maintext'|gL:'Izmanto <br><span class="announce-highlighted">veselības <br>apdrošināšanu</span>'}}
+        </h2>
+
+        <div class="announce-link paPopupOpenTrue">
+
+            <div class="announce-link-label">
+                {{'read_more'|gL:'Lasīt vairāk'}}
+            </div>
+
+            <div class="announce-link-btn">
+                <i class="fa fa-chevron-right"></i>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+    h2 {
+        font-weight:600;
+        font-size: 33px;
+    }
+    .hero_block.announcement .image_cont .image {
+        background-image: url(/img/announcements/hero-bg-2.jpg);
+        background-position: 49% bottom;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .hero_block.announcement .image_cont .image {
+            background-position: 52% bottom;
+        }
+        h2 {
+            font-weight:400;
+            font-size: 30px;
+        }
+        h2 .announce-highlighted {
+            color: black !important;
+            font-weight:600;
+        }
+        .announce-inner .announce-link {
+            color: #009be5;
+        }
+    }
+    @media (max-width: 767px) {
+        .hero_block.announcement .image_cont .image {
+            background-image: url(/img/announcements/mob-an3.png);
+            height: calc(100vh - 140px);
+            background-position: center bottom;
+            background-size: contain;
+        }
+
+        .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner h2 {
+            font-size: 36px;
+            line-height: 44px;
+        }
+
+        .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner .announce-link {
+            position: relative;
+            margin-top: 22px;
+        }
+    }
+    /*@media (max-width: 600px) {*/
+    /*    .hero_block > .wrap .hero-right .announce-cont .announce-inner h2 {*/
+    /*        font-size: 48px;*/
+    /*        line-height: 54px;*/
+    /*    }*/
+    /*}*/
+</style>
+

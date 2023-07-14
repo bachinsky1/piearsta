@@ -1,0 +1,85 @@
+<div id="content">
+
+    <div class="wrap">
+        <div class="profileTopLine">
+
+            {{if !$isCheckingPersonalData}}
+            <div class="profileMenu">
+
+                <div class="triggerMenu">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+                
+                <ul>
+                    {{foreach from=$menu.PROFILE item=item name=topmenu}}
+                    <li class="item {{if $item.active}}active{{/if}}">
+                        <a href="{{$item.url}}" class="{{if $item.active}}active{{/if}}">
+                            {{if $item.menuIcon}}
+                            <span class="profileMenuItemIcon"><img src="/img/menu/{{$item.menuIcon}}" /></span>
+                            {{else}}
+                            <span class="profileMenuItemIcon"><img src="/img/menu/mans-profils-menu.png" /></span>
+                            {{/if}}
+                            <span class="profileMenuItemText">{{$item.title}}</span>
+                            {{if $item.number}}
+
+                                {{if $item.number|@strlen > 2}}
+                                    {{assign var="number" value="..."}}
+                                {{else}}
+                                    {{assign var="number" value=$item.number}}
+                                {{/if}}
+
+                                <span class="number">{{$number}}</span>
+
+                            {{/if}}
+                        </a>
+                    </li>
+                    {{/foreach}}
+                    <li class="item">
+                        <a href="#" id="manidati_href">
+                            <span class="profileMenuItemIcon"><img src="/img/menu/izmeklejumi-menu.png" /></span>
+                            <span class="profileMenuItemText">Mani izmekl&#x0113;jumi</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+
+                <span class="breadcrumb-segment">
+                    {{if $web.url == '/profils/mans-profils/'}}
+                        {{$web.title}}
+                    {{else}}
+                        <a href="/{{$web.lang}}/profils/mans-profils/">{{if $dashboardPage}}{{$dashboardPage.title}}{{else}}Dashboard{{/if}}</a>
+                    {{/if}}
+                </span>
+
+                {{if $web.url != '/profils/mans-profils/'}}
+                    <span class="breadcrumb-segment">
+                        / {{$web.title}}
+                    </span>
+                {{/if}}
+
+            </div>
+
+            {{/if}}
+        </div>
+    </div>
+
+    {{if $web.url == "/profils/mans-profils/"}}
+        {{include file="../../content/tmpl/blocks_heroBlock.html"}}
+        <div class="distancer" style="margin-bottom: 30px;"></div>
+    {{/if}}
+
+    {{include file=$template}}
+
+    {{if $web.url == "/profils/mans-profils/"}}
+
+        {{include file="../../content/tmpl/helpline.html"}}
+
+        {{include file="../../content/tmpl/blocks_findBlock.html"}}
+    {{/if}}
+
+</div>

@@ -1,0 +1,24 @@
+.agree_terms_block .dt_tab_wrap {
+  margin-top: 50px;
+}
+.agree_terms_block h1 {
+  margin-bottom: 30px;
+}
+.agree_terms_block .block_content {
+  margin-bottom: 30px;
+}
+.agree_terms_block .block_content p {
+  margin: 15px 0;
+}
+.agree_terms_block .pull_right {
+  float: right;
+}
+.agree_terms_block .link-horizontal {
+  padding-left: 10px;
+}
+.agree_terms_block .checkbox_field {
+  margin-bottom: 15px;
+}
+.agree_terms_block .button_block {
+  margin-top: 20px;
+}

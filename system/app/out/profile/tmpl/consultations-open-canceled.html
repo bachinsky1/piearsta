@@ -1,0 +1,64 @@
+<div class="popup_bg"></div>
+<div class="popup w700">
+    <div class="close"><i class="fa fa-times"></i></div>
+    <div class="cont">
+
+        <h2>{{'profile_consultation_open_header'|gL:'Pieteikums e-konsultācijai'}}</h2>
+
+        <hr>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_doctor'|gL:'Ārsts'}}:</div>
+            <div class="col2"><a target="_blank" href="{{$siteData.mirrors_doctors_page|getLM2}}{{$item.doctor_url}}/{{$item.clinic_url}}/">{{$item.name}} {{$item.surname}}</a></div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_clinic'|gL:'Iestadē'}}:</div>
+            <div class="col2">
+                <div><a target="_blank" href="{{$siteData.mirrors_clinics_page|getLM2}}{{$item.clinic_url}}/">{{$item.clinic_name}}</a></div>
+                <div class="note">{{$item.clinic_address}}</div>
+            </div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_service'|gL:'Pakalpojums'}}:</div>
+            <div class="col2">{{$item.title}}</div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_client'|gL:'Pacients'}}:</div>
+            <div class="col2">
+                {{if $item.profile_person_id}}
+                {{$item.ppname}} {{$item.ppsurname}}
+                {{else}}
+                {{$userData.name}} {{$userData.surname}}
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_status'|gL:'Status'}}:</div>
+            <div class="col2">
+                {{if $item.status == 1}}
+                <span class="redtext">{{'profile_reservation_status_1'|gL:'Noraidīts'}}</span>
+                {{elseif $item.status == 3}}
+                <span class="redtext">{{'profile_reservation_status_3'|gL:'Atcelts'}}</span>
+                {{/if}}
+                &nbsp;&nbsp;<span class="graytext">{{$item.status_changed_at|date_format:"%d.%m.%y."}}</span>
+            </div>
+        </div>
+
+        {{if $item.status_reason}}
+        <div class="line w2 ver1 ver2">
+            <div class="col1">{{'profile_reservation_cancel_reason'|gL:'Iemesls'}}:</div>
+            <div class="col2">{{$item.status_reason}}</div>
+        </div>
+        {{/if}}
+
+        <hr>
+
+        <div class="btn_cont">
+            <a href="{{$siteData.mirrors_doctors_page|getLM2}}" class="btnw w5 width270">{{'profile_consultation_another_doctor'|gL:'Piteikt e-konsultāciju pie cita ārsta'}}</a>
+        </div>
+    </div>
+</div>

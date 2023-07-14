@@ -1,0 +1,8 @@
+<div id="sidebar">
+	<div id="close"><a href="javascript:;" onclick="$('#sidebar').toggleClass('closed');"><span>{{'close_sidebar'|gLA:'Close sidebar':'':true}}</span></a></div>
+	<ul class="menu">
+		{{section name=item loop=$data}}
+        <li{{if $data[item].class}}  class="{{$data[item].class}}"{{/if}}><a href="{{$data[item].link}}/"><span>{{$data[item].name}}</span></a></li>
+        {{/section}}
+    </ul>
+</div>

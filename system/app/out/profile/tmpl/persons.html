@@ -1,0 +1,29 @@
+<div class="signup_block personas">
+	<div class="wrap">
+		<div class="col2_y">
+			<div class="header_block">
+				<h2>{{$web.title}}</h2>
+			</div>
+			<div class="cont">
+				{{foreach from=$userData.persons item=item name=pp}}
+				<div class="btn_cont person">
+					<a href="{{$siteData.mirros_persons_add_page|getLM}}?id={{$item.id}}">
+						<div class="btnw">
+							<div class="gender_icon"><i class="fa {{if $item.gender == 'female'}}fa-female{{else}}fa-male{{/if}}"></i></div>
+							<div class="text">{{$item.name}} {{$item.surname}}</div>
+						</div>
+					</a>
+				</div>
+				{{/foreach}}
+				<div class="btn_cont">
+					<div class="btnw">
+						<a href="{{$siteData.mirros_persons_add_page|getLM}}">
+							<div class="add_icon"><i class="fa fa-plus-circle"></i></div>
+							<div class="text">{{'profile_add_person'|gL:'Pievienot personu'}}</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

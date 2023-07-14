@@ -1,0 +1,138 @@
+.startPage, #page {
+
+  .helpline {
+    ._bgc(#009fe5);
+    background: linear-gradient(90deg, #2d64c0 0%, #009fe5 51%);
+    ._text(16px, 22px);
+    color: #FFF;
+
+    > .wrap {
+      background:url("/img/design/pattern1.png") no-repeat 19% center;
+      ._clear;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .i {
+      background: url("/img/design/questions-icon.png") no-repeat 0 0;
+      color: transparent;
+      ._left;
+      width: 58px;
+      height: 58px;
+      margin-top: 10px;
+    }
+
+    .text {
+      ._left;
+      padding: 9px 0;
+      margin-left: 20px;
+      font-size: 30px;
+      line-height: 32px;
+
+      > span {
+        display: block;
+        font-size: 20px;
+      }
+    }
+
+    .phone {
+      ._left;
+      padding: 9px 0;
+      margin-left: 36px;
+    }
+
+    .mail {
+      float: right;
+      width: 50%;
+      padding: 9px 0 9px 80px;
+      margin-left: 5%;
+      line-height: 30px;
+      background: url("/img/design/mail-icon.png") no-repeat 0 10px;
+
+      a {
+        color: #fff;
+        display: block;
+        font-size: 30px;
+      }
+
+      span {
+        color: #fff;
+        display: block;
+        font-size: 20px;
+      }
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .helpline {
+      .text {
+        margin-left: 20px;
+      }
+
+      .phone {
+        margin-left: 20px;
+      }
+
+      .mail {
+        margin-left: 20px;
+        width: 41%;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .helpline {
+      .mail {
+        display: none;
+      }
+
+      .phone {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+
+.contacts_block  {
+
+  .col2 {
+
+    .helpline {
+      font-size: 18px;
+      line-height: 22px;
+
+      .i {
+        font-size: 24px;
+        line-height: 24px;
+        text-align: center;
+        font-style: italic;
+        width: 36px;
+        height: 24px;
+        font-weight: 700;
+        padding: 6px 0;
+        border: 2px solid #009fe5;
+        border-radius: 50% 50% 50% 50%;
+        -webkit-border-radius: 50% 50% 50% 50%;
+        font-family: 'Times New Roman', Arial, Helvetica, sans-serif;
+        color: #009fe5;
+      }
+
+      .text {
+        padding: 2px 0 0;
+      }
+
+      hr {
+        border-color: #d4dcde;
+      }
+
+      .phone {
+        padding: 0;
+      }
+
+      .mail {
+        padding: 9px 0;
+      }
+    }
+  }
+}

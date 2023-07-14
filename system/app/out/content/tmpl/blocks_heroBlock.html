@@ -1,0 +1,122 @@
+<div class="hero_block hero_block_StartPage{{if $announcement}} announcement{{/if}}">
+    {{if $BANNERS.startpage_promo && !$announcement}}
+    <div class="image_cont">
+        {{if $BANNERS.startpage_promo.url}}
+        <div class="wrap image_link">
+            <a href="{{$BANNERS.startpage_promo.url}}" target="{{$BANNERS.startpage_promo.target}}"></a>
+        </div>
+        {{/if}}
+        <div class="image"></div>
+    </div>
+    {{else}}
+    <div class="image_cont">
+        <div class="image"></div>
+    </div>
+    {{/if}}
+
+    {{if $BANNERS.startpage_promo && !$announcement}}
+    <style>
+        .hero_block .image_cont .image {
+            background-image: url("{{$BANNERS.startpage_promo.image}}");
+        }
+    </style>
+    {{/if}}
+
+    <div class="wrap">
+
+        <div class="hero-left">
+
+            <div class="titles">
+                <h1>{{'startpage_promo_title'|gL:'Pieraksties pie ārsta internetā'}}</h1>
+            </div>
+            <div class="search">
+                <div class="field">
+                    <div class="cinput mainSearch">
+                        <input type="text"
+                               id="doctors_filter_search"
+                               data-default="{{'form_search_default'|gL:'Ievādiet ārsta uzvārdu vai speicālitātī'}}"
+                               placeholder="{{'form_search_default'|gL:'Ievādiet ārsta uzvārdu vai speicālitātī'}}"
+                               class="autocomplete">
+                        <div class="btn_cont"><a href="#" data-url="{{$siteData.mirrors_doctors_page|getLM}}" class="btng spSearch">{{'doctror_search'|gL:'Meklēt ārstu'}}</a></div>
+                    </div>
+                </div>
+                <div class="right search-types">
+                    <div class="advanced"><a href="{{$siteData.mirrors_doctors_page|getLM}}?advanced=true">{{'advanced_search'|gL:'Advanced search'}}</a></div>
+                    <div class="search-helper-link"><a class="anchor" href="#find_block">{{'search_helper'|gL:'Search helper'}}</a></div>
+                </div>
+            </div>
+            <div class="howto">
+                <div class="list">
+                    <div class="item w1">
+                        <div class="icon zoom"></div>
+                        {{assign var="docCountParams" value=$doctorsCount|gLParam:'{Doctrors_Count}'}}
+                        <div class="text">{{'startpage_how_use_text1'|gL:'Atrodi vienu no 139 arstiem':'':$docCountParams}}</div>
+                    </div>
+                    <div class="item w2">
+                        <div class="icon clock"></div>
+                        <div class="text">{{'startpage_how_use_text2'|gL:'Pieraksties uz sev piemērotu laiku'}}</div>
+                    </div>
+                    <div class="item w3">
+                        <div class="icon envelope"></div>
+                        <div class="text">{{'startpage_how_use_text3'|gL:'Saņem apstiprinošo vēstuli uz e-pastu'}}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {{if $announcement}}
+        <div class="hero-right">
+            {{$announcement.template}}
+        </div>
+        {{/if}}
+
+    </div>
+</div>
+
+<script type="text/javascript" nonce="{{$web.cspNonce}}">
+
+    $(document).ready(function(){
+
+        monkeyPatchAutocomplete();
+
+        $(".autocomplete").autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "/doctors/autocomplete/",
+                    dataType: "json",
+                    data: {
+                        q: request.term
+                    },
+                    success: function( data ) {
+                        response( data );
+                    }
+                });
+            },
+            select: function( event, ui ) {
+
+                console.log('onSelect');
+
+                if(ui.item.spec) {
+                    $('#doctors_filter_search').data('spec', '1');
+                }
+            },
+            autoFocus: false,
+            minLength: 3,
+            position: { my : "left-12 top+20" },
+            appendTo: ".cinput.focused input"
+        });
+
+        jQuery.ui.autocomplete.prototype._resizeMenu = function () {
+            var ul = this.menu.element;
+            ul.outerWidth(this.element.outerWidth() + 24);
+        };
+
+        $('#doctors_filter_search').keypress(function (e) {
+            if (e.which === 13) {
+                spSearch('{{$siteData.mirrors_doctors_page|getLM}}');
+            }
+        });
+    });
+
+</script>

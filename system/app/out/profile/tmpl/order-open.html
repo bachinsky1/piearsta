@@ -1,0 +1,44 @@
+<div class="popup_bg"></div>
+<div class="popup w700 open-order">
+    <div class="close"><i class="fa fa-times"></i></div>
+    <div class="cont">
+        <h2>{{'profile_reservation_order_nr'|gL:'Pasūtījuma Nr.:'}} {{$item.orderId}}</h2>
+
+        <hr>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_order_date'|gL:'Datums:'}}</div>
+            <div class="col2">{{$item.date}}</div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_order_services'|gL:'Pakalpojums:'}}</div>
+            <div class="col2">{{$item.serviceName}}</div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_order_prices'|gL:'Cena:'}}</div>
+            <div class="col2">{{$item.total}}</div>
+        </div>
+
+        <div class="line w2">
+            <div class="col1">{{'profile_reservation_order_status'|gL:'Statuss:'}}</div>
+            <div class="col2">{{$item.status|gL}}</div>
+        </div>
+
+        {{if $item.showInvoice}}
+        <div class="btn_cont mob_mt40">
+            <a href="#" class="btnw w2 openInvoice" data-ordid="{{$item.orderId}}">{{'profile_reservation_open_invoice'|gL:'Open invoice'}}</a>
+
+            {{if !$item.reservationId && $item.consultationId}}
+            <a href="#" class="btng w2 openCons" data-consid="{{$item.consultationId}}">{{'profile_reservation_open_consultation'|gL:'Open consultation'}}</a>
+            {{/if}}
+
+            {{if $item.reservationId && !$item.consultationId}}
+            <a href="#" class="btng w2 openRes" data-resid="{{$item.reservationId}}">{{'profile_reservation_open_reservation'|gL:'Open reservation'}}</a>
+            {{/if}}
+        </div>
+        {{/if}}
+
+    </div>
+</div>

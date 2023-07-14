@@ -1,0 +1,823 @@
+.clinic_open {
+  ._rel;
+  color: #636c70;
+
+  > .wrap {
+    padding: 0px 0 0px;
+  }
+
+  .profile {
+    ._clear;
+
+    .reg_number {
+      ._text(16px, 26px);
+    }
+
+    .left {
+      ._left;
+      width: 260px;
+
+      .image {
+        padding-top: 42px;
+
+        img {
+          ._blo;
+          margin: 0 auto;
+          max-width: 100%;
+          border-radius: 10px;
+        }
+      }
+    }
+
+    .right {
+      ._right;
+      width: 640px;
+      padding-top: 42px;
+
+      h1 {
+        .specialLabel {
+          margin: 3px 6px 3px 6px;
+          vertical-align: middle;
+          height: 20px;
+          line-height: 20px;
+        }
+      }
+
+      h2 {
+        ._text(40px, 44px);
+        color: #404446;
+      }
+
+      h3 {
+        ._text(24px, 29px);
+        color: #404446;
+      }
+
+      p {
+        ._text(16px, 20px);
+
+        a {
+          color: #009fe5;
+          ._xu;
+
+          &:hover {
+            color: #006fa0;
+          }
+        }
+      }
+
+      hr {
+        border: 0;
+        border-top: 2px solid #009fe5;
+        margin: 23px 0 24px;
+      }
+
+      .contacts_cont {
+        margin-top: 30px;
+      }
+
+      .contacts {
+        margin-top: 17px;
+        ._right;
+
+        float: none;
+        margin-left: 0;
+      }
+
+      .line {
+        ._clear;
+        margin-top: 22px;
+        width: auto;
+
+        .col1 {
+          ._left;
+          width: 110px;
+        }
+
+        .col2 {
+          ._left;
+          margin-left: 6px;
+          min-width: 280px;
+          width: 300px;
+        }
+
+        & + .line {
+          margin-top: 5px;
+        }
+
+        &.mt2, & + .line.mt2 {
+          margin-top: 10px;
+        }
+      }
+
+      .map {
+        margin: 28px 0 27px;
+        width: 200px;
+        ._clear;
+
+        > div {
+          height: 180px;
+          width: 200px;
+        }
+      }
+    }
+  }
+
+  .header {
+    ._clear;
+    padding: 40px 0 20px;
+    margin-top: 50px;
+    border-top: solid 1px #e0e6e9;
+    box-shadow: 0 -5px 3px #e1e6e938;
+
+    h2 {
+      ._text(30px, 36px);
+      color: #404446;
+    }
+
+    .field {
+      width: 200px;
+      ._left;
+      margin-right: 25px;
+
+      &.checkBoxFilterWrapper {
+        width: auto;
+        margin-left: 10px;
+
+        .FilterWrapper {
+          height: 36px;
+          box-sizing: border-box;
+          padding: 10px 0 0 0;
+
+          .quickFilter-item {
+            display: inline-flex;
+          }
+
+          .tip {
+            margin: 2px 10px 0 4px;
+          }
+        }
+      }
+
+      .label {
+        ._text(14px, 18px);
+        padding: 14px 0 8px;
+        margin-top: 6px;
+      }
+
+      .arrow_icon {
+        color: #65c300;
+      }
+    }
+
+    .controls {
+      float: none !important;
+
+      .left {
+        ._left;
+        ._text(0, 0);
+
+        .text, .item {
+          ._inb;
+          ._text(14px, 17px);
+
+          & + .text {
+            margin-right: 20px;
+          }
+        }
+
+        .text {
+          ._blo;
+          ._text(14px, 18px);
+          padding: 14px 0 12px;
+          margin-top: 6px;
+        }
+
+        .item {
+          padding-left: 24px;
+          ._rel;
+          margin-top: 14px;
+
+          input[type=checkbox] {
+            opacity: 0;
+            ._abs;
+            top: 0;
+            left: 0;
+          }
+
+          .box {
+            ._abs;
+            top: 0;
+            left: 0;
+            ._wh(14px, 14px);
+            ._rad(3px, 3px, 3px, 3px);
+            ._bgc(#636c70);
+            ._text(10px, 14px);
+            ._alc;
+            padding: 2px 1px 0 1px;
+
+            .fa-check {
+              color: #ffffff;
+              ._none;
+            }
+          }
+
+          &.white {
+            .box {
+              box-sizing: border-box;
+              width: 16px;
+              height: 16px;
+              padding: 0;
+              ._bgc(#ffffff);
+              border: 1px solid gray;
+
+              .fa-check {
+                color: gray;
+              }
+            }
+          }
+
+          &.blue {
+            .box {
+              ._bgc(#009fe5);
+            }
+          }
+
+          &.green {
+            .box {
+              ._bgc(#65c300);
+            }
+          }
+
+          &.checked {
+            .box {
+              .fa-check {
+                ._inl;
+              }
+            }
+          }
+
+          &:hover {
+
+            .box {
+              ._bgc(#42494c);
+            }
+
+			  &.white {
+				  .box {
+					  ._bgc(#eee);
+				  }
+			  }
+
+            &.blue {
+              .box {
+                ._bgc(#0085bf);
+              }
+            }
+
+            &.green {
+              .box {
+                ._bgc(#56a600);
+              }
+            }
+          }
+        }
+
+        .tip {
+          ._text(12px, 14px);
+          color: #d6dde1;
+          ._inb;
+          ._cur;
+          margin-left: 4px;
+
+          &:hover {
+            color: #60686c;
+          }
+
+          & + .item {
+            margin-left: 20px;
+          }
+        }
+      }
+
+      .right {
+        ._right;
+        width: 140px;
+        margin-top: 55px;
+        ._rel;
+        ._bgc(#ffffff);
+
+        .btnw {
+          padding-left: 0;
+          padding-right: 0;
+          ._blo;
+          ._rel;
+          z-index: 2;
+
+          .fa {
+            ._text(16px, 17px);
+            margin-right: 8px;
+            ._inb;
+          }
+        }
+
+        input {
+          ._abs;
+          z-index: -100;
+          top: 0;
+          left: 0;
+          ._wh(0, 0);
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  .doctors_list {
+    .table_body { /*padding-bottom: 32px;*/
+      border-bottom: 1px solid #cbd5da;
+    }
+  }
+
+  .more_info {
+    ._clear;
+    padding-bottom: 100px;
+
+    h2 {
+      ._text(30px, 36px);
+      color: #404446;
+    }
+
+    .left {
+      width: 290px;
+      padding-top: 34px;
+      ._left;
+
+      .top {
+        ._clear;
+
+        .select {
+          ._text(16px, 19px);
+          padding-top: 6px;
+          margin-top: 10px;
+          ._clear;
+
+          .item {
+            ._left;
+            padding: 2px 0 1px;
+            color: #009fe5;
+            ._cur;
+
+            &:hover {
+              color: #006fa0;
+            }
+
+            &.active {
+              color: #404446;
+              cursor: text;
+            }
+
+            & + .item {
+              border-left: 1px solid #e0e6e9;
+              margin-left: 20px;
+              padding-left: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    .right {
+      margin-top: 30px;
+      width: 640px;
+      ._left;
+
+      .cont {
+        margin-top: 22px;
+
+        .item {
+          ._none;
+
+          &.active {
+            ._blo;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .clinic_open {
+    .profile {
+      .left {
+        ._left;
+        width: 200px;
+
+        .image {
+          img {
+            ._blo;
+            max-width: 100%;
+          }
+        }
+      }
+
+      .right {
+        float: none;
+        width: auto;
+        margin-left: 240px;
+
+        .contacts {
+          margin-top: 0px;
+          ._left;
+          margin-left: 0px;
+          ._clear;
+        }
+
+        .line {
+          .col2 {
+            width: 70%;
+            min-width: auto;
+          }
+        }
+
+        .map {
+          margin: 28px 0 27px;
+          width: 100%;
+          ._right;
+
+          > div {
+            height: 200px;
+            width: auto;
+          }
+        }
+      }
+    }
+
+    .header {
+      padding-top: 30px;
+
+      .left {
+        flex-wrap: wrap;
+      }
+
+      .controls2 {
+        &.quickFilters.open {
+          max-height: none;
+          margin: 0 0 18px 0;
+        }
+      }
+
+      .field {
+        width: 49%;
+        ._left;
+        margin-right: 0;
+
+        &:nth-of-type(2n) {
+          margin-left: 2%;
+        }
+
+        .checkBoxFilterWrapper {
+          margin-left: 0;
+        }
+      }
+
+      .controls {
+        width: 100%;
+
+        .left {
+          ._left;
+          ._text(0, 0);
+          margin-top: 11px;
+
+          .text, .item {
+            ._inb;
+            ._text(14px, 17px);
+
+            & + .text, & + .item {
+              margin-left: 20px;
+              margin-right: 0px;
+            }
+          }
+
+          .item {
+            padding-left: 24px;
+            ._rel;
+
+            .box {
+              ._abs;
+              top: 0;
+              left: 0;
+              ._wh(14px, 14px);
+              ._rad(3px, 3px, 3px, 3px);
+              ._bgc(#636c70);
+              ._text(10px, 14px);
+              ._alc;
+              padding: 2px 1px 0 1px;
+
+              .fa-check {
+                color: #ffffff;
+                ._none;
+              }
+            }
+
+            .tip {
+              ._text(14px, 14px);
+            }
+          }
+        }
+
+        .right {
+          ._m0p0;
+          margin-top: 20px;
+          margin-right: 0px;
+        }
+      }
+    }
+
+    .doctors_list {
+      .wrap {
+        margin: 0;
+
+      }
+
+      .moving_part.fixed {
+        .wrap {
+          margin: 0 34px;
+        }
+      }
+    }
+
+    .more_info {
+      ._clear;
+      padding-bottom: 100px;
+
+      h2 {
+        ._text(30px, 36px);
+        color: #404446;
+        ._left;
+      }
+
+      .left {
+        ._right;
+        width: 100%;
+        padding-top: 34px;
+        ._clear;
+
+        .top {
+          ._clear;
+
+          .select {
+            ._text(16px, 19px);
+            padding-top: 6px;
+            margin-top: 4px;
+            ._right;
+            ._clear;
+
+            .item {
+              ._left;
+              padding: 2px 0 1px;
+              color: #009fe5;
+              ._cur;
+
+              &:hover {
+                color: #006fa0;
+              }
+
+              &.active {
+                color: #404446;
+                cursor: text;
+              }
+
+              & + .item {
+                border-left: 1px solid #e0e6e9;
+                margin-left: 20px;
+                padding-left: 20px;
+              }
+            }
+          }
+        }
+      }
+
+      .right {
+        margin-top: 20px;
+        width: 100%;
+      }
+    }
+
+    .table_body {
+      .list {
+        .item {
+          .left {
+            float: left;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .clinic_open {
+
+
+    .profile {
+      padding-bottom: 20px;
+
+      .left {
+        width: 120px;
+        float: none;
+
+        .image {
+          padding-top: 20px;
+
+          img {
+            ._blo;
+            max-width: 100%;
+          }
+        }
+      }
+
+      .right {
+        float: none;
+        width: auto;
+        margin-left: 0px;
+        padding-top: 35px;
+
+        .contacts {
+          margin-top: 0px;
+          ._left;
+          margin-left: 0px;
+          ._clear;
+
+          .col1 {
+            width: 90px;
+          }
+
+          .line {
+            .col2 {
+              width: 70%;
+              min-width: auto;
+            }
+          }
+        }
+
+        .map {
+          ._none;
+        }
+      }
+    }
+
+    .header {
+      padding-top: 30px;
+
+      .field {
+        width: 49%;
+        ._left;
+        margin-right: 0;
+
+        &.checkBoxFilterWrapper {
+          margin-left: 0;
+
+          .FilterWrapper {
+            display: inline-flex;
+            flex-wrap: wrap;
+            height: auto;
+          }
+
+          .label {
+            display: none;
+
+            label {
+              display: none;
+            }
+          }
+        }
+
+        &:nth-of-type(2n) {
+          margin-left: 2%;
+        }
+      }
+
+      .controls {
+        width: 100%;
+        margin-left: 0;
+
+        .left {
+          ._left;
+          ._text(0, 0);
+          margin-top: 11px;
+
+          .text, .item {
+            ._inb;
+            ._text(14px, 17px);
+
+            & + .text {
+              margin-left: 0px;
+              margin-right: 20px;
+            }
+          }
+
+          .text {
+            ._none;
+          }
+        }
+
+        .right {
+          ._m0p0;
+          margin-top: 20px;
+          margin-right: 0px;
+          width: 36px;
+
+          .btnw {
+            padding-top: 9px;
+            padding-bottom: 8px;
+
+            .fa {
+              margin-right: 0;
+            }
+
+            .text {
+              ._none;
+            }
+          }
+        }
+      }
+
+      .controls2 {
+        &.quickFilters.open {
+          max-height: none;
+        }
+      }
+    }
+
+    .doctors_list {
+      .wrap {
+        margin: 0;
+      }
+
+      .moving_part.fixed {
+        .wrap {
+          margin: 0 40px;
+        }
+      }
+    }
+
+    .more_info {
+      ._clear;
+      padding-bottom: 100px;
+
+      h2 {
+        ._text(30px, 36px);
+        color: #404446;
+        ._left;
+      }
+
+      .left {
+        ._right;
+        width: 100%;
+        padding-top: 34px;
+        ._clear;
+
+        .top {
+          ._clear;
+
+          .select {
+            ._text(16px, 19px);
+            padding-top: 6px;
+            margin-top: 4px;
+            ._right;
+            ._clear;
+
+            .item {
+              ._left;
+              padding: 2px 0 1px;
+              color: #009fe5;
+              ._cur;
+
+              &:hover {
+                color: #006fa0;
+              }
+
+              &.active {
+                color: #404446;
+                cursor: text;
+              }
+
+              & + .item {
+                border-left: 1px solid #e0e6e9;
+                margin-left: 20px;
+                padding-left: 20px;
+              }
+            }
+          }
+        }
+      }
+
+      .right {
+        margin-top: 20px;
+        width: 100%;
+      }
+    }
+  }
+}

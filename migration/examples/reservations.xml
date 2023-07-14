@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reservations>
+	<reservation>
+		<piearstaId>{YOUR_SYSTEM_ID}</piearstaId>
+		<client_id>{YOUR_SYSTEM_CLINET_ID}</client_id>
+		<status>{RESERVATON_STATUS}</status>
+		<created>{CREATED}</created>
+		<doctor_id>{YOUR_SYSTEM_DOCTOR_ID}</doctor_id>
+		<clinic_id>{YOUR_SYSTEM_CLINIC_ID}</clinic_id>
+		<service_id>{YOUR_SYSTEM_SERVICE_ID}</service_id>
+		<shedule_id>{YOUR_SYSTEM_SHEDULE_ID}</shedule_id>
+		<payment_type>{PAYMENT_TYPE}</payment_type>
+		<notice>{NOTICE}</notice>
+	</reservation>
+</reservations>
+	

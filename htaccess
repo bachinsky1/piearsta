@@ -1,0 +1,123 @@
+#Order deny,allow
+#Deny from all
+#AuthType Basic
+#AuthUserFile /usr/local/www/apache22/data/projects/piearsta2015/.htpasswd 
+#AuthName "Protected Area"
+#require valid-user
+Allow from 87.110.84.138
+Allow from 213.175.120.26
+Allow from 127.0.0.1
+Allow from localhost
+Allow from 192.168.1.0/24
+Allow from vps.akopyan.lv
+Allow from 95.85.54.160
+Allow from 212.93.114.150
+Allow from 178.16.24.46
+#Deny from 87.246.167.235
+Allow from 178.16.24.43
+Allow from rev-178-16-24-46.deac.net
+Satisfy Any
+
+
+
+<IfModule mod_rewrite.c>
+
+  RewriteEngine on
+
+  RewriteRule ^robots.txt$ robots.php [L,NC]
+
+#  RewriteCond %{HTTP_HOST} !^www\.piearsta\.lv [NC]
+#  RewriteRule ^(.*)$ http://www\.piearsta\.lv/$1 [L,R=301]
+
+
+##########################
+RewriteCond %{HTTP_HOST} ^piearsta.lv$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^(piearsta.bb-tech.eu|www.piearsta.bb-tech.eu)$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^(bezrindaspiearsta.lv|www.bezrindaspiearsta.lv)$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^(e-pieraksti.lv|www.e-pieraksti.lv)$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^(epieraksti.lv|www.epieraksti.lv)$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^(kasarmani.lv|www.kasarmani.lv)$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^(kvracu.lv|www.kvracu.lv)$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^(manipieraksti.lv|www.manipieraksti.lv)$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^(okdoc.lv|www.okdoc.lv)$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^(okdok.lv|www.okdok.lv)$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^(piearstabezrindas.lv|www.piearstabezrindas.lv)$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^pieraksti.smartmedical.eu$
+RewriteRule ^$ http://www.piearsta.lv/$1 [L]
+RewriteCond %{HTTP_HOST} ^pieraksti.smartmedical.eu/api/$
+RewriteRule ^$ http://www.piearsta.lv/api/$1 [L]
+##########################
+
+
+  RewriteRule ^(.*/)?\.svn/ - [F,L]
+
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^(.+)$ $1 [L]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.+)$ $1 [L]
+  
+  RewriteRule ^files/ - [L]
+  RewriteRule ^images/ - [L]
+  RewriteRule ^css/ - [L]
+  RewriteRule ^js/ - [L]
+  RewriteRule ^system/ - [L]
+  
+  RewriteRule ^(.+)$ index.php [L]
+
+</IfModule>
+
+<FilesMatch "\.(ico|flv|jpe?g|png|gif|js|css|swf)$">
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+</FilesMatch>
+<IfModule mod_headers.c>
+        <FilesMatch "\.(ico|flv|jpg|jpeg|png|gif|js|css|swf)$">
+                Header set Cache-Control "public"
+                Header set Last-Modified "Mon, 31 Aug 2009 00:00:00 GMT"
+        </FilesMatch>
+        Header unset ETag
+        FileETag None
+</IfModule>
+#<IfModule mod_deflate.c>
+#        SetOutputFilter DEFLATE
+#        SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|gz)$ no-gzip dont-vary
+#        SetEnvIfNoCase Request_URI \.pdf$ no-gzip dont-vary
+#        BrowserMatch ^Mozilla/4 gzip-only-text/html
+#        BrowserMatch ^Mozilla/4\.0[678] no-gzip
+#        BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+#        Header append Vary User-Agent env=!dont-vary
+#</IfModule>
+
+# Added 09.11.2015
+#####################  Enable site compresion
+# compress text, html, javascript, css, xml:
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+
+# Or, compress certain file types by extension:
+<files *.html>
+    SetOutputFilter DEFLATE
+</files>
+
+
+########################################### block BAD Bots requests
+SetEnvIfNoCase User-Agent "^libwww-perl*" block_bad_bots
+Deny from env=block_bad_bots

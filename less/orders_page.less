@@ -1,0 +1,54 @@
+.orders {
+
+  .page-descr {
+    margin: 20px 0;
+  }
+
+  .table2 {
+    ._text(14px,17px);
+    width:100%;
+
+    th:first-child, td:first-child {width:15%;}     // order
+    th:nth-child(2), td:nth-child(2) {width:40%;}   // Service
+    th:nth-child(3), td:nth-child(3) {width:15%;}   // Date
+    th:nth-child(4), td:nth-child(4) {width:15%;}   // Price
+    th:nth-child(5), td:nth-child(5) {width:15%;}   // Status
+
+    th+th, td+td {
+      padding-left: 1.5%;
+    }
+
+    th{
+      ._all;
+      color:#404446;
+      border-bottom:2px solid #009fe5;
+      padding-bottom:9px;
+    }
+
+    .time{
+      ._text(20px,24px);
+      margin:-6px 0 -1px;
+    }
+
+    .status{
+      ._text(13px,16px);
+      ._b;
+
+      &.red {
+        color:#ea005e;
+      }
+
+      &.green {
+        color:#80ca00;
+      }
+
+      &.yellow {
+        color:#f9c400;
+      }
+
+      &.blue {
+        color:#009FE5;
+      }
+    }
+  }
+}

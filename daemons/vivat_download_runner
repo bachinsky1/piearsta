@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# PROVIDE: vivat_download_runner
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+#exit 0
+
+. /etc/rc.subr
+
+name="vivat_download_runner"
+rcvar="${name}_enable"
+
+_pidprefix="/var/run/${name}"
+pidfile="${_pidprefix}.pid"
+
+my_flags="/usr/home/urban/projects/piearsta2015/cron/vivat_download_appointment_requests_runner.php"
+my_command="/usr/bin/php ${my_flags}"
+
+command="/usr/sbin/daemon"
+command_args="-r -f -P ${pidfile} ${my_command}"
+
+stop_postcmd="runner_shutdown"
+
+runner_shutdown()
+{
+        if [ -e "${pidfile}" ]; then
+                echo "Stopping ${name} daemon."
+                kill -s TERM `cat ${pidfile}`
+        fi
+}
+
+load_rc_config $name
+: ${vivat_download_runner_enable:=no}
+
+run_rc_command "$1"

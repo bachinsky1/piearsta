@@ -1,0 +1,153 @@
+<div class="info-content order">
+
+    <div class="orderNr-date">
+
+        <div class="info-block order-number">
+            <div class="info-item">
+                <p><span class="title">{{'profile_invoice_order_number'|gL:'Pasūtījuma Nr.'}}</span> {{$item.orderId}}</p>
+            </div>
+        </div>
+
+        <div class="info-block date">
+            <div class="info-item">
+                <p><span class="title">{{'profile_invoice_date'|gL:'Datums'}}</span> {{$item.date|date_format:"%d.%m.%Y."}}</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="clinic-patient">
+
+        <!-- clinic data -->
+        <div class="info-block clinic">
+            <div class="info-item">
+                <p><span class="title">{{'profile_invoice_clinic'|gL:'Iestāde'}}</span></p>
+                <p class="indent-left"><span class="title">{{'profile_invoice_clinic'|gL:'Iestāde'}} </span><span class="clinic-name">{{$item.clinic_name}}</span></p>
+                <p class="indent-left"><span class="title">{{'profile_invoice_clinic_address'|gL:'Adrese'}} </span><span class="address">
+                                        {{$item.clinic_address}}
+                                        {{if $item.clinic_city}}
+                                        , {{$item.clinic_city}}
+                                        {{/if}}
+                                        {{if $item.clinic_zip}}
+                                        , {{$item.clinic_zip}}
+                                        {{/if}}
+                                    </span></p>
+                {{if $item.clinic_reg_num}}
+                <p class="indent-left"><span class="title">{{'profile_invoice_receiver_reg_num'|gL:'Reģ. Nr.'}} </span><span>{{$item.clinic_reg_num}}</span></p>
+                {{/if}}
+            </div>
+        </div>
+
+        <!-- patient data -->
+        <div class="info-block patient">
+            <div class="info-item">
+                <p><span class="title">{{'profile_invoice_patient'|gL:'Pacients'}}</span></p>
+                <p class="indent-left"><span class="title">{{'profile_invoice_patient_name_surname'|gL:'Vārds, uzvārds'}}</span> <span class="address">{{$item.patient.name}} {{$item.patient.surname}}</span></p>
+                <p class="indent-left"><span class="title">{{'profile_invoice_patient_person_code'|gL:'Personas kods'}}</span><span>{{$item.patient.pk}}</span></p>
+                {{if $item.patient.phone}}
+                <p class="indent-left"><span class="title">{{'profile_invoice_receiver_phone'|gL:'Tālrunis'}}</span> <a href="tel:{{$item.patient.phone|replace:' ':''}}">{{$item.patient.phone}}</a></p>
+                {{/if}}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="info-block order">
+        <div class="info-item order-table">
+            <p><span class="title h3">{{'profile_invoice_service'|gL:'Pakalpojums'}}</span></p>
+
+            <table>
+                <tr>
+                    <th>{{'profile_invoice_name'|gL:'Nosaukums'}}</th>
+                    <th>{{'profile_invoice_price'|gL:'Cena'}}</th>
+                    <th>{{'profile_invoice_quantity'|gL:'Sk.'}}</th>
+                    <th>{{'profile_invoice_amount'|gL:'Summa'}}</th>
+                </tr>
+                {{foreach from=$item.orderItems item=i}}
+                <tr>
+                    <td>
+                        <div class="service-info-block service-title-block">
+                            <p><span class="title">{{'profile_invoice_service'|gL:'Pakalpojums'}} </span>
+                                <span>{{$i.service_name}}{{if $item.serviceDuration > 0}} ({{$item.serviceDuration}} min.){{/if}}</span></p>
+
+                            {{if $i.service_type == 0}}
+                            <!-- time data -->
+                             <p><span class="title">{{'profile_invoice_service_date_time'|gL:'Apmeklējuma datums'}} </span>
+                                    <span>{{$i.start_time|date_format:"%d.%m.%Y"}}, {{$i.start_time|date_format:"%H:%M"}}</span></p>
+                            {{/if}}
+                            {{if $i.service_type == 1}}
+                            <!-- time data -->
+                             <p><span class="title">{{'profile_invoice_service_date_time'|gL:'Konsultācijas datums'}} </span>
+                                    <span>{{$i.start_time|date_format:"%d.%m.%Y"}}, {{$i.start_time|date_format:"%H:%M"}}</span></p>
+                            {{/if}}
+
+                            {{if $item.doctor_name && $item.doctor_surname}}
+                                <p><span class="title">{{'profile_invoice_doctor'|gL:'Ārsts'}} </span> <span>{{$item.doctor_name}} {{$item.doctor_surname}}</span>
+                            {{else}}
+                                <p><span class="title" title="{{'profile_reservation_other_doctor_tooltip'|gL:'Pieraksts ir nodots citam speciālistam.'}}">{{'profile_reservation_other_doctor'|gL:'Pie citu spciālistu'}},</span>
+                                    <span></span></p>
+                            {{/if}}
+                        </div>
+
+<!--                        &lt;!&ndash; clinic data &ndash;&gt;-->
+<!--                        <div class="service-info-block">-->
+<!--                            <p><span class="title">{{'profile_invoice_clinic'|gL:'Iestāde'}}: </span>{{$item.clinic_name}}</p>-->
+<!--                            <p><span class="title">{{'profile_invoice_clinic_address'|gL:'Adrese'}}: </span>-->
+<!--                                <span class="address">-->
+<!--                                    {{$item.clinic_address}}-->
+<!--                                    {{if $item.clinic_city}}-->
+<!--                                    , {{$item.clinic_city}}-->
+<!--                                    {{/if}}-->
+<!--                                    {{if $item.clinic_zip}}-->
+<!--                                    , {{$item.clinic_zip}}-->
+<!--                                    {{/if}}-->
+<!--                                </span></p>-->
+<!--                            {{if $item.clinic_reg_num}}-->
+<!--                                <p><span class="title">{{'profile_invoice_receiver_reg_num'|gL:'Reģ. Nr.'}}: </span>{{$item.clinic_reg_num}}</p>-->
+<!--                            {{/if}}-->
+<!--                        </div>-->
+
+                    </td>
+                    <td>
+                        <p class="item-price">{{$i.price|string_format:"%.2f"}} €</p>
+                    </td>
+                    <td>
+                        <p>{{$i.quantity}}</p>
+                    </td>
+                    <td>
+                        <p class="item-total">{{$i.item_total|string_format:"%.2f"}} €</p>
+                    </td>
+                </tr>
+                {{/foreach}}
+                <tr>
+                    <td colspan="3">
+                        <p class="order-total">{{'profile_invoice_total'|gL:'Apmaksai'}}:</p>
+                    </td>
+                    <td>
+                        <p class="order-total-value">{{$item.order_total|string_format:"%.2f"}} €</p>
+                    </td>
+                </tr>
+            </table>
+            <div class="info-cooperation">
+                {{if $item.clinic_name}}
+                {{assign var="clinic_name" value=$item.clinic_name|gLParam:'{clinic_name}'}}
+                {{/if}}
+                {{'profile_invoice_info_message_cooperation'|gL:'Rēķinu izraksta SIA "Blue Bridge Technologies" pamatojoties uz noslēgto sadarbības līgumu ar {clinic_name}.':'':$clinic_name}}
+            </div>
+
+            <div class="info-block receiver">
+                <div class="info-item">
+                    <p class="indent-left"><span class="title">{{'profile_invoice_receiver'|gL:'Saņēmējs'}}</span> <span>{{$item.bb.title}}</span></p>
+                    <p class="indent-left"><span class="title">{{'profile_invoice_receiver_address'|gL:'Saņēmēja adrese'}}</span>
+                        <span class="address">{{$item.bb.address}}</span></p>
+<!--                    <p class="indent-left"><span class="title">{{'profile_invoice_receiver_reg_num'|gL:'Reģ. Nr.'}}:</span> {{$item.bb.reg_number}}, <span class="title">{{'profile_invoice_receiver_pvn_num'|gL:'PVN Nr.:'}} </span>{{$item.bb.pvn_number}}</p>-->
+                    <p class="indent-left"><span class="title">{{'profile_invoice_receiver_phone'|gL:'Tālrunis'}}</span> <a href="tel:{{$item.bb.phone|replace:' ':''}}">{{$item.bb.phone}}</a></p>
+                    <p class="indent-left"><span class="title">Email</span> <a href="mailto:{{$item.bb.email}}">{{$item.bb.email}}</a></p>
+<!--                    <p class="indent-left"><span class="title">{{'profile_invoice_receiver_bank_account'|gL:'Konts'}} </span>{{$item.bb.bank_account}}</p>-->
+<!--                    <p class="indent-left">{{$item.bb.bank_info}}</p>-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

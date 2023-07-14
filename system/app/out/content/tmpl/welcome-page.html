@@ -1,0 +1,93 @@
+<div class="content">
+
+    <div class="hero-divisor">
+
+        <div class="wrapper">
+
+            <div class="goto-pie-arsta">
+                <a href="/{{$currentLang}}/home/" class="goto">{{'welcome_page_anon_visit'|gL:'Klātienes apmeklējums'}}
+                    <span class="descr">{{'welcome_page_make_reservation'|gL:'Izvēlies ārstu vai pakalpojumu un piesakies uz vizīti klātienē'}}</span></a>
+                <a href="/{{$currentLang}}/home/" class="goto-pa-btn">{{'welcome_page_button_next'|gL:'Turpināt'}}</a>
+            </div>
+
+
+            <div class="goto-digital-clinic">
+                <a href="{{$dcUrl}}/{{$currentLang}}" class="goto">{{'welcome_page_remote_consultation'|gL:'Attālinātas konsultācijas'}}
+                    <span class="descr">{{'welcome_page_dont_wait_for_anon_consultation'|gL:'Negaidi klātienes vizīti.'}}<br>{{'welcome_page_sign_to_remote_consultation'|gL:'Saņem attālinātu ārsta konsultāciju neizejot no mājām vai darba.'}}</span></a>
+                <a href="{{$dcUrl}}/{{$currentLang}}" class="goto-dc-btn">{{'welcome_page_button_next'|gL:'Turpināt'}}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="benefits">
+        <div class="wrap">
+            <h2>{{'welcome_page_benefits_of_the_portal'|gL:'Portāla priekšrocības'}}</h2>
+
+            <ul class="benefits-list">
+
+                <li>
+                    <span class="bnfts-icons"><img alt="{{'welcome_page_time_benefit'|gL:'Jums ērtā vietā un laikā'}}" src="/img/welcome-page/bnf-i1.png"></span>
+                    <h4>{{'welcome_page_time_benefit'|gL:'Jums ērtā vietā un laikā'}}</h4>
+                    <span>{{'welcome_page_place_benefit'|gL:'Neizejot no mājām, vilciena, mašīnas vai darba vietas. Arī ceļojuma laikā  vai jebkurā citā vietā, kur ir pieejams interneta pieslēgums.'}}</span>
+                </li>
+
+                <li>
+                    <span class="bnfts-icons"><img alt="{{'welcome_page_row_benefit'|gL:'Nestāvi rindās!'}}" src="/img/welcome-page/bnf-i2.png"></span>
+                    <h4>{{'welcome_page_row_benefit'|gL:'Nestāvi rindās!'}}</h4>
+                    <span>{{'welcome_page_specialists_benefit'|gL:'Plašs speciālistu skaits vienā vietā. Pieejams arī svētku dienas un vakara stundās'}}</span>
+                </li>
+
+                <li>
+                    <span class="bnfts-icons"><img alt="{{'welcome_page_save_benefit'|gL:'Taupi laiku un naudu'}}" src="/img/welcome-page/bnf-i3.png"></span>
+                    <h4>{{'welcome_page_save_benefit'|gL:'Taupi laiku un naudu'}}</h4>
+                    <span>{{'welcome_page_benefits_all'|gL:'Netērē laiku ceļā, rindās,naudu degvielai un autostāvvietai'}}</span>
+                </li>
+
+                <li>
+                    <span class="bnfts-icons"><img alt="{{'welcome_page_high_quality_services'|gL:'Augstas kvalitātes pakalpojumi'}}" src="/img/welcome-page/bnf-i4a.png"></span>
+                    <h4>{{'welcome_page_high_quality_services'|gL:'Augstas kvalitātes pakalpojumi'}}</h4>
+                    <span>{{'welcome_page_benefits_description'|gL:'Mūsu medicīniskais personālsir -augsti kvalificēti specialisti, kas nepārtraukti attīsta un pilnveido savas zināšanas, prasmes,  apgūst mūsdienu medicīnas zinātnes sasniegumus, jaunas atzītas ārstniecības metodes, inovatīvas tehnoloģijas, pielieto tās praksē un dalās pieredzē'}}</span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="testimonial_block2">
+        <div class="wrap">
+<!--
+            <div class="left">
+                <div class="nr">{{$profilesCount}}</div>
+                <div class="text">{{'startpage_clients_text'|gL:'Cilvēki jau izmantojuši mūsu pakalpojumu'}}</div>
+            </div>
+-->
+            {{if $randomReview}}
+            <div class="right">
+                <div class="text">{{$randomReview.text}}
+                </div>
+                <div class="author">
+                    <div class="bolded">{{$randomReview.author}}</div>
+                    <div>{{$randomReview.lead}}</div>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="sadarbiba">
+        <div class="wrap">
+            <h2>{{'welcome_page_ar_you_doctor'|gL:'Esi mediķis?'}}</h2>
+            <ul><li>
+                {{assign var="tags" value="</li><li>"|gLParam:"\n"}}
+                {{'welcome_page_for_doctors'|gL:'Uzzini par sadarbības iespējām. Mēs piedāvājam saviem klientiem attālinātas konsultācijas ar dažādu specialitāšu ārstiem, izmantojot internetu vai tālruni.':'':$tags}}
+            </li>
+            </ul>
+
+            <a href="{{$dcUrl}}/{{$currentLang}}/page/for-doctors" class="button">{{'welcome_page_apply_for_cooperation'|gL:'Uzzināt vairāk'}}</a>
+        </div>
+    </div>
+
+    {{$TEMPLATE_NEWS_MODULE}}
+
+</div>
+

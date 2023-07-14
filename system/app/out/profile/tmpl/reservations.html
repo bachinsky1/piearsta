@@ -1,0 +1,82 @@
+<div class="signup_block">
+	<div class="wrap">
+		<div class="col2_y" id="innerContent" data-type="Reservations" data-url="/profile/moreReservations/">
+			<div class="header_block">
+				<h2>{{$web.title}}</h2>
+			</div>
+			<div class="table_cont">
+
+				<form id="resForm" action="" method="GET">
+					<div class="selectfields">
+						<div class="cont">
+							<div class="cselect">
+								<div class="textcont">
+									<div class="textouter">
+										<div class="text">
+											{{'form_select_all'|gL:'Visi'}}
+										</div>
+									</div>
+									<div class="arrow_icon">
+										<i class="fa fa-angle-down"></i>
+									</div>
+								</div>
+								<select class="filterRes" id="person_id" name="person_id">
+									<option value="all" {{if $smarty.get.person_id == "all" || !$smarty.get.person_id}} selected="selected"{{/if}}>{{'form_select_all'|gL:'Visi'}}</option>
+									<option value="my" {{if $smarty.get.person_id == "my"}} selected="selected"{{/if}}>{{'form_select_my_reservations'|gL:'My Reservations'}}</option>
+									{{foreach from=$userData.persons item=i}}
+									<option value="{{$i.id}}" {{if $smarty.get.person_id == $i.id}} selected="selected"{{/if}}>{{$i.name|clear}} {{$i.surname|clear}}</option>
+									{{/foreach}}
+								</select>
+							</div>
+						</div>
+						<div class="cont">
+							<div class="cselect">
+								<div class="textcont">
+									<div class="textouter"><div class="text">
+										{{'form_select_all'|gL:'Visi'}}
+									</div></div>
+									<div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+								</div>
+								<select class="filterRes" id="status" name="status">
+									<option value="2" {{if $smarty.get.status == 2 || !isset($smarty.get.status)}} selected="selected"{{/if}}>{{'profile_reservation_status_2'|gL}}</option>
+									{{foreach from=$profileConfig.reservation_states item=i key=k}}
+									<option value="{{$k}}" {{if isset($smarty.get.status) && $smarty.get.status != 'all' && $smarty.get.status == $k}} selected="selected"{{/if}}>{{$i|gL}}</option>
+									{{/foreach}}
+								</select>
+							</div>
+						</div>
+
+					</div>
+				</form>
+
+				<div class="item-count">{{'profile_rezervations_found'|gL:'Reservations found'}}: <span></span></div>
+
+				<div class="table_header">
+					<table class="table1">
+						<thead>
+						<tr>
+							<th>{{'profile_reservation_time'|gL:'Laiks'}}</th>
+							<th>{{'profile_reservation_doctor'|gL:'Ārsts'}}</th>
+							<th>{{'profile_reservation_clinic'|gL:'Iestade'}}</th>
+							<th>{{'profile_reservation_service'|gL:'Pakalpojums'}}</th>
+							<th>{{'profile_reservation_status'|gL:'Status'}}</th>
+						</tr>
+						</thead>
+					</table>
+				</div>
+
+				<div class="item_list_cont"></div>
+
+				<div class="more" style="display: none">
+					<div class="btn_cont"><a href="#" rel="{{$current_page}}" class="btnw res-show-more">{{'doctors_show_more'|gL:'Radīt vairāk'}}</a></div>
+				</div>
+
+				<div class="res-empty" style="display: none">
+					<br />
+					<p>{{'profile_reservations_empty'|gL:'List is empty!'}}</p>
+				</div>
+			</div>
+			<div class="btn_cont"><a href="{{$siteData.mirrors_doctors_page|getLM}}" class="btng">{{'profile_goto_reserv'|gL:'Pierakstīties'}}</a></div>
+		</div>
+	</div>
+</div>

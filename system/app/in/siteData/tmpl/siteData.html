@@ -1,0 +1,27 @@
+<div class="content">
+	{{if !empty($tabs) || !empty($content)}}
+		<div id="modulePath">
+			<div id="tabs">
+				{{$tabs}}
+				{{$content}}
+			</div>
+			<table class="bttns-table">
+		        <tr>
+		            <td>
+		                <div class="btn orange"><a href="javascript:;" onclick="saveValues('apply');"><span>{{'save'|gLA:'Save'}}</span></a></div>
+		                <div class="btn"><a href="javascript:;" onclick="saveValues('save');"><span>{{'save_all'|gLA:'Save All'}}</span></a></div>
+		            </td>
+		        </tr>
+		    </table>
+		</div>
+	{{/if}}
+</div>
+<script type="text/javascript">
+	moduleTable.mainUrl = '{{$MAIN_URL}}';
+	moduleTable.moduleName = '{{$MODULE_NAME}}';
+	$(function () {
+		$("#tabs").tabs();	
+		loadCmsTabs();
+		
+	});
+</script>

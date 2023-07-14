@@ -1,0 +1,77 @@
+<h2>{{'profile_insurance_edit'|gL:'Данные страхового полиса'}}</h2>
+<hr>
+<div class="line w2">
+    <div class="col1"><label>{{'form_insurance_number'|gL:'Polises numurs'}}</label></div>
+    <div class="col2">
+        <div class="cinput"><input type="text" id="insurance_number" name="insurance_number" class="profile" value="{{$userData.insurance_number|clear}}"></div>
+    </div>
+</div>
+<div class="line w2">
+    <div class="col1"><label>{{'form_insurance_company'|gL:'Apdrošinātājs'}}</label></div>
+    <div class="col2">
+        <div class="cselect">
+            <div class="textcont">
+                <div class="textouter"><div class="text">{{$userData.insurance|clear}}</div></div>
+                <div class="arrow_icon"><i class="fa fa-angle-down"></i></div>
+            </div>
+            <select id="insurance_id" name="insurance_id" class="profile">
+                <option></option>
+                {{foreach from=$cl.ic item=item name=cl}}
+                <option value="{{$item.c_id}}" {{if $userData.insurance == $item.title}}selected="selected"{{/if}}>{{$item.title}}</option>
+                {{/foreach}}
+            </select>
+        </div>
+    </div>
+</div>
+<div class="line w2 dates-block">
+    <div class="field">
+        <div class="label">
+            <label>{{'form_insurance_from'|gL:'Полис годен с'}}
+                <div class="cinput"><input class="jq-calend profile" type="text" id="ins-from-jqui-calendar" name="insurance_start_date" readonly value="{{$userData.insurance_start_date_formated}}"><i class="fa fa-calendar"></i></div>
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="label">
+            <label>{{'form_insurance_to'|gL:'до'}}
+                <div class="cinput"><input class="jq-calend profile" type="text" id="ins-to-jqui-calendar" name="insurance_end_date" readonly value="{{$userData.insurance_end_date_formated}}"><i class="fa fa-calendar"></i></div>
+            </label>
+        </div>
+    </div>
+</div>
+
+<!-- save info for step back -->
+<input class="ins_hidden_inp" id="sheduleId" type="hidden" value="{{$hiddens.id}}" />
+<input class="ins_hidden_inp" id="clinic_id" type="hidden" value="{{$hiddens.clinic_id}}" />
+<input class="ins_hidden_inp" id="doctor_id" type="hidden" value="{{$hiddens.doctor_id}}" />
+<input class="ins_hidden_inp" id="serviceStreetPrice" type="hidden" value="{{$hiddens.streetPrice}}" />
+<input class="ins_hidden_inp" id="serviceInsurancePrice" type="hidden" value="{{$hiddens.insPrice}}" />
+<input class="ins_hidden_inp" id="serviceId" type="hidden" value="{{$hiddens.serviceData.c_id}}" />
+<input class="ins_hidden_inp" id="serviceName" type="hidden" value="{{$hiddens.serviceData.title}}" />
+<input class="ins_hidden_inp" id="slots" type="hidden" value="{{$hiddens.slots}}" />
+<input class="ins_hidden_inp" id="lock_id" type="hidden" value="{{$hiddens.lockId}}" />
+<input class="ins_hidden_inp" id="reservation_id" type="hidden" value="{{$hiddens.reservationId}}" />
+<input class="ins_hidden_inp" id="note" type="hidden" value="{{$hiddens.notice}}" />
+<input class="ins_hidden_inp" id="notice" type="hidden" value="{{$hiddens.notice}}" />
+<input class="ins_hidden_inp" id="isConsultation" type="hidden" value="{{$hiddens.isConsultation}}" />
+<input class="ins_hidden_inp" id="anyTime" type="hidden" value="{{$hiddens.anyTime}}" />
+<input class="ins_hidden_inp" id="selectedTime" type="hidden" value="{{$hiddens.selectedTime}}" />
+<input class="ins_hidden_inp" id="personId" type="hidden" value="{{$hiddens.profile_person_id}}" />
+<input class="ins_hidden_inp" id="fromTSWidget" type="hidden" value="{{$hiddens.fromTSWidget}}" />
+<input class="ins_hidden_inp" id="insurance" type="hidden" value="1" />
+
+{{if $dcAppointment}}
+<input class="ins_hidden_inp" id="dc" type="hidden" value="{{$dcAppointment}}" />
+{{/if}}
+
+{{if $resOptions}}
+{{foreach from=$resOptions key=k item=option}}
+<input id="{{$k}}" class="resOptionsHiddenInput ins_hidden_inp" type="hidden" value="{{$option}}" />
+{{/foreach}}
+{{/if}}
+
+<div class="btn_cont">
+    <a href="" class="btng w1 save-btn disabled">{{"profile_save"|gL:"Сохранить"}}</a>
+    <a class="btn btnw w3 back-to-ins-first-btn">{{'profile_reservation_back'|gL:'Go back.'}}</a>
+</div>
+

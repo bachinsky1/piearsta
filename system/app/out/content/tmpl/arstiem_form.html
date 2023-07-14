@@ -1,0 +1,40 @@
+<form id="arstiemForm" action="" method="post">
+
+    <div class="field">
+        <div class="label"><label for="full_name">Jūsu vārds un uzvārds*:</label></div>
+        <div class="cinput default invalid">
+            <input type="text" class="" id="full_name" name="full_name">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="label"><label for="a_email">E-pasta adrese*:</label></div>
+        <div class="cinput default invalid">
+            <input type="text" class="" id="a_email" name="a_email">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="label"><label for="phone">Telefona numurs*:</label></div>
+        <div class="cinput default invalid">
+            <input type="text" class="" id="phone" name="phone">
+        </div>
+    </div>
+
+    <div class="field captcha-field">
+        <div class="label"><label for="captcha_code">Captcha*:</label></div>
+        <div class="cinput default invalid">
+            <input type="text" id="captcha_code" name="captcha_code" size="10" maxlength="6" />
+        </div>
+        <div class="captcha-block">
+            <img id="captcha" src="/securimage/securimage_show.php" alt="CAPTCHA Image" />
+            <a href="#" class="reloadCaptcha"><div class="reloadDouble"></div></a>
+        </div>
+    </div>
+
+    <div class="field">
+        <input type="submit" class="btng" id="submit" value="{{'form_submit'|gL:'Nosūtīt'}}">
+    </div>
+
+    <input type="hidden" name="form" value="arstiemForm">
+</form>

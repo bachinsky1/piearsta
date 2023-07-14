@@ -1,0 +1,479 @@
+body {
+    font-size: 68px;
+}
+
+body * {
+    font-size: 1em;
+}
+
+.receiver {
+    margin-bottom: 1em;
+}
+
+.patient {
+    margin-bottom: 1em;
+}
+
+.logo {
+    display: inline-block;
+    height: 60px;
+    margin-right: 20px;
+}
+
+h1 {
+    margin-bottom: 1em;
+    font-size: 2em;
+    font-weight: bold;
+    color: grey;
+}
+
+h3 {
+    margin-bottom: 0.3em;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.payment_status {
+    margin: 2em 0 0 0;
+}
+
+a {
+    color: black;
+}
+
+p {
+    margin-bottom: 0.3em;
+}
+
+.indent-left {
+    padding-left: 0;
+    line-height: 1.5;
+    margin-bottom: 0.6em;
+}
+
+
+.info-block {
+    margin-bottom: 12px;
+}
+
+.info-item {
+    margin-bottom: 10px;
+}
+
+.info-item:last-of-type {
+    margin-bottom: 0;
+}
+
+.info-content p {
+    line-height: 18px;
+    margin-bottom: 2px;
+}
+
+.title {
+    font-weight: normal;
+    color: dimgrey;
+}
+
+.indent-left {
+    padding-left: 0;
+    margin-bottom: 6px;
+}
+
+.info-block.clinic .indent-left {
+    padding-left: 0;
+}
+
+.info-block.patient .indent-left .title {
+    display: inline-block;
+    width: 48%;
+}
+
+.info-block.clinic .indent-left .title {
+    display: inline-block;
+    width: 30%;
+}
+
+.info-block.clinic .info-item p:not(.indent-left) .title,
+.info-block.patient .info-item p:not(.indent-left) .title {
+    color: #009fe5;
+    display: block;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.4em;
+    margin-top: 1em;
+    font-size: 1.1em;
+}
+
+
+/*Table of order items*/
+
+.order-table  {
+    margin-top: 10mm;
+    border-top: solid 1px #e0e6e9;
+}
+
+.order-table table {
+    width: 100%;
+}
+
+.order-table table td {
+    color: black;
+}
+
+.order-table table td:first-child {
+    width: 59%;
+    border-right: solid 1px #d1d1d1;
+}
+
+.order-table table tr td:nth-child(2),
+.order-table table tr th:nth-child(2) {
+    padding-left: 27px;
+}
+
+.order-table table td.padd-top {
+    padding-top: 20px;
+}
+
+.item-total {
+    white-space: nowrap;
+    font-weight: bold;
+    color: black;
+}
+
+.order-total {
+    white-space: nowrap;
+    font-weight: bold;
+    color: black;
+    line-height: 1.5;
+    padding: 5px;
+}
+
+p.order-total-value {
+    white-space: nowrap;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: black;
+    padding: 5px;
+}
+
+.cont h1 {
+    margin-bottom: 1em;
+    font-weight: normal;
+    color: #000;
+}
+
+.cont h3 {
+    margin-bottom: 7px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #009fe5;
+}
+
+.info-content.order {
+    margin-bottom: 38px;
+    margin-top: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.order-table .title.h3 {
+    color: #009fe5;
+    display: block;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.8em;
+    margin-top: 2em;
+    font-size: 1.1em;
+    clear: both;
+}
+
+.order-table table tr th {
+    padding: 12px 7px;
+    border: none;
+    border-right: none;
+    font-weight: normal;
+    color: dimgrey;
+    text-align: left;
+    background: #fff;
+}
+
+.order-table table tr td {
+    padding: 12px 7px;
+    border: none;
+    font-weight: normal;
+    color: dimgrey;
+    background: #f0f5f9;
+}
+
+/*.order-table table tr:nth-child(even) td {*/
+/*   background: #f7fafd;*/
+/*}*/
+
+/*.order-table table td table tr:nth-child(even) td {*/
+/*    background: transparent;*/
+/*}*/
+
+.order-total {
+    white-space: nowrap;
+    font-weight: bold;
+    color: black;
+}
+
+
+.info-cooperation {
+    margin-top: 20mm;
+    color: dimgrey;
+}
+
+.invoice_info_message {
+    margin: 20px 0 20px;
+    color: dimgrey;
+}
+
+.info-content.order p {
+    line-height: 1.5;
+}
+
+
+
+.blue-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 35mm;
+    height: 0.5mm;
+    border-top: solid 0.5mm #00abec;
+}
+
+.orderNr-date {
+    display: inline-block;
+    float: right;
+    margin-bottom: 15mm;
+    clear: both;
+}
+
+.info-content.order .info-block.order-number {
+    float: left;
+    display: inline-block;
+    margin-right: 50px;
+}
+.info-content.order .info-block.date {
+    float: right;
+    display: inline-block;
+}
+
+h1.pdf-inv-h1 {
+    float: right;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.logo {
+    float: left;
+    margin-left: 0;
+}
+
+
+.clinic-patient {
+    display: block;
+    width: 100%;
+    margin: 0 0 10mm 10mm;
+    padding-bottom: 5mm;
+    /*border-bottom: solid 2px #e0e6e9;*/
+    clear: both;
+}
+
+.clinic-patient .info-block.clinic {
+    float: left;
+    display: inline-block;
+    width: 50%;
+}
+
+.clinic-patient .info-block.patient {
+    float: right;
+    text-align: left;
+    display: inline-block;
+    width: 40%;
+}
+
+
+
+
+table.Clinic-Patient,
+table.Clinic-Patient td table {
+    width: 100%;
+    margin-top: 1em;
+}
+
+table.Clinic-Patient td table td {
+    padding: 5px 0;
+}
+
+table.Clinic-Patient td.Clinic {
+    width: 58%;
+}
+
+table.Clinic-Patient td.Patient {
+    width: 38%;
+}
+
+table.Clinic-Patient td.Clinic table {
+    float: left;
+}
+
+table.Clinic-Patient td.Patient table {
+    float: right;
+}
+
+table.Clinic-Patient td.Clinic table td:first-child {
+    padding-right: 40px;
+    color: dimgrey;
+    width: 20%;
+ }
+
+table.Clinic-Patient td.Clinic table td:last-child {
+    width: 76%;
+    padding-right: 50px;
+}
+
+table.Clinic-Patient td.Patient table td:first-child {
+    width: 45%;
+    padding-right: 40px;
+    color: dimgrey;
+}
+
+table.Clinic-Patient td.Patient table td:last-child {
+    width: 52%;
+}
+
+table.Clinic-Patient td table td h3 {
+    color: #009fe5;
+    display: block;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 0.8em;
+}
+
+/*.order-table table tr:nth-child(odd) {*/
+/*    background: #f7fafd;*/
+/*}*/
+
+
+.service-info-block.service-title-block table {
+    width: 100%;
+    border-collapse: separate;
+    padding: 5px;
+}
+
+.service-info-block.service-title-block table td {
+    border: none;
+    background-color: transparent !important;
+    padding: 7px 5px !important;
+}
+
+.service-info-block.service-title-block table td:first-child {
+    color: #009fe5;
+    padding-right: 40px !important;
+    width: 222px;
+}
+
+.service-info-block.service-title-block table td:last-child {
+    color: black;
+}
+
+.info-block.receiver table {
+    width: 100%;
+    margin-top: 1em;
+}
+
+.info-block.receiver table td {
+    padding: 5px 0;
+    background: white;
+    border: none;
+}
+
+.info-block.receiver table td:first-child {
+    padding-right: 50px;
+    color: dimgrey;
+    width: 238px;
+}
+
+.info-block.receiver table td:last-child {
+    color: black;
+}
+
+
+.order-table table tr:last-of-type td {
+    border-top: 2px solid #00abec;
+    padding: 12px 7px;
+}
+
+.order-table table td table td {
+    border: none !important;
+    background: transparent !important;
+    padding: 5px;
+}
+
+
+
+.payment_status {
+    margin-top: 20mm;
+}
+
+.payment_status h3 {
+    color: #009fe5;
+    display: block;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0 0 9mm;
+    font-size: 1.1em;
+    line-height: normal;
+}
+
+.payment-data table {
+    width: 100%;
+    background: #f0f5f9;
+}
+
+.payment-data table td {
+    border: none !important;
+    display: block;
+    padding: 7px 10px;
+}
+
+.payment-data table td.payer {
+    padding: 7mm 10px 7px 10px;
+}
+
+.payment-data table td.date {
+    padding: 7px 10px;
+}
+
+.payment-data table td.order-id {
+    padding: 7px 10px 7mm 10px;
+}
+
+.payment-data table td h4 {
+    color: #009fe5;
+    padding-right: 40px !important;
+    margin: 0 0 0 10px;
+    width: 222px;
+    display: inline-block;
+    text-transform: none;
+    font-size: 1em;
+    line-height: 1;
+}
+
+.payment-data table td p {
+    display: inline-block;
+    line-height: 1;
+    margin: 0;
+}
+
+.payment-data table td span {
+    padding: 0;
+    margin: 0;
+}
+

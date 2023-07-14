@@ -1,0 +1,127 @@
+<div class="content">
+    <form id="edit_form">
+        <input type="hidden" name="id" id="id" value="{{$edit.id}}" />
+        <table class="search-table" style="margin-bottom: 4px;">
+            <tr>
+                <td>
+                    <strong>{{'m_promo_add_edit'|gLA:'Add/edit banner'}}</strong>
+                </td>
+            </tr>
+        </table>
+        <div class="error-msg hidden" id="errorBlock"></div>
+        <div class="ok-msg hidden" id="okBlock">{{'m_data_saved'|gLA:'Data has been saved'}}</div>
+        <table class="holder-table">
+            <tr>
+                <td>* {{'m_language'|gLA:'Language'}}:</td>
+                <td>
+                    <select name="lang" id="lang" class="long">
+                        <option value="0">{{'m_select_option'|gLA:'-- Select --'}}</option>
+                        {{section name=item loop=$langs}}
+	                		<option {{if $langs[item].lang == $edit.lang}} selected="selected" {{/if}} value="{{$langs[item].lang}}">{{$langs[item].title}}</option>
+	                	{{/section}} 
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>* {{'m_slot'|gLA:'Slot'}}:</td>
+                <td>
+                    <select name="slot" id="slot" class="slot">
+                        <option value="0">{{'m_select_option'|gLA:'-- Select --'}}</option>
+                        {{foreach from=$slots item=slot key=key}}
+	                		<option {{if $key == $edit.slot}} selected="selected" {{/if}} value="{{$key}}">{{$slot}}</option>
+	                	{{/foreach}} 
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>{{'m_title'|gLA:'Title'}}:</td>
+                <td>
+                    <input type="text" class="long simple" name="title" id="title" value="{{$edit.title|clear}}" style="width: 60%;" />
+                </td>
+            </tr>
+            <tr>
+                <td>{{'m_target_url'|gLA:'Target URL'}}:</td>
+                <td>
+                    <input type="text" id="url" name="url" value="{{$edit.url}}" class="simple" />
+					<input type="hidden" id="url_id" name="url_id" onchange="getDocumentsList('url_id', 'doc_id'); return false;" value="{{$edit.url_id}}" class="simple" />
+					<a href="#" onclick="openSiteMapDialog('url_id', 'url', ''); return false;" class="select-btn">Select</a>
+					<select id="doc_id" name="doc_id" class="simple">
+						<option value="0">Select</option>
+					</select>
+					&nbsp;&nbsp;&nbsp;
+					<a href="#" onclick="$('#url').val('');$('#url_id').val('');$('#doc_id').val('');" class="select-btn">Clear</a>
+                </td>
+            </tr>
+            <tr>
+                <td>{{'m_target_location'|gLA:'How to open link'}}:</td>
+                <td>
+                    <select name="target" id="target" class="long simple">
+                        <option value="_blank"{{if $edit.target eq '_blank' || !$edit.id}} selected="selected"{{/if}}>{{'m_target_blank'|gLA:'New window'}}</option>
+                        <option value="_self"{{if $edit.target eq '_self'}} selected="selected"{{/if}}>{{'m_target_self'|gLA:'This window'}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>* {{'m_image'|gLA:'Image'}}:</td>
+                <td>
+                    <div style="width: 98%; padding: 5px;">
+                        <div id="imageDiv">
+                            {{if $edit.image}}
+                                <img width="100" alt="" src="{{$AD_UPLOAD_FOLDER}}{{$edit.uploadFolder}}{{$edit.image}}" />
+                                <a href="javascript: void(0);" onclick="emptyUploadFile('image'); return false;">{{'m_delete'|gLA:'Delete'}}</a>
+                                <input type="hidden" class="simple" name="image" id="image" value="{{$edit.image}}" />
+                            {{/if}}
+                        </div>
+                        <a href="javascript: void(0);" id="imageButton" class="select-btn  img-required">{{'upload'|gLA:'Upload'}}</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>{{'m_alt_text'|gLA:'Alternative text'}}:</td>
+                <td>
+                    <input type="text" class="long simple" name="alt" id="alt" value="{{$edit.alt|clear|hsc}}" style="width: 60%;" maxlength="255" />
+                </td>
+            </tr>
+        </table>
+        <table class="bttns-table">
+            <tr>
+                <td>
+                    {{if $edit.id}}
+                        <div class="btn orange">
+                            <a href="javascript: void(0);" onclick="checkFields('apply'); return false;">
+                                <span>{{'apply'|gLA:'Apply'}}</span>
+                            </a>
+                        </div>
+                    {{/if}}
+                    <div class="btn">
+                        <a href="javascript: void(0);" onclick="checkFields('save'); return false;">
+                            <span>{{'save'|gLA:'Save'}}</span>
+                        </a>
+                    </div>
+                    <div class="btn cancel">
+                        <a href="javascript: void(0);" onclick="window.location.href = moduleTable.getRequestUrl();">
+                            <span>{{'m_cancel'|gLA:'Cancel'}}</span>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+    moduleTable.mainUrl = '{{$MAIN_URL}}';
+    moduleTable.moduleName = '{{$MODULE_NAME}}';
+    
+    $id = parseInt('{{$edit.id}}');
+    
+    $(function() {
+        
+        {{if $edit.doc_id}}
+        getDocumentsList('url_id', 'doc_id', '{{$edit.doc_id}}');
+		{{/if}}
+        
+        var config = {};
+        config['allowed_types'] = 'jpg|jpeg|gif|png';
+        loadUploadImgButton('{{$edit.uploadFolder}}', 'image', config);
+    });
+</script>
+</div>

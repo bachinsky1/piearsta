@@ -1,0 +1,47 @@
+{{if $sheduleDataPrev}}
+<div class="arrow arrow_left">
+	<i class="fa fa-angle-left"></i>
+</div>
+{{/if}}
+{{if $sheduleDataNext}}
+<div class="arrow arrow_right">
+	<i class="fa fa-angle-right"></i>
+</div>
+{{/if}}
+<script nonce="{{$web.cspNonce}}">
+    $(document).ready(function(){
+		$('.arrow_right').click(function(){
+		    profile.filterReservationCalendar('next');
+		});
+		$('.arrow_left').click(function(){
+		    profile.filterReservationCalendar('prev');
+		});
+    });
+</script>	
+<div class="slide">
+	<div class="week active" data-id="1">
+		<div class="months">
+		    {{foreach from=$doctors[0].shedule.monthData[7] name=weekShedule key=m item=data}}
+			<div class="cell merge{{$data}}">{{$m}}</div>
+			{{/foreach}}
+		</div>
+		<div class="days">
+			{{foreach from=$doctors[0].shedule.intervalMobile name=weekShedule key=k item=in}}
+			{{assign var=fullDate value=$in.full}}
+		    <div class="cell {{if $smarty.foreach.weekShedule.iteration > 1 && $fullMonth != $in.m}} bl {{/if}} {{if $in.wdn == 6 || $in.wdn == 7}} we{{/if}}{{if $in.full == $smarty.now|date_format:'%Y-%m-%d'}} today{{/if}}" data-id="{{$fullDate}}">
+				<div class="day">
+					<div>{{$in.d}}</div>
+					<div class="dotw">
+						{{if $in.d == $smarty.now|date_format:'%d' && $in.m == $smarty.now|date_format:'%m'}}
+						{{'today'|gL:'Šodiena'}}
+						{{else}}
+						{{$in.wd}}
+						{{/if}}
+					</div>
+				</div>
+		    </div>
+		    {{assign var=fullMonth value=$in.m}}
+		    {{/foreach}}
+		</div>
+	</div>
+</div>

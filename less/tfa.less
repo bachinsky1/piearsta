@@ -1,0 +1,404 @@
+// profile tfa section styles
+
+.twocols_y.signup_block.profil_edit {
+
+    .menu2 .trigger {
+
+      @media (max-width: 767px) {
+        padding: 21px 100px 20px 20px !important;
+      }
+
+    }
+}
+
+
+
+.headingBlock {
+  h1 {
+    margin-bottom: 20px;
+
+    @media (max-width: 767px) {
+      margin-top: 20px;
+    }
+
+  }
+}
+.sectionProfileTFA {
+
+  .twocol_flex {
+    display: flex;
+    justify-content: space-between;
+
+    .left {
+      width: 70%;
+
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin: 10px 0 7px;
+      }
+    }
+
+    .right {
+      display: flex;
+      width: 30%;
+      justify-content: flex-end;
+
+      @media (max-width: 767px) {
+        width: 100%;
+        justify-content: center;
+      }
+
+      &.fieldSwitch {
+        @media (max-width: 767px) {
+          width: 30%;
+          justify-content: flex-end;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+
+  .tfaSwitchOn {
+    display: block !important;
+  }
+
+  .tfaSwitchOff {
+    display: none !important;
+  }
+
+  .infoBlock {
+    font-size: 16px;
+    line-height: 22px;
+    border-bottom: none;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+  }
+
+  .tfaInfo {
+    display: block;
+  }
+
+  .tfaConfigureBlock {
+    display: none;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .btn_cont {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  &.isOn {
+
+    .infoBlock {
+      border-bottom: 1px solid #cbd5da;
+      margin-bottom: 15px;
+    }
+
+    .tfaConfigureBlock {
+      display: flex;
+      padding-bottom: 15px;
+    }
+
+    .tfaInfo {
+      display: none;
+    }
+
+    &.isConfigured {
+
+      .infoBlock {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+
+      .tfaConfigureBlock {
+        display: none;
+      }
+    }
+
+    .tfaSwitchOn {
+      display: none !important;
+    }
+
+    .tfaSwitchOff {
+      display: block !important;
+    }
+  }
+}
+
+// configure popup styles
+
+.popupTFAConfigure, .popupTFAAuth {
+
+  .popupTFAConfigureHeader {
+    padding-top: 10px;
+
+    h2.tfa_header {
+      text-align: center;
+    }
+  }
+
+  .info-block {
+    text-align: center;
+
+    h4 {
+      margin: 30px auto;
+      font-size: 16px;
+      line-height: 1.5;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    &.d-flex {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 40px 40px 30px;
+
+      @media (max-width: 767px) {
+        flex-direction: column;
+      }
+    }
+
+    &.error-block {
+      background-color: #faedf1;
+      padding: 32px 40px;
+      margin-top: -16px;
+
+      h3 {
+        color: #ea005e;
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0 auto 8px;
+      }
+
+      div {
+        color: #ea005e;
+        font-size: 16px;
+      }
+    }
+
+    .messageContainer {
+      padding: 32px 0 10px;
+
+      h3 {
+        font-size: 22px;
+        font-weight: 600;
+        margin: 0 auto 18px;
+      }
+
+      div {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .btn.btnw.back-btn,
+  .btn.btnw.cancel-btn {
+    @media (max-width: 767px) {
+      width: 178px;
+    }
+  }
+
+  .codeContainer {
+    text-align: left;
+
+    @media (max-width: 767px) {
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .a-center {
+      text-align: center;
+
+      h4 {
+        margin: 30px auto 20px;
+      }
+    }
+
+    .cinput {
+      width: 70%;
+      margin: 0 auto 20px;
+
+      @media (max-width: 767px) {
+        width: 84%;
+      }
+    }
+  }
+
+  .qrContainer {
+    width: 200px;
+    height: auto;
+
+    @media (max-width: 767px) {
+      width: 60%;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    img {
+      max-width: 150px;
+      max-height: 150px;
+      margin-right: 50px;
+
+      @media (max-width: 767px) {
+        max-width: 100%;
+        max-height: 100%;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .imageContainer {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #f6f7f9;
+    margin: 35px auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    img {
+      width: 100%;
+      height: 100%;
+      margin: auto;
+    }
+  }
+
+  a.codeShowLink {
+    display: block;
+    margin-top: 20px;
+  }
+
+  .codeHidden {
+    display: none;
+    font-size: 16px;
+    margin-top: 20px;
+    padding: 5px 15px;
+    background: #f1f3f3;
+    //display: inline-block;
+    border-radius: 4px;
+  }
+
+  .btn_cont {
+    margin-top: 30px;
+    //padding-top: 40px;
+    //border-top: 1px solid #e0e6e9;
+    display: flex;
+    //align-items: center;
+    justify-content: center;
+
+      a {
+        margin: 0 15px;
+      }
+  }
+}
+
+.popupTFAAuth {
+
+  .codeContainer {
+    text-align: center;
+
+    div {
+      label {
+        font-size: 22px;
+        display: block;
+        margin: 32px auto;
+      }
+    }
+
+    .attempts-left {
+      margin-top: 17px;
+      color: grey !important;
+      font-size: 15px !important;
+      font-weight: normal;
+    }
+  }
+
+  .info-block.error-block {
+    background-color: #fff;
+    padding: 0 20px 30px;
+    margin-top: -8px;
+    font-weight: bold;
+
+    h3 {
+      font-size: 16px;
+      margin: 0 auto 4px;
+      font-weight: bold;
+    }
+  }
+
+}
+
+// switcher control styles
+
+.switchControl {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 48px;
+  height: 27px;
+  border-radius: 9999px;
+
+  .toggle-background {
+    display: inline-block;
+    border-radius: 9999px;
+    height: 100%;
+    width: 100%;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color .2s ease;
+    background-color: #e2e8eb;
+  }
+
+  .toggle-indicator {
+    position: absolute;
+    height: 23px;
+    width: 23px;
+    left: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    border: 2px solid #e2e8eb;
+    border-radius: 9999px;
+    box-shadow:  0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform .2s ease;
+    transform: translateX(0);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &.on {
+
+    .toggle-background {
+      background-color: #65c300;
+    }
+
+    .toggle-indicator {
+      border: 2px solid #65c300;
+      transform: translateX(23px);
+    }
+  }
+}
+

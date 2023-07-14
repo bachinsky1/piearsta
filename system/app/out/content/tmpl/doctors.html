@@ -1,0 +1,11 @@
+<div id="content">
+    {{if $doctors_list}}
+	{{$TEMPLATE_DOCTORS_MODULE_FILTERS}}
+    
+	<div class="doctors_list" id="doctors_list">
+    {{else}}
+	<div class="doctors_open">
+    {{/if}}
+	{{$TEMPLATE_DOCTORS_MODULE}}
+	</div>
+</div>

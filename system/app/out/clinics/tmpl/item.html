@@ -1,0 +1,143 @@
+<div class="profile">
+	<input type="hidden" id="clinicId" value="{{$clinic.id}}">
+    <div class="left">
+	<div class="image">
+		{{if $clinic.logo}}
+		<img alt="" src="{{$AD_UPLOAD_FOLDER}}{{$clinicsConfig.uploadFolder}}open/{{$clinic.logo}}">
+		{{else}}
+		<img alt="" src="{{$AD_IMAGE_FOLDER}}clinic-large.png">
+		{{/if}}
+	</div>
+    </div>
+
+    <div class="right">
+
+	<h1>
+		{{$clinic.name|clear}}
+
+		{{if $clinic.hasSubscription}}
+			<span class="specialLabel hasSubscription">
+				<strong>A</strong>
+			</span>
+		{{/if}}
+
+	</h1>
+
+	{{if $clinic.reg_nr}}
+		<div class="reg_number">{{'clinics_open_reg_nr'|gL:'Reģ.nr.'}} {{$clinic.reg_nr|clear}}</div>
+	{{/if}}
+	<hr>
+	<p>{{$clinic.description}}</p>
+	<div class="contacts_cont">
+	    <h3>{{'clinics_open_contacts_title'|gL:'Kontakti'}}</h3>
+
+		<div class="contacts">
+		    {{if $clinic.address}}
+			<div class="line">
+			    <div class="col1">{{'clinics_open_address'|gL:'Adrese'}}:</div>
+			    <div class="col2">
+			    	<div>
+			    		{{if $clinic.citytitle}}
+			    		{{$clinic.citytitle}},
+			    		{{/if}}
+			    		
+			    		{{if $clinic.districttitle}}
+			    		{{$clinic.districttitle}},
+			    		{{/if}}
+			    		
+			    		{{if $clinic.zip}}
+			    		{{$clinic.address}}, {{$clinic.zip}}
+			    		{{else}}
+			    		{{$clinic.address}}
+			    		{{/if}}
+			    	</div>
+			    	<div class="f-14">
+						{{if $clinic.lat == 'wrong' || $clinic.lng == 'wrong'}}
+							<a class="disabled-link">{{'clinics_show_map'|gL:'Skatīt kartē'}}</a>
+						{{else}}
+							<a target="_blank" href="https://maps.google.com/?q={{$clinic.lat}},{{$clinic.lng}}&z=15&key={{$API_KEY}}">{{'clinics_show_map'|gL:'Skatīt kartē'}}</a>
+						{{/if}}
+			    	</div>
+			    </div>
+			</div>
+			{{/if}}
+			
+			{{foreach from=$clinic.contacts key=i item=c}}
+
+				{{if $c.name}}
+				<div class="line mt2">
+				    <strong>{{$c.name|htmlspecialchars_decode}}</strong>:
+				</div>
+				{{/if}}
+
+				{{if $c.phone}}
+				<div class="line mt2">
+				    <div class="col1">{{'clinics_open_phone'|gL:'Telefons'}}:</div>
+				    <div class="col2">{{$c.phone|clear}}</div>
+				</div>
+				{{/if}}
+				{{if $c.email}}
+				<div class="line">
+				    <div class="col1">{{'clinics_open_email'|gL:'E-pasts'}}:</div>
+				    <div class="col2"><a href="mailto:{{$c.email|clear}}">{{$c.email|clear}}</a></div>
+				</div>
+				{{/if}}
+			
+			{{/foreach}}
+
+	    </div>
+	</div>
+    </div>
+</div>
+
+{{$TEMPLATE_DOCTORS_MODULE}}
+
+<script type="text/javascript" nonce="{{$web.cspNonce}}">
+
+	$(document).ready(function(){
+
+		var scheduleId = '{{$schedule_id}}';
+		var servId = {{if $service_id}}{{$service_id}}{{else}}null{{/if}};
+		var dc = {{if $dc}}true{{else}}false{{/if}};
+
+		{{if $schedule_id && $dc}}
+
+			profile.initRes(scheduleId, servId, dc);
+
+		{{/if}}
+
+	});
+
+</script>
+
+<!-- <div class="more_info" id="more_info">
+    <div class="left">
+	<div class="top">
+	    <h2>{{'clinics_open_reviews'|gL:'Atsauksmes'}}</h2>
+	    <!--<div class="select">
+		<div class="item active" data-tab="fb"><div class="text">{{'clinics_open_reviews_facebook'|gL:'Facebook'}}</div></div>
+		<div class="item" data-tab="dr"><div class="text">{{'clinics_open_reviews_draugiem'|gL:'Draugiem.lv'}}</div></div>
+	    </div>
+		<a name="comments"></a>
+	</div>
+    </div>
+    <div class="right">
+	<div class="cont">
+	    <div class="item fb active">
+		<div id="fb-root"></div>
+		<script>(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+			    return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+			fjs.parentNode.insertBefore(js, fjs);
+		    }(document, 'script', 'facebook-jssdk'));</script>
+
+		<div class="fb-comments" data-href="{{if $clinic.fb_link != ''}}{{$clinic.fb_link|clear}}{{else}}{{$curPageUrl2}}{{/if}}" data-width="400" data-numposts="5" data-colorscheme="light"></div>
+	    </div>
+	    <div class="item dr"></div>
+	</div>
+    </div>
+</div> -->

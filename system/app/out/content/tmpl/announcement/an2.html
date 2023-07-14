@@ -1,0 +1,162 @@
+<div class="announce-cont">
+
+    <div class="announce-inner">
+
+        <h2>
+            {{'announce_2_maintext'|gL:'Esi uzticams! <br><span class="announce-highlighted">Verificē savu profilu <br>ar <span class="nobr">Smart-ID</span> vai <span class="nobr">E-ID</span></span>'}}
+        </h2>
+
+        <div class="announce-link paPopupOpenTrue">
+
+            <div class="announce-link-label">
+                {{'read_more'|gL:'Lasīt vairāk'}}
+            </div>
+
+            <div class="announce-link-btn">
+                <i class="fa fa-chevron-right"></i>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+    .hero_block .image_cont .image {
+        background-image: url(/img/announcements/hero-bg3.jpg);
+        background-position: 53% bottom;
+        left: 50% !important;
+        width: 100%;
+        max-width: 1600px;
+        transform: translateX(-50%);
+        margin: 0;
+    }
+
+    .announcement_popup.pa-popup-wrap .pa-popup .pa-popup-footer {
+        padding: 10px;
+        display: none;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .hero_block .image_cont .image {
+            background-position: 53% bottom !important;
+            background-size: cover !important;
+        }
+
+        .hero_block.announcement .hero-right .announce-cont .announce-inner .announce-link {
+            left: 20px;
+        }
+        .announce-inner .announce-link {
+            color: #009be5;
+        }
+        .hero_block.announcement .hero-right .announce-cont .announce-inner h2 {
+            font-size: 28px !important;
+        }
+        .hero_block.announcement .wrap .hero-left .howto .list .item {
+            margin-right: 0;
+        }
+    }
+
+
+    @media all and (max-width: 767px) {
+        .hero_block.announcement .image_cont {
+            max-height: 876px;
+        }
+
+        .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner,
+        .hero_block.announcement > .wrap .hero-right .announce-cont,
+        .hero_block.announcement > .wrap .hero-right {
+            max-height: 876px;
+        }
+
+        .hero_block .image_cont .image {
+            background-image: url(/img/announcements/mob-an2b.jpg);
+            background-position: center center !important;
+            background-size: cover !important;
+            max-height: 876px;
+            max-width: 100%;
+        }
+
+        .announce-highlighted {
+            display: block;
+        }
+
+        .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner .announce-link {
+            position: relative;
+            left: 3px;
+            top: 28px;
+            bottom: auto;
+        }
+    }
+
+    @media all and (max-width: 610px) {
+
+        .hero_block.announcement .image_cont {
+            max-height: 640px;
+        }
+
+        .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner,
+        .hero_block.announcement > .wrap .hero-right .announce-cont,
+        .hero_block.announcement > .wrap .hero-right {
+            max-height: 620px;
+        }
+
+        .hero_block .image_cont .image {
+            background-image: url(/img/announcements/mob-an2b.jpg);
+            background-position: center 20px !important;
+            background-size: cover !important;
+            max-height: 640px;
+        }
+
+        .testimonial_block .left .nr {
+            font-size: 42px;
+        }
+
+        .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner .announce-link {
+            position: relative;
+            left: 3px;
+            top: 28px;
+            bottom: auto;
+        }
+
+        .announcement_popup.pa-popup-wrap .pa-popup .pa-popup-footer {
+            padding: 10px;
+            display: none;
+        }
+
+        /*.hero_block.announcement > .wrap .hero-left {*/
+        /*    margin-top: -90px;*/
+        /*}*/
+    }
+
+    @media all and (max-width: 520px) {
+
+        .hero_block .image_cont .image {
+            background-position: center 40px !important;
+            background-size: cover !important;
+        }
+
+        .announcement_popup.pa-popup-wrap .pa-popup .pa-popup-header h2 {
+            font-size: 24px;
+            line-height: 36px;
+        }
+    }
+
+    @media all and (max-width: 412px) {
+
+        .hero_block .image_cont .image {
+            background-position: center 114px !important;
+            background-size: contain !important;
+        }
+
+        .hero_block.announcement > .wrap .hero-left h1,
+        .hero_block.announcement > .wrap .hero-right .announce-cont .announce-inner h2 {
+            font-size: 28px;
+            line-height: 42px;
+            width: 100%;
+        }
+    }
+
+</style>

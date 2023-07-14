@@ -1,0 +1,190 @@
+<div class="popup_bg"></div>
+
+<div class="popup-communication-error">
+    <!-- Communication with payment portal or insurance/dc_cards handler error in popup -->
+    <div class="cont">
+        <div class="popup-communication-error-heding">
+            <div class="close"><i class="fa fa-times"></i></div>
+            <h2>{{'profile_payment_communication_error_header'|gL:'Gateway error'}}</h2>
+        </div>
+        <div class="popup-communication-error-content">
+            <div class="message">{{'profile_payment_communication_error_message'|gL:'Communication error occurred. You may try again later or choose another payment method.'}}</div>
+        </div>
+        <div class="btn_cont">
+            <div class="close_message">
+                <a class="btn cancel-btn">{{'profile_reservation_close'|gL:'Close.'}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup w830 order-details-popup-parent">
+    <div class="close"><i class="fa fa-times"></i></div>
+    <div id="step2" class="cont order-details popup-step-2">
+        <h2>{{'profile_order_confirmation'|gL:'Pasūtījuma rēķins'}}</h2>
+        <hr>
+
+        <!-- Order -->
+        {{$item.order_html}}
+        <!-- / Order -->
+
+        {{if $item.promoAvailable}}
+        <div class="info-content order promoCodeBlock">
+            <div class="headingPromo">{{'profile_enter_promo'|gL:'Введите промо-код'}}</div>
+            <div class="promoFieldGroup">
+                <div class="cinput">
+                    <input id="promo" name="promo" type="text" />
+                </div>
+                <div class="btn_cont">
+                    <a class="btn btng w3 promo-btn disabled">{{'profile_promo_apply'|gL:'Применить'}}</a>
+                </div>
+            </div>
+            <div class="promoSuccess">
+                <span>{{'profile_promo_success'|gL:'Промо-код применен'}}</span>
+            </div>
+            <div class="promoFieldError">
+                <span>{{'profile_promo_not_found'|gL:'Промо-код не найден'}}</span>
+            </div>
+        </div>
+        {{/if}}
+
+        <div class="info-block order-agree">
+            <div class="order-agree">
+                <div class="checkbox_field">
+                    <label class="item blue">
+                        <input class="order-agree" id="order-agree" type="checkbox">
+                        <span class="box"><i class="fa fa-check"></i></span>{{'profile_have_read_and_accept_terms'|gL:'Apliecinu, ka iepazinos un piekritu <a href="/lietosanas-noteikumi/" target="_blank">apmaksas noteikumiem</a>'}}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="shadow-spacer"></div>
+
+        {{if $item.oldPaymentType }}
+        <div class="info-block payment-method">
+            <h3 class="title">{{'profile_choose_payment_method'|gL:'Izvēlies apmaksas veidu'}}</h3>
+            <div class="payment-methods-choose radio-group">
+                <div class="banks-block">
+                    {{foreach from=$item.banklinks item=bank}}
+                        <div class="method-group {{$bank.title}}-group">
+                            <input type="radio" id="{{$bank.title}}" name="method" value="{{$bank.title}}">
+                            <label for="{{$bank.title}}" class="bank {{$bank.title}}"><img alt="{{$bank.image_alt}}" src="{{$bank.image}}"></label>
+                        </div>
+                    {{/foreach}}
+                </div>
+
+                <div class="cards-block">
+                    <div class="method-group cards-group{{if empty($item.banklinks)}} only{{/if}}">
+                        <input type="radio" id="cards" name="method" value="cards">
+                        <label for="cards" class="bank cards">
+                            <img alt="Mastercard logo" src="/img/payments/cards/new/master_logo.png">
+                            <img alt="Visa logo" src="/img/payments/cards/new/visa_logo.png">
+                            <img alt="Maestro logo" src="/img/payments/cards/new/maestro_logo.png">
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="shadow-spacer"></div>
+
+            <div class="secure-cont">
+                <div class="info-item secure-block">
+                    <p class="secure">
+                        {{'profile_secure_payments'|gL:'Droši pirkumi tiešsaistē ar Mastercard, Visa un Swedbank'}}
+                    </p>
+                    <div class="secure-img-cont">
+                        <img alt="Mastercard logo" src="/img/payments/cards/new/mc_idcheck_hrz_pos.svg">
+                        <img alt="Mastercard logo" src="/img/payments/cards/new/visa-secure_blu_CMYK.svg">
+                        <img class="swedbank-logo" alt="{{$bank.image_alt}}" src="{{$bank.image}}">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {{else}}
+        <div class="info-block payment-method" style="display: block">
+            <div class="secure-cont">
+                <div class="info-item secure-block">
+                    <p class="secure">
+                        {{'profile_secure_payments'|gL:'Droši pirkumi tiešsaistē ar Mastercard, Visa un Swedbank'}}
+                    </p>
+                    <div class="secure-img-cont">
+                        <img alt="Mastercard logo" src="/img/payments/cards/new/mc_idcheck_hrz_pos.svg">
+                        <img alt="Mastercard logo" src="/img/payments/cards/new/visa-secure_blu_CMYK.svg">
+                        {{foreach from=$item.banklinks item=bank}}
+                        <img class="swedbank-logo" alt="{{$bank.image_alt}}" src="{{$bank.image}}">
+                        {{/foreach}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div  style="display:none">
+            <div class="info-block payment-method">
+                <input type="radio" id="everyPay" name="method" value="everyPay" checked="checked">
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- save info for step back -->
+        <input id="sheduleId" type="hidden" value="{{$item.id}}" />
+        <input id="clinic_id" type="hidden" value="{{$item.clinic_id}}" />
+        <input id="doctor_id" type="hidden" value="{{$item.doctor_id}}" />
+        <input id="orderId" type="hidden" value="{{$item.orderId}}" />
+        <input id="orderTotal" type="hidden" value="{{$item.order_total}}" />
+        <input id="serviceId" type="hidden" value="{{$item.orderItems.0.service_id}}" />
+        <input id="serviceName" type="hidden" value="{{$item.orderItems.0.service_name}}" />
+        <input id="slots" type="hidden" value="{{$item.slots}}" />
+        <input id="lock_id" type="hidden" value="{{$item.lockId}}" />
+        <input id="reservation_id" type="hidden" value="{{$item.reservationId}}" />
+        <input id="note" type="hidden" value="{{$item.notice}}" />
+        <input id="isConsultation" type="hidden" value="{{$item.isConsultation}}" />
+        <input id="anyTime" type="hidden" value="{{$item.anyTime}}" />
+        <input id="selectedTime" type="hidden" value="{{$item.selectedTime}}" />
+        <input id="personId" type="hidden" value="{{$item.profile_person_id}}" />
+        <input id="fromTSWidget" type="hidden" value="{{$item.fromTSWidget}}" />
+
+        {{if $dcAppointment}}
+            <input id="dc" type="hidden" value="{{$dcAppointment}}" />
+        {{/if}}
+
+        {{if $resOptions}}
+            {{foreach from=$resOptions key=k item=option}}
+                <input id="{{$k}}" class="resOptionsHiddenInput" type="hidden" value="{{$option}}" />
+            {{/foreach}}
+        {{/if}}
+
+        <div class="btn_cont">
+            <a class="btn btnw w3 back-btn">{{'profile_reservation_back'|gL:'Go back.'}}</a>
+            <a class="btn btng w3 pay-btn disabled">{{'profile_reservation_pay'|gL:'Pay.'}}</a>
+            <a href="" class="btng w1 reservation-btn active disabled-btn">{{"profile_reservation_add_submit"|gL:"Pierakstīties"}}</a>
+
+            <div class="cancel">
+                <a class="btn cancel-btn">{{'profile_reservation_cancel'|gL:'Cancel.'}}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="spinner-container">
+        <div class="spinner-content">
+            <div class="spinner-msg"></div>
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
+<script nonce="{{$web.cspNonce}}">
+    var checkExist = setInterval(function () {
+        let step2 = document.getElementById('step2');
+        if (step2 != null) {
+
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+            }
+        }
+
+    }, 500);
+</script>

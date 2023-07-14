@@ -1,0 +1,15 @@
+<div class="popup_bg"></div>
+<div class="popup w750">
+	<div class="close"><i class="fa fa-times"></i></div>
+	<div class="cont">
+		<h2>{{$message.subject|clear}}</h2>
+		<hr>
+		<div class="text_msg">
+			{{$message.message}}
+		</div>
+		<hr>
+		<div class="btn_cont">
+			<a class="btnw w2 red deleteMessage" href="#" data-mesid="{{$message.id}}">{{'profile_messages_delete'|gL:'Dzēst ziņojumu'}}</a>
+		</div>
+	</div>
+</div>

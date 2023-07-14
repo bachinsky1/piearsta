@@ -1,0 +1,116 @@
+<form class="sb-forma" method="post" action="">
+    <fieldset>
+        <legend>Add form</legend>
+        <ul class="add-list">
+        	{{if count($countries) > 1}}
+			<li>
+                <label for="sitemap-countryF">{{'country'|gLA:'Country'}}:</label>
+                <select id="sitemap-countryF" name="sitemap-countryF" onchange="changeCountrySiteMap(); return false;">
+                	{{section name=item loop=$countries.data}}
+                		<option {{if $countries.data[item].id == $countries.sel}} selected="selected" {{/if}} value="{{$countries.data[item].id}}">{{$countries.data[item].title}}</option>
+                	{{/section}} 
+                </select>
+            </li>                  
+			{{/if}}
+            <li>
+                <label for="sitemap-language">{{'lang'|gLA:'Language'}}:</label>
+                <select id="sitemap-language" name="sitemap-language" onchange="changeLangSiteMap(); return false;">
+                    {{section name=item loop=$languages.data}}
+                		<option {{if $languages.data[item].lang == $languages.sel}} selected="selected" {{/if}} value="{{$languages.data[item].lang}}">{{$languages.data[item].title}}</option>
+                	{{/section}}
+                </select>
+            </li>
+        </ul>
+    </fieldset>
+</form>
+           
+<div class="contentTree" id="siteMap">         
+</div>
+
+<div class="clr"><!-- clear --></div>
+
+<script type="text/javascript">
+
+	var id = "siteMap";
+	var	moduleName = '{{$MODULE_NAME}}';
+	var	mainUrl = '{{$MAIN_URL}}';
+	var	ajaxAction = "moduleTable";
+	var	additionalParms = "";
+	var	idField = '{{$idField}}';
+	var	titleField = '{{$titleField}}';
+	var refreshTree = true;
+	var returnFunction = {{$func}};
+
+	$(function () { 
+		updateSitemap();
+		initTree();
+	});	
+
+	function getRequestParameters() {
+		return additionalParms;
+	}
+
+	function getRequestUrl() {
+		return mainUrl + moduleName + "/";
+	}
+
+	function updateSitemap() {
+
+		$.post(getRequestUrl() + ajaxAction + "/", getRequestParameters(),
+				function(data) {
+								returnHtml = data["html"];
+								extraField = data["filterLang"];
+						
+								if (extraField != null && extraField != '') {
+									$('#sitemap-language').html(extraField);
+								}
+						
+								$('#' + id).html(returnHtml);
+								
+								
+								initTree();
+
+							}, 
+				"json");
+				
+	}
+
+	function initTree() {		
+
+		$("#siteMap").jstree({
+			"themes" : {
+				"theme" : "default",
+				"dots" : true,
+				"icons" : false
+			},
+			"plugins" : [ "themes", "html_data", "ui" ]
+			
+		}).bind("dblclick.jstree", function (event, data) {
+			var node = $(event.target).closest("li");
+			
+			eval(returnFunction(node));
+			$("#dialog").dialog('close');
+			return false;
+		   
+		});
+	}
+
+	
+	function defaultReturn(NODE) {
+		id = $(NODE).attr("id").replace("node", "");
+		$('#' + idField).val(id);
+		$('#' + idField).change();
+		$('#' + titleField).val($(NODE).attr("title"));
+	}
+
+	function changeCountrySiteMap() {
+		additionalParms = "filterCountry=" + $('#sitemap-countryF').val();
+		updateSitemap();
+	}
+
+	function changeLangSiteMap() {
+		additionalParms = "filterLang=" + $('#sitemap-language').val() + "&filterCountry=" + $('#sitemap-countryF').val();
+		updateSitemap();
+	}
+	
+</script>

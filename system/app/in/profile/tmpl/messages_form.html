@@ -1,0 +1,35 @@
+<div id="messages_form" class="main-tab">
+	<table class="inner-table">
+		
+		{{foreach name=orders from=$edit.messages item=i key=k}}
+		<tr>
+			<td colspan="2">
+				<p><strong>{{$i.subject|clear}}</strong></p>
+				<p>{{$i.message}}</p>
+				<p>{{$i.created|date_format:"%b %d %Y, %l:%M %p"}}</p>
+			</td>
+		</tr>
+		{{/foreach}}
+        <tr>
+            <td colspan="2"><strong>{{'add_message'|gLA:'Add message:'}}</strong></td>
+        </tr>
+        <tr>
+        	<td>Subject</td>
+            <td>
+            	<textarea class="message" id="subject" name="subject" rows="3" style="width:500px"></textarea>
+			</td>
+        </tr>
+        <tr>
+        	<td>Body</td>
+            <td>
+            	<textarea class="message" id="message" name="message" rows="5" style="width:500px"></textarea>
+            	<p class="wys"><a href="#" onclick="openCkEditor('message', 'advanced'); return false;">{{'wysiwyg'|gLA:'WYSIWYG'}}</a></p>
+			</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            	<div class="btn orange"><a href="javascript:;" onclick="addMessage();"><span>{{'add_messsage'|gLA:'Add Message'}}</span></a></div>
+            </td>
+        </tr>
+	</table>
+</div>

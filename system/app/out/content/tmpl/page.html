@@ -1,0 +1,16 @@
+<!-- Get Countries -->
+{{section name=item loop=$ctrAr.ctr}}
+	<li><a href="{{$ctrAr.ctr[item].link}}" title="{{$ctrAr.ctr[item].title}}">{{$ctrAr.ctr[item].title}}</a></li>
+{{/section}}
+
+<!-- Get Langs -->
+{{section name=item loop=$langMenu.langs}}
+	<li><a href="{{$langMenu.langs[item].link}}" title="{{$langMenu.langs[item].title}}"><div class="{{$langMenu.langs[item].lang}}">{{$langMenu.langs[item].title}}</div></a></li>
+{{/section}}
+
+<!-- Get Menu -->
+{{section name=item loop=$menu.TOP}}					
+	<li {{if $menu.TOP[item].first}} class="first" {{/if}}><a href="{{$menu.TOP[item].url}}" {{if $menu.TOP[item].active}} class="sel" {{/if}}>{{$menu.TOP[item].title}}</a></li>			
+{{/section}}
+
+
