@@ -1,10 +1,11 @@
 const penthouse = require("penthouse");
 const fs = require("fs").promises;
 const path = require("path");
+require('dotenv').config();
 
 const cssDir = "./css"; // Defining the directory where CSS files will be stored
 
-const url = process.env.URL || "http://127.0.0.1"; // Setting the URL to be used for generating critical CSS
+const url = process.env.URL || "http://local.piearsta.lv"; // Setting the URL to be used for generating critical CSS
 
 const links = [
     "/lv", 
@@ -18,7 +19,7 @@ const generateFileName = (url) => {
     const lastPart = parts[parts.length - 1];
 
     if (lastPart === "") {
-        return ""
+        return "";
     }
 
     if (/^(ru|en|lv)$/.test(lastPart)) {
