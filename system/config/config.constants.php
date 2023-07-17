@@ -45,6 +45,7 @@ define("AD_HTTP_HOST", "http://" . $_SERVER["HTTP_HOST"] . "/");
  * @AD_IMAGE_FOLDER - Public image folder
  * @AD_CSS_SRC_FOLDER - CSS sources
  * @AD_CSS_FOLDER - Public css folder -- contains generated code only, git-ignored
+ * @AD_CSS_VERSION - CSS  version
  * @AD_JS_SRC_FOLDER - JS sources
  * @AD_JS_FOLDER - Public js folder -- contains generated code only, git-ignored
  * @AD_CMS_WEB_FOLDER - CMS(ADWEB) folder

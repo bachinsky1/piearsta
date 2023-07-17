@@ -194,11 +194,35 @@ class Module {
 
 			$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https" : "http";
 			$host = $_SERVER['HTTP_HOST'];
-			$uri = $_SERVER['REQUEST_URI'];
 
-			$criticalCss = '/css/critical' . $uri . 'style.css';
-			
+			/* 
+			------------------------------------------------------------------------------------
+			Assign critical css file to template.
+			If file doesn't exist - assign default critical file
+			------------------------------------------------------------------------------------
+			*/
+
+			$uri = $_SERVER['REQUEST_URI'];
+			$last_segment = basename(parse_url($uri, PHP_URL_PATH));
+
+			if ($last_segment === 'lv' || $last_segment === 'ru' || $last_segment === 'en') {
+				$last_segment = 'default';
+			}
+
+			$criticalCss = "/css/$last_segment.css";
+
+			if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $criticalCss)) {
+				$criticalCss = '/css/default.css';
+			}
+
 			$this->tpl->assign("CRITICAL_CSS", $criticalCss);
+
+			/* 
+			------------------------------------------------------------------------------------
+			End of assigning default css file
+			------------------------------------------------------------------------------------
+			*/
+
 			$this->tpl->assign($this->getPData());
 			$output = $this->tpl->fetch();
 
