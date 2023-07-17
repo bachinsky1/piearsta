@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css" fetchpriority="low" crossorigin>
+<!-- <link rel="stylesheet" href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css" fetchpriority="low" crossorigin> -->
 
 <noscript data-css-lazyload>
-	<!-- <link href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css" rel="stylesheet" crossorigin fetchpriority="low"> -->
+	<link href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css" rel="stylesheet" crossorigin fetchpriority="low">
 	<!-- more stylesheets, same as above preloads -->
 </noscript>
 <!--[if lt IE 9]>
@@ -60,6 +60,7 @@
 			const sheets = getItemsFromContainerText(cssContainer, 'link[rel="stylesheet"]');
 			styleSheets.append(...sheets);
 			cssContainer.remove();
+			console.log(...sheets, 1)
 		}
 		document.head.append(styleSheets);
 	}
