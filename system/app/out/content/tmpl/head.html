@@ -60,7 +60,6 @@
 			const sheets = getItemsFromContainerText(cssContainer, 'link[rel="stylesheet"]');
 			styleSheets.append(...sheets);
 			cssContainer.remove();
-			console.log(...sheets, 1)
 		}
 		document.head.append(styleSheets);
 	}
