@@ -43,6 +43,8 @@ const generateCss = async (url, cssString) => {
         const criticalCss = await penthouse({
             url: url,
             cssString: cssString, 
+            // width: 2000,
+            // height:1600
         }); // Generating the critical CSS using Penthouse
 
         await fs.writeFile(cssPath, criticalCss); // Writing the critical CSS to a file
