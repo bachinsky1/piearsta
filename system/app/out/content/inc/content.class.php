@@ -80,7 +80,6 @@ class contentData extends Module {
 	 * @param int	template id
 	 */
 	public function getTemplateById($id) {
-
 		$dbQuery = "SELECT `filename` FROM `ad_templates` WHERE `id` = '" . $id . "' LIMIT 0,1";
 		$query = new query($this->db, $dbQuery);
 

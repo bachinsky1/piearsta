@@ -1,8 +1,13 @@
-<link rel="preload" as="style" href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css" fetchpriority="low" crossorigin>
+
+
+{{if $web.mirror_id == 399}}
+<link rel="stylesheet" href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css?v={{$AD_CSS_VERSION}}" >
+{{/if}}
+
+<link rel="stylesheet" href="{{$web.criticalCssPath}}?v={{$AD_CSS_VERSION}}"/>
 
 <noscript data-css-lazyload>
-	<link href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css" rel="stylesheet" crossorigin fetchpriority="low">
-	<!-- more stylesheets, same as above preloads -->
+	<link href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css?v={{$AD_CSS_VERSION}}" rel="stylesheet" crossorigin fetchpriority="low">
 </noscript>
 <!--[if lt IE 9]>
 	<script src="{{$AD_JS_FOLDER}}ielte8.js"></script>
@@ -10,6 +15,7 @@
 <script nonce="{{$web.cspNonce}}" type="text/javascript" src="{{$AD_JS_FOLDER}}{{$web.jsFile}}.js"></script>
 
 <script type="text/javascript" nonce="{{$web.cspNonce}}">
+	
 
 	var webLang = '{{$web.lang}}';
 
@@ -47,9 +53,10 @@
 	const getItemsFromContainerText = function(container, selector){
 		const parser = new DOMParser();
 		const parsedHtml = parser.parseFromString(decodeHTML(container.textContent), 'text/html');
-
+		
 		return parsedHtml.querySelectorAll(selector);
 	};
+
 	function loadCss(){
 		const cssContainers = document.querySelectorAll('noscript[data-css-lazyload]');
 		if(!cssContainers){
@@ -58,12 +65,14 @@
 		const styleSheets = document.createDocumentFragment();
 		for(const cssContainer of cssContainers){
 			const sheets = getItemsFromContainerText(cssContainer, 'link[rel="stylesheet"]');
+			
 			styleSheets.append(...sheets);
 			cssContainer.remove();
-		}
+		} 
 		document.head.append(styleSheets);
 	}
 	loadCss();
+	
 </script>
 
 {{if $popupMessage}}

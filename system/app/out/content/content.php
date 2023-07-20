@@ -141,8 +141,30 @@ class content extends Module {
         $data['pageClass'] = trim($urlForClass, '/');
         $data['cspNonce'] = CSP_NONCE;
 
-        $this->setPData(curPostUrl(), "curPostUrl");
+        // Make Critical CSS path
 
+        $uri = $_SERVER['REQUEST_URI'];
+        $last_segment = basename(parse_url($uri, PHP_URL_PATH));
+
+        $lang_codes = ['lv', 'ru', 'en'];
+
+        if (in_array($last_segment, $lang_codes)) {
+            $last_segment = 'default';
+        }
+
+        $criticalCss = "/css/$last_segment.css";
+        $fullPath = $_SERVER['DOCUMENT_ROOT'] . $criticalCss;
+
+        if (!file_exists($fullPath)) {
+            $criticalCss = '/css/default.css';
+        }
+
+        $data['criticalCssPath'] = $criticalCss;
+        
+        // Make Critical CSS path. End
+
+        $this->setPData(curPostUrl(), "curPostUrl");
+        // var_dump($data);
         $this->setPData($data, "web");
         $this->setPData($this->getCData(), "content");
 
