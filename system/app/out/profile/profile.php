@@ -55,8 +55,8 @@ class profile extends Module {
 	 * This function runs auto from Module class
 	 */
 	public function run() {
-		$this->addCSSFile('jquery-ui.min');
-		$this->addCSSFile('jquery-ui.structure.min');
+		// $this->addCSSFile('jquery-ui.min');
+		// $this->addCSSFile('jquery-ui.structure.min');
 		$this->addJSFile('time-select-widget');
 
 		$dashboardPage = $this->module->getDashboardPage();

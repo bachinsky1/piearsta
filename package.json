@@ -4,12 +4,12 @@
     "compress-images": "^2.0.5",
     "dotenv": "^16.3.1",
     "gifsicle": "^5.2.1",
-    "penthouse": "^2.3.3",
-    "pngquant-bin": "^6.0.1"
+    "penthouse": "^2.3.3"
   },
   "scripts": {
     "criticalcss": "node criticalcss.js",
+    "minifycss": "node minifycss.js",
     "compressImg": "node compressImg.js",
-    "build": "npm run criticalcss && npm run compressImg"
+    "build": "npm run criticalcss && npm run minifycss && npm run compressImg"
   }
 }

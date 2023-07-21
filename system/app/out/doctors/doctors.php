@@ -34,8 +34,8 @@ class doctors extends Module {
     public function run() {
 		$this->addJSFile('ajax-list');
 		$this->addJSFile('jquery-ui.min');
-		$this->addCSSFile('jquery-ui.min');
-		$this->addCSSFile('jquery-ui.structure.min');
+		// $this->addCSSFile('jquery-ui.min');
+		// $this->addCSSFile('jquery-ui.structure.min');
 
 		switch ($this->getCData("id")) {
 		    

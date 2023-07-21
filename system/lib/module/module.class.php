@@ -250,88 +250,60 @@ class Module {
 	 *
 	 */
 	private function createJSorCSSFile($fArray, $srcFolder, $folder, $type) {
-        if (count($fArray) < 1) {
-            return;
-        }
-        if(!file_exists( AD_SRV_ROOT . $srcFolder )) {
-            mkdir(AD_SRV_ROOT . $srcFolder, 0777);
-        }
-        if(!file_exists( AD_SRV_ROOT . $folder )) {
-            mkdir(AD_SRV_ROOT . $folder, 0777);
-        }
-        $mTime = 0;
-        foreach ($fArray AS $file){
-            if (file_exists(AD_SRV_ROOT . $srcFolder . $file . "." . $type)) {
-                $files[] = $file;
-                $fTime = filemtime(AD_SRV_ROOT . $srcFolder . $file . "." . $type);
-                if ($fTime > $mTime){
-                    $mTime = $fTime;
-                }
-            }
-        }
-        if(!$files || count($files) < 1) {
-            return;
-        }
-        $mainFile = glob(AD_SRV_ROOT . $folder . md5(implode(".", $fArray)) . "*." . $type);
-        $curTime = 0;
-        if (count($mainFile) > 0) {
-            $parts = explode(".", basename($mainFile[0]));
-            $curTime = $parts[1];
-        }
-        if (count($mainFile) < 1 || $curTime < $mTime) {
-            foreach ($mainFile AS $oldOne) {
-                @unlink($oldOne);
-            }
-            $result = '';
-            foreach ($fArray AS $file) {
-                if (file_exists(AD_SRV_ROOT . $srcFolder . $file . "." . $type)) {
-                    $filename[] = $file;
-                    if (!$handle = fopen(AD_SRV_ROOT . $srcFolder . $file . "." . $type, 'r')) {
-                        showError('Can not open ' . $type . ' file!');
-                    }
-                    while (!feof($handle)) {
-                        $result .= fread($handle, 8192);
-                    }
-                    fclose($handle);
-                }
-                $result .= "\n\n";
-            }
-            if ($type == 'js') {
-                if ($this->cfg->get('compress')) {
-                    /** @var JavaScriptPacker $packer */
-                    $packer = loadLibClass('JavaScriptPacker', false);
-                    $packer = new JavaScriptPacker($result, 'Normal', true, false);
-                    $packed = $packer->pack();
-                } else {
-                    $packed = $result;
-                }
-            } elseif ($type == 'css') {
-                if ($this->cfg->get('compress')) {
-                    $packer = loadLibClass('CSSPacker');
-                    $packed = $packer->process($result);
-                } else {
-                    $packed = $result;
-                }
-            } else {
-                return;
-            }
-            try {
-                if (!$handle = @fopen(AD_SRV_ROOT . $folder . md5(implode(".", $filename)) . "." . $mTime . "." . $type, 'w')) {
-                    showError('Can not open ' . $type . ' file!');
-                }
-                if (fwrite($handle, $packed) === FALSE) {
-                    showError('Can not write in ' . $type . ' file!');
-                }
-                fclose($handle);
-            } catch (Exception $e) {
-                showError('Can not create ' . $type . ' file!');
-            }
-            $this->setPData(array($type . 'File' => md5(implode(".", $filename)) . '.' . $mTime), 'web');
-        } else {
-            $this->setPData(array($type . 'File' => md5(implode(".", $files)) . '.' . $curTime), 'web');
-        }
-        return true;
-    }
+		if (empty($fArray)) {
+			return;
+		}
+		// var_dump($fArray);
+		$srcFolder = AD_SRV_ROOT . $srcFolder;
+		$folder = AD_SRV_ROOT . $folder;
+
+		if(!is_dir($srcFolder)) {
+			mkdir($srcFolder, 0777, true);
+		}
+		
+		if(!is_dir($folder)) {
+			mkdir($folder, 0777, true);
+		}
+	
+		$files = array_filter($fArray, function($file) use ($srcFolder, $type) {
+			return file_exists($srcFolder . $file . "." . $type);
+		});
+	
+		if (empty($files)) {
+			return;
+		}
+	
+		$mainFile = $folder . "main." . $type;
+		// Check if the main file exists. If it does, no need to recreate it.
+		if (file_exists($mainFile)) {
+			$this->setPData([$type . 'File' => "main"], 'web');
+			return true;
+		}
+	
+		$result = '';
+		
+		foreach ($files as $file) {
+			$filePath = $srcFolder . $file . "." . $type;
+			try {
+				$result .= file_get_contents($filePath);
+			} catch (Exception $e) {
+				throw new Exception('Cannot read ' . $type . ' file: ' . $e->getMessage());
+			}
+			$result .= "\n\n";
+		}
+	
+		try {
+			if (file_put_contents($mainFile, $result) === false) {
+				throw new Exception('Cannot write in ' . $type . ' file!');
+			}
+		} catch (Exception $e) {
+			throw new Exception('Cannot create ' . $type . ' file: ' . $e->getMessage());
+		}
+	
+		$this->setPData([$type . 'File' => "main"], 'web');
+	
+		return true;
+	} 
 
 	/**
 	 * Add js file to jsArray
@@ -657,7 +629,7 @@ class Module {
 
 		$this->tpl->assign('AD_IMAGE_FOLDER', AD_IMAGE_FOLDER);
 		$this->tpl->assign('AD_CSS_FOLDER', AD_CSS_FOLDER);
-		$this->tpl->assign('AD_CSS_VERSION', AD_CSS_VERSION);
+		$this->tpl->assign('AD_REVISION', AD_REVISION);
 		$this->tpl->assign('AD_JS_FOLDER', AD_JS_FOLDER);
 		$this->tpl->assign('AD_WEB_FOLDER', AD_WEB_FOLDER);
 		$this->tpl->assign('AD_HTTP_HOST', AD_HTTP_HOST);

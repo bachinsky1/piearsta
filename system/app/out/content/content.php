@@ -135,13 +135,12 @@ class content extends Module {
         $data["url_orig"] = $this->uri->orig_uri;
         $data["pagePath"] = $this->module->getPagePath();
         $data["jsArray"] = array('jquery', 'jquery.mobile.custom', 'jquery.dotdotdot.min', 'jquery-ui.min', 'functions', 'js', 'lib/jquery.selectric.min', 'profile', 'profile-edit', 'tfa');
-        $data["cssArray"] = array('extra', 'font-awesome.min', 'lib/selectric', 'jquery-ui.min', 'jquery-ui.structure.min', 'css');
+        $data["cssArray"] = array('extra', 'font-awesome.min', 'lib/selectric', 'jquery-ui.min', 'css');
         $data["env"] = $this->cfg->get('env');
         $urlForClass = '/' . makeUrlWithLangInTheEnd($this->getUrlDir(), true);
         $data['pageClass'] = trim($urlForClass, '/');
         $data['cspNonce'] = CSP_NONCE;
-        $data['isLogged'] = !empty($_SESSION['user']);
-
+        $data['isLoggedUser'] = isset($_SESSION['user']) && isset($_SESSION['user']['id']) && $_SESSION['user']['id']; 
         // Make Critical CSS path
 
         $uri = $_SERVER['REQUEST_URI'];
@@ -165,7 +164,7 @@ class content extends Module {
         // Make Critical CSS path. End
 
         $this->setPData(curPostUrl(), "curPostUrl");
-        // var_dump($_SESSION['user']);
+        // var_dump($data);
         $this->setPData($data, "web");
         $this->setPData($this->getCData(), "content");
 

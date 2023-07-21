@@ -10,11 +10,12 @@ const cssDir = "./css"; // Defining the directory where CSS files will be stored
 const url = process.env.URL || "http://local.piearsta.lv"; // Setting the URL to be used for generating critical CSS
 
 const links = [
-    "/en",
-    "/en/arstu-katalogs",
-    "/en/ka-lietot",
-    "/en/iestazu-katalogs",
-    "/en/home"
+    "/lv",
+    "/lv/arstu-katalogs",
+    "/lv/ka-lietot",
+    "/lv/iestazu-katalogs",
+    "/lv/home",
+    "/lv/noderigi"
 ]; // Defining an array of URLs for which critical CSS needs to be generated
 
 const generateFileName = (url) => {
@@ -47,6 +48,8 @@ const generateCss = async (url, cssString) => {
         const criticalCss = await penthouse({
             url: url,
             cssString: cssString,
+            // width:2000,
+            // height:2000,
             // screenshots: {
             //     basePath: path.resolve(cssDir + '/' + fileName), // absolute or relative; excluding file extension
             //     type: 'jpeg', // jpeg or png, png default
@@ -94,27 +97,6 @@ const getMostRecentCssFile = async () => {
     return newestFile; // Returning the path of the most recent CSS file
 };
 
-const minifyCss = async (filePath) => {
-    const cssFileData = await fs.readFile(filePath, "utf8");
-    
-    const minified = new CleanCSS({
-        level: { 1: { specialComments: 0 } }
-    }).minify(cssFileData);
-
-    if (minified.errors.length || minified.warnings.length) {
-        // Something went wrong during the minification
-        console.error(
-            "Minification errors/warnings: ",
-            minified.errors,
-            minified.warnings
-        );
-    }
-    // Write minified styles back to the file
-    await fs.writeFile(path.resolve(filePath), minified.styles);
-
-    return minified.styles; // If everything went smoothly return minified styles
-};
-
 const deleteOldFiles = async () => {
     const oldFiles = links.map((link) => {
         const fileName = generateFileName(url + link);
@@ -138,11 +120,11 @@ const deleteOldFiles = async () => {
 };
 
 const penthouseOptions = {
-    // cssString: async () => await fs.readFile(await getMostRecentCssFile(), "utf8")
-    cssString: async () => {
-        const mostRecentCssFile = await getMostRecentCssFile();
-        return await minifyCss(mostRecentCssFile);
-    }
+    cssString: async () => await fs.readFile(await getMostRecentCssFile(), "utf8")
+    // cssString: async () => {
+    //     const mostRecentCssFile = await getMostRecentCssFile();
+    //     return await minifyCss(mostRecentCssFile);
+    // }
 }; // Setting the options for Penthouse, including reading the most recent CSS file
 
 const makeCriticalCss = async () => {

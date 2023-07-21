@@ -45,7 +45,7 @@ define("AD_HTTP_HOST", "http://" . $_SERVER["HTTP_HOST"] . "/");
  * @AD_IMAGE_FOLDER - Public image folder
  * @AD_CSS_SRC_FOLDER - CSS sources
  * @AD_CSS_FOLDER - Public css folder -- contains generated code only, git-ignored
- * @AD_CSS_VERSION - CSS  version
+ * @AD_REVISION - CSS  version
  * @AD_JS_SRC_FOLDER - JS sources
  * @AD_JS_FOLDER - Public js folder -- contains generated code only, git-ignored
  * @AD_CMS_WEB_FOLDER - CMS(ADWEB) folder
@@ -62,7 +62,7 @@ define("AD_HTTP_HOST", "http://" . $_SERVER["HTTP_HOST"] . "/");
 define("AD_IMAGE_FOLDER",  AD_WEB_FOLDER . "img/");
 define("AD_CSS_SRC_FOLDER",  AD_WEB_FOLDER . "css_src/");
 define("AD_CSS_FOLDER",  AD_WEB_FOLDER . "css/");
-define("AD_CSS_VERSION",  1);
+define("AD_REVISION",  2);
 define("AD_JS_SRC_FOLDER",  AD_WEB_FOLDER . "js_src/");
 define("AD_JS_FOLDER",  AD_WEB_FOLDER . "js/");
 define("AD_CMS_WEB_FOLDER", AD_WEB_FOLDER . "admin/");
