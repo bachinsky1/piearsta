@@ -29,3 +29,4 @@ test.*
 /docker/.env
 /docker/dump
 .env
+log

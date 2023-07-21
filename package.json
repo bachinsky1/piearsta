@@ -4,7 +4,8 @@
     "compress-images": "^2.0.5",
     "dotenv": "^16.3.1",
     "gifsicle": "^5.2.1",
-    "penthouse": "^2.3.3"
+    "penthouse": "^2.3.3",
+    "pngquant-bin": "^6.0.1"
   },
   "scripts": {
     "criticalcss": "node criticalcss.js",
