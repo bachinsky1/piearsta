@@ -1,10 +1,18 @@
 
 
 {{if $web.mirror_id == 399}}
-<link rel="stylesheet" href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css?v={{$AD_CSS_VERSION}}" >
+	<link rel="stylesheet" href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css?v={{$AD_CSS_VERSION}}" >
+{{else}}
+	{{if !!$web.isLogged == false}}
+		<link rel="stylesheet" href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css?v={{$AD_CSS_VERSION}}" >
+	{{/if}}
 {{/if}}
 
 <link rel="stylesheet" href="{{$web.criticalCssPath}}?v={{$AD_CSS_VERSION}}"/>
+
+{{if !!$web.isLogged == true}}
+<link rel="stylesheet" href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css?v={{$AD_CSS_VERSION}}" >
+{{/if}}
 
 <noscript data-css-lazyload>
 	<link href="{{$AD_CSS_FOLDER}}{{$web.cssFile}}.css?v={{$AD_CSS_VERSION}}" rel="stylesheet" crossorigin fetchpriority="low">
@@ -14,8 +22,32 @@
 <![endif]-->
 <script nonce="{{$web.cspNonce}}" type="text/javascript" src="{{$AD_JS_FOLDER}}{{$web.jsFile}}.js"></script>
 
+{{if !!$web.isLogged == false }}
+<script>
+(function () {
+		const cssContainers = document.querySelectorAll('noscript[data-css-lazyload]');
+		if (!cssContainers.length) {
+			return;
+		}
+		for (const cssContainer of cssContainers) {
+			const newHref = cssContainer.textContent.match(/href="(.*?)"/)[1];
+			const allStylesheets = document.querySelectorAll('link[rel="stylesheet"]');
+			const existingStylesheet = Array.from(allStylesheets).find(stylesheet => stylesheet.href.endsWith(newHref));
+
+			if (existingStylesheet) {
+				cssContainer.remove();
+				continue;
+			}
+
+			const head = document.querySelector('head');
+			head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="${newHref}" crossorigin="anonymous" fetchpriority="low">`);
+			cssContainer.remove();
+		}
+	})();
+</script>
+{{/if}}
+
 <script type="text/javascript" nonce="{{$web.cspNonce}}">
-	
 
 	var webLang = '{{$web.lang}}';
 
@@ -44,35 +76,6 @@
         },
     };
 	messages.new_pass_should_diff_from_old = "{{'new_pass_should_diff_from_old'|gl:'New password should differ from old by at least 40%'}}";
-
-	const decodeHTML = function(html){
-	const textarea = document.createElement('textarea');
-	textarea.innerHTML = html;
-	return textarea.value;
-	};
-	const getItemsFromContainerText = function(container, selector){
-		const parser = new DOMParser();
-		const parsedHtml = parser.parseFromString(decodeHTML(container.textContent), 'text/html');
-		
-		return parsedHtml.querySelectorAll(selector);
-	};
-
-	function loadCss(){
-		const cssContainers = document.querySelectorAll('noscript[data-css-lazyload]');
-		if(!cssContainers){
-			return;
-		}
-		const styleSheets = document.createDocumentFragment();
-		for(const cssContainer of cssContainers){
-			const sheets = getItemsFromContainerText(cssContainer, 'link[rel="stylesheet"]');
-			
-			styleSheets.append(...sheets);
-			cssContainer.remove();
-		} 
-		document.head.append(styleSheets);
-	}
-	loadCss();
-	
 </script>
 
 {{if $popupMessage}}

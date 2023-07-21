@@ -140,6 +140,7 @@ class content extends Module {
         $urlForClass = '/' . makeUrlWithLangInTheEnd($this->getUrlDir(), true);
         $data['pageClass'] = trim($urlForClass, '/');
         $data['cspNonce'] = CSP_NONCE;
+        $data['isLogged'] = !empty($_SESSION['user']);
 
         // Make Critical CSS path
 
@@ -164,7 +165,7 @@ class content extends Module {
         // Make Critical CSS path. End
 
         $this->setPData(curPostUrl(), "curPostUrl");
-        // var_dump($data);
+        // var_dump($_SESSION['user']);
         $this->setPData($data, "web");
         $this->setPData($this->getCData(), "content");
 
